@@ -16,6 +16,10 @@ const HERO_AGH_KEY = 'dow-planner:hero-agh';
 // personal scratchpad separate from the board, and separate from the
 // hero's static coreItemSlugs/situationalItemSlugs reference list.
 const HERO_LOADOUT_KEY = 'dow-planner:hero-loadout';
+// Set once someone picks "Continue as Guest" on the login gate, so it
+// doesn't ask again on this browser. Cleared on sign-out along with the
+// rest of the account-scoped data, so signing out returns to the gate.
+const GUEST_MODE_KEY = 'dow-planner:guest-mode';
 
 export function emptyBoard(): Board {
   return {
@@ -127,6 +131,16 @@ export function clearAccountScopedLocalData(): void {
   localStorage.removeItem(ACTIVE_BOARD_KEY);
   localStorage.removeItem(HERO_AGH_KEY);
   localStorage.removeItem(HERO_LOADOUT_KEY);
+  localStorage.removeItem(GUEST_MODE_KEY);
+}
+
+/** Whether this browser already chose "Continue as Guest" on the login gate. */
+export function isGuestMode(): boolean {
+  return localStorage.getItem(GUEST_MODE_KEY) === 'true';
+}
+
+export function setGuestMode(): void {
+  localStorage.setItem(GUEST_MODE_KEY, 'true');
 }
 
 export interface HeroAghFlags {

@@ -55,7 +55,7 @@ export function HeroPickerPopover({
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <div className="hero-picker-grid">
+      <div className="hero-picker-grid" data-single={filtered.length === 1 || undefined}>
         {filtered.length === 0 && <div className="hero-picker-empty">No heroes found.</div>}
         {filtered.map((hero) => (
           <button

@@ -397,6 +397,17 @@ body {
   gap: 0.3rem;
 }
 
+.hero-picker-grid[data-single] {
+  display: flex;
+  justify-content: center;
+  padding: 0.7rem;
+}
+
+.hero-picker-grid[data-single] .hero-picker-item img {
+  width: 130px;
+  height: 74px;
+}
+
 .hero-picker-empty {
   grid-column: 1 / -1;
   font-size: 0.75rem;

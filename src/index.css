@@ -276,7 +276,7 @@ body {
 
 .role-slot-card {
   position: relative;
-  flex: 1 1 auto;
+  flex: 0 0 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;

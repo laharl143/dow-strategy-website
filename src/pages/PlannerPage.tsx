@@ -22,7 +22,7 @@ import {
   toggleShard,
 } from '../lib/boardRules';
 import { NEUTRAL_ITEM_CAP } from '../lib/boardRules';
-import { loadHeroItemLoadouts } from '../lib/persistence';
+import { placeHeroInSlot } from '../lib/heroPlacement';
 import { Board } from '../components/Board';
 import { HeroTray } from '../components/HeroTray';
 import { ItemShopPanel } from '../components/ItemShopPanel';
@@ -118,23 +118,9 @@ export function PlannerPage({
     if (!activeData || !overData) return;
 
     setBoard((prev) => {
-      // Placing a hero from the tray. If that hero has a saved "Core Items"
-      // build from its hero page, seed the slot's items with it.
-      if (activeData.kind === 'hero' && overData.kind === 'hero-slot' && overData.slotId) {
-        const heroSlug = activeData.heroSlug ?? null;
-
-        // A hero can only be on the board once. If it's already in a
-        // different slot, this drag relocates it (and everything it's
-        // holding) rather than creating a duplicate.
-        const existingSlot = heroSlug ? prev.slots.find((s) => s.heroSlug === heroSlug) : undefined;
-        if (existingSlot && existingSlot.slotId !== overData.slotId) {
-          return moveHero(prev, existingSlot.slotId, overData.slotId);
-        }
-        if (existingSlot) return prev;
-
-        const saved = heroSlug ? loadHeroItemLoadouts()[heroSlug] : undefined;
-        const hasSavedItems = saved && (saved.regularItemSlugs.some((s) => s !== null) || saved.neutralItemSlug !== null);
-        return setHero(prev, overData.slotId, heroSlug, hasSavedItems ? saved : undefined);
+      // Placing a hero from the tray.
+      if (activeData.kind === 'hero' && overData.kind === 'hero-slot' && overData.slotId && activeData.heroSlug) {
+        return placeHeroInSlot(prev, overData.slotId, activeData.heroSlug);
       }
 
       // Moving/swapping a hero already on the board to another role slot.
@@ -246,10 +232,13 @@ export function PlannerPage({
         <main className="board-panel">
           <Board
             board={board}
+            heroes={heroes}
+            assignedHeroSlugs={assignedHeroSlugs}
             heroBySlug={heroBySlug}
             regularItemBySlug={regularItemBySlug}
             neutralItemBySlug={neutralItemBySlug}
             onRemoveHero={(slotId) => setBoard((prev) => setHero(prev, slotId, null))}
+            onPickHero={(slotId, heroSlug) => setBoard((prev) => placeHeroInSlot(prev, slotId, heroSlug))}
             onRemoveRegularItem={(slotId, i) => setBoard((prev) => setRegularItem(prev, slotId, i, null))}
             onRemoveNeutralItem={(slotId) => setBoard((prev) => setNeutralItem(prev, slotId, null))}
             onToggleScepter={(slotId) => setBoard((prev) => toggleScepter(prev, slotId))}

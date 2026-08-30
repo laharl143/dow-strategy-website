@@ -1,17 +1,22 @@
+import { useState } from 'react';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import type { BoardSlot, Hero, Item, NeutralItem, RoleSlotDefinition } from '../types';
 import { heroIconUrl, SCEPTER_ICON_URL, SHARD_ICON_URL } from '../lib/assets';
 import { useDoubleClick } from '../lib/useDoubleClick';
 import { AghUpgradeToggle } from './AghUpgradeToggle';
 import { ItemSlotBox } from './ItemSlotBox';
+import { HeroPickerPopover } from './HeroPickerPopover';
 
 export function RoleSlotCard({
   definition,
   slot,
   hero,
+  heroes,
+  assignedHeroSlugs,
   regularItems,
   neutralItem,
   onRemoveHero,
+  onPickHero,
   onRemoveRegularItem,
   onRemoveNeutralItem,
   onToggleScepter,
@@ -21,15 +26,19 @@ export function RoleSlotCard({
   definition: RoleSlotDefinition;
   slot: BoardSlot;
   hero: Hero | undefined;
+  heroes: Hero[];
+  assignedHeroSlugs: Set<string>;
   regularItems: (Item | undefined)[];
   neutralItem: NeutralItem | undefined;
   onRemoveHero: () => void;
+  onPickHero: (heroSlug: string) => void;
   onRemoveRegularItem: (index: number) => void;
   onRemoveNeutralItem: () => void;
   onToggleScepter: () => void;
   onToggleShard: () => void;
   onHeroContextMenu: (e: React.MouseEvent, heroSlug: string) => void;
 }) {
+  const [pickerOpen, setPickerOpen] = useState(false);
   const { setNodeRef, isOver } = useDroppable({
     id: `slot:${slot.slotId}:hero`,
     data: { kind: 'hero-slot', slotId: slot.slotId },
@@ -70,7 +79,29 @@ export function RoleSlotCard({
               <img className="role-slot-hero-icon" src={heroIconUrl(hero.code)} alt={hero.name} draggable={false} />
             </div>
           ) : (
-            <div className="role-slot-hero-empty">Drop hero here</div>
+            <>
+              <button
+                type="button"
+                className="role-slot-hero-empty"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPickerOpen(true);
+                }}
+              >
+                Drop hero here
+              </button>
+              {pickerOpen && (
+                <HeroPickerPopover
+                  heroes={heroes}
+                  assignedHeroSlugs={assignedHeroSlugs}
+                  onPick={(heroSlug) => {
+                    onPickHero(heroSlug);
+                    setPickerOpen(false);
+                  }}
+                  onClose={() => setPickerOpen(false)}
+                />
+              )}
+            </>
           )}
         </div>
 

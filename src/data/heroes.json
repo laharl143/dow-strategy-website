@@ -1,0 +1,3066 @@
+[
+  {
+    "slug": "ancient-apparition",
+    "name": "Ancient Apparition",
+    "code": "ancient_apparition",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Disabler",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "anti-mage",
+    "name": "Anti-Mage",
+    "code": "antimage",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "axe",
+    "name": "Axe",
+    "code": "axe",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Initiator",
+      "Durable",
+      "Disabler",
+      "Carry"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "bane",
+    "name": "Bane",
+    "code": "bane",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Disabler",
+      "Nuker",
+      "Durable"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "beastmaster",
+    "name": "Beastmaster",
+    "code": "beastmaster",
+    "primaryAttribute": "all",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Initiator",
+      "Disabler",
+      "Durable",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "bloodseeker",
+    "name": "Bloodseeker",
+    "code": "bloodseeker",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Disabler",
+      "Nuker",
+      "Initiator"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "chen",
+    "name": "Chen",
+    "code": "chen",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Pusher"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "crystal-maiden",
+    "name": "Crystal Maiden",
+    "code": "crystal_maiden",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Disabler",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "dazzle",
+    "name": "Dazzle",
+    "code": "dazzle",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "dragon-knight",
+    "name": "Dragon Knight",
+    "code": "dragon_knight",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Pusher",
+      "Durable",
+      "Disabler",
+      "Initiator",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "doom",
+    "name": "Doom",
+    "code": "doom_bringer",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Disabler",
+      "Initiator",
+      "Durable",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "earthshaker",
+    "name": "Earthshaker",
+    "code": "earthshaker",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Support",
+      "Initiator",
+      "Disabler",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "enchantress",
+    "name": "Enchantress",
+    "code": "enchantress",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Pusher",
+      "Durable",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "enigma",
+    "name": "Enigma",
+    "code": "enigma",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Disabler",
+      "Initiator",
+      "Pusher"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "faceless-void",
+    "name": "Faceless Void",
+    "code": "faceless_void",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Initiator",
+      "Disabler",
+      "Escape",
+      "Durable"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "nature-s-prophet",
+    "name": "Nature's Prophet",
+    "code": "furion",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Pusher",
+      "Escape",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "juggernaut",
+    "name": "Juggernaut",
+    "code": "juggernaut",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Pusher",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "kunkka",
+    "name": "Kunkka",
+    "code": "kunkka",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Support",
+      "Disabler",
+      "Initiator",
+      "Durable",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "tank",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "leshrac",
+    "name": "Leshrac",
+    "code": "leshrac",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Support",
+      "Nuker",
+      "Pusher",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "lich",
+    "name": "Lich",
+    "code": "lich",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "lifestealer",
+    "name": "Lifestealer",
+    "code": "life_stealer",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Durable",
+      "Escape",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support",
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "lina",
+    "name": "Lina",
+    "code": "lina",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Carry",
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "lion",
+    "name": "Lion",
+    "code": "lion",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Disabler",
+      "Nuker",
+      "Initiator"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support",
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "mirana",
+    "name": "Mirana",
+    "code": "mirana",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Support",
+      "Escape",
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "morphling",
+    "name": "Morphling",
+    "code": "morphling",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Durable",
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "necrophos",
+    "name": "Necrophos",
+    "code": "necrolyte",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Nuker",
+      "Durable",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "shadow-fiend",
+    "name": "Shadow Fiend",
+    "code": "nevermore",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "night-stalker",
+    "name": "Night Stalker",
+    "code": "night_stalker",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Initiator",
+      "Durable",
+      "Disabler",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "omniknight",
+    "name": "Omniknight",
+    "code": "omniknight",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Support",
+      "Durable",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "tank",
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "puck",
+    "name": "Puck",
+    "code": "puck",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Initiator",
+      "Disabler",
+      "Escape",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "pudge",
+    "name": "Pudge",
+    "code": "pudge",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Disabler",
+      "Initiator",
+      "Durable",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "tank",
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "pugna",
+    "name": "Pugna",
+    "code": "pugna",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Nuker",
+      "Pusher"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "clockwerk",
+    "name": "Clockwerk",
+    "code": "rattletrap",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Initiator",
+      "Disabler",
+      "Durable",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "tank",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "razor",
+    "name": "Razor",
+    "code": "razor",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Durable",
+      "Nuker",
+      "Pusher"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "riki",
+    "name": "Riki",
+    "code": "riki",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "sand-king",
+    "name": "Sand King",
+    "code": "sand_king",
+    "primaryAttribute": "all",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Initiator",
+      "Disabler",
+      "Support",
+      "Nuker",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "shadow-shaman",
+    "name": "Shadow Shaman",
+    "code": "shadow_shaman",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Pusher",
+      "Disabler",
+      "Nuker",
+      "Initiator"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "slardar",
+    "name": "Slardar",
+    "code": "slardar",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Durable",
+      "Initiator",
+      "Disabler",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "support",
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "sniper",
+    "name": "Sniper",
+    "code": "sniper",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "spectre",
+    "name": "Spectre",
+    "code": "spectre",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Durable",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "storm-spirit",
+    "name": "Storm Spirit",
+    "code": "storm_spirit",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Nuker",
+      "Initiator",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "sven",
+    "name": "Sven",
+    "code": "sven",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Disabler",
+      "Initiator",
+      "Durable",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "tidehunter",
+    "name": "Tidehunter",
+    "code": "tidehunter",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Initiator",
+      "Durable",
+      "Disabler",
+      "Nuker",
+      "Carry"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core",
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "tinker",
+    "name": "Tinker",
+    "code": "tinker",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Nuker",
+      "Pusher"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "tiny",
+    "name": "Tiny",
+    "code": "tiny",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Nuker",
+      "Pusher",
+      "Initiator",
+      "Durable",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "venomancer",
+    "name": "Venomancer",
+    "code": "venomancer",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Initiator",
+      "Pusher",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support",
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "viper",
+    "name": "Viper",
+    "code": "viper",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Durable",
+      "Initiator",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "weaver",
+    "name": "Weaver",
+    "code": "weaver",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "windranger",
+    "name": "Windranger",
+    "code": "windrunner",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Support",
+      "Disabler",
+      "Escape",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "witch-doctor",
+    "name": "Witch Doctor",
+    "code": "witch_doctor",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "zeus",
+    "name": "Zeus",
+    "code": "zuus",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Nuker",
+      "Carry"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "broodmother",
+    "name": "Broodmother",
+    "code": "broodmother",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Pusher",
+      "Escape",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "wraith-king",
+    "name": "Wraith King",
+    "code": "skeleton_king",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Support",
+      "Durable",
+      "Disabler",
+      "Initiator"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "queen-of-pain",
+    "name": "Queen of Pain",
+    "code": "queenofpain",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Nuker",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "huskar",
+    "name": "Huskar",
+    "code": "huskar",
+    "primaryAttribute": "str",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Durable",
+      "Initiator"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "jakiro",
+    "name": "Jakiro",
+    "code": "jakiro",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Pusher",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "batrider",
+    "name": "Batrider",
+    "code": "batrider",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Initiator",
+      "Disabler",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "warlock",
+    "name": "Warlock",
+    "code": "warlock",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Initiator",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "alchemist",
+    "name": "Alchemist",
+    "code": "alchemist",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Support",
+      "Durable",
+      "Disabler",
+      "Initiator",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core",
+      "tank",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "death-prophet",
+    "name": "Death Prophet",
+    "code": "death_prophet",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Pusher",
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "tank",
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "ursa",
+    "name": "Ursa",
+    "code": "ursa",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Durable",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "bounty-hunter",
+    "name": "Bounty Hunter",
+    "code": "bounty_hunter",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Escape",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "spirit-breaker",
+    "name": "Spirit Breaker",
+    "code": "spirit_breaker",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Initiator",
+      "Disabler",
+      "Durable",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "outworld-devourer",
+    "name": "Outworld Devourer",
+    "code": "obsidian_destroyer",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "shadow-demon",
+    "name": "Shadow Demon",
+    "code": "shadow_demon",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Disabler",
+      "Initiator",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "support",
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "lycan",
+    "name": "Lycan",
+    "code": "lycan",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Pusher",
+      "Durable",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "brewmaster",
+    "name": "Brewmaster",
+    "code": "brewmaster",
+    "primaryAttribute": "all",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Initiator",
+      "Durable",
+      "Disabler",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "treant-protector",
+    "name": "Treant Protector",
+    "code": "treant",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Support",
+      "Initiator",
+      "Durable",
+      "Disabler",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "ogre-magi",
+    "name": "Ogre Magi",
+    "code": "ogre_magi",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Disabler",
+      "Durable",
+      "Initiator"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "lone-druid",
+    "name": "Lone Druid",
+    "code": "lone_druid",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Pusher",
+      "Durable"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "phantom-assassin",
+    "name": "Phantom Assassin",
+    "code": "phantom_assassin",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "gyrocopter",
+    "name": "Gyrocopter",
+    "code": "gyrocopter",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "rubick",
+    "name": "Rubick",
+    "code": "rubick",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Disabler",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support",
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "luna",
+    "name": "Luna",
+    "code": "luna",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Nuker",
+      "Pusher"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "disruptor",
+    "name": "Disruptor",
+    "code": "disruptor",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Disabler",
+      "Nuker",
+      "Initiator"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "templar-assassin",
+    "name": "Templar Assassin",
+    "code": "templar_assassin",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "naga-siren",
+    "name": "Naga Siren",
+    "code": "naga_siren",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Support",
+      "Pusher",
+      "Disabler",
+      "Initiator",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "nyx-assassin",
+    "name": "Nyx Assassin",
+    "code": "nyx_assassin",
+    "primaryAttribute": "all",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Disabler",
+      "Nuker",
+      "Initiator",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "keeper-of-the-light",
+    "name": "Keeper of the Light",
+    "code": "keeper_of_the_light",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "phoenix",
+    "name": "Phoenix",
+    "code": "phoenix",
+    "primaryAttribute": "str",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Initiator",
+      "Escape",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "magnus",
+    "name": "Magnus",
+    "code": "magnataur",
+    "primaryAttribute": "all",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Initiator",
+      "Disabler",
+      "Nuker",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "centaur-warrunner",
+    "name": "Centaur Warrunner",
+    "code": "centaur",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Durable",
+      "Initiator",
+      "Disabler",
+      "Nuker",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "timbersaw",
+    "name": "Timbersaw",
+    "code": "shredder",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Nuker",
+      "Durable",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "medusa",
+    "name": "Medusa",
+    "code": "medusa",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Disabler",
+      "Durable"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "tank",
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "troll-warlord",
+    "name": "Troll Warlord",
+    "code": "troll_warlord",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Pusher",
+      "Disabler",
+      "Durable"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "tank",
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "tusk",
+    "name": "Tusk",
+    "code": "tusk",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Initiator",
+      "Disabler",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "bristleback",
+    "name": "Bristleback",
+    "code": "bristleback",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Durable",
+      "Initiator",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "skywrath-mage",
+    "name": "Skywrath Mage",
+    "code": "skywrath_mage",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "abaddon",
+    "name": "Abaddon",
+    "code": "abaddon",
+    "primaryAttribute": "all",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Support",
+      "Carry",
+      "Durable"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "earth-spirit",
+    "name": "Earth Spirit",
+    "code": "earth_spirit",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Nuker",
+      "Escape",
+      "Disabler",
+      "Initiator",
+      "Durable"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "ember-spirit",
+    "name": "Ember Spirit",
+    "code": "ember_spirit",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Nuker",
+      "Disabler",
+      "Initiator"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "legion-commander",
+    "name": "Legion Commander",
+    "code": "legion_commander",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Disabler",
+      "Initiator",
+      "Durable",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "terrorblade",
+    "name": "Terrorblade",
+    "code": "terrorblade",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Pusher",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "techies",
+    "name": "Techies",
+    "code": "techies",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "oracle",
+    "name": "Oracle",
+    "code": "oracle",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Disabler",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "winter-wyvern",
+    "name": "Winter Wyvern",
+    "code": "winter_wyvern",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Disabler",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "arc-warden",
+    "name": "Arc Warden",
+    "code": "arc_warden",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "underlord",
+    "name": "Underlord",
+    "code": "abyssal_underlord",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Disabler",
+      "Durable",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "grimstroke",
+    "name": "Grimstroke",
+    "code": "grimstroke",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Disabler",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "mars",
+    "name": "Mars",
+    "code": "mars",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Initiator",
+      "Disabler",
+      "Durable"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "undying",
+    "name": "Undying",
+    "code": "undying",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Support",
+      "Durable",
+      "Disabler",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "tank",
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "invoker",
+    "name": "Invoker",
+    "code": "invoker",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Nuker",
+      "Disabler",
+      "Escape",
+      "Pusher"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "clinkz",
+    "name": "Clinkz",
+    "code": "clinkz",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Pusher"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "elder-titan",
+    "name": "Elder Titan",
+    "code": "elder_titan",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Initiator",
+      "Disabler",
+      "Nuker",
+      "Durable"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "support",
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "pangolier",
+    "name": "Pangolier",
+    "code": "pangolier",
+    "primaryAttribute": "all",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Nuker",
+      "Disabler",
+      "Durable",
+      "Escape",
+      "Initiator"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "slark",
+    "name": "Slark",
+    "code": "slark",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Disabler",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "dark-willow",
+    "name": "Dark Willow",
+    "code": "dark_willow",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Disabler",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "dark-seer",
+    "name": "Dark Seer",
+    "code": "dark_seer",
+    "primaryAttribute": "int",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Initiator",
+      "Escape",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "phantom-lancer",
+    "name": "Phantom Lancer",
+    "code": "phantom_lancer",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Pusher",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "monkey-king",
+    "name": "Monkey King",
+    "code": "monkey_king",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Disabler",
+      "Initiator"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "void-spirit",
+    "name": "Void Spirit",
+    "code": "void_spirit",
+    "primaryAttribute": "all",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "snapfire",
+    "name": "Snapfire",
+    "code": "snapfire",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Disabler",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "support",
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "silencer",
+    "name": "Silencer",
+    "code": "silencer",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Support",
+      "Disabler",
+      "Initiator",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core",
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "visage",
+    "name": "Visage",
+    "code": "visage",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Durable",
+      "Disabler",
+      "Pusher"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "vengeful-spirit",
+    "name": "Vengeful Spirit",
+    "code": "vengefulspirit",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Initiator",
+      "Disabler",
+      "Nuker",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "drow-ranger",
+    "name": "Drow Ranger",
+    "code": "drow_ranger",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Disabler",
+      "Pusher"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "chaos-knight",
+    "name": "Chaos Knight",
+    "code": "chaos_knight",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Disabler",
+      "Durable",
+      "Pusher",
+      "Initiator"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "io",
+    "name": "Io",
+    "code": "wisp",
+    "primaryAttribute": "all",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Escape",
+      "Nuker"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "meepo",
+    "name": "Meepo",
+    "code": "meepo",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Nuker",
+      "Disabler",
+      "Initiator",
+      "Pusher"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "hoodwink",
+    "name": "Hoodwink",
+    "code": "hoodwink",
+    "primaryAttribute": "agi",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Escape",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "dawnbreaker",
+    "name": "Dawnbreaker",
+    "code": "dawnbreaker",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Durable"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "marci",
+    "name": "Marci",
+    "code": "marci",
+    "primaryAttribute": "all",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Support",
+      "Carry",
+      "Initiator",
+      "Disabler",
+      "Escape"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "never",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "primal-beast",
+    "name": "Primal Beast",
+    "code": "primal_beast",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Initiator",
+      "Durable",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core",
+      "tank"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "muerta",
+    "name": "Muerta",
+    "code": "muerta",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Carry",
+      "Nuker",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "ring-master",
+    "name": "Ring Master",
+    "code": "ringmaster",
+    "primaryAttribute": "int",
+    "attackType": "ranged",
+    "dotaRoles": [
+      "Support",
+      "Nuker",
+      "Escape",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "always",
+    "compositionRoles": [
+      "support"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "kez",
+    "name": "Kez",
+    "code": "kez",
+    "primaryAttribute": "agi",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Carry",
+      "Escape",
+      "Disabler"
+    ],
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "pickFrequency": "sometimes",
+    "compositionRoles": [
+      "core"
+    ],
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  },
+  {
+    "slug": "largo",
+    "name": "Largo",
+    "code": "largo",
+    "primaryAttribute": "str",
+    "attackType": "melee",
+    "dotaRoles": [
+      "Durable",
+      "Disabler",
+      "Support"
+    ],
+    "compositionRoles": [],
+    "pickFrequency": null,
+    "damageType": null,
+    "powerCurve": null,
+    "hasAoeStun": false,
+    "piercesMagicImmunity": false,
+    "needsReview": false,
+    "coreItemSlugs": [],
+    "situationalItemSlugs": []
+  }
+]

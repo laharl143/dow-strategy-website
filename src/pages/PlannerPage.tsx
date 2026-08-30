@@ -59,6 +59,7 @@ export function PlannerPage({
 }) {
   const [activeDrag, setActiveDrag] = useState<DragData | null>(null);
   const [shopOpen, setShopOpen] = useState(true);
+  const [heroPanelOpen, setHeroPanelOpen] = useState(true);
   // Require a small drag distance before a pointer-down counts as a drag —
   // otherwise dnd-kit treats any real click (with its inevitable sub-pixel
   // jitter) as a micro-drag and swallows the trailing click event, breaking
@@ -66,11 +67,21 @@ export function PlannerPage({
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 4 } }));
 
   // F4 toggles the item shop panel, matching the in-game shop hotkey.
+  // Space toggles the hero panel — guarded against text inputs (search
+  // boxes, strategy name) where Space is just... a space.
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'F4') {
         e.preventDefault();
         setShopOpen((v) => !v);
+        return;
+      }
+      if (e.code === 'Space') {
+        const target = e.target as HTMLElement | null;
+        const isTyping = target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
+        if (isTyping) return;
+        e.preventDefault();
+        setHeroPanelOpen((v) => !v);
       }
     }
     window.addEventListener('keydown', handleKeyDown);
@@ -227,7 +238,7 @@ export function PlannerPage({
       onDragEnd={handleDragEnd}
       onDragCancel={() => setActiveDrag(null)}
     >
-      <div className="app-layout" data-shop-open={shopOpen}>
+      <div className="app-layout" data-shop-open={shopOpen} data-hero-panel-open={heroPanelOpen}>
         <aside className="left-panel">
           <HeroTray heroes={heroes} assignedSlugs={assignedHeroSlugs} />
         </aside>
@@ -275,6 +286,18 @@ export function PlannerPage({
         <span>{shopOpen ? '›' : '‹'}</span>
         <span className="shop-collapse-handle-label">Shop</span>
         <span className="shop-toggle-hotkey">F4</span>
+      </button>
+
+      <button
+        type="button"
+        className="hero-panel-collapse-handle"
+        data-hero-panel-open={heroPanelOpen}
+        onClick={() => setHeroPanelOpen((v) => !v)}
+        title={heroPanelOpen ? 'Hide heroes (Space)' : 'Show heroes (Space)'}
+      >
+        <span>{heroPanelOpen ? '‹' : '›'}</span>
+        <span className="hero-panel-collapse-handle-label">Heroes</span>
+        <span className="shop-toggle-hotkey">Space</span>
       </button>
 
       <DragOverlay dropAnimation={null}>{renderDragOverlay()}</DragOverlay>

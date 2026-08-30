@@ -170,12 +170,12 @@ body {
 }
 
 .app-layout {
+  position: relative;
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: minmax(0, 1fr);
   flex: 1;
   min-height: 0;
-  gap: 1px;
 }
 
 .shop-dock-layout {
@@ -192,19 +192,32 @@ body {
   overflow-y: auto;
 }
 
+/* Both side panels overlay on top of the board/hero content instead of
+   pushing it — sliding in/out via transform so nothing else reflows. */
 .left-panel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 260px;
+  z-index: 15;
   background: var(--panel);
   border-right: 1px solid var(--border);
+  box-shadow: 8px 0 24px rgba(0, 0, 0, 0.35);
   padding: 1rem;
   overflow-y: auto;
   min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  transform: translateX(0);
+  transition: transform 0.22s ease;
 }
 
-/* Overlays on top of the board/hero content instead of pushing it — sliding
-   in/out via transform so nothing else in the layout reflows. */
+.app-layout[data-hero-panel-open='false'] .left-panel {
+  transform: translateX(-100%);
+}
+
 .right-panel {
   position: absolute;
   top: 0;
@@ -514,6 +527,12 @@ body {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* old Edge */
+}
+
+.hero-chip-list::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
 }
 
 .hero-chip {
@@ -594,6 +613,43 @@ body {
   border-radius: 3px;
   padding: 0.05rem 0.3rem;
   writing-mode: horizontal-tb;
+}
+
+.hero-panel-collapse-handle {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  background: var(--panel-raised);
+  border: 1px solid var(--gold-dim);
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  padding: 0.6rem 0.4rem;
+  cursor: pointer;
+  color: var(--text-dim);
+  transition: left 0.22s ease;
+}
+
+.hero-panel-collapse-handle:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.hero-panel-collapse-handle[data-hero-panel-open='true'] {
+  left: 260px;
+}
+
+.hero-panel-collapse-handle-label {
+  writing-mode: vertical-rl;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .item-shop-panel {

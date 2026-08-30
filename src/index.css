@@ -520,8 +520,8 @@ body {
 }
 
 .hero-chip-list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
   align-content: flex-start;
   gap: 0.35rem;
   flex: 1;
@@ -535,8 +535,14 @@ body {
   display: none; /* Chrome/Safari */
 }
 
+/* The single-large-chip case stays flex-centered rather than stretched
+   across a grid row. */
+.hero-chip-list[data-single] {
+  display: flex;
+  justify-content: center;
+}
+
 .hero-chip {
-  width: 56px;
   height: 40px;
   background: var(--panel-alt);
   border: 1px solid var(--border);

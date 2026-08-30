@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useAuth } from '../lib/auth';
+import { supabase } from '../lib/supabase';
 
 export function NavBar({
   onNewGame,
@@ -11,6 +13,7 @@ export function NavBar({
   const location = useLocation();
   const [name, setName] = useState('');
   const onBoard = location.pathname === '/';
+  const { session, loading, signInWithGoogle, signOut } = useAuth();
 
   return (
     <nav className="nav-bar">
@@ -46,6 +49,25 @@ export function NavBar({
           >
             Save As
           </button>
+        </div>
+      )}
+
+      {supabase && (
+        <div className="nav-bar-account">
+          {loading ? null : session ? (
+            <>
+              <span className="nav-bar-account-email" title="Hero builds sync to this account">
+                {session.user.email}
+              </span>
+              <button type="button" className="nav-bar-sign-out" onClick={() => void signOut()}>
+                Sign out
+              </button>
+            </>
+          ) : (
+            <button type="button" className="nav-bar-sign-in" onClick={() => void signInWithGoogle()}>
+              Sign in with Google
+            </button>
+          )}
         </div>
       )}
     </nav>

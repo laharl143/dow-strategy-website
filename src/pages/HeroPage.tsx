@@ -15,6 +15,8 @@ import {
 import { AghUpgradeToggle } from '../components/AghUpgradeToggle';
 import { ItemSlotBox } from '../components/ItemSlotBox';
 import { ItemShopDock } from '../components/ItemShopDock';
+import { useAuth } from '../lib/auth';
+import { pushLoadout } from '../lib/heroLoadoutSync';
 import type { RegularItem } from '../types';
 
 interface DragData {
@@ -119,6 +121,7 @@ const EMPTY_AGH_FLAGS: HeroAghFlags = { coreScepter: false, coreShard: false };
 export function HeroPage() {
   const { slug } = useParams<{ slug: string }>();
   const hero = slug ? heroBySlug.get(slug) : undefined;
+  const { session } = useAuth();
   const [aghFlagsBySlug, setAghFlagsBySlug] = useState<Record<string, HeroAghFlags>>(() => loadHeroAghFlags());
   const [loadoutsBySlug, setLoadoutsBySlug] = useState<Record<string, HeroItemLoadout>>(() => loadHeroItemLoadouts());
 
@@ -129,6 +132,15 @@ export function HeroPage() {
   useEffect(() => {
     saveHeroItemLoadouts(loadoutsBySlug);
   }, [loadoutsBySlug]);
+
+  // Push this hero's build to Supabase whenever it actually changes (not on
+  // every render — the object reference is stable unless this hero's entry
+  // was the one just updated).
+  const heroLoadout = hero ? loadoutsBySlug[hero.slug] : undefined;
+  useEffect(() => {
+    if (!session || !hero || !heroLoadout) return;
+    void pushLoadout(session.user.id, hero.slug, heroLoadout);
+  }, [session, hero, heroLoadout]);
 
   if (!hero) {
     return (

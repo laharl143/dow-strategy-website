@@ -126,6 +126,40 @@ body {
   cursor: not-allowed;
 }
 
+.nav-bar-account {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-left: auto;
+}
+
+.nav-bar-account-email {
+  font-size: 0.76rem;
+  color: var(--text-dim);
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nav-bar-sign-in,
+.nav-bar-sign-out {
+  background: var(--panel-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.4rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.nav-bar-sign-in:hover,
+.nav-bar-sign-out:hover {
+  border-color: var(--gold-dim);
+  color: var(--gold);
+}
+
 .app-main {
   position: relative;
   flex: 1;

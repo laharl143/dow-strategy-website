@@ -117,6 +117,18 @@ export function deleteStrategy(id: string): void {
   persistStrategies(strategies.filter((s) => s.id !== id));
 }
 
+/**
+ * Clears the active board and hero item loadouts — called on sign-out so a
+ * signed-in account's data doesn't linger in this browser for whoever uses
+ * it next. Saved strategies are left alone: they're a deliberate, named save
+ * rather than ambient session state, and aren't account-synced.
+ */
+export function clearAccountScopedLocalData(): void {
+  localStorage.removeItem(ACTIVE_BOARD_KEY);
+  localStorage.removeItem(HERO_AGH_KEY);
+  localStorage.removeItem(HERO_LOADOUT_KEY);
+}
+
 export interface HeroAghFlags {
   coreScepter: boolean;
   coreShard: boolean;

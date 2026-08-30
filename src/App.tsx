@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import type { Board as BoardType, SavedStrategy } from './types';
+import { AuthProvider } from './lib/auth';
 import { NavBar } from './components/NavBar';
 import { PlannerPage } from './pages/PlannerPage';
 import { HeroesIndexPage } from './pages/HeroesIndexPage';
@@ -26,6 +27,7 @@ function App() {
   }, [board]);
 
   return (
+    <AuthProvider>
     <div className="app-shell">
       <NavBar
         onNewGame={() => {
@@ -76,6 +78,7 @@ function App() {
         </Routes>
       </main>
     </div>
+    </AuthProvider>
   );
 }
 

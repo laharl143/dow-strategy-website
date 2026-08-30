@@ -94,7 +94,6 @@ export function NeutralItemTray({
     <div className="item-tray neutral-tray">
       {bonusNeutralTier !== undefined && onSetBonusNeutralTier && (
         <div className="bonus-tier-toggle">
-          <span className="bonus-tier-toggle-label">Level 25 bonus</span>
           <button
             type="button"
             className="bonus-tier-switch"

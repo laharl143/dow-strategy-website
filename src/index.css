@@ -1060,20 +1060,10 @@ body {
 .bonus-tier-toggle {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.6rem;
+  justify-content: center;
   margin-bottom: 0.75rem;
   padding-bottom: 0.6rem;
   border-bottom: 1px solid var(--border-soft);
-}
-
-.bonus-tier-toggle-label {
-  font-size: 0.68rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--text-dim);
-  white-space: nowrap;
 }
 
 /* A single switch, not two separate buttons — clicking anywhere on it

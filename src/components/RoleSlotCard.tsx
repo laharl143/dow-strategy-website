@@ -57,8 +57,6 @@ export function RoleSlotCard({
     disabled: !hero,
   });
 
-  const activeCount = regularItems.slice(0, 6).filter(Boolean).length;
-  const backpackCount = regularItems.slice(6, 9).filter(Boolean).length;
   const handleHeroClick = useDoubleClick(onRemoveHero);
 
   return (
@@ -157,15 +155,6 @@ export function RoleSlotCard({
                 empty="Empty neutral slot"
                 circular
               />
-            </div>
-            <div className="loadout-status">
-              <span className="fill-chip">
-                <span className={activeCount > 0 ? 'good' : undefined}>{activeCount}</span>/6 active
-              </span>
-              <span className="fill-chip">{backpackCount}/3 pack</span>
-              <span className="fill-chip">
-                {neutralItem ? <span className="good">✓</span> : '—'} neutral
-              </span>
             </div>
           </>
         )}

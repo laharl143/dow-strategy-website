@@ -279,8 +279,8 @@ body {
   flex: 1 1 auto;
   min-width: 0;
   display: flex;
-  align-items: stretch;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.6rem;
   background: var(--panel-alt);
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -333,8 +333,8 @@ body {
   flex: 0 0 auto;
   min-width: 0;
   display: flex;
-  align-items: stretch;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.6rem;
   background: var(--panel-alt);
   border: 1px solid var(--border-soft);
   border-radius: 6px;
@@ -377,12 +377,12 @@ body {
 }
 
 .role-slot-header {
-  width: 190px;
-  flex-shrink: 0;
   display: flex;
   gap: 0.6rem;
   align-items: flex-start;
-  padding-top: 0.15rem;
+  padding-bottom: 0.6rem;
+  padding-right: 4.5rem;
+  border-bottom: 1px solid var(--border-soft);
 }
 
 .role-slot-order {
@@ -755,27 +755,6 @@ body {
   height: 100%;
   object-fit: cover;
   border-radius: 2px;
-}
-
-.loadout-status {
-  margin-left: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  align-items: flex-end;
-  flex-shrink: 0;
-}
-
-.fill-chip {
-  font-size: 0.66rem;
-  font-weight: 600;
-  color: var(--text-dim);
-  font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.fill-chip .good {
-  color: var(--good);
 }
 
 .hero-tray {

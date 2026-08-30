@@ -350,15 +350,21 @@ body {
   color: var(--danger);
 }
 
+.late-game-card-hero-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.6rem;
+}
+
 .late-game-hero-dropzone {
-  width: auto;
+  width: 96px;
 }
 
 .late-game-hero-dropzone .role-slot-hero-icon {
-  height: 60px;
+  height: 54px;
 }
 
-.late-game-card-loadout {
+.late-game-card-items-row {
   display: flex;
   align-items: center;
   gap: 0.6rem;

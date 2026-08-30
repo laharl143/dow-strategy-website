@@ -78,49 +78,49 @@ export function LateGameSwapCard({
         </button>
       </div>
 
-      <div ref={setNodeRef} className="hero-dropzone late-game-hero-dropzone" data-over={isOver || undefined}>
-        {hero ? (
-          <div
-            ref={heroDraggable.setNodeRef}
-            {...heroDraggable.listeners}
-            {...heroDraggable.attributes}
-            className="role-slot-hero"
-            data-dragging={heroDraggable.isDragging || undefined}
-            onClick={handleHeroClick}
-            onContextMenu={(e) => onHeroContextMenu(e, hero.slug)}
-            title={`${hero.name} — drag to move, double-click to remove, right-click to inspect`}
-          >
-            <img className="role-slot-hero-icon" src={heroIconUrl(hero.code)} alt={hero.name} draggable={false} />
-          </div>
-        ) : (
-          <>
-            <button
-              type="button"
-              className="role-slot-hero-empty"
-              onClick={(e) => {
-                e.stopPropagation();
-                setPickerOpen(true);
-              }}
+      <div className="late-game-card-hero-row">
+        <div ref={setNodeRef} className="hero-dropzone late-game-hero-dropzone" data-over={isOver || undefined}>
+          {hero ? (
+            <div
+              ref={heroDraggable.setNodeRef}
+              {...heroDraggable.listeners}
+              {...heroDraggable.attributes}
+              className="role-slot-hero"
+              data-dragging={heroDraggable.isDragging || undefined}
+              onClick={handleHeroClick}
+              onContextMenu={(e) => onHeroContextMenu(e, hero.slug)}
+              title={`${hero.name} — drag to move, double-click to remove, right-click to inspect`}
             >
-              Drop hero here
-            </button>
-            {pickerOpen && (
-              <HeroPickerPopover
-                heroes={heroes}
-                assignedHeroSlugs={assignedHeroSlugs}
-                onPick={(heroSlug) => {
-                  onPickHero(heroSlug);
-                  setPickerOpen(false);
+              <img className="role-slot-hero-icon" src={heroIconUrl(hero.code)} alt={hero.name} draggable={false} />
+            </div>
+          ) : (
+            <>
+              <button
+                type="button"
+                className="role-slot-hero-empty"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPickerOpen(true);
                 }}
-                onClose={() => setPickerOpen(false)}
-              />
-            )}
-          </>
-        )}
-      </div>
+              >
+                Drop hero here
+              </button>
+              {pickerOpen && (
+                <HeroPickerPopover
+                  heroes={heroes}
+                  assignedHeroSlugs={assignedHeroSlugs}
+                  onPick={(heroSlug) => {
+                    onPickHero(heroSlug);
+                    setPickerOpen(false);
+                  }}
+                  onClose={() => setPickerOpen(false)}
+                />
+              )}
+            </>
+          )}
+        </div>
 
-      {hero && (
-        <div className="late-game-card-loadout">
+        {hero && (
           <div className="agh-toggle-stack">
             <AghUpgradeToggle
               iconUrl={SCEPTER_ICON_URL}
@@ -135,6 +135,11 @@ export function LateGameSwapCard({
               onToggle={onToggleShard}
             />
           </div>
+        )}
+      </div>
+
+      {hero && (
+        <div className="late-game-card-items-row">
           <div className="inventory-grid">
             {regularItems.map((item, i) => (
               <ItemSlotBox

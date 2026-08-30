@@ -78,7 +78,7 @@ export function LateGameSwapCard({
         </button>
       </div>
 
-      <div className="late-game-card-hero-row">
+      <div className="loadout-panel late-game-card-loadout">
         <div ref={setNodeRef} className="hero-dropzone late-game-hero-dropzone" data-over={isOver || undefined}>
           {hero ? (
             <div
@@ -121,52 +121,52 @@ export function LateGameSwapCard({
         </div>
 
         {hero && (
-          <div className="agh-toggle-stack">
-            <AghUpgradeToggle
-              iconUrl={SCEPTER_ICON_URL}
-              label="Aghanim's Scepter"
-              active={swap.hasScepter}
-              onToggle={onToggleScepter}
-            />
-            <AghUpgradeToggle
-              iconUrl={SHARD_ICON_URL}
-              label="Aghanim's Shard"
-              active={swap.hasShard}
-              onToggle={onToggleShard}
-            />
-          </div>
+          <>
+            <div className="loadout-divider" />
+            <div className="agh-toggle-stack">
+              <AghUpgradeToggle
+                iconUrl={SCEPTER_ICON_URL}
+                label="Aghanim's Scepter"
+                active={swap.hasScepter}
+                onToggle={onToggleScepter}
+              />
+              <AghUpgradeToggle
+                iconUrl={SHARD_ICON_URL}
+                label="Aghanim's Shard"
+                active={swap.hasShard}
+                onToggle={onToggleShard}
+              />
+            </div>
+            <div className="item-bay">
+              <div className="inventory-grid">
+                {regularItems.map((item, i) => (
+                  <ItemSlotBox
+                    key={i}
+                    id={`slot:${slotId}:lategame:regular:${i}`}
+                    data={{ kind: 'lategame-regular-item-slot', slotId, itemIndex: i }}
+                    item={item}
+                    items={regularItemsCatalog}
+                    onRemove={() => onRemoveRegularItem(i)}
+                    onPick={(itemSlug) => onPickRegularItem(i, itemSlug)}
+                    empty={i < 6 ? 'Empty item slot' : 'Empty backpack slot'}
+                    backpack={i >= 6}
+                  />
+                ))}
+              </div>
+              <ItemSlotBox
+                id={`slot:${slotId}:lategame:neutral`}
+                data={{ kind: 'lategame-neutral-item-slot', slotId }}
+                item={neutralItem}
+                items={neutralItemsCatalog}
+                onRemove={onRemoveNeutralItem}
+                onPick={onPickNeutralItem}
+                empty="Empty neutral slot"
+                circular
+              />
+            </div>
+          </>
         )}
       </div>
-
-      {hero && (
-        <div className="late-game-card-items-row">
-          <div className="inventory-grid">
-            {regularItems.map((item, i) => (
-              <ItemSlotBox
-                key={i}
-                id={`slot:${slotId}:lategame:regular:${i}`}
-                data={{ kind: 'lategame-regular-item-slot', slotId, itemIndex: i }}
-                item={item}
-                items={regularItemsCatalog}
-                onRemove={() => onRemoveRegularItem(i)}
-                onPick={(itemSlug) => onPickRegularItem(i, itemSlug)}
-                empty={i < 6 ? 'Empty item slot' : 'Empty backpack slot'}
-                backpack={i >= 6}
-              />
-            ))}
-          </div>
-          <ItemSlotBox
-            id={`slot:${slotId}:lategame:neutral`}
-            data={{ kind: 'lategame-neutral-item-slot', slotId }}
-            item={neutralItem}
-            items={neutralItemsCatalog}
-            onRemove={onRemoveNeutralItem}
-            onPick={onPickNeutralItem}
-            empty="Empty neutral slot"
-            circular
-          />
-        </div>
-      )}
     </div>
   );
 }

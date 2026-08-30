@@ -310,7 +310,7 @@ body {
 }
 
 .late-game-card {
-  flex: 0 0 280px;
+  flex: 0 0 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -350,10 +350,8 @@ body {
   color: var(--danger);
 }
 
-.late-game-card-hero-row {
-  display: flex;
-  align-items: stretch;
-  gap: 0.6rem;
+.late-game-card-loadout {
+  min-height: 0;
 }
 
 .late-game-hero-dropzone {
@@ -362,12 +360,6 @@ body {
 
 .late-game-hero-dropzone .role-slot-hero-icon {
   height: 54px;
-}
-
-.late-game-card-items-row {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
 }
 
 .role-slot-header {

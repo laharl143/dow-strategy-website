@@ -184,10 +184,35 @@ function SituationalItemsSection({
   );
 }
 
-function NoteSection({ note, onChange }: { note: string; onChange: (value: string) => void }) {
+function NoteSection({
+  note,
+  onChange,
+  onSave,
+  canSave,
+}: {
+  note: string;
+  onChange: (value: string) => void;
+  onSave: () => void;
+  canSave: boolean;
+}) {
+  const [justSaved, setJustSaved] = useState(false);
+
+  function handleSave() {
+    onSave();
+    setJustSaved(true);
+    setTimeout(() => setJustSaved(false), 1500);
+  }
+
   return (
     <section className="hero-page-item-section">
-      <h2>Notes</h2>
+      <div className="hero-page-note-header">
+        <h2>Notes</h2>
+        {canSave && (
+          <button type="button" className="hero-page-note-save" onClick={handleSave}>
+            {justSaved ? 'Saved ✓' : 'Save'}
+          </button>
+        )}
+      </div>
       <textarea
         className="hero-page-note"
         placeholder="Write build notes, timings, matchup tips…"
@@ -216,16 +241,28 @@ export function HeroPage() {
   }, [loadoutsBySlug]);
 
   // Push this hero's build to Supabase after changes settle — debounced so
-  // rapid edits (typing a note, several drags in a row) don't fire one
-  // network request per keystroke/drop.
+  // several drags in a row don't fire one network request per drop. The
+  // note is deliberately excluded from what triggers this: it only syncs
+  // when the user hits the Notes section's own Save button, not on every
+  // keystroke (whatever note text is current still rides along on a push
+  // triggered by an item change, since it's all one row).
   const heroLoadout = hero ? loadoutsBySlug[hero.slug] : undefined;
+  const itemSyncSignature = heroLoadout
+    ? JSON.stringify([
+        heroLoadout.regularItemSlugs,
+        heroLoadout.neutralItemSlug,
+        heroLoadout.situationalItemSlugs,
+        heroLoadout.situationalNeutralItemSlugs,
+      ])
+    : null;
   useEffect(() => {
     if (!session || !hero || !heroLoadout) return;
     const timer = setTimeout(() => {
       void pushLoadout(session.user.id, hero.slug, heroLoadout);
     }, 600);
     return () => clearTimeout(timer);
-  }, [session, hero, heroLoadout]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session, hero, itemSyncSignature]);
 
   if (!hero) {
     return (
@@ -394,7 +431,14 @@ export function HeroPage() {
             })
           }
         />
-        <NoteSection note={loadout.note} onChange={(value) => setLoadout((prev) => ({ ...prev, note: value }))} />
+        <NoteSection
+          note={loadout.note}
+          onChange={(value) => setLoadout((prev) => ({ ...prev, note: value }))}
+          onSave={() => {
+            if (session) void pushLoadout(session.user.id, hero.slug, loadout);
+          }}
+          canSave={!!session}
+        />
       </div>
     </ItemShopDock>
   );

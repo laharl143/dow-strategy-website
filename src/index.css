@@ -1290,6 +1290,12 @@ body {
   border-radius: 6px;
 }
 
+/* Circular slots (neutral items) must win over the square radius above —
+   same selector specificity, so this has to come after it in source order. */
+.hero-page-item-slots .item-slot[data-circular] {
+  border-radius: 50%;
+}
+
 .hero-page-item-slots .inventory-grid {
   grid-template-columns: repeat(3, 56px);
   grid-template-rows: repeat(3, 56px);
@@ -1297,8 +1303,14 @@ body {
 }
 
 .hero-page-item-slots .agh-toggle {
-  width: 44px;
-  height: 44px;
+  width: 60px;
+  height: 60px;
+  border-width: 3px;
+  padding: 6px;
+}
+
+.hero-page-item-slots .agh-toggle-stack {
+  gap: 10px;
 }
 
 .hero-page-item-slots .item-slot-icon {
@@ -1325,6 +1337,38 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+.hero-page-note-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--border-soft);
+  padding-bottom: 0.4rem;
+  margin: 0 0 0.9rem;
+}
+
+.hero-page-note-header h2 {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+.hero-page-note-save {
+  background: var(--gold-dim);
+  border: none;
+  color: #12100a;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.74rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hero-page-note-save:hover {
+  background: var(--gold);
 }
 
 .hero-page-note {

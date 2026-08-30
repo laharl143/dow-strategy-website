@@ -55,7 +55,7 @@ export function HeroPickerPopover({
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
-      <div className="hero-picker-list">
+      <div className="hero-picker-grid">
         {filtered.length === 0 && <div className="hero-picker-empty">No heroes found.</div>}
         {filtered.map((hero) => (
           <button
@@ -66,8 +66,7 @@ export function HeroPickerPopover({
             title={assignedHeroSlugs.has(hero.slug) ? `${hero.name} — already on the board, picking moves it here` : hero.name}
             onClick={() => onPick(hero.slug)}
           >
-            <img src={heroIconUrl(hero.code)} alt="" draggable={false} />
-            <span>{hero.name}</span>
+            <img src={heroIconUrl(hero.code)} alt={hero.name} draggable={false} />
           </button>
         ))}
       </div>

@@ -264,7 +264,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  max-width: 1000px;
+  max-width: 940px;
   margin: 0 auto;
 }
 
@@ -276,9 +276,9 @@ body {
 
 .role-slot-card {
   position: relative;
-  flex: 0 0 700px;
+  flex: 0 0 460px;
   min-width: 0;
-  min-height: 192px;
+  min-height: 176px;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -287,24 +287,6 @@ body {
   border-radius: 6px;
   padding: 0.75rem 1rem;
 }
-
-.role-slot-tag {
-  position: absolute;
-  top: 0.6rem;
-  right: 0.75rem;
-  font-size: 0.62rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  color: var(--text);
-  white-space: nowrap;
-}
-
-.role-slot-tag-tank { background: var(--tank); }
-.role-slot-tag-core { background: var(--core); }
-.role-slot-tag-support { background: var(--support); }
 
 /* The "add a late-game swap" control — a slim dashed button that sits beside
    the role card until clicked, at which point it's replaced by the full
@@ -329,14 +311,61 @@ body {
   color: var(--gold);
 }
 
+/* Links a role card to its late-game swap card — a dashed line with a
+   "Swap" pill riding on it, so the pairing reads as "these two belong
+   together" rather than needing a one-off callout the first time. */
+.role-slot-connector {
+  flex: 0 0 56px;
+  align-self: stretch;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.role-slot-connector-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 0;
+  border-top: 2px dashed var(--gold-dim);
+  animation: role-slot-connector-grow 0.45s ease forwards;
+}
+
+@keyframes role-slot-connector-grow {
+  to { width: 100%; }
+}
+
+.role-slot-connector-pill {
+  position: relative;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #12100a;
+  background: var(--gold);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  opacity: 0;
+  animation: role-slot-connector-fade 0.3s ease 0.3s forwards;
+}
+
+@keyframes role-slot-connector-fade {
+  to { opacity: 1; }
+}
+
 .late-game-card {
   position: relative;
-  flex: 0 0 280px;
+  flex: 0 0 390px;
   min-width: 0;
-  min-height: 192px;
+  min-height: 208px;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  /* No header row like the primary card has, so center the one piece of
+     content (the loadout) in the box instead of packing it to the top and
+     leaving dead space below. */
+  justify-content: center;
   background: var(--panel-alt);
   border: 1px solid var(--border-soft);
   border-radius: 6px;
@@ -383,7 +412,6 @@ body {
   gap: 0.6rem;
   align-items: flex-start;
   padding-bottom: 0.6rem;
-  padding-right: 4.5rem;
   border-bottom: 1px solid var(--border-soft);
 }
 

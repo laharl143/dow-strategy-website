@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import type { BoardSlot, Hero, Item, NeutralItem, RoleSlotDefinition } from '../types';
 import { heroIconUrl, SCEPTER_ICON_URL, SHARD_ICON_URL } from '../lib/assets';
 import { useDoubleClick } from '../lib/useDoubleClick';
+import { useSingleOpenPopover } from '../lib/useSingleOpenPopover';
 import { AghUpgradeToggle } from './AghUpgradeToggle';
 import { ItemSlotBox } from './ItemSlotBox';
 import { HeroPickerPopover } from './HeroPickerPopover';
@@ -46,7 +46,7 @@ export function RoleSlotCard({
   onToggleShard: () => void;
   onHeroContextMenu: (e: React.MouseEvent, heroSlug: string) => void;
 }) {
-  const [pickerOpen, setPickerOpen] = useState(false);
+  const { open: pickerOpen, openPopover, closePopover } = useSingleOpenPopover(`slot:${slot.slotId}:hero-picker`);
   const { setNodeRef, isOver } = useDroppable({
     id: `slot:${slot.slotId}:hero`,
     data: { kind: 'hero-slot', slotId: slot.slotId },
@@ -61,7 +61,6 @@ export function RoleSlotCard({
 
   return (
     <div className="role-slot-card">
-      <span className={`role-slot-tag role-slot-tag-${definition.role}`}>{definition.tag}</span>
       <div className="role-slot-header">
         <span className="role-slot-order">{definition.order}</span>
         <div>
@@ -92,7 +91,7 @@ export function RoleSlotCard({
                 className="role-slot-hero-empty"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setPickerOpen(true);
+                  openPopover();
                 }}
               >
                 Drop hero here
@@ -103,9 +102,9 @@ export function RoleSlotCard({
                   assignedHeroSlugs={assignedHeroSlugs}
                   onPick={(heroSlug) => {
                     onPickHero(heroSlug);
-                    setPickerOpen(false);
+                    closePopover();
                   }}
-                  onClose={() => setPickerOpen(false)}
+                  onClose={closePopover}
                 />
               )}
             </>

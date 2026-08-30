@@ -1,7 +1,7 @@
-import { useState } from 'react';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import type { Item } from '../types';
 import { useDoubleClick } from '../lib/useDoubleClick';
+import { useSingleOpenPopover } from '../lib/useSingleOpenPopover';
 import { ItemPickerPopover } from './ItemPickerPopover';
 
 export function ItemSlotBox({
@@ -25,7 +25,7 @@ export function ItemSlotBox({
   backpack?: boolean;
   circular?: boolean;
 }) {
-  const [pickerOpen, setPickerOpen] = useState(false);
+  const { open: pickerOpen, openPopover, closePopover } = useSingleOpenPopover(id);
   const { setNodeRef, isOver } = useDroppable({ id, data });
   const draggable = useDraggable({
     id: `${id}:occupant`,
@@ -65,7 +65,7 @@ export function ItemSlotBox({
             className="item-slot-empty"
             onClick={(e) => {
               e.stopPropagation();
-              setPickerOpen(true);
+              openPopover();
             }}
           >
             <span className="item-slot-placeholder" />
@@ -75,9 +75,9 @@ export function ItemSlotBox({
               items={items}
               onPick={(itemSlug) => {
                 onPick(itemSlug);
-                setPickerOpen(false);
+                closePopover();
               }}
-              onClose={() => setPickerOpen(false)}
+              onClose={closePopover}
             />
           )}
         </>

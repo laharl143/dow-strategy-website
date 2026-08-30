@@ -89,6 +89,13 @@ export function Board({
               onHeroContextMenu={openMenu}
             />
 
+            {swap && (
+              <div className="role-slot-connector" title="This card is a late-game swap for the role on the left">
+                <span className="role-slot-connector-line" />
+                <span className="role-slot-connector-pill">Swap</span>
+              </div>
+            )}
+
             {swap ? (
               <LateGameSwapCard
                 slotId={definition.id}

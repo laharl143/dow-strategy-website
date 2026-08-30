@@ -1,8 +1,8 @@
-import { useState } from 'react';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import type { BoardSlot, Hero, Item, NeutralItem } from '../types';
 import { heroIconUrl, SCEPTER_ICON_URL, SHARD_ICON_URL } from '../lib/assets';
 import { useDoubleClick } from '../lib/useDoubleClick';
+import { useSingleOpenPopover } from '../lib/useSingleOpenPopover';
 import { AghUpgradeToggle } from './AghUpgradeToggle';
 import { ItemSlotBox } from './ItemSlotBox';
 import { HeroPickerPopover } from './HeroPickerPopover';
@@ -55,7 +55,7 @@ export function LateGameSwapCard({
   onToggleShard: () => void;
   onHeroContextMenu: (e: React.MouseEvent, heroSlug: string) => void;
 }) {
-  const [pickerOpen, setPickerOpen] = useState(false);
+  const { open: pickerOpen, openPopover, closePopover } = useSingleOpenPopover(`slot:${slotId}:lategame:hero-picker`);
   const { setNodeRef, isOver } = useDroppable({
     id: `slot:${slotId}:lategame:hero`,
     data: { kind: 'lategame-hero-slot', slotId },
@@ -99,7 +99,7 @@ export function LateGameSwapCard({
                 className="role-slot-hero-empty"
                 onClick={(e) => {
                   e.stopPropagation();
-                  setPickerOpen(true);
+                  openPopover();
                 }}
               >
                 Drop hero here
@@ -110,9 +110,9 @@ export function LateGameSwapCard({
                   assignedHeroSlugs={assignedHeroSlugs}
                   onPick={(heroSlug) => {
                     onPickHero(heroSlug);
-                    setPickerOpen(false);
+                    closePopover();
                   }}
-                  onClose={() => setPickerOpen(false)}
+                  onClose={closePopover}
                 />
               )}
             </>

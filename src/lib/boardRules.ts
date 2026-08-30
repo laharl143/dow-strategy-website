@@ -1,4 +1,4 @@
-import type { Board } from '../types';
+import type { Board, LateGameSwap } from '../types';
 
 // Neutral items: global cap of 6 across the whole board, at most 1 per hero.
 // See CONTEXT.md "Neutral Item". No per-tier limit yet (round 2 grill decision).
@@ -127,6 +127,85 @@ export function toggleShard(board: Board, slotId: string): Board {
   return {
     slots: board.slots.map((s) =>
       s.slotId === slotId && s.heroSlug ? { ...s, hasShard: !s.hasShard } : s,
+    ),
+  };
+}
+
+// --- Late-game swap: an optional second hero+loadout tracked per role slot,
+// for "I'll switch this hero out once we're deep into the game." It lives
+// alongside the slot's primary hero, not instead of it, and isn't counted
+// against the neutral item cap above — it's a plan, not something actually
+// equipped at the same time as the primary loadout.
+
+export function emptyLateGameSwap(): LateGameSwap {
+  return {
+    heroSlug: null,
+    regularItemSlugs: new Array(REGULAR_ITEM_SLOT_COUNT).fill(null),
+    neutralItemSlug: null,
+    hasScepter: false,
+    hasShard: false,
+  };
+}
+
+export function addLateGameSwap(board: Board, slotId: string): Board {
+  return {
+    slots: board.slots.map((s) => (s.slotId === slotId ? { ...s, lateGameSwap: emptyLateGameSwap() } : s)),
+  };
+}
+
+export function removeLateGameSwap(board: Board, slotId: string): Board {
+  return {
+    slots: board.slots.map((s) => (s.slotId === slotId ? { ...s, lateGameSwap: null } : s)),
+  };
+}
+
+/** Clears the hero (and everything it's holding) from a late-game swap card, keeping the card itself. */
+export function clearLateGameHero(board: Board, slotId: string): Board {
+  return {
+    slots: board.slots.map((s) => (s.slotId === slotId && s.lateGameSwap ? { ...s, lateGameSwap: emptyLateGameSwap() } : s)),
+  };
+}
+
+export function setLateGameRegularItem(
+  board: Board,
+  slotId: string,
+  itemIndex: number,
+  itemSlug: string | null,
+): Board {
+  return {
+    slots: board.slots.map((s) => {
+      if (s.slotId !== slotId || !s.lateGameSwap) return s;
+      const regularItemSlugs = [...s.lateGameSwap.regularItemSlugs];
+      regularItemSlugs[itemIndex] = itemSlug;
+      return { ...s, lateGameSwap: { ...s.lateGameSwap, regularItemSlugs } };
+    }),
+  };
+}
+
+export function setLateGameNeutralItem(board: Board, slotId: string, itemSlug: string | null): Board {
+  return {
+    slots: board.slots.map((s) =>
+      s.slotId === slotId && s.lateGameSwap ? { ...s, lateGameSwap: { ...s.lateGameSwap, neutralItemSlug: itemSlug } } : s,
+    ),
+  };
+}
+
+export function toggleLateGameScepter(board: Board, slotId: string): Board {
+  return {
+    slots: board.slots.map((s) =>
+      s.slotId === slotId && s.lateGameSwap?.heroSlug
+        ? { ...s, lateGameSwap: { ...s.lateGameSwap, hasScepter: !s.lateGameSwap.hasScepter } }
+        : s,
+    ),
+  };
+}
+
+export function toggleLateGameShard(board: Board, slotId: string): Board {
+  return {
+    slots: board.slots.map((s) =>
+      s.slotId === slotId && s.lateGameSwap?.heroSlug
+        ? { ...s, lateGameSwap: { ...s.lateGameSwap, hasShard: !s.lateGameSwap.hasShard } }
+        : s,
     ),
   };
 }

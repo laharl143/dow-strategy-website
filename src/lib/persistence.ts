@@ -1,4 +1,4 @@
-import type { Board, SavedStrategy } from '../types';
+import type { Board, BoardSlot, SavedStrategy } from '../types';
 import { ROLE_SLOTS } from '../data/roleSlots';
 import { REGULAR_ITEM_SLOT_COUNT } from './boardRules';
 
@@ -30,12 +30,26 @@ export function emptyBoard(): Board {
       neutralItemSlug: null,
       hasScepter: false,
       hasShard: false,
+      lateGameSwap: null,
     })),
   };
 }
 
+function normalizeLateGameSwap(swap: BoardSlot['lateGameSwap']): BoardSlot['lateGameSwap'] {
+  if (!swap) return null;
+  const slugs = (swap.regularItemSlugs ?? []).slice(0, REGULAR_ITEM_SLOT_COUNT);
+  while (slugs.length < REGULAR_ITEM_SLOT_COUNT) slugs.push(null);
+  return {
+    heroSlug: swap.heroSlug ?? null,
+    regularItemSlugs: slugs,
+    neutralItemSlug: swap.neutralItemSlug ?? null,
+    hasScepter: swap.hasScepter ?? false,
+    hasShard: swap.hasShard ?? false,
+  };
+}
+
 // Pads/truncates regularItemSlugs to the current length, and backfills
-// hasScepter/hasShard, for boards saved before those fields existed.
+// hasScepter/hasShard/lateGameSwap, for boards saved before those fields existed.
 export function normalizeBoard(board: Board): Board {
   return {
     slots: board.slots.map((s) => {
@@ -46,6 +60,7 @@ export function normalizeBoard(board: Board): Board {
         regularItemSlugs: slugs,
         hasScepter: s.hasScepter ?? false,
         hasShard: s.hasShard ?? false,
+        lateGameSwap: normalizeLateGameSwap(s.lateGameSwap),
       };
     }),
   };

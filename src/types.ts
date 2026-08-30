@@ -80,6 +80,20 @@ export interface RoleSlotDefinition {
   description: string;
 }
 
+/**
+ * "I'll swap this hero out later" — an optional second hero+loadout for a
+ * role slot, for heroes that are strong early but fall off, tracked
+ * alongside (not instead of) the slot's primary hero. Present (non-null)
+ * only once the user clicks the slot's "+" to add one.
+ */
+export interface LateGameSwap {
+  heroSlug: string | null;
+  regularItemSlugs: (string | null)[];
+  neutralItemSlug: string | null;
+  hasScepter: boolean;
+  hasShard: boolean;
+}
+
 export interface BoardSlot {
   slotId: string;
   heroSlug: string | null;
@@ -89,6 +103,7 @@ export interface BoardSlot {
   /** Whether this game's hero has bought the Aghanim's Scepter/Shard upgrade. */
   hasScepter: boolean;
   hasShard: boolean;
+  lateGameSwap: LateGameSwap | null;
 }
 
 export interface Board {

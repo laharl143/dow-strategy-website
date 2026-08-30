@@ -1064,6 +1064,50 @@ body {
   display: block;
 }
 
+.bonus-tier-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.bonus-tier-toggle-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.bonus-tier-toggle-control {
+  display: flex;
+  background: var(--panel-deep);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.bonus-tier-toggle-control button {
+  background: none;
+  border: none;
+  border-radius: 999px;
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  cursor: pointer;
+}
+
+.bonus-tier-toggle-control button[data-active] {
+  background: var(--gold-dim);
+  color: #12100a;
+}
+
 .neutral-tray-header {
   font-size: 0.75rem;
   margin-bottom: 0.6rem;
@@ -1214,6 +1258,23 @@ body {
 .hero-context-menu button:hover {
   background: var(--panel-alt);
   color: var(--gold);
+}
+
+.neutral-error-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  z-index: 200;
+  background: var(--panel-raised);
+  border: 1px solid var(--danger);
+  color: var(--text);
+  font-size: 0.82rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  max-width: 420px;
+  text-align: center;
 }
 
 .pick-frequency-filters {

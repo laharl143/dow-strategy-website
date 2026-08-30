@@ -1,7 +1,9 @@
-import type { Board, LateGameSwap } from '../types';
+import type { Board, LateGameSwap, NeutralItem } from '../types';
 
-// Neutral items: global cap of 6 across the whole board, at most 1 per hero.
-// See CONTEXT.md "Neutral Item". No per-tier limit yet (round 2 grill decision).
+// Neutral items: global cap of 6 across the whole board — one guaranteed
+// drop per tier (1-5), plus one bonus drop at hero level 25 that's randomly
+// a 2nd tier 4 or a 2nd tier 5 (see Board.bonusNeutralTier). So every tier
+// caps at 1 except the game's bonus tier, which caps at 2.
 export const NEUTRAL_ITEM_CAP = 6;
 
 // A hero's inventory: 6 active item slots + a 3-slot backpack, matching Dota 2's
@@ -14,12 +16,57 @@ export function countAssignedNeutrals(board: Board): number {
   return board.slots.filter((s) => s.neutralItemSlug !== null).length;
 }
 
-export function canAssignNeutral(board: Board, slotId: string): boolean {
+export function neutralTierCap(board: Board, tier: number): number {
+  return tier === board.bonusNeutralTier ? 2 : 1;
+}
+
+export function countAssignedByTier(board: Board, tier: number, neutralItemBySlug: Map<string, NeutralItem>): number {
+  return board.slots.filter((s) => s.neutralItemSlug && neutralItemBySlug.get(s.neutralItemSlug)?.tier === tier).length;
+}
+
+export type NeutralAssignError = 'total-cap' | 'tier-cap' | null;
+
+/**
+ * Whether `itemSlug` can be placed in `slotId`'s neutral slot, and if not,
+ * why — 'total-cap' for the board-wide 6 item limit, 'tier-cap' for the
+ * per-tier limit (see NEUTRAL_ITEM_CAP above). Both checks exclude the
+ * slot's own current occupant, so replacing a slot's existing item with
+ * another of the same tier is always fine.
+ */
+export function checkAssignNeutral(
+  board: Board,
+  slotId: string,
+  itemSlug: string,
+  neutralItemBySlug: Map<string, NeutralItem>,
+): NeutralAssignError {
   const slot = board.slots.find((s) => s.slotId === slotId);
-  if (!slot) return false;
-  if (slot.heroSlug === null) return false; // no hero to hold it
-  if (slot.neutralItemSlug !== null) return true; // replacing own item is fine
-  return countAssignedNeutrals(board) < NEUTRAL_ITEM_CAP;
+  if (!slot || slot.heroSlug === null) return 'total-cap'; // no hero to hold it
+  if (slot.neutralItemSlug === itemSlug) return null;
+
+  const item = neutralItemBySlug.get(itemSlug);
+  if (!item) return 'total-cap';
+
+  const others = board.slots.filter((s) => s.slotId !== slotId);
+  const totalOthers = others.filter((s) => s.neutralItemSlug !== null).length;
+  if (totalOthers >= NEUTRAL_ITEM_CAP) return 'total-cap';
+
+  const tierOthers = others.filter((s) => s.neutralItemSlug && neutralItemBySlug.get(s.neutralItemSlug)?.tier === item.tier).length;
+  if (tierOthers >= neutralTierCap(board, item.tier)) return 'tier-cap';
+
+  return null;
+}
+
+export function canAssignNeutral(
+  board: Board,
+  slotId: string,
+  itemSlug: string,
+  neutralItemBySlug: Map<string, NeutralItem>,
+): boolean {
+  return checkAssignNeutral(board, slotId, itemSlug, neutralItemBySlug) === null;
+}
+
+export function setBonusNeutralTier(board: Board, tier: 4 | 5): Board {
+  return { ...board, bonusNeutralTier: tier };
 }
 
 export interface HeroLoadoutSeed {
@@ -36,6 +83,7 @@ export interface HeroLoadoutSeed {
  */
 export function setHero(board: Board, slotId: string, heroSlug: string | null, seed?: HeroLoadoutSeed | null): Board {
   return {
+    ...board,
     slots: board.slots.map((s) =>
       s.slotId === slotId
         ? {
@@ -66,6 +114,7 @@ export function moveHero(board: Board, fromSlotId: string, toSlotId: string): Bo
   if (!from || !to) return board;
 
   return {
+    ...board,
     slots: board.slots.map((s) => {
       if (s.slotId === fromSlotId) {
         return {
@@ -99,6 +148,7 @@ export function setRegularItem(
   itemSlug: string | null,
 ): Board {
   return {
+    ...board,
     slots: board.slots.map((s) => {
       if (s.slotId !== slotId) return s;
       const regularItemSlugs = [...s.regularItemSlugs];
@@ -108,15 +158,22 @@ export function setRegularItem(
   };
 }
 
-export function setNeutralItem(board: Board, slotId: string, itemSlug: string | null): Board {
-  if (itemSlug !== null && !canAssignNeutral(board, slotId)) return board;
+export function setNeutralItem(
+  board: Board,
+  slotId: string,
+  itemSlug: string | null,
+  neutralItemBySlug: Map<string, NeutralItem>,
+): Board {
+  if (itemSlug !== null && !canAssignNeutral(board, slotId, itemSlug, neutralItemBySlug)) return board;
   return {
+    ...board,
     slots: board.slots.map((s) => (s.slotId === slotId ? { ...s, neutralItemSlug: itemSlug } : s)),
   };
 }
 
 export function toggleScepter(board: Board, slotId: string): Board {
   return {
+    ...board,
     slots: board.slots.map((s) =>
       s.slotId === slotId && s.heroSlug ? { ...s, hasScepter: !s.hasScepter } : s,
     ),
@@ -125,6 +182,7 @@ export function toggleScepter(board: Board, slotId: string): Board {
 
 export function toggleShard(board: Board, slotId: string): Board {
   return {
+    ...board,
     slots: board.slots.map((s) =>
       s.slotId === slotId && s.heroSlug ? { ...s, hasShard: !s.hasShard } : s,
     ),
@@ -149,12 +207,14 @@ export function emptyLateGameSwap(): LateGameSwap {
 
 export function addLateGameSwap(board: Board, slotId: string): Board {
   return {
+    ...board,
     slots: board.slots.map((s) => (s.slotId === slotId ? { ...s, lateGameSwap: emptyLateGameSwap() } : s)),
   };
 }
 
 export function removeLateGameSwap(board: Board, slotId: string): Board {
   return {
+    ...board,
     slots: board.slots.map((s) => (s.slotId === slotId ? { ...s, lateGameSwap: null } : s)),
   };
 }
@@ -162,6 +222,7 @@ export function removeLateGameSwap(board: Board, slotId: string): Board {
 /** Clears the hero (and everything it's holding) from a late-game swap card, keeping the card itself. */
 export function clearLateGameHero(board: Board, slotId: string): Board {
   return {
+    ...board,
     slots: board.slots.map((s) => (s.slotId === slotId && s.lateGameSwap ? { ...s, lateGameSwap: emptyLateGameSwap() } : s)),
   };
 }
@@ -173,6 +234,7 @@ export function setLateGameRegularItem(
   itemSlug: string | null,
 ): Board {
   return {
+    ...board,
     slots: board.slots.map((s) => {
       if (s.slotId !== slotId || !s.lateGameSwap) return s;
       const regularItemSlugs = [...s.lateGameSwap.regularItemSlugs];
@@ -184,6 +246,7 @@ export function setLateGameRegularItem(
 
 export function setLateGameNeutralItem(board: Board, slotId: string, itemSlug: string | null): Board {
   return {
+    ...board,
     slots: board.slots.map((s) =>
       s.slotId === slotId && s.lateGameSwap ? { ...s, lateGameSwap: { ...s.lateGameSwap, neutralItemSlug: itemSlug } } : s,
     ),
@@ -192,6 +255,7 @@ export function setLateGameNeutralItem(board: Board, slotId: string, itemSlug: s
 
 export function toggleLateGameScepter(board: Board, slotId: string): Board {
   return {
+    ...board,
     slots: board.slots.map((s) =>
       s.slotId === slotId && s.lateGameSwap?.heroSlug
         ? { ...s, lateGameSwap: { ...s.lateGameSwap, hasScepter: !s.lateGameSwap.hasScepter } }
@@ -202,6 +266,7 @@ export function toggleLateGameScepter(board: Board, slotId: string): Board {
 
 export function toggleLateGameShard(board: Board, slotId: string): Board {
   return {
+    ...board,
     slots: board.slots.map((s) =>
       s.slotId === slotId && s.lateGameSwap?.heroSlug
         ? { ...s, lateGameSwap: { ...s.lateGameSwap, hasShard: !s.lateGameSwap.hasShard } }

@@ -32,6 +32,7 @@ export function emptyBoard(): Board {
       hasShard: false,
       lateGameSwap: null,
     })),
+    bonusNeutralTier: 5,
   };
 }
 
@@ -49,7 +50,8 @@ function normalizeLateGameSwap(swap: BoardSlot['lateGameSwap']): BoardSlot['late
 }
 
 // Pads/truncates regularItemSlugs to the current length, and backfills
-// hasScepter/hasShard/lateGameSwap, for boards saved before those fields existed.
+// hasScepter/hasShard/lateGameSwap/bonusNeutralTier, for boards saved
+// before those fields existed.
 export function normalizeBoard(board: Board): Board {
   return {
     slots: board.slots.map((s) => {
@@ -63,6 +65,7 @@ export function normalizeBoard(board: Board): Board {
         lateGameSwap: normalizeLateGameSwap(s.lateGameSwap),
       };
     }),
+    bonusNeutralTier: board.bonusNeutralTier === 4 ? 4 : 5,
   };
 }
 

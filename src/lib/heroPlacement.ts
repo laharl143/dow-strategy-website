@@ -40,6 +40,7 @@ function readLoadout(board: Board, target: HeroTarget): HeroLoadoutState {
 
 function writeLoadout(board: Board, target: HeroTarget, loadout: HeroLoadoutState): Board {
   return {
+    ...board,
     slots: board.slots.map((s) => {
       if (s.slotId !== target.slotId) return s;
       if (target.kind === 'primary') {

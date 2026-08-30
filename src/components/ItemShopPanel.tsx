@@ -14,11 +14,16 @@ export function ItemShopPanel({
   regularItems,
   neutralsByTier,
   neutralsRemaining,
+  bonusNeutralTier,
+  onSetBonusNeutralTier,
 }: {
   regularItems: RegularItem[];
   neutralsByTier: Map<number, NeutralItem[]>;
   /** Null when there's no active game board to count against (e.g. the Heroes reference pages). */
   neutralsRemaining: number | null;
+  /** This game's random level-25 bonus tier — undefined on pages with no active board. */
+  bonusNeutralTier?: 4 | 5;
+  onSetBonusNeutralTier?: (tier: 4 | 5) => void;
 }) {
   const [tab, setTab] = useState<ShopTab>('basics');
   const [query, setQuery] = useState('');
@@ -55,7 +60,12 @@ export function ItemShopPanel({
       </div>
       <div className="item-shop-body">
         {tab === 'neutrals' ? (
-          <NeutralItemTray itemsByTier={neutralsByTier} remaining={neutralsRemaining} />
+          <NeutralItemTray
+            itemsByTier={neutralsByTier}
+            remaining={neutralsRemaining}
+            bonusNeutralTier={bonusNeutralTier}
+            onSetBonusNeutralTier={onSetBonusNeutralTier}
+          />
         ) : (
           <RegularItemColumns items={filteredRegular} shopTab={tab} />
         )}

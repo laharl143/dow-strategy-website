@@ -108,6 +108,14 @@ export interface BoardSlot {
 
 export interface Board {
   slots: BoardSlot[];
+  /**
+   * At hero level 25 the team gets one bonus neutral item drop on top of
+   * the guaranteed tier 1-5 — it's randomly a tier 4 or a tier 5, never
+   * both. This records which one the RNG gave this game, so the board can
+   * cap that tier at 2 instances (guaranteed + bonus) and every other tier
+   * at 1.
+   */
+  bonusNeutralTier: 4 | 5;
 }
 
 export interface SavedStrategy {

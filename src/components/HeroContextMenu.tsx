@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 
 /**
@@ -28,19 +29,27 @@ export function useHeroContextMenu() {
     setMenu({ x: e.clientX, y: e.clientY, heroSlug });
   }
 
-  const menuNode = menu && (
-    <div className="hero-context-menu" style={{ left: menu.x, top: menu.y }} onClick={(e) => e.stopPropagation()}>
-      <button
-        type="button"
-        onClick={() => {
-          navigate(`/heroes/${menu.heroSlug}`);
-          setMenu(null);
-        }}
-      >
-        Inspect
-      </button>
-    </div>
-  );
+  // Rendered via a portal straight to <body> — this menu uses `position:
+  // fixed` with viewport coordinates (clientX/clientY), but CSS gives any
+  // transformed ancestor (e.g. the sliding hero/shop panels) its own
+  // containing block for fixed descendants, which would otherwise throw the
+  // menu's position off by that ancestor's offset.
+  const menuNode = menu
+    ? createPortal(
+        <div className="hero-context-menu" style={{ left: menu.x, top: menu.y }} onClick={(e) => e.stopPropagation()}>
+          <button
+            type="button"
+            onClick={() => {
+              navigate(`/heroes/${menu.heroSlug}`);
+              setMenu(null);
+            }}
+          >
+            Inspect
+          </button>
+        </div>,
+        document.body,
+      )
+    : null;
 
   return { openMenu, menuNode };
 }

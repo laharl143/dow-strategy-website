@@ -26,8 +26,13 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
+  overflow-x: hidden;
   background: var(--bg);
   color: var(--text);
   background-image: radial-gradient(circle at 50% 0%, #1a1622 0%, var(--bg) 60%);
@@ -450,17 +455,17 @@ body {
 .agh-toggle-stack {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   flex-shrink: 0;
 }
 
 .agh-toggle {
-  width: 28px;
-  height: 28px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: 2px solid var(--border);
   background: var(--panel-deep);
-  padding: 3px;
+  padding: 4px;
   cursor: pointer;
   opacity: 0.4;
   filter: grayscale(1);

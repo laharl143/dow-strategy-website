@@ -92,7 +92,6 @@ export function Board({
             {swap ? (
               <LateGameSwapCard
                 slotId={definition.id}
-                definition={definition}
                 swap={swap}
                 hero={swap.heroSlug ? heroBySlug.get(swap.heroSlug) : undefined}
                 regularItems={swap.regularItemSlugs.map((s) => (s ? regularItemBySlug.get(s) : undefined))}

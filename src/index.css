@@ -170,6 +170,12 @@ body {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  /* Without this, overflow-x computes to 'auto' too (the CSS quirk where an
+     unset axis follows 'auto' when the other axis isn't 'visible') — and the
+     side panels' translateX(...) slide-out counts toward this container's
+     scrollable overflow even though it doesn't move their layout box, which
+     opened a phantom horizontal scrollbar whenever a panel was hidden. */
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -195,6 +201,7 @@ body {
   min-height: 0;
   min-width: 0;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* Both side panels overlay on top of the board/hero content instead of

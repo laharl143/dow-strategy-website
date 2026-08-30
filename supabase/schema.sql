@@ -6,9 +6,18 @@ create table if not exists hero_loadouts (
   hero_slug text not null,
   regular_item_slugs jsonb not null default '[]'::jsonb,
   neutral_item_slug text,
+  situational_item_slugs jsonb not null default '[]'::jsonb,
+  situational_neutral_item_slugs jsonb not null default '[]'::jsonb,
+  note text not null default '',
   updated_at timestamptz not null default now(),
   primary key (user_id, hero_slug)
 );
+
+-- Migration for a table created before these columns existed — safe to
+-- re-run, `if not exists` makes each statement a no-op once applied.
+alter table hero_loadouts add column if not exists situational_item_slugs jsonb not null default '[]'::jsonb;
+alter table hero_loadouts add column if not exists situational_neutral_item_slugs jsonb not null default '[]'::jsonb;
+alter table hero_loadouts add column if not exists note text not null default '';
 
 alter table hero_loadouts enable row level security;
 

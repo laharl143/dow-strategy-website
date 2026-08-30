@@ -167,19 +167,42 @@ export function saveHeroAghFlags(flags: Record<string, HeroAghFlags>): void {
   localStorage.setItem(HERO_AGH_KEY, JSON.stringify(flags));
 }
 
+export const SITUATIONAL_ITEM_SLOT_COUNT = 6;
+export const SITUATIONAL_NEUTRAL_SLOT_COUNT = 2;
+
 export interface HeroItemLoadout {
   regularItemSlugs: (string | null)[];
   neutralItemSlug: string | null;
+  /** Freeform "my own situational picks" slots — separate from the hero's static reference list. */
+  situationalItemSlugs: (string | null)[];
+  situationalNeutralItemSlugs: (string | null)[];
+  note: string;
 }
 
 export function emptyHeroItemLoadout(): HeroItemLoadout {
-  return { regularItemSlugs: new Array(REGULAR_ITEM_SLOT_COUNT).fill(null), neutralItemSlug: null };
+  return {
+    regularItemSlugs: new Array(REGULAR_ITEM_SLOT_COUNT).fill(null),
+    neutralItemSlug: null,
+    situationalItemSlugs: new Array(SITUATIONAL_ITEM_SLOT_COUNT).fill(null),
+    situationalNeutralItemSlugs: new Array(SITUATIONAL_NEUTRAL_SLOT_COUNT).fill(null),
+    note: '',
+  };
+}
+
+function padSlots(slugs: (string | null)[] | undefined, count: number): (string | null)[] {
+  const result = (slugs ?? []).slice(0, count);
+  while (result.length < count) result.push(null);
+  return result;
 }
 
 function normalizeHeroItemLoadout(loadout: HeroItemLoadout): HeroItemLoadout {
-  const slugs = (loadout.regularItemSlugs ?? []).slice(0, REGULAR_ITEM_SLOT_COUNT);
-  while (slugs.length < REGULAR_ITEM_SLOT_COUNT) slugs.push(null);
-  return { regularItemSlugs: slugs, neutralItemSlug: loadout.neutralItemSlug ?? null };
+  return {
+    regularItemSlugs: padSlots(loadout.regularItemSlugs, REGULAR_ITEM_SLOT_COUNT),
+    neutralItemSlug: loadout.neutralItemSlug ?? null,
+    situationalItemSlugs: padSlots(loadout.situationalItemSlugs, SITUATIONAL_ITEM_SLOT_COUNT),
+    situationalNeutralItemSlugs: padSlots(loadout.situationalNeutralItemSlugs, SITUATIONAL_NEUTRAL_SLOT_COUNT),
+    note: loadout.note ?? '',
+  };
 }
 
 export function loadHeroItemLoadouts(): Record<string, HeroItemLoadout> {

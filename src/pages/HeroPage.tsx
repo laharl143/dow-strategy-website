@@ -61,7 +61,7 @@ function CoreItemsSection({
   return (
     <section className="hero-page-item-section">
       <h2>Core Items</h2>
-      <div className="item-bay">
+      <div className="item-bay hero-page-item-slots">
         <div className="agh-toggle-stack">
           <AghUpgradeToggle
             iconUrl={SCEPTER_ICON_URL}
@@ -106,26 +106,94 @@ function CoreItemsSection({
   );
 }
 
-function SituationalItemsRow({ itemSlugs }: { itemSlugs: string[] }) {
-  const items = itemSlugs.map((slug) => regularItemBySlug.get(slug)).filter((i): i is RegularItem => !!i);
+function SituationalItemsSection({
+  heroSlug,
+  referenceItemSlugs,
+  loadout,
+  onRemoveSituationalItem,
+  onPickSituationalItem,
+  onRemoveSituationalNeutralItem,
+  onPickSituationalNeutralItem,
+}: {
+  heroSlug: string;
+  referenceItemSlugs: string[];
+  loadout: HeroItemLoadout;
+  onRemoveSituationalItem: (index: number) => void;
+  onPickSituationalItem: (index: number, itemSlug: string) => void;
+  onRemoveSituationalNeutralItem: (index: number) => void;
+  onPickSituationalNeutralItem: (index: number, itemSlug: string) => void;
+}) {
+  const referenceItems = referenceItemSlugs
+    .map((slug) => regularItemBySlug.get(slug))
+    .filter((i): i is RegularItem => !!i);
+  const situationalSlotId = `hero:${heroSlug}:situational`;
+  const situationalItems = loadout.situationalItemSlugs.map((slug) => (slug ? regularItemBySlug.get(slug) : undefined));
+  const situationalNeutralItems = loadout.situationalNeutralItemSlugs.map((slug) =>
+    slug ? neutralItemBySlug.get(slug) : undefined,
+  );
 
   return (
     <section className="hero-page-item-section">
       <h2>Situational Items</h2>
-      {items.length === 0 ? (
+      {referenceItems.length === 0 ? (
         <p className="empty-tray">
           No situational items added yet — edit this hero's <code>situationalItemSlugs</code> in{' '}
           <code>src/data/heroes.json</code>.
         </p>
       ) : (
         <div className="hero-page-situational-row">
-          {items.map((item) => (
+          {referenceItems.map((item) => (
             <div key={item.slug} className="hero-page-item-box" title={item.name}>
               {item.iconUrl ? <img src={item.iconUrl} alt={item.name} /> : <span>{item.name.slice(0, 2)}</span>}
             </div>
           ))}
         </div>
       )}
+
+      <div className="hero-page-situational-editable hero-page-item-slots">
+        <span className="hero-page-situational-editable-label">My Picks</span>
+        <div className="hero-page-situational-editable-row">
+          {situationalItems.map((item, i) => (
+            <ItemSlotBox
+              key={`item-${i}`}
+              id={`${situationalSlotId}:item:${i}`}
+              data={{ kind: 'situational-item-slot', slotId: situationalSlotId, itemIndex: i }}
+              item={item}
+              items={regularItemsCatalog}
+              onRemove={() => onRemoveSituationalItem(i)}
+              onPick={(itemSlug) => onPickSituationalItem(i, itemSlug)}
+              empty="Empty situational slot"
+            />
+          ))}
+          {situationalNeutralItems.map((item, i) => (
+            <ItemSlotBox
+              key={`neutral-${i}`}
+              id={`${situationalSlotId}:neutral:${i}`}
+              data={{ kind: 'situational-neutral-item-slot', slotId: situationalSlotId, itemIndex: i }}
+              item={item}
+              items={neutralItemsCatalog}
+              onRemove={() => onRemoveSituationalNeutralItem(i)}
+              onPick={(itemSlug) => onPickSituationalNeutralItem(i, itemSlug)}
+              empty="Empty situational neutral slot"
+              circular
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function NoteSection({ note, onChange }: { note: string; onChange: (value: string) => void }) {
+  return (
+    <section className="hero-page-item-section">
+      <h2>Notes</h2>
+      <textarea
+        className="hero-page-note"
+        placeholder="Write build notes, timings, matchup tips…"
+        value={note}
+        onChange={(e) => onChange(e.target.value)}
+      />
     </section>
   );
 }
@@ -147,13 +215,16 @@ export function HeroPage() {
     saveHeroItemLoadouts(loadoutsBySlug);
   }, [loadoutsBySlug]);
 
-  // Push this hero's build to Supabase whenever it actually changes (not on
-  // every render — the object reference is stable unless this hero's entry
-  // was the one just updated).
+  // Push this hero's build to Supabase after changes settle — debounced so
+  // rapid edits (typing a note, several drags in a row) don't fire one
+  // network request per keystroke/drop.
   const heroLoadout = hero ? loadoutsBySlug[hero.slug] : undefined;
   useEffect(() => {
     if (!session || !hero || !heroLoadout) return;
-    void pushLoadout(session.user.id, hero.slug, heroLoadout);
+    const timer = setTimeout(() => {
+      void pushLoadout(session.user.id, hero.slug, heroLoadout);
+    }, 600);
+    return () => clearTimeout(timer);
   }, [session, hero, heroLoadout]);
 
   if (!hero) {
@@ -169,6 +240,7 @@ export function HeroPage() {
   const aghFlags = aghFlagsBySlug[hero.slug] ?? EMPTY_AGH_FLAGS;
   const loadout = loadoutsBySlug[hero.slug] ?? emptyHeroItemLoadout();
   const slotId = `hero:${hero.slug}`;
+  const situationalSlotId = `hero:${hero.slug}:situational`;
 
   function toggleFlag(key: keyof HeroAghFlags) {
     setAghFlagsBySlug((prev) => {
@@ -189,29 +261,53 @@ export function HeroPage() {
     if (!over) return;
     const activeData = active.data.current as DragData | undefined;
     const overData = over.data.current as DragData | undefined;
-    if (!activeData || !overData || overData.slotId !== slotId) return;
+    if (!activeData || !overData) return;
+
+    function moveInto(field: 'regularItemSlugs' | 'situationalItemSlugs' | 'situationalNeutralItemSlugs') {
+      setLoadout((prev) => {
+        const slugs = [...prev[field]];
+        if (activeData!.fromItemIndex !== undefined) slugs[activeData!.fromItemIndex] = null;
+        slugs[overData!.itemIndex!] = activeData!.itemSlug ?? null;
+        return { ...prev, [field]: slugs };
+      });
+    }
 
     if (
-      (activeData.kind === 'regular-item' || activeData.kind === 'regular-item-slot') &&
       overData.kind === 'regular-item-slot' &&
-      overData.itemIndex !== undefined
+      overData.slotId === slotId &&
+      overData.itemIndex !== undefined &&
+      (activeData.kind === 'regular-item' || activeData.kind === 'regular-item-slot')
     ) {
-      setLoadout((prev) => {
-        const slugs = [...prev.regularItemSlugs];
-        if (activeData.kind === 'regular-item-slot' && activeData.fromItemIndex !== undefined) {
-          slugs[activeData.fromItemIndex] = null;
-        }
-        slugs[overData.itemIndex!] = activeData.itemSlug ?? null;
-        return { ...prev, regularItemSlugs: slugs };
-      });
+      moveInto('regularItemSlugs');
       return;
     }
 
     if (
-      (activeData.kind === 'neutral-item' || activeData.kind === 'neutral-item-slot') &&
-      overData.kind === 'neutral-item-slot'
+      overData.kind === 'neutral-item-slot' &&
+      overData.slotId === slotId &&
+      (activeData.kind === 'neutral-item' || activeData.kind === 'neutral-item-slot')
     ) {
       setLoadout((prev) => ({ ...prev, neutralItemSlug: activeData.itemSlug ?? null }));
+      return;
+    }
+
+    if (
+      overData.kind === 'situational-item-slot' &&
+      overData.slotId === situationalSlotId &&
+      overData.itemIndex !== undefined &&
+      (activeData.kind === 'regular-item' || activeData.kind === 'situational-item-slot')
+    ) {
+      moveInto('situationalItemSlugs');
+      return;
+    }
+
+    if (
+      overData.kind === 'situational-neutral-item-slot' &&
+      overData.slotId === situationalSlotId &&
+      overData.itemIndex !== undefined &&
+      (activeData.kind === 'neutral-item' || activeData.kind === 'situational-neutral-item-slot')
+    ) {
+      moveInto('situationalNeutralItemSlugs');
     }
   }
 
@@ -265,7 +361,40 @@ export function HeroPage() {
           onToggleScepter={() => toggleFlag('coreScepter')}
           onToggleShard={() => toggleFlag('coreShard')}
         />
-        <SituationalItemsRow itemSlugs={hero.situationalItemSlugs} />
+        <SituationalItemsSection
+          heroSlug={hero.slug}
+          referenceItemSlugs={hero.situationalItemSlugs}
+          loadout={loadout}
+          onRemoveSituationalItem={(i) =>
+            setLoadout((prev) => {
+              const slugs = [...prev.situationalItemSlugs];
+              slugs[i] = null;
+              return { ...prev, situationalItemSlugs: slugs };
+            })
+          }
+          onPickSituationalItem={(i, itemSlug) =>
+            setLoadout((prev) => {
+              const slugs = [...prev.situationalItemSlugs];
+              slugs[i] = itemSlug;
+              return { ...prev, situationalItemSlugs: slugs };
+            })
+          }
+          onRemoveSituationalNeutralItem={(i) =>
+            setLoadout((prev) => {
+              const slugs = [...prev.situationalNeutralItemSlugs];
+              slugs[i] = null;
+              return { ...prev, situationalNeutralItemSlugs: slugs };
+            })
+          }
+          onPickSituationalNeutralItem={(i, itemSlug) =>
+            setLoadout((prev) => {
+              const slugs = [...prev.situationalNeutralItemSlugs];
+              slugs[i] = itemSlug;
+              return { ...prev, situationalNeutralItemSlugs: slugs };
+            })
+          }
+        />
+        <NoteSection note={loadout.note} onChange={(value) => setLoadout((prev) => ({ ...prev, note: value }))} />
       </div>
     </ItemShopDock>
   );

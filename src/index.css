@@ -1281,6 +1281,75 @@ body {
   gap: 4px;
 }
 
+/* Scales up the shared item-slot/inventory-grid/agh-toggle components used
+   on the hero page's Core Items and My Picks sections — the board's compact
+   34px slots read too small next to the rest of this page. */
+.hero-page-item-slots .item-slot {
+  width: 56px;
+  height: 56px;
+  border-radius: 6px;
+}
+
+.hero-page-item-slots .inventory-grid {
+  grid-template-columns: repeat(3, 56px);
+  grid-template-rows: repeat(3, 56px);
+  gap: 6px;
+}
+
+.hero-page-item-slots .agh-toggle {
+  width: 44px;
+  height: 44px;
+}
+
+.hero-page-item-slots .item-slot-icon {
+  border-radius: 4px;
+}
+
+.hero-page-situational-editable {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--border-soft);
+}
+
+.hero-page-situational-editable-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  margin-bottom: 0.6rem;
+}
+
+.hero-page-situational-editable-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.hero-page-note {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  background: var(--panel-deep);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  padding: 0.7rem 0.85rem;
+}
+
+.hero-page-note:focus {
+  outline: none;
+  border-color: var(--gold-dim);
+}
+
+.hero-page-note::placeholder {
+  color: var(--text-faint);
+}
+
 /* ---------- Heroes index page ---------- */
 
 .heroes-index {

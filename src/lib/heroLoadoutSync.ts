@@ -5,6 +5,9 @@ interface HeroLoadoutRow {
   hero_slug: string;
   regular_item_slugs: (string | null)[];
   neutral_item_slug: string | null;
+  situational_item_slugs: (string | null)[] | null;
+  situational_neutral_item_slugs: (string | null)[] | null;
+  note: string | null;
 }
 
 /**
@@ -19,7 +22,7 @@ export async function pullAndMergeLoadouts(userId: string): Promise<void> {
 
   const { data, error } = await supabase
     .from('hero_loadouts')
-    .select('hero_slug, regular_item_slugs, neutral_item_slug')
+    .select('hero_slug, regular_item_slugs, neutral_item_slug, situational_item_slugs, situational_neutral_item_slugs, note')
     .eq('user_id', userId);
 
   if (error) {
@@ -36,6 +39,9 @@ export async function pullAndMergeLoadouts(userId: string): Promise<void> {
     merged[row.hero_slug] = {
       regularItemSlugs: row.regular_item_slugs,
       neutralItemSlug: row.neutral_item_slug,
+      situationalItemSlugs: row.situational_item_slugs ?? [],
+      situationalNeutralItemSlugs: row.situational_neutral_item_slugs ?? [],
+      note: row.note ?? '',
     };
   }
   saveHeroItemLoadouts(merged);
@@ -54,6 +60,9 @@ export async function pushLoadout(userId: string, heroSlug: string, loadout: Her
     hero_slug: heroSlug,
     regular_item_slugs: loadout.regularItemSlugs,
     neutral_item_slug: loadout.neutralItemSlug,
+    situational_item_slugs: loadout.situationalItemSlugs,
+    situational_neutral_item_slugs: loadout.situationalNeutralItemSlugs,
+    note: loadout.note,
     updated_at: new Date().toISOString(),
   });
   if (error) console.error('Failed to sync hero build', heroSlug, error);

@@ -1103,27 +1103,15 @@ body {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(6, 1fr);
   gap: 2px;
-  opacity: 0.55;
+  opacity: 0.5;
 }
 
-.login-gate-backdrop span {
-  background: var(--panel-raised);
-}
-
-.login-gate-backdrop span:nth-child(3n) {
-  background: linear-gradient(145deg, var(--tank), #1c2a3d);
-}
-
-.login-gate-backdrop span:nth-child(5n) {
-  background: linear-gradient(145deg, var(--core), #3d1c1c);
-}
-
-.login-gate-backdrop span:nth-child(7n) {
-  background: linear-gradient(145deg, var(--support), #1c3d2a);
-}
-
-.login-gate-backdrop span:nth-child(4n) {
-  background: linear-gradient(145deg, #8d7fe6, #241c3d);
+.login-gate-backdrop img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.7);
 }
 
 .login-gate::after {

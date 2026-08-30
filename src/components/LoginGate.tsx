@@ -1,5 +1,12 @@
 import { useAuth } from '../lib/auth';
 import { setGuestMode } from '../lib/persistence';
+import { heroes } from '../lib/gameData';
+import { heroIconUrl } from '../lib/assets';
+
+// A spread of 60 portraits across the whole roster (every other hero, in
+// roster order) rather than a random pick, so the backdrop stays stable
+// between renders instead of reshuffling.
+const BACKDROP_HEROES = heroes.filter((_, i) => i % 2 === 0).slice(0, 60);
 
 /**
  * Shown before the app on first visit (or after signing out) when there's
@@ -12,8 +19,8 @@ export function LoginGate({ onContinueAsGuest }: { onContinueAsGuest: () => void
   return (
     <div className="login-gate">
       <div className="login-gate-backdrop" aria-hidden="true">
-        {Array.from({ length: 60 }).map((_, i) => (
-          <span key={i} />
+        {BACKDROP_HEROES.map((hero) => (
+          <img key={hero.slug} src={heroIconUrl(hero.code)} alt="" draggable={false} loading="eager" />
         ))}
       </div>
 

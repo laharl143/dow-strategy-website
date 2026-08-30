@@ -143,6 +143,11 @@ export function setGuestMode(): void {
   localStorage.setItem(GUEST_MODE_KEY, 'true');
 }
 
+/** Clears the guest choice so the login gate reappears (the "back to login page" nav button). */
+export function clearGuestMode(): void {
+  localStorage.removeItem(GUEST_MODE_KEY);
+}
+
 export interface HeroAghFlags {
   coreScepter: boolean;
   coreShard: boolean;

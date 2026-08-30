@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../lib/auth';
 import { supabase } from '../lib/supabase';
+import { clearGuestMode } from '../lib/persistence';
 
 export function NavBar({
   onNewGame,
@@ -13,7 +14,7 @@ export function NavBar({
   const location = useLocation();
   const [name, setName] = useState('');
   const onBoard = location.pathname === '/';
-  const { session, loading, signInWithGoogle, signOut } = useAuth();
+  const { session, loading, signOut } = useAuth();
 
   return (
     <nav className="nav-bar">
@@ -64,8 +65,15 @@ export function NavBar({
               </button>
             </>
           ) : (
-            <button type="button" className="nav-bar-sign-in" onClick={() => void signInWithGoogle()}>
-              Sign in with Google
+            <button
+              type="button"
+              className="nav-bar-sign-in"
+              onClick={() => {
+                clearGuestMode();
+                window.location.reload();
+              }}
+            >
+              Back to Login
             </button>
           )}
         </div>

@@ -21,10 +21,12 @@ const PICK_FREQUENCY_FILTERS: { value: PickFrequency | 'all'; label: string }[] 
 function HeroChip({
   hero,
   assigned,
+  large,
   onContextMenu,
 }: {
   hero: Hero;
   assigned: boolean;
+  large?: boolean;
   onContextMenu: (e: React.MouseEvent, heroSlug: string) => void;
 }) {
   const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
@@ -40,6 +42,7 @@ function HeroChip({
       className="hero-chip"
       data-dragging={isDragging || undefined}
       data-assigned={assigned || undefined}
+      data-large={large || undefined}
       title={`${hero.name} (${hero.code})${hero.needsReview ? ' — needs review' : ''}`}
       onContextMenu={(e) => onContextMenu(e, hero.slug)}
     >
@@ -101,9 +104,15 @@ export function HeroTray({ heroes, assignedSlugs }: { heroes: Hero[]; assignedSl
           ))}
         </div>
       </div>
-      <div className="hero-chip-list">
+      <div className="hero-chip-list" data-single={filtered.length === 1 || undefined}>
         {filtered.map((hero) => (
-          <HeroChip key={hero.slug} hero={hero} assigned={assignedSlugs.has(hero.slug)} onContextMenu={openMenu} />
+          <HeroChip
+            key={hero.slug}
+            hero={hero}
+            assigned={assignedSlugs.has(hero.slug)}
+            large={filtered.length === 1}
+            onContextMenu={openMenu}
+          />
         ))}
       </div>
 

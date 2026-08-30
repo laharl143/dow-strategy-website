@@ -537,6 +537,7 @@ body {
 
 .hero-chip {
   width: 56px;
+  height: 40px;
   background: var(--panel-alt);
   border: 1px solid var(--border);
   border-radius: 4px;
@@ -546,11 +547,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: width 0.15s ease, height 0.15s ease;
 }
 
 .hero-chip-icon {
   width: 100%;
-  height: 32px;
+  height: 100%;
   object-fit: cover;
   border-radius: 2px;
 }
@@ -561,6 +563,18 @@ body {
 
 .hero-chip[data-dragging] {
   opacity: 0.3;
+}
+
+/* When a filter narrows the hero list down to exactly one hero, show it bigger. */
+.hero-chip[data-large] {
+  width: 130px;
+  height: 74px;
+  border-radius: 6px;
+  border-color: var(--gold-dim);
+}
+
+.hero-chip-list[data-single] {
+  justify-content: center;
 }
 
 .hero-chip-flag {

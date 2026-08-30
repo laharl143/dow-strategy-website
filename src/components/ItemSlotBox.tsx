@@ -1,12 +1,16 @@
+import { useState } from 'react';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import type { Item } from '../types';
 import { useDoubleClick } from '../lib/useDoubleClick';
+import { ItemPickerPopover } from './ItemPickerPopover';
 
 export function ItemSlotBox({
   id,
   data,
   item,
+  items,
   onRemove,
+  onPick,
   empty,
   backpack,
   circular,
@@ -14,11 +18,14 @@ export function ItemSlotBox({
   id: string;
   data: Record<string, unknown>;
   item: Item | undefined;
+  items: Item[];
   onRemove: () => void;
+  onPick: (itemSlug: string) => void;
   empty: string;
   backpack?: boolean;
   circular?: boolean;
 }) {
+  const [pickerOpen, setPickerOpen] = useState(false);
   const { setNodeRef, isOver } = useDroppable({ id, data });
   const draggable = useDraggable({
     id: `${id}:occupant`,
@@ -52,7 +59,28 @@ export function ItemSlotBox({
           )}
         </span>
       ) : (
-        <span className="item-slot-placeholder" />
+        <>
+          <button
+            type="button"
+            className="item-slot-empty"
+            onClick={(e) => {
+              e.stopPropagation();
+              setPickerOpen(true);
+            }}
+          >
+            <span className="item-slot-placeholder" />
+          </button>
+          {pickerOpen && (
+            <ItemPickerPopover
+              items={items}
+              onPick={(itemSlug) => {
+                onPick(itemSlug);
+                setPickerOpen(false);
+              }}
+              onClose={() => setPickerOpen(false)}
+            />
+          )}
+        </>
       )}
     </div>
   );

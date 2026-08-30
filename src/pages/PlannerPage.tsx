@@ -235,12 +235,16 @@ export function PlannerPage({
             heroes={heroes}
             assignedHeroSlugs={assignedHeroSlugs}
             heroBySlug={heroBySlug}
+            regularItems={regularItems}
             regularItemBySlug={regularItemBySlug}
+            neutralItems={neutralItems}
             neutralItemBySlug={neutralItemBySlug}
             onRemoveHero={(slotId) => setBoard((prev) => setHero(prev, slotId, null))}
             onPickHero={(slotId, heroSlug) => setBoard((prev) => placeHeroInSlot(prev, slotId, heroSlug))}
             onRemoveRegularItem={(slotId, i) => setBoard((prev) => setRegularItem(prev, slotId, i, null))}
+            onPickRegularItem={(slotId, i, itemSlug) => setBoard((prev) => setRegularItem(prev, slotId, i, itemSlug))}
             onRemoveNeutralItem={(slotId) => setBoard((prev) => setNeutralItem(prev, slotId, null))}
+            onPickNeutralItem={(slotId, itemSlug) => setBoard((prev) => setNeutralItem(prev, slotId, itemSlug))}
             onToggleScepter={(slotId) => setBoard((prev) => toggleScepter(prev, slotId))}
             onToggleShard={(slotId) => setBoard((prev) => toggleShard(prev, slotId))}
           />

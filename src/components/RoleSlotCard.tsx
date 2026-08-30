@@ -14,11 +14,15 @@ export function RoleSlotCard({
   heroes,
   assignedHeroSlugs,
   regularItems,
+  regularItemsCatalog,
   neutralItem,
+  neutralItemsCatalog,
   onRemoveHero,
   onPickHero,
   onRemoveRegularItem,
+  onPickRegularItem,
   onRemoveNeutralItem,
+  onPickNeutralItem,
   onToggleScepter,
   onToggleShard,
   onHeroContextMenu,
@@ -29,11 +33,15 @@ export function RoleSlotCard({
   heroes: Hero[];
   assignedHeroSlugs: Set<string>;
   regularItems: (Item | undefined)[];
+  regularItemsCatalog: Item[];
   neutralItem: NeutralItem | undefined;
+  neutralItemsCatalog: NeutralItem[];
   onRemoveHero: () => void;
   onPickHero: (heroSlug: string) => void;
   onRemoveRegularItem: (index: number) => void;
+  onPickRegularItem: (index: number, itemSlug: string) => void;
   onRemoveNeutralItem: () => void;
+  onPickNeutralItem: (itemSlug: string) => void;
   onToggleScepter: () => void;
   onToggleShard: () => void;
   onHeroContextMenu: (e: React.MouseEvent, heroSlug: string) => void;
@@ -130,7 +138,9 @@ export function RoleSlotCard({
                     id={`slot:${slot.slotId}:regular:${i}`}
                     data={{ kind: 'regular-item-slot', slotId: slot.slotId, itemIndex: i }}
                     item={item}
+                    items={regularItemsCatalog}
                     onRemove={() => onRemoveRegularItem(i)}
+                    onPick={(itemSlug) => onPickRegularItem(i, itemSlug)}
                     empty={i < 6 ? 'Empty item slot' : 'Empty backpack slot'}
                     backpack={i >= 6}
                   />
@@ -140,7 +150,9 @@ export function RoleSlotCard({
                 id={`slot:${slot.slotId}:neutral`}
                 data={{ kind: 'neutral-item-slot', slotId: slot.slotId }}
                 item={neutralItem}
+                items={neutralItemsCatalog}
                 onRemove={onRemoveNeutralItem}
+                onPick={onPickNeutralItem}
                 empty="Empty neutral slot"
                 circular
               />

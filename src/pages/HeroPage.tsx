@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import type { DragEndEvent } from '@dnd-kit/core';
-import { heroBySlug, regularItemBySlug, neutralItemBySlug } from '../lib/gameData';
+import {
+  heroBySlug,
+  regularItems as regularItemsCatalog,
+  regularItemBySlug,
+  neutralItems as neutralItemsCatalog,
+  neutralItemBySlug,
+} from '../lib/gameData';
 import { heroIconUrl, SCEPTER_ICON_URL, SHARD_ICON_URL } from '../lib/assets';
 import {
   loadHeroAghFlags,
@@ -32,7 +38,9 @@ function CoreItemsSection({
   loadout,
   aghFlags,
   onRemoveRegularItem,
+  onPickRegularItem,
   onRemoveNeutralItem,
+  onPickNeutralItem,
   onToggleScepter,
   onToggleShard,
 }: {
@@ -40,7 +48,9 @@ function CoreItemsSection({
   loadout: HeroItemLoadout;
   aghFlags: HeroAghFlags;
   onRemoveRegularItem: (index: number) => void;
+  onPickRegularItem: (index: number, itemSlug: string) => void;
   onRemoveNeutralItem: () => void;
+  onPickNeutralItem: (itemSlug: string) => void;
   onToggleScepter: () => void;
   onToggleShard: () => void;
 }) {
@@ -73,7 +83,9 @@ function CoreItemsSection({
               id={`${slotId}:regular:${i}`}
               data={{ kind: 'regular-item-slot', slotId, itemIndex: i }}
               item={item}
+              items={regularItemsCatalog}
               onRemove={() => onRemoveRegularItem(i)}
+              onPick={(itemSlug) => onPickRegularItem(i, itemSlug)}
               empty={i < 6 ? 'Empty item slot' : 'Empty backpack slot'}
               backpack={i >= 6}
             />
@@ -83,7 +95,9 @@ function CoreItemsSection({
           id={`${slotId}:neutral`}
           data={{ kind: 'neutral-item-slot', slotId }}
           item={neutralItem}
+          items={neutralItemsCatalog}
           onRemove={onRemoveNeutralItem}
+          onPick={onPickNeutralItem}
           empty="Empty neutral slot"
           circular
         />
@@ -239,7 +253,15 @@ export function HeroPage() {
               return { ...prev, regularItemSlugs: slugs };
             })
           }
+          onPickRegularItem={(i, itemSlug) =>
+            setLoadout((prev) => {
+              const slugs = [...prev.regularItemSlugs];
+              slugs[i] = itemSlug;
+              return { ...prev, regularItemSlugs: slugs };
+            })
+          }
           onRemoveNeutralItem={() => setLoadout((prev) => ({ ...prev, neutralItemSlug: null }))}
+          onPickNeutralItem={(itemSlug) => setLoadout((prev) => ({ ...prev, neutralItemSlug: itemSlug }))}
           onToggleScepter={() => toggleFlag('coreScepter')}
           onToggleShard={() => toggleFlag('coreShard')}
         />

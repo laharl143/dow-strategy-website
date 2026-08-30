@@ -23,7 +23,6 @@ import { ItemSlotBox } from '../components/ItemSlotBox';
 import { ItemShopDock } from '../components/ItemShopDock';
 import { useAuth } from '../lib/auth';
 import { pushLoadout } from '../lib/heroLoadoutSync';
-import type { RegularItem } from '../types';
 
 interface DragData {
   kind: string;
@@ -108,7 +107,6 @@ function CoreItemsSection({
 
 function SituationalItemsSection({
   heroSlug,
-  referenceItemSlugs,
   loadout,
   onRemoveSituationalItem,
   onPickSituationalItem,
@@ -116,16 +114,12 @@ function SituationalItemsSection({
   onPickSituationalNeutralItem,
 }: {
   heroSlug: string;
-  referenceItemSlugs: string[];
   loadout: HeroItemLoadout;
   onRemoveSituationalItem: (index: number) => void;
   onPickSituationalItem: (index: number, itemSlug: string) => void;
   onRemoveSituationalNeutralItem: (index: number) => void;
   onPickSituationalNeutralItem: (index: number, itemSlug: string) => void;
 }) {
-  const referenceItems = referenceItemSlugs
-    .map((slug) => regularItemBySlug.get(slug))
-    .filter((i): i is RegularItem => !!i);
   const situationalSlotId = `hero:${heroSlug}:situational`;
   const situationalItems = loadout.situationalItemSlugs.map((slug) => (slug ? regularItemBySlug.get(slug) : undefined));
   const situationalNeutralItems = loadout.situationalNeutralItemSlugs.map((slug) =>
@@ -135,23 +129,7 @@ function SituationalItemsSection({
   return (
     <section className="hero-page-item-section">
       <h2>Situational Items</h2>
-      {referenceItems.length === 0 ? (
-        <p className="empty-tray">
-          No situational items added yet — edit this hero's <code>situationalItemSlugs</code> in{' '}
-          <code>src/data/heroes.json</code>.
-        </p>
-      ) : (
-        <div className="hero-page-situational-row">
-          {referenceItems.map((item) => (
-            <div key={item.slug} className="hero-page-item-box" title={item.name}>
-              {item.iconUrl ? <img src={item.iconUrl} alt={item.name} /> : <span>{item.name.slice(0, 2)}</span>}
-            </div>
-          ))}
-        </div>
-      )}
-
-      <div className="hero-page-situational-editable hero-page-item-slots">
-        <span className="hero-page-situational-editable-label">My Picks</span>
+      <div className="hero-page-item-slots">
         <div className="hero-page-situational-editable-row">
           {situationalItems.map((item, i) => (
             <ItemSlotBox
@@ -400,7 +378,6 @@ export function HeroPage() {
         />
         <SituationalItemsSection
           heroSlug={hero.slug}
-          referenceItemSlugs={hero.situationalItemSlugs}
           loadout={loadout}
           onRemoveSituationalItem={(i) =>
             setLoadout((prev) => {

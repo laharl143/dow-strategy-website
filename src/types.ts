@@ -78,6 +78,10 @@ export interface RoleSlotDefinition {
   order: number;
   label: string;
   description: string;
+  /** Broad composition category — colors the slot's role pill badge. */
+  role: CompositionRole;
+  /** Short pill badge text, e.g. "Core Magic" — distinguishes same-role slots. */
+  tag: string;
 }
 
 /**

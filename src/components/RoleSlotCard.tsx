@@ -63,6 +63,7 @@ export function RoleSlotCard({
 
   return (
     <div className="role-slot-card">
+      <span className={`role-slot-tag role-slot-tag-${definition.role}`}>{definition.tag}</span>
       <div className="role-slot-header">
         <span className="role-slot-order">{definition.order}</span>
         <div>

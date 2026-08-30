@@ -275,6 +275,7 @@ body {
 }
 
 .role-slot-card {
+  position: relative;
   flex: 1 1 auto;
   min-width: 0;
   display: flex;
@@ -285,6 +286,24 @@ body {
   border-radius: 6px;
   padding: 0.75rem 1rem;
 }
+
+.role-slot-tag {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.75rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.role-slot-tag-tank { background: var(--tank); }
+.role-slot-tag-core { background: var(--core); }
+.role-slot-tag-support { background: var(--support); }
 
 /* The "add a late-game swap" control — a slim dashed button that sits beside
    the role card until clicked, at which point it's replaced by the full
@@ -310,30 +329,25 @@ body {
 }
 
 .late-game-card {
+  position: relative;
   flex: 0 0 auto;
   min-width: 0;
   display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  align-items: stretch;
+  gap: 1rem;
   background: var(--panel-alt);
   border: 1px solid var(--border-soft);
   border-radius: 6px;
-  padding: 0.6rem 0.75rem;
+  padding: 0.75rem 1rem;
 }
 
-.late-game-card-header {
+.late-game-card-corner {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.75rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-}
-
-.late-game-card-label {
-  font-size: 0.66rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--gold-dim);
+  gap: 0.4rem;
 }
 
 .late-game-card-remove {
@@ -1083,28 +1097,49 @@ body {
   white-space: nowrap;
 }
 
-.bonus-tier-toggle-control {
+/* A single switch, not two separate buttons — clicking anywhere on it
+   (either label) flips between Tier 4 and Tier 5, with the gold thumb
+   sliding to whichever side is now active. */
+.bonus-tier-switch {
+  position: relative;
   display: flex;
+  width: 128px;
   background: var(--panel-deep);
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 2px;
-  gap: 2px;
-}
-
-.bonus-tier-toggle-control button {
-  background: none;
-  border: none;
-  border-radius: 999px;
-  color: var(--text-dim);
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 0.25rem 0.6rem;
   cursor: pointer;
 }
 
-.bonus-tier-toggle-control button[data-active] {
+.bonus-tier-switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(50% - 2px);
+  height: calc(100% - 4px);
   background: var(--gold-dim);
+  border-radius: 999px;
+  transition: transform 0.2s ease;
+}
+
+.bonus-tier-switch[data-tier='5'] .bonus-tier-switch-thumb {
+  transform: translateX(100%);
+}
+
+.bonus-tier-switch-option {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0;
+  color: var(--text-dim);
+  transition: color 0.2s ease;
+}
+
+.bonus-tier-switch[data-tier='4'] .bonus-tier-switch-option:first-child,
+.bonus-tier-switch[data-tier='5'] .bonus-tier-switch-option:last-child {
   color: #12100a;
 }
 

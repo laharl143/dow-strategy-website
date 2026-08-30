@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
-import type { BoardSlot, Hero, Item, NeutralItem } from '../types';
+import type { BoardSlot, Hero, Item, NeutralItem, RoleSlotDefinition } from '../types';
 import { heroIconUrl, SCEPTER_ICON_URL, SHARD_ICON_URL } from '../lib/assets';
 import { useDoubleClick } from '../lib/useDoubleClick';
 import { AghUpgradeToggle } from './AghUpgradeToggle';
@@ -10,12 +10,14 @@ import { HeroPickerPopover } from './HeroPickerPopover';
 /**
  * "I'll swap this hero out later" — an optional second hero+loadout card
  * for a role slot, tracked alongside its primary hero. Mirrors the primary
- * card's own drag/drop and click-to-search behavior, addressed by the same
- * role slot's id but under the 'lategame-*' drag-data kinds so the two
- * never get confused during a drag.
+ * card's own header format (order/label/role pill) so the two line up at
+ * the same height, and the same drag/drop and click-to-search behavior,
+ * addressed by the same role slot's id but under the 'lategame-*' drag-data
+ * kinds so the two never get confused during a drag.
  */
 export function LateGameSwapCard({
   slotId,
+  definition,
   swap,
   hero,
   heroes,
@@ -36,6 +38,7 @@ export function LateGameSwapCard({
   onHeroContextMenu,
 }: {
   slotId: string;
+  definition: RoleSlotDefinition;
   swap: BoardSlot['lateGameSwap'];
   hero: Hero | undefined;
   heroes: Hero[];
@@ -71,11 +74,18 @@ export function LateGameSwapCard({
 
   return (
     <div className="late-game-card">
-      <div className="late-game-card-header">
-        <span className="late-game-card-label">Late Game Swap</span>
+      <div className="late-game-card-corner">
+        <span className={`role-slot-tag role-slot-tag-${definition.role}`}>{definition.tag}</span>
         <button type="button" className="late-game-card-remove" title="Remove late-game swap" onClick={onRemove}>
           ×
         </button>
+      </div>
+      <div className="role-slot-header">
+        <span className="role-slot-order">{definition.order}</span>
+        <div>
+          <div className="role-slot-label">{definition.label}</div>
+          <div className="role-slot-description">Late-game swap</div>
+        </div>
       </div>
 
       <div className="loadout-panel late-game-card-loadout">

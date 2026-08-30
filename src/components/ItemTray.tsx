@@ -95,22 +95,17 @@ export function NeutralItemTray({
       {bonusNeutralTier !== undefined && onSetBonusNeutralTier && (
         <div className="bonus-tier-toggle">
           <span className="bonus-tier-toggle-label">Level 25 bonus</span>
-          <div className="bonus-tier-toggle-control">
-            <button
-              type="button"
-              data-active={bonusNeutralTier === 4 || undefined}
-              onClick={() => onSetBonusNeutralTier(4)}
-            >
-              Tier 4
-            </button>
-            <button
-              type="button"
-              data-active={bonusNeutralTier === 5 || undefined}
-              onClick={() => onSetBonusNeutralTier(5)}
-            >
-              Tier 5
-            </button>
-          </div>
+          <button
+            type="button"
+            className="bonus-tier-switch"
+            data-tier={bonusNeutralTier}
+            title={`This game's bonus: Tier ${bonusNeutralTier} — click to switch to Tier ${bonusNeutralTier === 4 ? 5 : 4}`}
+            onClick={() => onSetBonusNeutralTier(bonusNeutralTier === 4 ? 5 : 4)}
+          >
+            <span className="bonus-tier-switch-thumb" />
+            <span className="bonus-tier-switch-option">Tier 4</span>
+            <span className="bonus-tier-switch-option">Tier 5</span>
+          </button>
         </div>
       )}
       {remaining !== null && (

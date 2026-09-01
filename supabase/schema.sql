@@ -32,6 +32,7 @@ alter table hero_loadouts add column if not exists has_shard boolean not null de
 -- Backfill build_id for any pre-existing single-build rows, then make it
 -- required and fold it into the primary key. Safe to re-run: once every row
 -- has a build_id and the composite key exists, these are no-ops.
+create extension if not exists pgcrypto;
 update hero_loadouts set build_id = gen_random_uuid()::text where build_id is null;
 alter table hero_loadouts alter column build_id set not null;
 alter table hero_loadouts drop constraint if exists hero_loadouts_pkey;

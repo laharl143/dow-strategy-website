@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import type { DragEndEvent } from '@dnd-kit/core';
 import {
   heroBySlug,
@@ -246,6 +246,9 @@ export function HeroPage() {
     return (
       <ItemShopDock>
         <div className="hero-page">
+          <Link to="/heroes" className="hero-page-back">
+            ‹ Back to Heroes
+          </Link>
           <p>Hero not found.</p>
         </div>
       </ItemShopDock>
@@ -329,6 +332,9 @@ export function HeroPage() {
   return (
     <ItemShopDock onDragEnd={handleItemDragEnd}>
       <div className="hero-page">
+        <Link to="/heroes" className="hero-page-back">
+          ‹ Back to Heroes
+        </Link>
         <div className="hero-page-header">
           <img className="hero-page-portrait" src={heroIconUrl(hero.code)} alt={hero.name} />
           <div>

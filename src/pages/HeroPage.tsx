@@ -11,19 +11,18 @@ import {
 import { heroIconUrl, abilityIconUrl, SCEPTER_ICON_URL, SHARD_ICON_URL } from '../lib/assets';
 import type { Ability } from '../types';
 import {
-  loadHeroAghFlags,
-  saveHeroAghFlags,
-  loadHeroItemLoadouts,
-  saveHeroItemLoadouts,
-  emptyHeroItemLoadout,
-  type HeroAghFlags,
-  type HeroItemLoadout,
+  loadHeroBuilds,
+  saveHeroBuilds,
+  emptyHeroBuildState,
+  newHeroBuild,
+  type HeroBuild,
+  type HeroBuildState,
 } from '../lib/persistence';
 import { AghUpgradeToggle } from '../components/AghUpgradeToggle';
 import { ItemSlotBox } from '../components/ItemSlotBox';
 import { ItemShopDock } from '../components/ItemShopDock';
 import { useAuth } from '../lib/auth';
-import { pushLoadout } from '../lib/heroLoadoutSync';
+import { pushHeroBuilds } from '../lib/heroLoadoutSync';
 
 interface DragData {
   kind: string;
@@ -55,10 +54,91 @@ function SkillsSection({ abilities }: { abilities: Ability[] }) {
   );
 }
 
+function BuildTabs({
+  builds,
+  activeBuildId,
+  onSelect,
+  onAdd,
+  onRemove,
+  onRename,
+}: {
+  builds: HeroBuild[];
+  activeBuildId: string;
+  onSelect: (id: string) => void;
+  onAdd: () => void;
+  onRemove: (id: string) => void;
+  onRename: (id: string, name: string) => void;
+}) {
+  const [renamingId, setRenamingId] = useState<string | null>(null);
+  const [draftName, setDraftName] = useState('');
+
+  function startRename(build: HeroBuild) {
+    setRenamingId(build.id);
+    setDraftName(build.name);
+  }
+
+  function commitRename() {
+    if (renamingId && draftName.trim()) {
+      onRename(renamingId, draftName.trim());
+    }
+    setRenamingId(null);
+  }
+
+  return (
+    <div className="build-tabs">
+      {builds.map((build) => (
+        <div
+          key={build.id}
+          className={`build-tab${build.id === activeBuildId ? ' active' : ''}`}
+          onClick={() => onSelect(build.id)}
+        >
+          {renamingId === build.id ? (
+            <input
+              className="build-tab-input"
+              value={draftName}
+              autoFocus
+              onChange={(e) => setDraftName(e.target.value)}
+              onBlur={commitRename}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') commitRename();
+                if (e.key === 'Escape') setRenamingId(null);
+              }}
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <span onDoubleClick={(e) => { e.stopPropagation(); startRename(build); }}>{build.name}</span>
+          )}
+          {builds.length > 1 && (
+            <button
+              type="button"
+              className="build-tab-remove"
+              title={`Remove ${build.name}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                onRemove(build.id);
+              }}
+            >
+              ✕
+            </button>
+          )}
+        </div>
+      ))}
+      <button type="button" className="build-tab-add" title="Add build" onClick={onAdd}>
+        +
+      </button>
+    </div>
+  );
+}
+
 function CoreItemsSection({
   heroSlug,
-  loadout,
-  aghFlags,
+  build,
+  builds,
+  activeBuildId,
+  onSelectBuild,
+  onAddBuild,
+  onRemoveBuild,
+  onRenameBuild,
   onRemoveRegularItem,
   onPickRegularItem,
   onRemoveNeutralItem,
@@ -67,8 +147,13 @@ function CoreItemsSection({
   onToggleShard,
 }: {
   heroSlug: string;
-  loadout: HeroItemLoadout;
-  aghFlags: HeroAghFlags;
+  build: HeroBuild;
+  builds: HeroBuild[];
+  activeBuildId: string;
+  onSelectBuild: (id: string) => void;
+  onAddBuild: () => void;
+  onRemoveBuild: (id: string) => void;
+  onRenameBuild: (id: string, name: string) => void;
   onRemoveRegularItem: (index: number) => void;
   onPickRegularItem: (index: number, itemSlug: string) => void;
   onRemoveNeutralItem: () => void;
@@ -77,24 +162,32 @@ function CoreItemsSection({
   onToggleShard: () => void;
 }) {
   const slotId = `hero:${heroSlug}`;
-  const regularItems = loadout.regularItemSlugs.map((slug) => (slug ? regularItemBySlug.get(slug) : undefined));
-  const neutralItem = loadout.neutralItemSlug ? neutralItemBySlug.get(loadout.neutralItemSlug) : undefined;
+  const regularItems = build.regularItemSlugs.map((slug) => (slug ? regularItemBySlug.get(slug) : undefined));
+  const neutralItem = build.neutralItemSlug ? neutralItemBySlug.get(build.neutralItemSlug) : undefined;
 
   return (
     <section className="hero-page-item-section">
       <h2>Core Items</h2>
+      <BuildTabs
+        builds={builds}
+        activeBuildId={activeBuildId}
+        onSelect={onSelectBuild}
+        onAdd={onAddBuild}
+        onRemove={onRemoveBuild}
+        onRename={onRenameBuild}
+      />
       <div className="item-bay hero-page-item-slots">
         <div className="agh-toggle-stack">
           <AghUpgradeToggle
             iconUrl={SCEPTER_ICON_URL}
             label="Aghanim's Scepter"
-            active={aghFlags.coreScepter}
+            active={build.hasScepter}
             onToggle={onToggleScepter}
           />
           <AghUpgradeToggle
             iconUrl={SHARD_ICON_URL}
             label="Aghanim's Shard"
-            active={aghFlags.coreShard}
+            active={build.hasShard}
             onToggle={onToggleShard}
           />
         </div>
@@ -130,22 +223,22 @@ function CoreItemsSection({
 
 function SituationalItemsSection({
   heroSlug,
-  loadout,
+  build,
   onRemoveSituationalItem,
   onPickSituationalItem,
   onRemoveSituationalNeutralItem,
   onPickSituationalNeutralItem,
 }: {
   heroSlug: string;
-  loadout: HeroItemLoadout;
+  build: HeroBuild;
   onRemoveSituationalItem: (index: number) => void;
   onPickSituationalItem: (index: number, itemSlug: string) => void;
   onRemoveSituationalNeutralItem: (index: number) => void;
   onPickSituationalNeutralItem: (index: number, itemSlug: string) => void;
 }) {
   const situationalSlotId = `hero:${heroSlug}:situational`;
-  const situationalItems = loadout.situationalItemSlugs.map((slug) => (slug ? regularItemBySlug.get(slug) : undefined));
-  const situationalNeutralItems = loadout.situationalNeutralItemSlugs.map((slug) =>
+  const situationalItems = build.situationalItemSlugs.map((slug) => (slug ? regularItemBySlug.get(slug) : undefined));
+  const situationalNeutralItems = build.situationalNeutralItemSlugs.map((slug) =>
     slug ? neutralItemBySlug.get(slug) : undefined,
   );
 
@@ -224,46 +317,45 @@ function NoteSection({
   );
 }
 
-const EMPTY_AGH_FLAGS: HeroAghFlags = { coreScepter: false, coreShard: false };
-
 export function HeroPage() {
   const { slug } = useParams<{ slug: string }>();
   const hero = slug ? heroBySlug.get(slug) : undefined;
   const { session } = useAuth();
-  const [aghFlagsBySlug, setAghFlagsBySlug] = useState<Record<string, HeroAghFlags>>(() => loadHeroAghFlags());
-  const [loadoutsBySlug, setLoadoutsBySlug] = useState<Record<string, HeroItemLoadout>>(() => loadHeroItemLoadouts());
+  const [buildsBySlug, setBuildsBySlug] = useState<Record<string, HeroBuildState>>(() => loadHeroBuilds());
 
   useEffect(() => {
-    saveHeroAghFlags(aghFlagsBySlug);
-  }, [aghFlagsBySlug]);
+    saveHeroBuilds(buildsBySlug);
+  }, [buildsBySlug]);
 
-  useEffect(() => {
-    saveHeroItemLoadouts(loadoutsBySlug);
-  }, [loadoutsBySlug]);
-
-  // Push this hero's build to Supabase after changes settle — debounced so
+  // Push this hero's builds to Supabase after changes settle — debounced so
   // several drags in a row don't fire one network request per drop. The
   // note is deliberately excluded from what triggers this: it only syncs
   // when the user hits the Notes section's own Save button, not on every
   // keystroke (whatever note text is current still rides along on a push
   // triggered by an item change, since it's all one row).
-  const heroLoadout = hero ? loadoutsBySlug[hero.slug] : undefined;
-  const itemSyncSignature = heroLoadout
-    ? JSON.stringify([
-        heroLoadout.regularItemSlugs,
-        heroLoadout.neutralItemSlug,
-        heroLoadout.situationalItemSlugs,
-        heroLoadout.situationalNeutralItemSlugs,
-      ])
+  const heroBuildState = hero ? buildsBySlug[hero.slug] : undefined;
+  const buildSyncSignature = heroBuildState
+    ? JSON.stringify(
+        heroBuildState.builds.map((b) => [
+          b.id,
+          b.name,
+          b.regularItemSlugs,
+          b.neutralItemSlug,
+          b.situationalItemSlugs,
+          b.situationalNeutralItemSlugs,
+          b.hasScepter,
+          b.hasShard,
+        ]),
+      )
     : null;
   useEffect(() => {
-    if (!session || !hero || !heroLoadout) return;
+    if (!session || !hero || !heroBuildState) return;
     const timer = setTimeout(() => {
-      void pushLoadout(session.user.id, hero.slug, heroLoadout);
+      void pushHeroBuilds(session.user.id, hero.slug, heroBuildState);
     }, 600);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [session, hero, itemSyncSignature]);
+  }, [session, hero, buildSyncSignature]);
 
   if (!hero) {
     return (
@@ -278,23 +370,50 @@ export function HeroPage() {
     );
   }
 
-  const aghFlags = aghFlagsBySlug[hero.slug] ?? EMPTY_AGH_FLAGS;
-  const loadout = loadoutsBySlug[hero.slug] ?? emptyHeroItemLoadout();
+  const buildState = buildsBySlug[hero.slug] ?? emptyHeroBuildState();
+  const activeBuild = buildState.builds.find((b) => b.id === buildState.activeBuildId) ?? buildState.builds[0];
   const slotId = `hero:${hero.slug}`;
   const situationalSlotId = `hero:${hero.slug}:situational`;
 
-  function toggleFlag(key: keyof HeroAghFlags) {
-    setAghFlagsBySlug((prev) => {
-      const current = prev[hero!.slug] ?? EMPTY_AGH_FLAGS;
-      return { ...prev, [hero!.slug]: { ...current, [key]: !current[key] } };
+  function setBuildState(updater: (prev: HeroBuildState) => HeroBuildState) {
+    setBuildsBySlug((prev) => {
+      const current = prev[hero!.slug] ?? emptyHeroBuildState();
+      return { ...prev, [hero!.slug]: updater(current) };
     });
   }
 
-  function setLoadout(updater: (prev: HeroItemLoadout) => HeroItemLoadout) {
-    setLoadoutsBySlug((prev) => {
-      const current = prev[hero!.slug] ?? emptyHeroItemLoadout();
-      return { ...prev, [hero!.slug]: updater(current) };
+  function setActiveBuild(updater: (prev: HeroBuild) => HeroBuild) {
+    setBuildState((prev) => ({
+      ...prev,
+      builds: prev.builds.map((b) => (b.id === prev.activeBuildId ? updater(b) : b)),
+    }));
+  }
+
+  function selectBuild(buildId: string) {
+    setBuildState((prev) => ({ ...prev, activeBuildId: buildId }));
+  }
+
+  function addBuild() {
+    setBuildState((prev) => {
+      const build = newHeroBuild(`Build ${prev.builds.length + 1}`);
+      return { builds: [...prev.builds, build], activeBuildId: build.id };
     });
+  }
+
+  function removeBuild(buildId: string) {
+    setBuildState((prev) => {
+      if (prev.builds.length <= 1) return prev;
+      const builds = prev.builds.filter((b) => b.id !== buildId);
+      const activeBuildId = prev.activeBuildId === buildId ? builds[0].id : prev.activeBuildId;
+      return { builds, activeBuildId };
+    });
+  }
+
+  function renameBuild(buildId: string, name: string) {
+    setBuildState((prev) => ({
+      ...prev,
+      builds: prev.builds.map((b) => (b.id === buildId ? { ...b, name } : b)),
+    }));
   }
 
   function handleItemDragEnd(event: DragEndEvent) {
@@ -305,7 +424,7 @@ export function HeroPage() {
     if (!activeData || !overData) return;
 
     function moveInto(field: 'regularItemSlugs' | 'situationalItemSlugs' | 'situationalNeutralItemSlugs') {
-      setLoadout((prev) => {
+      setActiveBuild((prev) => {
         const slugs = [...prev[field]];
         if (activeData!.fromItemIndex !== undefined) slugs[activeData!.fromItemIndex] = null;
         slugs[overData!.itemIndex!] = activeData!.itemSlug ?? null;
@@ -328,7 +447,7 @@ export function HeroPage() {
       overData.slotId === slotId &&
       (activeData.kind === 'neutral-item' || activeData.kind === 'neutral-item-slot')
     ) {
-      setLoadout((prev) => ({ ...prev, neutralItemSlug: activeData.itemSlug ?? null }));
+      setActiveBuild((prev) => ({ ...prev, neutralItemSlug: activeData.itemSlug ?? null }));
       return;
     }
 
@@ -386,53 +505,58 @@ export function HeroPage() {
 
         <CoreItemsSection
           heroSlug={hero.slug}
-          loadout={loadout}
-          aghFlags={aghFlags}
+          build={activeBuild}
+          builds={buildState.builds}
+          activeBuildId={buildState.activeBuildId}
+          onSelectBuild={selectBuild}
+          onAddBuild={addBuild}
+          onRemoveBuild={removeBuild}
+          onRenameBuild={renameBuild}
           onRemoveRegularItem={(i) =>
-            setLoadout((prev) => {
+            setActiveBuild((prev) => {
               const slugs = [...prev.regularItemSlugs];
               slugs[i] = null;
               return { ...prev, regularItemSlugs: slugs };
             })
           }
           onPickRegularItem={(i, itemSlug) =>
-            setLoadout((prev) => {
+            setActiveBuild((prev) => {
               const slugs = [...prev.regularItemSlugs];
               slugs[i] = itemSlug;
               return { ...prev, regularItemSlugs: slugs };
             })
           }
-          onRemoveNeutralItem={() => setLoadout((prev) => ({ ...prev, neutralItemSlug: null }))}
-          onPickNeutralItem={(itemSlug) => setLoadout((prev) => ({ ...prev, neutralItemSlug: itemSlug }))}
-          onToggleScepter={() => toggleFlag('coreScepter')}
-          onToggleShard={() => toggleFlag('coreShard')}
+          onRemoveNeutralItem={() => setActiveBuild((prev) => ({ ...prev, neutralItemSlug: null }))}
+          onPickNeutralItem={(itemSlug) => setActiveBuild((prev) => ({ ...prev, neutralItemSlug: itemSlug }))}
+          onToggleScepter={() => setActiveBuild((prev) => ({ ...prev, hasScepter: !prev.hasScepter }))}
+          onToggleShard={() => setActiveBuild((prev) => ({ ...prev, hasShard: !prev.hasShard }))}
         />
         <SituationalItemsSection
           heroSlug={hero.slug}
-          loadout={loadout}
+          build={activeBuild}
           onRemoveSituationalItem={(i) =>
-            setLoadout((prev) => {
+            setActiveBuild((prev) => {
               const slugs = [...prev.situationalItemSlugs];
               slugs[i] = null;
               return { ...prev, situationalItemSlugs: slugs };
             })
           }
           onPickSituationalItem={(i, itemSlug) =>
-            setLoadout((prev) => {
+            setActiveBuild((prev) => {
               const slugs = [...prev.situationalItemSlugs];
               slugs[i] = itemSlug;
               return { ...prev, situationalItemSlugs: slugs };
             })
           }
           onRemoveSituationalNeutralItem={(i) =>
-            setLoadout((prev) => {
+            setActiveBuild((prev) => {
               const slugs = [...prev.situationalNeutralItemSlugs];
               slugs[i] = null;
               return { ...prev, situationalNeutralItemSlugs: slugs };
             })
           }
           onPickSituationalNeutralItem={(i, itemSlug) =>
-            setLoadout((prev) => {
+            setActiveBuild((prev) => {
               const slugs = [...prev.situationalNeutralItemSlugs];
               slugs[i] = itemSlug;
               return { ...prev, situationalNeutralItemSlugs: slugs };
@@ -440,10 +564,10 @@ export function HeroPage() {
           }
         />
         <NoteSection
-          note={loadout.note}
-          onChange={(value) => setLoadout((prev) => ({ ...prev, note: value }))}
+          note={activeBuild.note}
+          onChange={(value) => setActiveBuild((prev) => ({ ...prev, note: value }))}
           onSave={() => {
-            if (session) void pushLoadout(session.user.id, hero.slug, loadout);
+            if (session) void pushHeroBuilds(session.user.id, hero.slug, buildState);
           }}
           canSave={!!session}
         />

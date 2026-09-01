@@ -1,6 +1,6 @@
 import type { Board } from '../types';
 import { REGULAR_ITEM_SLOT_COUNT } from './boardRules';
-import { loadHeroItemLoadouts } from './persistence';
+import { loadHeroBuilds } from './persistence';
 
 /** Addresses either a role slot's primary hero or its late-game swap hero. */
 export type HeroTarget = { kind: 'primary'; slotId: string } | { kind: 'lategame'; slotId: string };
@@ -61,7 +61,8 @@ function writeLoadout(board: Board, target: HeroTarget, loadout: HeroLoadoutStat
  * swap: if it's already somewhere else, this relocates it (and everything
  * it's holding) there instead of creating a duplicate — swapping with
  * whatever was already at the target, if anything. A freshly-placed hero
- * seeds its items from its saved "Core Items" build, if it has one.
+ * seeds its items from its saved "Core Items" build (whichever build tab
+ * was last active on its hero page), if it has one.
  */
 export function placeHeroAt(board: Board, target: HeroTarget, heroSlug: string): Board {
   const existing = findHero(board, heroSlug);
@@ -75,7 +76,8 @@ export function placeHeroAt(board: Board, target: HeroTarget, heroSlug: string):
     return next;
   }
 
-  const saved = loadHeroItemLoadouts()[heroSlug];
+  const heroBuildState = loadHeroBuilds()[heroSlug];
+  const saved = heroBuildState?.builds.find((b) => b.id === heroBuildState.activeBuildId);
   const hasSavedItems = saved && (saved.regularItemSlugs.some((s) => s !== null) || saved.neutralItemSlug !== null);
   const seeded: HeroLoadoutState = hasSavedItems
     ? { heroSlug, regularItemSlugs: [...saved.regularItemSlugs], neutralItemSlug: saved.neutralItemSlug, hasScepter: false, hasShard: false }

@@ -57,9 +57,13 @@ export function ItemPickerPopover({
   // itself reflects the icon-only grid's actual final width.
   const [style, setStyle] = useState<CSSProperties>({ top: -9999, left: -9999, width, visibility: 'hidden' });
 
+  // Focusing while the popover is still `visibility: hidden` (during the
+  // initial off-screen measurement render) is a silent no-op per the DOM
+  // spec, so this has to wait for the layout effect below to flip it
+  // visible rather than running once on mount.
   useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+    if (style.visibility === 'visible') inputRef.current?.focus();
+  }, [style.visibility]);
 
   useLayoutEffect(() => {
     const anchor = anchorRef.current;
@@ -116,6 +120,15 @@ export function ItemPickerPopover({
     if (!q) return items;
     return items.filter((i) => i.name.toLowerCase().includes(q));
   }, [items, query]);
+
+  // A search narrowed to exactly one match is picked automatically — no
+  // need to also click it. Only while actively searching: with an empty
+  // query `filtered` is just the full catalog, and picking whichever one
+  // item happens to be first (or the entire catalog if it's length 1) would
+  // be wrong.
+  useEffect(() => {
+    if (query.trim() && filtered.length === 1) onPick(filtered[0].slug);
+  }, [query, filtered, onPick]);
 
   // Neutral items get grouped into a per-tier accordion instead of one long
   // flat list — but only while browsing unfiltered; a search query flattens

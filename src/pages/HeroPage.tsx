@@ -426,8 +426,14 @@ export function HeroPage() {
     function moveInto(field: 'regularItemSlugs' | 'situationalItemSlugs' | 'situationalNeutralItemSlugs') {
       setActiveBuild((prev) => {
         const slugs = [...prev[field]];
-        if (activeData!.fromItemIndex !== undefined) slugs[activeData!.fromItemIndex] = null;
-        slugs[overData!.itemIndex!] = activeData!.itemSlug ?? null;
+        const fromIndex = activeData!.fromItemIndex;
+        const toIndex = overData!.itemIndex!;
+        // Dropping onto an occupied slot swaps the two, instead of silently
+        // discarding whatever was already there. A drag from outside this
+        // array (e.g. straight from the shop tray) has no fromIndex, so
+        // there's nothing to swap back — it just places into the target.
+        if (fromIndex !== undefined) slugs[fromIndex] = slugs[toIndex];
+        slugs[toIndex] = activeData!.itemSlug ?? null;
         return { ...prev, [field]: slugs };
       });
     }

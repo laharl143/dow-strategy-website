@@ -1,55 +1,13 @@
 import { supabase } from './supabase';
-import { loadHeroBuilds, saveHeroBuilds, type HeroBuild, type HeroBuildState } from './persistence';
+import { loadHeroItemLoadouts, saveHeroItemLoadouts, type HeroItemLoadout } from './persistence';
 
-interface HeroBuildRow {
+interface HeroLoadoutRow {
   hero_slug: string;
-  build_id: string;
-  build_name: string;
   regular_item_slugs: (string | null)[];
   neutral_item_slug: string | null;
   situational_item_slugs: (string | null)[] | null;
   situational_neutral_item_slugs: (string | null)[] | null;
   note: string | null;
-  has_scepter: boolean | null;
-  has_shard: boolean | null;
-}
-
-function toRow(userId: string, heroSlug: string, build: HeroBuild) {
-  return {
-    user_id: userId,
-    hero_slug: heroSlug,
-    build_id: build.id,
-    build_name: build.name,
-    regular_item_slugs: build.regularItemSlugs,
-    neutral_item_slug: build.neutralItemSlug,
-    situational_item_slugs: build.situationalItemSlugs,
-    situational_neutral_item_slugs: build.situationalNeutralItemSlugs,
-    note: build.note,
-    has_scepter: build.hasScepter,
-    has_shard: build.hasShard,
-    updated_at: new Date().toISOString(),
-  };
-}
-
-// Probes for the multi-build columns (added by the updated supabase/schema.sql)
-// before doing anything else. Until that migration has actually been run
-// against this Supabase project, pull/push both no-op instead of touching
-// the table — a prior version of this file deleted a hero's row before
-// inserting its replacement, and on an unmigrated table the insert failed
-// silently (unknown columns) while the delete had already gone through,
-// destroying saved builds. Cached for the page's lifetime: schema state
-// doesn't change without a deploy, so there's no need to re-probe per call.
-let schemaReadyCheck: Promise<boolean> | null = null;
-
-async function probeSchemaReady(): Promise<boolean> {
-  if (!supabase) return false;
-  const { error } = await supabase.from('hero_loadouts').select('build_id').limit(1);
-  return !error;
-}
-
-function isSchemaReady(): Promise<boolean> {
-  if (!schemaReadyCheck) schemaReadyCheck = probeSchemaReady();
-  return schemaReadyCheck;
 }
 
 /**
@@ -57,20 +15,14 @@ function isSchemaReady(): Promise<boolean> {
  * them with whatever's already in this browser's localStorage (remote wins
  * per-hero when both exist, since the whole point is "the most recent thing
  * I set on another machine"), writes the merged result back to localStorage,
- * and pushes any local-only hero builds (never synced before) up to Supabase.
+ * and pushes any local-only builds (never synced before) up to Supabase.
  */
-export async function pullAndMergeHeroBuilds(userId: string): Promise<void> {
+export async function pullAndMergeLoadouts(userId: string): Promise<void> {
   if (!supabase) return;
-  if (!(await isSchemaReady())) {
-    console.warn('hero_loadouts is missing the multi-build columns — run supabase/schema.sql. Sync skipped.');
-    return;
-  }
 
   const { data, error } = await supabase
     .from('hero_loadouts')
-    .select(
-      'hero_slug, build_id, build_name, regular_item_slugs, neutral_item_slug, situational_item_slugs, situational_neutral_item_slugs, note, has_scepter, has_shard',
-    )
+    .select('hero_slug, regular_item_slugs, neutral_item_slug, situational_item_slugs, situational_neutral_item_slugs, note')
     .eq('user_id', userId);
 
   if (error) {
@@ -78,69 +30,40 @@ export async function pullAndMergeHeroBuilds(userId: string): Promise<void> {
     return;
   }
 
-  const local = loadHeroBuilds();
-  const remoteRows = (data ?? []) as HeroBuildRow[];
-  const remoteByHero = new Map<string, HeroBuildRow[]>();
-  for (const row of remoteRows) {
-    const list = remoteByHero.get(row.hero_slug) ?? [];
-    list.push(row);
-    remoteByHero.set(row.hero_slug, list);
-  }
+  const local = loadHeroItemLoadouts();
+  const remote = (data ?? []) as HeroLoadoutRow[];
+  const remoteSlugs = new Set(remote.map((r) => r.hero_slug));
 
-  const merged: Record<string, HeroBuildState> = { ...local };
-  for (const [heroSlug, rows] of remoteByHero) {
-    const builds: HeroBuild[] = rows.map((r) => ({
-      id: r.build_id,
-      name: r.build_name,
-      regularItemSlugs: r.regular_item_slugs,
-      neutralItemSlug: r.neutral_item_slug,
-      situationalItemSlugs: r.situational_item_slugs ?? [],
-      situationalNeutralItemSlugs: r.situational_neutral_item_slugs ?? [],
-      note: r.note ?? '',
-      hasScepter: r.has_scepter ?? false,
-      hasShard: r.has_shard ?? false,
-    }));
-    merged[heroSlug] = { builds, activeBuildId: builds[0]?.id ?? '' };
+  const merged: Record<string, HeroItemLoadout> = { ...local };
+  for (const row of remote) {
+    merged[row.hero_slug] = {
+      regularItemSlugs: row.regular_item_slugs,
+      neutralItemSlug: row.neutral_item_slug,
+      situationalItemSlugs: row.situational_item_slugs ?? [],
+      situationalNeutralItemSlugs: row.situational_neutral_item_slugs ?? [],
+      note: row.note ?? '',
+    };
   }
-  saveHeroBuilds(merged);
+  saveHeroItemLoadouts(merged);
 
-  const localOnly = Object.entries(local).filter(([slug]) => !remoteByHero.has(slug));
-  for (const [heroSlug, state] of localOnly) {
-    await pushHeroBuilds(userId, heroSlug, state);
+  const localOnly = Object.entries(local).filter(([slug]) => !remoteSlugs.has(slug));
+  for (const [heroSlug, loadout] of localOnly) {
+    await pushLoadout(userId, heroSlug, loadout);
   }
 }
 
-/**
- * Syncs one hero's builds to Supabase: upserts every current build first
- * (keyed on user_id/hero_slug/build_id), then — only once that succeeds —
- * deletes any remote rows for builds no longer present locally (i.e. ones
- * removed via the hero page's tab "✕"). Never deletes before the write
- * that's meant to replace it has actually landed. No-ops entirely until
- * the multi-build schema migration has been run (see isSchemaReady above).
- */
-export async function pushHeroBuilds(userId: string, heroSlug: string, state: HeroBuildState): Promise<void> {
+/** Upserts one hero's build to Supabase. Call whenever a signed-in user's loadout changes. */
+export async function pushLoadout(userId: string, heroSlug: string, loadout: HeroItemLoadout): Promise<void> {
   if (!supabase) return;
-  if (!(await isSchemaReady())) {
-    console.warn('hero_loadouts is missing the multi-build columns — run supabase/schema.sql. Sync skipped.');
-    return;
-  }
-  if (state.builds.length === 0) return;
-
-  const rows = state.builds.map((build) => toRow(userId, heroSlug, build));
-  const { error: upsertError } = await supabase
-    .from('hero_loadouts')
-    .upsert(rows, { onConflict: 'user_id,hero_slug,build_id' });
-  if (upsertError) {
-    console.error('Failed to sync hero builds', heroSlug, upsertError);
-    return;
-  }
-
-  const keepIds = state.builds.map((b) => `"${b.id}"`).join(',');
-  const { error: deleteError } = await supabase
-    .from('hero_loadouts')
-    .delete()
-    .eq('user_id', userId)
-    .eq('hero_slug', heroSlug)
-    .not('build_id', 'in', `(${keepIds})`);
-  if (deleteError) console.error('Failed to prune removed hero builds', heroSlug, deleteError);
+  const { error } = await supabase.from('hero_loadouts').upsert({
+    user_id: userId,
+    hero_slug: heroSlug,
+    regular_item_slugs: loadout.regularItemSlugs,
+    neutral_item_slug: loadout.neutralItemSlug,
+    situational_item_slugs: loadout.situationalItemSlugs,
+    situational_neutral_item_slugs: loadout.situationalNeutralItemSlugs,
+    note: loadout.note,
+    updated_at: new Date().toISOString(),
+  });
+  if (error) console.error('Failed to sync hero build', heroSlug, error);
 }

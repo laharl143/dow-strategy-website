@@ -81,13 +81,32 @@ export function RegularItemColumns({ items, shopTab }: { items: RegularItem[]; s
 export function NeutralItemTray({
   itemsByTier,
   remaining,
+  bonusNeutralTier,
+  onSetBonusNeutralTier,
 }: {
   itemsByTier: Map<number, NeutralItem[]>;
   remaining: number | null;
+  bonusNeutralTier?: 4 | 5;
+  onSetBonusNeutralTier?: (tier: 4 | 5) => void;
 }) {
   const hasAny = [...itemsByTier.values()].some((list) => list.length > 0);
   return (
     <div className="item-tray neutral-tray">
+      {bonusNeutralTier !== undefined && onSetBonusNeutralTier && (
+        <div className="bonus-tier-toggle">
+          <button
+            type="button"
+            className="bonus-tier-switch"
+            data-tier={bonusNeutralTier}
+            title={`This game's bonus: Tier ${bonusNeutralTier} — click to switch to Tier ${bonusNeutralTier === 4 ? 5 : 4}`}
+            onClick={() => onSetBonusNeutralTier(bonusNeutralTier === 4 ? 5 : 4)}
+          >
+            <span className="bonus-tier-switch-thumb" />
+            <span className="bonus-tier-switch-option">Tier 4</span>
+            <span className="bonus-tier-switch-option">Tier 5</span>
+          </button>
+        </div>
+      )}
       {remaining !== null && (
         <div className="neutral-tray-header">
           Neutral items remaining this game: <strong>{remaining}</strong> / 6

@@ -1,5 +1,5 @@
 import { useDraggable, useDroppable } from '@dnd-kit/core';
-import type { BoardSlot, Hero, Item, NeutralItem, RoleSlotDefinition } from '../types';
+import type { BoardSlot, Hero, Item, NeutralItem } from '../types';
 import { heroIconUrl, SCEPTER_ICON_URL, SHARD_ICON_URL } from '../lib/assets';
 import { useDoubleClick } from '../lib/useDoubleClick';
 import { useSingleOpenPopover } from '../lib/useSingleOpenPopover';
@@ -7,9 +7,16 @@ import { AghUpgradeToggle } from './AghUpgradeToggle';
 import { ItemSlotBox } from './ItemSlotBox';
 import { HeroPickerPopover } from './HeroPickerPopover';
 
-export function RoleSlotCard({
-  definition,
-  slot,
+/**
+ * "I'll swap this hero out later" — an optional second hero+loadout card
+ * for a role slot, tracked alongside its primary hero. Mirrors the primary
+ * card's own drag/drop and click-to-search behavior, addressed by the same
+ * role slot's id but under the 'lategame-*' drag-data kinds so the two
+ * never get confused during a drag.
+ */
+export function LateGameSwapCard({
+  slotId,
+  swap,
   hero,
   heroes,
   assignedHeroSlugs,
@@ -17,6 +24,7 @@ export function RoleSlotCard({
   regularItemsCatalog,
   neutralItem,
   neutralItemsCatalog,
+  onRemove,
   onRemoveHero,
   onPickHero,
   onRemoveRegularItem,
@@ -27,8 +35,8 @@ export function RoleSlotCard({
   onToggleShard,
   onHeroContextMenu,
 }: {
-  definition: RoleSlotDefinition;
-  slot: BoardSlot;
+  slotId: string;
+  swap: BoardSlot['lateGameSwap'];
   hero: Hero | undefined;
   heroes: Hero[];
   assignedHeroSlugs: Set<string>;
@@ -36,6 +44,7 @@ export function RoleSlotCard({
   regularItemsCatalog: Item[];
   neutralItem: NeutralItem | undefined;
   neutralItemsCatalog: NeutralItem[];
+  onRemove: () => void;
   onRemoveHero: () => void;
   onPickHero: (heroSlug: string) => void;
   onRemoveRegularItem: (index: number) => void;
@@ -46,31 +55,30 @@ export function RoleSlotCard({
   onToggleShard: () => void;
   onHeroContextMenu: (e: React.MouseEvent, heroSlug: string) => void;
 }) {
-  const { open: pickerOpen, openPopover, closePopover } = useSingleOpenPopover(`slot:${slot.slotId}:hero-picker`);
+  const { open: pickerOpen, openPopover, closePopover } = useSingleOpenPopover(`slot:${slotId}:lategame:hero-picker`);
   const { setNodeRef, isOver } = useDroppable({
-    id: `slot:${slot.slotId}:hero`,
-    data: { kind: 'hero-slot', slotId: slot.slotId },
+    id: `slot:${slotId}:lategame:hero`,
+    data: { kind: 'lategame-hero-slot', slotId },
   });
   const heroDraggable = useDraggable({
-    id: `slot:${slot.slotId}:hero:occupant`,
-    data: { kind: 'hero-slot', fromSlotId: slot.slotId, heroSlug: hero?.slug },
+    id: `slot:${slotId}:lategame:hero:occupant`,
+    data: { kind: 'lategame-hero-slot', fromSlotId: slotId, heroSlug: hero?.slug },
     disabled: !hero,
   });
-
   const handleHeroClick = useDoubleClick(onRemoveHero);
 
+  if (!swap) return null;
+
   return (
-    <div className="role-slot-card">
-      <div className="role-slot-header">
-        <span className="role-slot-order">{definition.order}</span>
-        <div>
-          <div className="role-slot-label">{definition.label}</div>
-          <div className="role-slot-description">{definition.description}</div>
-        </div>
+    <div className="late-game-card">
+      <div className="late-game-card-corner">
+        <button type="button" className="late-game-card-remove" title="Remove late-game swap" onClick={onRemove}>
+          ×
+        </button>
       </div>
 
-      <div className="loadout-panel">
-        <div ref={setNodeRef} className="hero-dropzone" data-over={isOver || undefined}>
+      <div className="loadout-panel late-game-card-loadout">
+        <div ref={setNodeRef} className="hero-dropzone late-game-hero-dropzone" data-over={isOver || undefined}>
           {hero ? (
             <div
               ref={heroDraggable.setNodeRef}
@@ -118,13 +126,13 @@ export function RoleSlotCard({
               <AghUpgradeToggle
                 iconUrl={SCEPTER_ICON_URL}
                 label="Aghanim's Scepter"
-                active={slot.hasScepter}
+                active={swap.hasScepter}
                 onToggle={onToggleScepter}
               />
               <AghUpgradeToggle
                 iconUrl={SHARD_ICON_URL}
                 label="Aghanim's Shard"
-                active={slot.hasShard}
+                active={swap.hasShard}
                 onToggle={onToggleShard}
               />
             </div>
@@ -133,8 +141,8 @@ export function RoleSlotCard({
                 {regularItems.map((item, i) => (
                   <ItemSlotBox
                     key={i}
-                    id={`slot:${slot.slotId}:regular:${i}`}
-                    data={{ kind: 'regular-item-slot', slotId: slot.slotId, itemIndex: i }}
+                    id={`slot:${slotId}:lategame:regular:${i}`}
+                    data={{ kind: 'lategame-regular-item-slot', slotId, itemIndex: i }}
                     item={item}
                     items={regularItemsCatalog}
                     onRemove={() => onRemoveRegularItem(i)}
@@ -145,8 +153,8 @@ export function RoleSlotCard({
                 ))}
               </div>
               <ItemSlotBox
-                id={`slot:${slot.slotId}:neutral`}
-                data={{ kind: 'neutral-item-slot', slotId: slot.slotId }}
+                id={`slot:${slotId}:lategame:neutral`}
+                data={{ kind: 'lategame-neutral-item-slot', slotId }}
                 item={neutralItem}
                 items={neutralItemsCatalog}
                 onRemove={onRemoveNeutralItem}

@@ -78,6 +78,24 @@ export interface RoleSlotDefinition {
   order: number;
   label: string;
   description: string;
+  /** Broad composition category — colors the slot's role pill badge. */
+  role: CompositionRole;
+  /** Short pill badge text, e.g. "Core Magic" — distinguishes same-role slots. */
+  tag: string;
+}
+
+/**
+ * "I'll swap this hero out later" — an optional second hero+loadout for a
+ * role slot, for heroes that are strong early but fall off, tracked
+ * alongside (not instead of) the slot's primary hero. Present (non-null)
+ * only once the user clicks the slot's "+" to add one.
+ */
+export interface LateGameSwap {
+  heroSlug: string | null;
+  regularItemSlugs: (string | null)[];
+  neutralItemSlug: string | null;
+  hasScepter: boolean;
+  hasShard: boolean;
 }
 
 export interface BoardSlot {
@@ -89,10 +107,19 @@ export interface BoardSlot {
   /** Whether this game's hero has bought the Aghanim's Scepter/Shard upgrade. */
   hasScepter: boolean;
   hasShard: boolean;
+  lateGameSwap: LateGameSwap | null;
 }
 
 export interface Board {
   slots: BoardSlot[];
+  /**
+   * At hero level 25 the team gets one bonus neutral item drop on top of
+   * the guaranteed tier 1-5 — it's randomly a tier 4 or a tier 5, never
+   * both. This records which one the RNG gave this game, so the board can
+   * cap that tier at 2 instances (guaranteed + bonus) and every other tier
+   * at 1.
+   */
+  bonusNeutralTier: 4 | 5;
 }
 
 export interface SavedStrategy {

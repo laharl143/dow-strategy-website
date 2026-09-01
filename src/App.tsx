@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import type { Board as BoardType, SavedStrategy } from './types';
+import { AuthProvider, useAuth } from './lib/auth';
 import { NavBar } from './components/NavBar';
+import { LoginGate } from './components/LoginGate';
 import { PlannerPage } from './pages/PlannerPage';
 import { HeroesIndexPage } from './pages/HeroesIndexPage';
 import { HeroPage } from './pages/HeroPage';
@@ -14,9 +16,21 @@ import {
   updateStrategy,
   renameStrategy,
   deleteStrategy,
+  isGuestMode,
 } from './lib/persistence';
+import { supabase } from './lib/supabase';
 
 function App() {
+  return (
+    <AuthProvider>
+      <AppShell />
+    </AuthProvider>
+  );
+}
+
+function AppShell() {
+  const { session, loading } = useAuth();
+  const [guestMode, setGuestModeState] = useState(() => isGuestMode());
   const [board, setBoard] = useState<BoardType>(() => loadActiveBoard());
   const [strategies, setStrategies] = useState<SavedStrategy[]>(() => listSavedStrategies());
   const [activeStrategyId, setActiveStrategyId] = useState<string | null>(null);
@@ -24,6 +38,15 @@ function App() {
   useEffect(() => {
     saveActiveBoard(board);
   }, [board]);
+
+  // No backend configured — behave exactly as before, no gate at all.
+  // Otherwise, wait for the session check, then gate on sign-in/guest choice.
+  if (supabase) {
+    if (loading) return null;
+    if (!session && !guestMode) {
+      return <LoginGate onContinueAsGuest={() => setGuestModeState(true)} />;
+    }
+  }
 
   return (
     <div className="app-shell">

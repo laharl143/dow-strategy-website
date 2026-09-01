@@ -1,4 +1,4 @@
-import type { Board, SavedStrategy } from '../types';
+import type { Board, BoardSlot, SavedStrategy } from '../types';
 import { ROLE_SLOTS } from '../data/roleSlots';
 import { REGULAR_ITEM_SLOT_COUNT } from './boardRules';
 
@@ -16,6 +16,10 @@ const HERO_AGH_KEY = 'dow-planner:hero-agh';
 // personal scratchpad separate from the board, and separate from the
 // hero's static coreItemSlugs/situationalItemSlugs reference list.
 const HERO_LOADOUT_KEY = 'dow-planner:hero-loadout';
+// Set once someone picks "Continue as Guest" on the login gate, so it
+// doesn't ask again on this browser. Cleared on sign-out along with the
+// rest of the account-scoped data, so signing out returns to the gate.
+const GUEST_MODE_KEY = 'dow-planner:guest-mode';
 
 export function emptyBoard(): Board {
   return {
@@ -26,12 +30,28 @@ export function emptyBoard(): Board {
       neutralItemSlug: null,
       hasScepter: false,
       hasShard: false,
+      lateGameSwap: null,
     })),
+    bonusNeutralTier: 5,
+  };
+}
+
+function normalizeLateGameSwap(swap: BoardSlot['lateGameSwap']): BoardSlot['lateGameSwap'] {
+  if (!swap) return null;
+  const slugs = (swap.regularItemSlugs ?? []).slice(0, REGULAR_ITEM_SLOT_COUNT);
+  while (slugs.length < REGULAR_ITEM_SLOT_COUNT) slugs.push(null);
+  return {
+    heroSlug: swap.heroSlug ?? null,
+    regularItemSlugs: slugs,
+    neutralItemSlug: swap.neutralItemSlug ?? null,
+    hasScepter: swap.hasScepter ?? false,
+    hasShard: swap.hasShard ?? false,
   };
 }
 
 // Pads/truncates regularItemSlugs to the current length, and backfills
-// hasScepter/hasShard, for boards saved before those fields existed.
+// hasScepter/hasShard/lateGameSwap/bonusNeutralTier, for boards saved
+// before those fields existed.
 export function normalizeBoard(board: Board): Board {
   return {
     slots: board.slots.map((s) => {
@@ -42,8 +62,10 @@ export function normalizeBoard(board: Board): Board {
         regularItemSlugs: slugs,
         hasScepter: s.hasScepter ?? false,
         hasShard: s.hasShard ?? false,
+        lateGameSwap: normalizeLateGameSwap(s.lateGameSwap),
       };
     }),
+    bonusNeutralTier: board.bonusNeutralTier === 4 ? 4 : 5,
   };
 }
 
@@ -117,6 +139,33 @@ export function deleteStrategy(id: string): void {
   persistStrategies(strategies.filter((s) => s.id !== id));
 }
 
+/**
+ * Clears the active board and hero item loadouts — called on sign-out so a
+ * signed-in account's data doesn't linger in this browser for whoever uses
+ * it next. Saved strategies are left alone: they're a deliberate, named save
+ * rather than ambient session state, and aren't account-synced.
+ */
+export function clearAccountScopedLocalData(): void {
+  localStorage.removeItem(ACTIVE_BOARD_KEY);
+  localStorage.removeItem(HERO_AGH_KEY);
+  localStorage.removeItem(HERO_LOADOUT_KEY);
+  localStorage.removeItem(GUEST_MODE_KEY);
+}
+
+/** Whether this browser already chose "Continue as Guest" on the login gate. */
+export function isGuestMode(): boolean {
+  return localStorage.getItem(GUEST_MODE_KEY) === 'true';
+}
+
+export function setGuestMode(): void {
+  localStorage.setItem(GUEST_MODE_KEY, 'true');
+}
+
+/** Clears the guest choice so the login gate reappears (the "back to login page" nav button). */
+export function clearGuestMode(): void {
+  localStorage.removeItem(GUEST_MODE_KEY);
+}
+
 export interface HeroAghFlags {
   coreScepter: boolean;
   coreShard: boolean;
@@ -136,19 +185,42 @@ export function saveHeroAghFlags(flags: Record<string, HeroAghFlags>): void {
   localStorage.setItem(HERO_AGH_KEY, JSON.stringify(flags));
 }
 
+export const SITUATIONAL_ITEM_SLOT_COUNT = 6;
+export const SITUATIONAL_NEUTRAL_SLOT_COUNT = 2;
+
 export interface HeroItemLoadout {
   regularItemSlugs: (string | null)[];
   neutralItemSlug: string | null;
+  /** Freeform "my own situational picks" slots — separate from the hero's static reference list. */
+  situationalItemSlugs: (string | null)[];
+  situationalNeutralItemSlugs: (string | null)[];
+  note: string;
 }
 
 export function emptyHeroItemLoadout(): HeroItemLoadout {
-  return { regularItemSlugs: new Array(REGULAR_ITEM_SLOT_COUNT).fill(null), neutralItemSlug: null };
+  return {
+    regularItemSlugs: new Array(REGULAR_ITEM_SLOT_COUNT).fill(null),
+    neutralItemSlug: null,
+    situationalItemSlugs: new Array(SITUATIONAL_ITEM_SLOT_COUNT).fill(null),
+    situationalNeutralItemSlugs: new Array(SITUATIONAL_NEUTRAL_SLOT_COUNT).fill(null),
+    note: '',
+  };
+}
+
+function padSlots(slugs: (string | null)[] | undefined, count: number): (string | null)[] {
+  const result = (slugs ?? []).slice(0, count);
+  while (result.length < count) result.push(null);
+  return result;
 }
 
 function normalizeHeroItemLoadout(loadout: HeroItemLoadout): HeroItemLoadout {
-  const slugs = (loadout.regularItemSlugs ?? []).slice(0, REGULAR_ITEM_SLOT_COUNT);
-  while (slugs.length < REGULAR_ITEM_SLOT_COUNT) slugs.push(null);
-  return { regularItemSlugs: slugs, neutralItemSlug: loadout.neutralItemSlug ?? null };
+  return {
+    regularItemSlugs: padSlots(loadout.regularItemSlugs, REGULAR_ITEM_SLOT_COUNT),
+    neutralItemSlug: loadout.neutralItemSlug ?? null,
+    situationalItemSlugs: padSlots(loadout.situationalItemSlugs, SITUATIONAL_ITEM_SLOT_COUNT),
+    situationalNeutralItemSlugs: padSlots(loadout.situationalNeutralItemSlugs, SITUATIONAL_NEUTRAL_SLOT_COUNT),
+    note: loadout.note ?? '',
+  };
 }
 
 export function loadHeroItemLoadouts(): Record<string, HeroItemLoadout> {

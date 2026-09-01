@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import type { Item } from '../types';
 import { useDoubleClick } from '../lib/useDoubleClick';
@@ -27,6 +28,7 @@ export function ItemSlotBox({
 }) {
   const { open: pickerOpen, openPopover, closePopover } = useSingleOpenPopover(id);
   const { setNodeRef, isOver } = useDroppable({ id, data });
+  const slotRef = useRef<HTMLDivElement | null>(null);
   const draggable = useDraggable({
     id: `${id}:occupant`,
     data: { kind: data.kind, fromSlotId: data.slotId, fromItemIndex: data.itemIndex, itemSlug: item?.slug },
@@ -36,7 +38,10 @@ export function ItemSlotBox({
 
   return (
     <div
-      ref={setNodeRef}
+      ref={(node) => {
+        setNodeRef(node);
+        slotRef.current = node;
+      }}
       className="item-slot"
       data-over={isOver || undefined}
       data-filled={!!item || undefined}
@@ -73,6 +78,7 @@ export function ItemSlotBox({
           {pickerOpen && (
             <ItemPickerPopover
               items={items}
+              anchorRef={slotRef}
               onPick={(itemSlug) => {
                 onPick(itemSlug);
                 closePopover();

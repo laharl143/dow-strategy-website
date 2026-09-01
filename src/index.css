@@ -700,9 +700,7 @@ body {
 }
 
 .item-picker-popover {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
+  position: fixed;
   z-index: 30;
   width: 220px;
   max-height: 320px;
@@ -713,11 +711,6 @@ body {
   border-radius: 6px;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
   overflow: hidden;
-}
-
-.item-picker-popover[data-open-upward] {
-  top: auto;
-  bottom: calc(100% + 6px);
 }
 
 .item-picker-popover input {

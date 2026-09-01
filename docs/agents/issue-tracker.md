@@ -29,6 +29,12 @@ Every commit tied to a ticket starts with the Jira issue key in brackets, follow
 
 Example: `[DOW-1] Fix: item picker popover no longer covers Situational Items/Notes`
 
+## Commit policy
+
+**Never commit automatically.** Make the code change and, if you tested it, report what you did and what you found — then stop and wait for explicit confirmation that the fix/feature is good before running `git commit`. Finishing a fix and verifying it (including automated checks) is not the same as being told to commit it. This applies even when a Jira ticket exists for the work — don't commit just because a ticket is being closed out.
+
+Once committed, push right away — don't leave confirmed, committed work sitting local-only.
+
 ## Conventions
 
 - **Create an issue**: `createJiraIssue` with `projectKey: "DOW"`. Issue types available: `Feature`, `Bug`, `Subtask`.

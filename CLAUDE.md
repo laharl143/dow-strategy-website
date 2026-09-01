@@ -2,7 +2,7 @@
 
 ### Issue tracker
 
-Issues are tracked in Jira, project **DOW** on `vital-stats.atlassian.net`. Board workflow and commit message format mirror the sibling VS project. See `docs/agents/issue-tracker.md`.
+Issues are tracked in Jira, project **DOW** on `vital-stats.atlassian.net`. Board workflow, commit message format, and commit policy (never commit without explicit confirmation) mirror the sibling VS project. See `docs/agents/issue-tracker.md`.
 
 ### Domain docs
 

@@ -886,6 +886,15 @@ body {
   border-color: var(--gold);
 }
 
+/* The icon's own corners must round with the slot, not just the slot's
+   border — otherwise a filled neutral slot shows the item art's square
+   corners poking out past the circular border. Wins by specificity over
+   both .item-slot-icon's base radius and the hero page's larger-slot
+   override below, regardless of source order. */
+.item-slot[data-circular] .item-slot-icon {
+  border-radius: 50%;
+}
+
 .item-slot-occupant {
   font-size: 0.6rem;
   text-transform: uppercase;

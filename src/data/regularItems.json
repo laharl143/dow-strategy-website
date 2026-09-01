@@ -632,14 +632,6 @@
     "order": 15
   },
   {
-    "slug": "hand_of_midas_new",
-    "name": "hand_of_midas_new",
-    "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/hand_of_midas.png",
-    "shopTab": "upgrades",
-    "category": "basics",
-    "order": 16
-  },
-  {
     "slug": "ring_of_basilius",
     "name": "Ring of Basilius",
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/ring_of_basilius.png",
@@ -688,20 +680,12 @@
     "order": 5
   },
   {
-    "slug": "essence_distiller",
-    "name": "Essence Distiller",
-    "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/essence_distiller.png",
-    "shopTab": "upgrades",
-    "category": "support",
-    "order": 6
-  },
-  {
     "slug": "ancient_janggo",
     "name": "Drum of Endurance",
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/ancient_janggo.png",
     "shopTab": "upgrades",
     "category": "support",
-    "order": 7
+    "order": 6
   },
   {
     "slug": "pavise",
@@ -709,7 +693,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/pavise.png",
     "shopTab": "upgrades",
     "category": "support",
-    "order": 8
+    "order": 7
   },
   {
     "slug": "guardian_greaves",
@@ -717,7 +701,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/guardian_greaves.png",
     "shopTab": "upgrades",
     "category": "support",
-    "order": 9
+    "order": 8
   },
   {
     "slug": "spirit_vessel",
@@ -725,7 +709,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/spirit_vessel.png",
     "shopTab": "upgrades",
     "category": "support",
-    "order": 10
+    "order": 9
   },
   {
     "slug": "boots_of_bearing",
@@ -733,7 +717,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/boots_of_bearing.png",
     "shopTab": "upgrades",
     "category": "support",
-    "order": 11
+    "order": 10
   },
   {
     "slug": "solar_crest",
@@ -741,7 +725,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/solar_crest.png",
     "shopTab": "upgrades",
     "category": "support",
-    "order": 12
+    "order": 11
   },
   {
     "slug": "glimmer_cape",
@@ -749,7 +733,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/glimmer_cape.png",
     "shopTab": "upgrades",
     "category": "support",
-    "order": 13
+    "order": 12
   },
   {
     "slug": "holy_locket",
@@ -757,7 +741,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/holy_locket.png",
     "shopTab": "upgrades",
     "category": "support",
-    "order": 14
+    "order": 13
   },
   {
     "slug": "pipe",
@@ -765,7 +749,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/pipe.png",
     "shopTab": "upgrades",
     "category": "support",
-    "order": 15
+    "order": 14
   },
   {
     "slug": "force_boots",
@@ -1032,20 +1016,12 @@
     "order": 7
   },
   {
-    "slug": "consecrated_wraps",
-    "name": "Consecrated Wraps",
-    "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/consecrated_wraps.png",
-    "shopTab": "upgrades",
-    "category": "defense",
-    "order": 8
-  },
-  {
     "slug": "aeon_disk",
     "name": "Aeon Disk",
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/aeon_disk.png",
     "shopTab": "upgrades",
     "category": "defense",
-    "order": 9
+    "order": 8
   },
   {
     "slug": "lotus_orb",
@@ -1053,7 +1029,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/lotus_orb.png",
     "shopTab": "upgrades",
     "category": "defense",
-    "order": 10
+    "order": 9
   },
   {
     "slug": "black_king_bar",
@@ -1061,7 +1037,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/black_king_bar.png",
     "shopTab": "upgrades",
     "category": "defense",
-    "order": 11
+    "order": 10
   },
   {
     "slug": "shivas_guard",
@@ -1069,7 +1045,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/shivas_guard.png",
     "shopTab": "upgrades",
     "category": "defense",
-    "order": 12
+    "order": 11
   },
   {
     "slug": "sphere",
@@ -1077,7 +1053,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/sphere.png",
     "shopTab": "upgrades",
     "category": "defense",
-    "order": 13
+    "order": 12
   },
   {
     "slug": "assault",
@@ -1085,7 +1061,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/assault.png",
     "shopTab": "upgrades",
     "category": "defense",
-    "order": 14
+    "order": 13
   },
   {
     "slug": "heart",
@@ -1093,7 +1069,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/heart.png",
     "shopTab": "upgrades",
     "category": "defense",
-    "order": 15
+    "order": 14
   },
   {
     "slug": "eternal_shroud",
@@ -1101,7 +1077,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/eternal_shroud.png",
     "shopTab": "upgrades",
     "category": "defense",
-    "order": 16
+    "order": 15
   },
   {
     "slug": "beast_horn",
@@ -1248,20 +1224,12 @@
     "order": 13
   },
   {
-    "slug": "manta",
-    "name": "Manta Style",
-    "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/manta.png",
-    "shopTab": "upgrades",
-    "category": "weapons",
-    "order": 14
-  },
-  {
     "slug": "radiance",
     "name": "Radiance",
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/radiance.png",
     "shopTab": "upgrades",
     "category": "weapons",
-    "order": 15
+    "order": 14
   },
   {
     "slug": "rapier",
@@ -1269,7 +1237,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/rapier.png",
     "shopTab": "upgrades",
     "category": "weapons",
-    "order": 16
+    "order": 15
   },
   {
     "slug": "monkey_king_bar",
@@ -1277,7 +1245,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/monkey_king_bar.png",
     "shopTab": "upgrades",
     "category": "weapons",
-    "order": 17
+    "order": 16
   },
   {
     "slug": "butterfly",
@@ -1285,7 +1253,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/butterfly.png",
     "shopTab": "upgrades",
     "category": "weapons",
-    "order": 18
+    "order": 17
   },
   {
     "slug": "satanic",
@@ -1293,7 +1261,7 @@
     "iconUrl": "https://cdn.steamstatic.com/apps/dota2/images/dota_react/items/satanic.png",
     "shopTab": "upgrades",
     "category": "weapons",
-    "order": 19
+    "order": 18
   },
   {
     "slug": "sange",

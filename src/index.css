@@ -1546,6 +1546,44 @@ body {
   margin: 0 0 0.9rem;
 }
 
+.skills-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.skill-slot {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--panel-alt);
+}
+
+.skill-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.skill-slot.ultimate {
+  border-color: var(--gold-dim);
+  box-shadow: inset 0 0 0 2px var(--gold-dim);
+}
+
+.skill-slot .hotkey {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--gold-bright);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+  z-index: 1;
+}
+
 .hero-page-core-row {
   display: flex;
   align-items: center;

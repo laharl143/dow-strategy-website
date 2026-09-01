@@ -8,7 +8,8 @@ import {
   neutralItems as neutralItemsCatalog,
   neutralItemBySlug,
 } from '../lib/gameData';
-import { heroIconUrl, SCEPTER_ICON_URL, SHARD_ICON_URL } from '../lib/assets';
+import { heroIconUrl, abilityIconUrl, SCEPTER_ICON_URL, SHARD_ICON_URL } from '../lib/assets';
+import type { Ability } from '../types';
 import {
   loadHeroAghFlags,
   saveHeroAghFlags,
@@ -30,6 +31,28 @@ interface DragData {
   itemIndex?: number;
   itemSlug?: string;
   fromItemIndex?: number;
+}
+
+const HOTKEYS = ['Q', 'W', 'E', 'R'];
+
+function SkillsSection({ abilities }: { abilities: Ability[] }) {
+  return (
+    <section className="hero-page-item-section">
+      <h2>Skills</h2>
+      <div className="skills-row">
+        {abilities.map((ability, i) => (
+          <div
+            key={ability.slug}
+            className={`skill-slot${ability.ultimate ? ' ultimate' : ''}`}
+            title={`${ability.name}\n\n${ability.desc}`}
+          >
+            <span className="hotkey">{HOTKEYS[i]}</span>
+            <img src={abilityIconUrl(ability.slug)} alt={ability.name} />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 function CoreItemsSection({
@@ -358,6 +381,8 @@ export function HeroPage() {
             </div>
           </div>
         </div>
+
+        <SkillsSection abilities={hero.abilities} />
 
         <CoreItemsSection
           heroSlug={hero.slug}

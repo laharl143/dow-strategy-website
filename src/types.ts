@@ -5,6 +5,14 @@ export type PowerCurve = 'early' | 'mid' | 'late' | 'flex';
 export type AttackType = 'melee' | 'ranged';
 export type ItemCategory = 'artifact' | 'enchantment';
 
+export interface Ability {
+  /** Dota 2 internal ability name, used to build the CDN icon URL. */
+  slug: string;
+  name: string;
+  desc: string;
+  ultimate: boolean;
+}
+
 export interface Hero {
   slug: string;
   name: string;
@@ -28,6 +36,8 @@ export interface Hero {
   /** Recommended-build item slugs for this hero, shown on its dedicated page. */
   coreItemSlugs: string[];
   situationalItemSlugs: string[];
+  /** Skillable Q/W/E/R abilities (innate and item abilities excluded), shown on the hero page. */
+  abilities: Ability[];
 }
 
 export interface Item {

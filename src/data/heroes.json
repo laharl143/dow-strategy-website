@@ -20,7 +20,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "ancient_apparition_cold_feet",
+        "name": "Cold Feet",
+        "desc": "Places a curse on an enemy, dealing damage over time and stunning if it stays near the initial location.",
+        "ultimate": false
+      },
+      {
+        "slug": "ancient_apparition_ice_vortex",
+        "name": "Ice Vortex",
+        "desc": "Creates a vortex of icy energy that slows, deals damage, and increases magic damage taken in its range.",
+        "ultimate": false
+      },
+      {
+        "slug": "ancient_apparition_chilling_touch",
+        "name": "Chilling Touch",
+        "desc": "Enhances Ancient Apparition's attack with increased range and a burst of magical damage and slow.",
+        "ultimate": false
+      },
+      {
+        "slug": "ancient_apparition_ice_blast",
+        "name": "Ice Blast",
+        "desc": "Launches a tracer that marks an area to be blasted by a damaging explosion of hail, causing enemies to Frostbite.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "anti-mage",
@@ -43,7 +69,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "antimage_mana_break",
+        "name": "Mana Break",
+        "desc": "Burns an opponent's mana on each attack and deals damage equal to a percentage of the mana burnt.",
+        "ultimate": false
+      },
+      {
+        "slug": "antimage_blink",
+        "name": "Blink",
+        "desc": "Short distance teleportation that allows Anti-Mage to move in and out of combat.",
+        "ultimate": false
+      },
+      {
+        "slug": "antimage_counterspell",
+        "name": "Counterspell",
+        "desc": "Passively grants magic resistance. Counterspell may be activated to create an anti-magic shell around Anti-Mage that blocks and reflects any targeted spells.",
+        "ultimate": false
+      },
+      {
+        "slug": "antimage_mana_void",
+        "name": "Mana Void",
+        "desc": "For each point of mana missing by the target unit, damage is dealt to it and surrounding enemies.  The main target is also mini-stunned.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "axe",
@@ -67,7 +119,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "axe_berserkers_call",
+        "name": "Berserker's Call",
+        "desc": "Axe taunts nearby enemy units, forcing them to attack him while he gains bonus armor during the duration.",
+        "ultimate": false
+      },
+      {
+        "slug": "axe_battle_hunger",
+        "name": "Battle Hunger",
+        "desc": "Enrages an enemy unit, causing it to take damage over time until it kills another unit or the duration ends. The enemy is slowed as long as they are facing away from Axe.",
+        "ultimate": false
+      },
+      {
+        "slug": "axe_counter_helix",
+        "name": "Counter Helix",
+        "desc": "After a set number of attacks, Axe will perform a helix counter attack, dealing pure damage to all nearby enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "axe_culling_blade",
+        "name": "Culling Blade",
+        "desc": "Axe spots a weakness and strikes, dealing pure damage. When an enemy hero is killed with Culling Blade, its cooldown is reset, and all nearby allied units gain bonus movement speed and armor.\n\nAxe permanently drenches his blade every time he kills an enemy Hero with Culling Blade, gaining bonus armor for each stack.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "bane",
@@ -91,7 +169,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "bane_enfeeble",
+        "name": "Enfeeble",
+        "desc": "Deals damage every second and lowers the enemy's total attack damage and cast range.",
+        "ultimate": false
+      },
+      {
+        "slug": "bane_brain_sap",
+        "name": "Brain Sap",
+        "desc": "Feasts on the vital energies of an enemy unit, healing Bane and dealing damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "bane_nightmare",
+        "name": "Nightmare",
+        "desc": "Puts the target enemy or friendly Hero to sleep. Sleeping units walk in Bane's chosen direction and are awakened when damaged. If the target was directly attacked, the Nightmare passes to the attacking unit. Bane can attack and damage Nightmared targets freely.<br><br> Can be put on alt-cast to have the target stand still.",
+        "ultimate": false
+      },
+      {
+        "slug": "bane_fiends_grip",
+        "name": "Fiend's Grip",
+        "desc": "CHANNELED - Grips an enemy unit, disabling it and causing heavy damage over time, while stealing mana every %fiend_grip_tick_interval% seconds based on the unit's maximum mana.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "beastmaster",
@@ -115,7 +219,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "beastmaster_wild_axes",
+        "name": "Wild Axes",
+        "desc": "Beastmaster sends his axes flying and calls them home again, slicing through enemy units and trees along their path.",
+        "ultimate": false
+      },
+      {
+        "slug": "beastmaster_summon_razorback",
+        "name": "Summon Razorback",
+        "desc": "Beastmaster calls forth a Boar to aid in the battlefield, with a passive poison attack that slows attack and movement speeds.",
+        "ultimate": false
+      },
+      {
+        "slug": "beastmaster_summon_raptor",
+        "name": "Summon Raptors",
+        "desc": "Beastmaster summons hawks that circle around him and dive-bomb at enemies, damaging and rooting them.",
+        "ultimate": false
+      },
+      {
+        "slug": "beastmaster_primal_roar",
+        "name": "Primal Roar",
+        "desc": "Beastmaster lets loose a deafening roar that stuns and shoves open a path to its target, damaging all units in the path.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "bloodseeker",
@@ -139,7 +269,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "bloodseeker_bloodrage",
+        "name": "Bloodrage",
+        "desc": "Drives Bloodseeker into a bloodthirsty rage which causes him to attack faster and deal more spell damage at the cost of a percentage of his health per second.",
+        "ultimate": false
+      },
+      {
+        "slug": "bloodseeker_blood_bath",
+        "name": "Blood Rite",
+        "desc": "Bloodseeker baptizes an area in sacred blood. After %delay_plus_castpoint_tooltip% seconds the ritual completes, causing any enemies caught in the area to take damage and become silenced.",
+        "ultimate": false
+      },
+      {
+        "slug": "bloodseeker_thirst",
+        "name": "Thirst",
+        "desc": "Bloodseeker is invigorated by the wounds of his enemies, gaining bonus movement speed when an enemy hero's health falls below %min_bonus_pct%%%, with the bonuses increasing as their health falls further. If an enemy hero's health falls below %invis_threshold_pct%%%, he will also gain vision and True Sight of that hero. Bonuses stack per hero. Unlocks max movement speed for Bloodseeker.",
+        "ultimate": false
+      },
+      {
+        "slug": "bloodseeker_rupture",
+        "name": "Rupture",
+        "desc": "Causes an enemy unit's skin to rupture, dealing initial damage based on its current health. If the unit moves, it takes damage based on the distance moved.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "chen",
@@ -161,7 +317,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "chen_penitence",
+        "name": "Penitence",
+        "desc": "Damages an enemy unit, forces it to move slower and lets allies attack it more quickly.",
+        "ultimate": false
+      },
+      {
+        "slug": "chen_holy_persuasion",
+        "name": "Holy Persuasion",
+        "desc": "Chen takes control of an enemy or neutral creep, converting it into an ally with bonus speed and damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "chen_divine_favor",
+        "name": "Divine Favor",
+        "desc": "Passively grants increased health regeneration; can be cast on allies for bonus armor and healing.",
+        "ultimate": false
+      },
+      {
+        "slug": "chen_hand_of_god",
+        "name": "Hand of God",
+        "desc": "Heals all allied heroes on the map as well as all units under Chen's control.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "crystal-maiden",
@@ -184,7 +366,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "crystal_maiden_crystal_nova",
+        "name": "Crystal Nova",
+        "desc": "A burst of damaging frost slows enemy movement in the targeted area.",
+        "ultimate": false
+      },
+      {
+        "slug": "crystal_maiden_frostbite",
+        "name": "Frostbite",
+        "desc": "Encases an enemy unit in ice, prohibiting movement and attack, while dealing damage over time. Deals %creep_multiplier%x damage to non-ancient creeps.",
+        "ultimate": false
+      },
+      {
+        "slug": "crystal_maiden_brilliance_aura",
+        "name": "Arcane Aura",
+        "desc": "Gives mana regeneration to all friendly units on the map. Allies within a %proximity_bonus_radius% radius of Crystal Maiden receive more mana regeneration.<br><br>Crystal Maiden passively gains mana regen amplification.",
+        "ultimate": false
+      },
+      {
+        "slug": "crystal_maiden_freezing_field",
+        "name": "Freezing Field",
+        "desc": "CHANNELED - Surrounds Crystal Maiden with 100 random icy explosions that slow enemies and deal massive damage. Lasts %abilitychanneltime% seconds.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "dazzle",
@@ -207,7 +415,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "dazzle_poison_touch",
+        "name": "Poison Touch",
+        "desc": "Releases a cone of poison that strikes multiple enemy units, dealing damage over time and slowing the targets.",
+        "ultimate": false
+      },
+      {
+        "slug": "dazzle_shallow_grave",
+        "name": "Shallow Grave",
+        "desc": "An ally blessed with Shallow Grave, no matter how close to death, cannot die while under its protection.",
+        "ultimate": false
+      },
+      {
+        "slug": "dazzle_shadow_wave",
+        "name": "Shadow Wave",
+        "desc": "Sends out a bolt of power that arcs between allies, healing them while damaging any enemy units standing nearby.",
+        "ultimate": false
+      },
+      {
+        "slug": "dazzle_nothl_projection",
+        "name": "Nothl Projection",
+        "desc": "Dazzle departs his body as an invulnerable spirit that can cast spells, attack, and use items, empowering his other abilities.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "dragon-knight",
@@ -233,7 +467,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "dragon_knight_breathe_fire",
+        "name": "Breathe Fire",
+        "desc": "Unleashes a breath of fire in front of Dragon Knight that burns enemies and reduces the damage their attacks deal.",
+        "ultimate": false
+      },
+      {
+        "slug": "dragon_knight_dragon_tail",
+        "name": "Dragon Tail",
+        "desc": "Dragon Knight smites an enemy unit with his shield, stunning and damaging it and units close to it.",
+        "ultimate": false
+      },
+      {
+        "slug": "dragon_knight_wyrms_wrath",
+        "name": "Wyrm's Wrath",
+        "desc": "The life blood of the Dragon improves Dragon Knight's abilities and items, and causes his attacks to deal additional magic damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "dragon_knight_elder_dragon_form",
+        "name": "Elder Dragon Form",
+        "desc": "Dragon Knight assumes the form of the Elder Dragon, gaining a ranged attack and increasingly powerful bonuses per level.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "doom",
@@ -259,7 +519,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "doom_bringer_devour",
+        "name": "Devour",
+        "desc": "Consumes an enemy or neutral creep, acquiring any special abilities that it possessed.",
+        "ultimate": false
+      },
+      {
+        "slug": "doom_bringer_scorched_earth",
+        "name": "Scorched Earth",
+        "desc": "Carpets the nearby earth in flames which damage enemies, while granting Doom increased movement speed and regen.",
+        "ultimate": false
+      },
+      {
+        "slug": "doom_bringer_infernal_blade",
+        "name": "Infernal Blade",
+        "desc": "Doom swings his burning sword, stunning and applying a burn that deals damage per second.",
+        "ultimate": false
+      },
+      {
+        "slug": "doom_bringer_doom",
+        "name": "Doom",
+        "desc": "Inflicts a curse that dispels an enemy and prevents them from casting spells or healing, while dealing damage over time.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "earthshaker",
@@ -284,7 +570,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "earthshaker_fissure",
+        "name": "Fissure",
+        "desc": "Slams the ground with a mighty totem, creating an impassable ridge of stone while stunning and damaging enemy units along its line.",
+        "ultimate": false
+      },
+      {
+        "slug": "earthshaker_enchant_totem",
+        "name": "Enchant Totem",
+        "desc": "Empowers Earthshaker's totem, causing it to deal extra damage and have %bonus_attack_range% bonus attack range on the next attack.",
+        "ultimate": false
+      },
+      {
+        "slug": "earthshaker_aftershock",
+        "name": "Aftershock",
+        "desc": "Causes the earth to shake underfoot, adding additional damage and stuns to nearby enemy units when Earthshaker casts his abilities.",
+        "ultimate": false
+      },
+      {
+        "slug": "earthshaker_echo_slam",
+        "name": "Echo Slam",
+        "desc": "Shockwaves travel through the ground, damaging enemy units.  Each enemy hit causes an echo to damage nearby units. Real heroes cause two echoes.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "enchantress",
@@ -309,7 +621,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "enchantress_impetus",
+        "name": "Impetus",
+        "desc": "Places an enchantment on each attack while activated, causing it to deal additional damage based on how far away the target is.",
+        "ultimate": false
+      },
+      {
+        "slug": "enchantress_enchant",
+        "name": "Enchant",
+        "desc": "Enchantress charms an enemy, dispelling and slowing a hero, or bringing a creep under her control.",
+        "ultimate": false
+      },
+      {
+        "slug": "enchantress_natures_attendants",
+        "name": "Nature's Attendants",
+        "desc": "A cloud of wisps heals Enchantress and any friendly units nearby.",
+        "ultimate": false
+      },
+      {
+        "slug": "enchantress_untouchable",
+        "name": "Untouchable",
+        "desc": "Enchantress beguiles her enemies, slowing their attacks when she is attacked.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "enigma",
@@ -332,7 +670,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "enigma_malefice",
+        "name": "Malefice",
+        "desc": "Focuses Enigma's power on a target, causing it to take damage and become repeatedly stunned for multiple instances.",
+        "ultimate": false
+      },
+      {
+        "slug": "enigma_demonic_conversion",
+        "name": "Demonic Summoning",
+        "desc": "Summons three fragments of Enigma himself at the cost of health, all under Enigma's control.",
+        "ultimate": false
+      },
+      {
+        "slug": "enigma_midnight_pulse",
+        "name": "Midnight Pulse",
+        "desc": "Steeps an area in dark resonance, dealing damage plus a percentage of the enemies' current HP as damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "enigma_black_hole",
+        "name": "Black Hole",
+        "desc": "CHANNELED - Summons a vortex that sucks in nearby enemy units, unable to move, attack, or cast spells.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "faceless-void",
@@ -357,7 +721,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "faceless_void_time_walk",
+        "name": "Time Walk",
+        "desc": "Rushes to a target location while backtracking any damage taken in the last few seconds.",
+        "ultimate": false
+      },
+      {
+        "slug": "faceless_void_time_dilation",
+        "name": "Time Dilation",
+        "desc": "Faceless Void envelops nearby enemies with time dilating fields to slow cooldown progression of their abilities.",
+        "ultimate": false
+      },
+      {
+        "slug": "faceless_void_time_lock",
+        "name": "Time Lock",
+        "desc": "Adds the chance for an attack to lock an enemy unit in time while attacking it a second time.",
+        "ultimate": false
+      },
+      {
+        "slug": "faceless_void_chronosphere",
+        "name": "Chronosphere",
+        "desc": "Creates a blister in spacetime, trapping all units caught in its sphere of influence.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "nature-s-prophet",
@@ -381,7 +771,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "furion_sprout",
+        "name": "Sprout",
+        "desc": "Sprouts a ring of trees around a unit, damaging and trapping it in place and providing vision.",
+        "ultimate": false
+      },
+      {
+        "slug": "furion_teleportation",
+        "name": "Teleportation",
+        "desc": "Teleports to any point on the map, gaining a barrier after arriving at its destination.",
+        "ultimate": false
+      },
+      {
+        "slug": "furion_force_of_nature",
+        "name": "Nature's Call",
+        "desc": "Converts an area of trees into Treants under the command of Nature's Prophet.",
+        "ultimate": false
+      },
+      {
+        "slug": "furion_wrath_of_nature",
+        "name": "Wrath of Nature",
+        "desc": "Damaging energy bounces around the map, striking visible enemies starting with those closest to the cast point.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "juggernaut",
@@ -404,7 +820,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "juggernaut_blade_fury",
+        "name": "Blade Fury",
+        "desc": "Causes a bladestorm of destructive force around Juggernaut, rendering him debuff immune with %immunity_resist%%% magic resistance and dealing damage every %blade_fury_damage_tick%s to nearby enemy units. Applies a strong dispel at the end of the spin.",
+        "ultimate": false
+      },
+      {
+        "slug": "juggernaut_healing_ward",
+        "name": "Healing Ward",
+        "desc": "Summons a Healing Ward which heals all nearby allied units, based on their max health.  The Healing Ward moves at %healing_ward_movespeed_tooltip% movement speed after being summoned.  Lasts %abilityduration% seconds.",
+        "ultimate": false
+      },
+      {
+        "slug": "juggernaut_blade_dance",
+        "name": "Blade Dance",
+        "desc": "Gives Juggernaut a chance to deal critical damage with Blade Fury and on each attack.",
+        "ultimate": false
+      },
+      {
+        "slug": "juggernaut_omni_slash",
+        "name": "Omnislash",
+        "desc": "Juggernaut leaps towards the target enemy units, and then slashes the target and other nearby enemy units at an increased attack rate. Juggernaut is invulnerable for the duration.\n\nDISPEL TYPE: Basic Dispel",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "kunkka",
@@ -431,7 +873,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "kunkka_torrent",
+        "name": "Torrent",
+        "desc": "Summons a rising torrent that, after a short delay, hurls enemy units into the sky, stunning, dealing damage and slowing movement speed.",
+        "ultimate": false
+      },
+      {
+        "slug": "kunkka_tidebringer",
+        "name": "Tidebringer",
+        "desc": "Kunkka's legendary sword grants increased damage and cleaves a large area of effect in front of him for a single strike.",
+        "ultimate": false
+      },
+      {
+        "slug": "kunkka_x_marks_the_spot",
+        "name": "X Marks the Spot",
+        "desc": "Targets a friendly or enemy Hero, marks their position with an X, and returns them to it after several seconds.",
+        "ultimate": false
+      },
+      {
+        "slug": "kunkka_ghostship",
+        "name": "Ghostship",
+        "desc": "Summons a ghostly ship that sails through the battle before smashing apart, damaging and stunning all enemies caught near the wreckage.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "leshrac",
@@ -456,7 +924,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "leshrac_split_earth",
+        "name": "Split Earth",
+        "desc": "Splits the earth under enemies, dealing damage and stunning for a short duration.",
+        "ultimate": false
+      },
+      {
+        "slug": "leshrac_diabolic_edict",
+        "name": "Diabolic Edict",
+        "desc": "Saturates the area around Leshrac with magical explosions that deal pure damage to enemy units and buildings.",
+        "ultimate": false
+      },
+      {
+        "slug": "leshrac_lightning_storm",
+        "name": "Lightning Storm",
+        "desc": "Summons a lightning storm that blasts the target enemy unit, then strikes any nearby enemy units, slowing them.",
+        "ultimate": false
+      },
+      {
+        "slug": "leshrac_pulse_nova",
+        "name": "Pulse Nova",
+        "desc": "Creates waves of damaging energy around Leshrac, one per second, to damage nearby enemy units.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "lich",
@@ -478,7 +972,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "lich_frost_nova",
+        "name": "Frost Blast",
+        "desc": "Blasts the target enemy unit with damaging frost, dealing area damage and slowing movement and attack rates.",
+        "ultimate": false
+      },
+      {
+        "slug": "lich_frost_shield",
+        "name": "Frost Shield",
+        "desc": "Applies a magical frost shield around the target, reducing damage from attacks against it.",
+        "ultimate": false
+      },
+      {
+        "slug": "lich_sinister_gaze",
+        "name": "Sinister Gaze",
+        "desc": "CHANNELED - Hypnotizes an enemy unit, causing it to move towards a point between the two of you and drains a percentage of its current mana.",
+        "ultimate": false
+      },
+      {
+        "slug": "lich_chain_frost",
+        "name": "Chain Frost",
+        "desc": "Releases an orb of frost that bounces between nearby enemy units, slowing and damaging each time it hits.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "lifestealer",
@@ -503,7 +1023,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "life_stealer_rage",
+        "name": "Rage",
+        "desc": "Launch into a maddened rage, becoming Debuff Immune, increasing magic resistance and gaining movement speed.",
+        "ultimate": false
+      },
+      {
+        "slug": "life_stealer_open_wounds",
+        "name": "Open Wounds",
+        "desc": "Lifestealer rends an enemy unit, slowing it and letting all allies regain health for damage they deal to that unit.",
+        "ultimate": false
+      },
+      {
+        "slug": "life_stealer_feast",
+        "name": "Feast",
+        "desc": "Lifestealer's attacks deal damage and heal him for a percentage of his target's max health.",
+        "ultimate": false
+      },
+      {
+        "slug": "life_stealer_infest",
+        "name": "Infest",
+        "desc": "Lifestealer infests the body of a target unit, becoming undetectable and healing while inside, then can explode from the host.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "lina",
@@ -528,7 +1074,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "lina_dragon_slave",
+        "name": "Dragon Slave",
+        "desc": "Lina channels the breath of a dragon, sending out a wave of fire that scorches every enemy in its path.",
+        "ultimate": false
+      },
+      {
+        "slug": "lina_light_strike_array",
+        "name": "Light Strike Array",
+        "desc": "Summons a column of flames that damages and stuns enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "lina_fiery_soul",
+        "name": "Fiery Soul",
+        "desc": "Grants bonus attack and movement speed each time Lina hits an enemy with a spell. Stacks with itself.",
+        "ultimate": false
+      },
+      {
+        "slug": "lina_laguna_blade",
+        "name": "Laguna Blade",
+        "desc": "Fires off a bolt of lightning at a single enemy unit, dealing massive damage.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "lion",
@@ -553,7 +1125,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "lion_impale",
+        "name": "Earth Spike",
+        "desc": "Rock spikes burst from the earth along a straight path. Enemy units are hurled into the air, then are stunned and take damage when they fall.",
+        "ultimate": false
+      },
+      {
+        "slug": "lion_voodoo",
+        "name": "Hex",
+        "desc": "Transforms an enemy unit into a harmless beast, with all special abilities disabled.",
+        "ultimate": false
+      },
+      {
+        "slug": "lion_mana_drain",
+        "name": "Mana Drain",
+        "desc": "CHANNELED - Channels magical energy, taking mana and slowing enemies over time.",
+        "ultimate": false
+      },
+      {
+        "slug": "lion_finger_of_death",
+        "name": "Finger of Death",
+        "desc": "Rips at an enemy unit, trying to turn it inside-out, dealing massive damage to the target.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "mirana",
@@ -579,7 +1177,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "mirana_starfall",
+        "name": "Starstorm",
+        "desc": "Calls down a wave of meteors to damage nearby enemy units. The closest enemy unit to Mirana in a %starfall_secondary_radius% radius will be struck a second time.",
+        "ultimate": false
+      },
+      {
+        "slug": "mirana_arrow",
+        "name": "Sacred Arrow",
+        "desc": "Fires a long-range arrow with deadly precision, which stuns and damages the first enemy unit it strikes. The stun duration ranges from %arrow_min_stun% to %arrow_max_stun% seconds, with bonus damage up to %arrow_bonus_damage% added, based on the distance the arrow travels to its target. Instantly kills the first non-ancient creep it hits.",
+        "ultimate": false
+      },
+      {
+        "slug": "mirana_leap",
+        "name": "Leap",
+        "desc": "Mirana leaps forward into battle, empowering herself with a ferocious roar that grants bonus attack and movement speed. Speed bonus lasts %leap_bonus_duration% seconds.",
+        "ultimate": false
+      },
+      {
+        "slug": "mirana_invis",
+        "name": "Moonlight Shadow",
+        "desc": "Turns Mirana and all allied heroes invisible and grants bonus movement speed. Mirana gains bonus outgoing damage during the duration. If a hero is revealed, invisibility will restore after the fade delay as long as Moonlight Shadow's duration has not expired.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "morphling",
@@ -604,7 +1228,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "morphling_waveform",
+        "name": "Waveform",
+        "desc": "Morphling dissolves into liquid and surges forward, damaging enemy units in his path. Morphling is invulnerable during Waveform.",
+        "ultimate": false
+      },
+      {
+        "slug": "morphling_adaptive_strike_agi",
+        "name": "Adaptive Strike",
+        "desc": "Launches a surge of water toward an enemy unit, stunning them, knocking them back, and dealing base damage plus additional damage based on Morphling's agility times a multiplier.  If Morphling's agility is 50% higher than strength, the maximum agility multiplier is used.\n\nKnockback distance and stun duration are based on Morphling's strength. If his strength is 50% higher than his agility, the maximum knockback distance and stun duration is used.",
+        "ultimate": false
+      },
+      {
+        "slug": "morphling_morph_agi",
+        "name": "Attribute Shift (Agility Gain)",
+        "desc": "Morphling shifts its form, pulling points from Strength and pouring them into Agility at a rate of %morph_rate%. The process is reversible.",
+        "ultimate": false
+      },
+      {
+        "slug": "morphling_replicate",
+        "name": "Morph",
+        "desc": "Morphling changes his form to match the targeted enemy, gaining their basic abilities and changing his primary attribute based on his target. Can be toggled for the duration of the ability.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "necrophos",
@@ -629,7 +1279,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "necrolyte_death_pulse",
+        "name": "Death Pulse",
+        "desc": "Necrophos releases a wave of death around him, dealing damage to enemy units and healing allied units.",
+        "ultimate": false
+      },
+      {
+        "slug": "necrolyte_ghost_shroud",
+        "name": "Ghost Shroud",
+        "desc": "Necrophos slips into the realm that separates the living from the dead, unable to attack or be attacked, emitting a slowing aura.",
+        "ultimate": false
+      },
+      {
+        "slug": "necrolyte_heartstopper_aura",
+        "name": "Heartstopper Aura",
+        "desc": "Necrophos stills the hearts of his opponents, causing nearby enemy units to lose a percentage of their max health over time.",
+        "ultimate": false
+      },
+      {
+        "slug": "necrolyte_reapers_scythe",
+        "name": "Reaper's Scythe",
+        "desc": "Stuns the target enemy hero, then deals damage based on how much life it is missing.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "shadow-fiend",
@@ -651,7 +1327,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "nevermore_shadowraze1",
+        "name": "Shadowraze",
+        "desc": "Shadow Fiend razes the ground directly in front of him, dealing damage to enemy units in the area, dealing bonus damage based on his current Necromastery Soul amount. Adds a stacking damage amplifier on the target that causes the enemy to take bonus Shadowraze damage per stack.",
+        "ultimate": false
+      },
+      {
+        "slug": "nevermore_frenzy",
+        "name": "Feast of Souls",
+        "desc": "Shadow Fiend gains Bonus Movement and Attack Speed for %duration% seconds. For the duration of the effect, every %soul_collection_interval%s he collects souls from %soul_collection_per_interval% enemies in a %soul_collection_radius% radius. After the effect is over, he loses the souls whose owners are still alive, retaining the rest for %linger_duration%s, after which souls that are over the Necromastery max stack count are also lost.\n\n Can only collect souls once from each individual enemy.",
+        "ultimate": false
+      },
+      {
+        "slug": "nevermore_dark_lord",
+        "name": "Presence of the Dark Lord",
+        "desc": "Shadow Fiend's presence reduces the armor of nearby enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "nevermore_requiem",
+        "name": "Requiem of Souls",
+        "desc": "Shadow Fiend gathers up to %max_soul_release% of his captured souls to release them as lines of demonic energy. Units near Shadow Fiend when the souls are released can be damaged by several lines of energy. Any unit damaged by Requiem of Souls will be feared and have its movement speed and magic resistance reduced for %requiem_slow_duration% seconds for each line hit up to a maximum of %requiem_slow_duration_max%. Lines of energy are created for every soul captured through Necromastery. <br><br> Requiem of Souls is automatically cast whenever Shadow Fiend dies, regardless of its cooldown.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "night-stalker",
@@ -676,7 +1378,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "night_stalker_void",
+        "name": "Void",
+        "desc": "Creates a damaging void that slows an enemy unit and deals damage; mini-stuns at night.",
+        "ultimate": false
+      },
+      {
+        "slug": "night_stalker_crippling_fear",
+        "name": "Crippling Fear",
+        "desc": "Night Stalker horrifies all nearby enemies, silencing them and dealing damage over time while near him.",
+        "ultimate": false
+      },
+      {
+        "slug": "night_stalker_midnight_feast",
+        "name": "Midnight Feast",
+        "desc": "Night Stalker heals himself when attacking enemy units, more so at night.",
+        "ultimate": false
+      },
+      {
+        "slug": "night_stalker_darkness",
+        "name": "Dark Ascension",
+        "desc": "Night Stalker summons instant darkness, gaining flight and bonus damage during this time.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "omniknight",
@@ -701,7 +1429,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "omniknight_purification",
+        "name": "Purification",
+        "desc": "Instantly heals a friendly unit and damages all nearby enemy units.",
+        "ultimate": false
+      },
+      {
+        "slug": "omniknight_martyr",
+        "name": "Repel",
+        "desc": "Grants Debuff Immunity with magic resistance, as well as bonus HP Regen.",
+        "ultimate": false
+      },
+      {
+        "slug": "omniknight_hammer_of_purity",
+        "name": "Hammer of Purity",
+        "desc": "Omniknight imbues his hammer with holy power, causing his attack to have increased range, deal pure damage and slow his target.",
+        "ultimate": false
+      },
+      {
+        "slug": "omniknight_guardian_angel",
+        "name": "Guardian Angel",
+        "desc": "Omniknight calls upon a Guardian Angel that grants immunity from physical damage to all allied units near him.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "puck",
@@ -725,7 +1479,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "puck_illusory_orb",
+        "name": "Illusory Orb",
+        "desc": "Vector Targeted. Puck launches a magic orb that travels along the path, damaging enemy units along the way. The orb deals an additional %damage_over_time_pct%%% of its impact damage every %damage_interval%s in its area of effect, but if it exceeds the max cast range it will be destroyed.\n\n At any point, Puck may teleport to the orb's location using Ethereal Jaunt.<br><br> Can be put on alt-cast to launch the Orb straight ahead.",
+        "ultimate": false
+      },
+      {
+        "slug": "puck_waning_rift",
+        "name": "Waning Rift",
+        "desc": "Puck teleports to the target location and releases a burst of faerie dust that deals damage and silences enemy units nearby.",
+        "ultimate": false
+      },
+      {
+        "slug": "puck_phase_shift",
+        "name": "Phase Shift",
+        "desc": "CHANNELED - Puck briefly shifts into another dimension where it is immune from harm.",
+        "ultimate": false
+      },
+      {
+        "slug": "puck_dream_coil",
+        "name": "Dream Coil",
+        "desc": "Creates a coil of volatile magic that latches onto enemy Heroes, damaging and leashing them.  If the enemy hero stretches the coil by moving too far away, it snaps, stunning and dealing additional damage.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "pudge",
@@ -751,7 +1531,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "pudge_meat_hook",
+        "name": "Meat Hook",
+        "desc": "Launches a bloody hook toward a unit or location. The hook will snag the first unit it encounters, dragging the unit back to Pudge, killing it if it's a non-ancient creep and dealing damage if it is an enemy otherwise.",
+        "ultimate": false
+      },
+      {
+        "slug": "pudge_rot",
+        "name": "Rot",
+        "desc": "A toxic cloud that deals intense damage and slows movement--harming not only enemy units but Pudge himself.",
+        "ultimate": false
+      },
+      {
+        "slug": "pudge_flesh_heap",
+        "name": "Meat Shield",
+        "desc": "Pudge covers himself with a layer of flesh that blocks damage of any type taken from any source.",
+        "ultimate": false
+      },
+      {
+        "slug": "pudge_dismember",
+        "name": "Dismember",
+        "desc": "CHANNELED - Pudge chows down on an enemy unit, disabling it and dealing damage over time. Damage is increased by Pudge's Strength and heals him for the total amount. Pudge pulls the unit at a rate of %pull_units_per_second% units, up to a minimum of %pull_distance_limit% range.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "pugna",
@@ -774,7 +1580,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "pugna_nether_blast",
+        "name": "Nether Blast",
+        "desc": "An exploding pulse deals damage to enemies and structures in the area.",
+        "ultimate": false
+      },
+      {
+        "slug": "pugna_decrepify",
+        "name": "Decrepify",
+        "desc": "A powerful banishing spell that slows a unit and renders it unable to attack or be attacked.",
+        "ultimate": false
+      },
+      {
+        "slug": "pugna_nether_ward",
+        "name": "Nether Ward",
+        "desc": "Pugna places a Nether Ward at the target location that fires at any enemy hero who casts a spell.",
+        "ultimate": false
+      },
+      {
+        "slug": "pugna_life_drain",
+        "name": "Life Drain",
+        "desc": "CHANNELED - Drains health from an enemy to heal himself, or drains his own health into an ally.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "clockwerk",
@@ -799,7 +1631,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "rattletrap_battery_assault",
+        "name": "Battery Assault",
+        "desc": "Discharges high-powered shrapnel at random nearby enemy units, dealing minor magical damage and ministun.",
+        "ultimate": false
+      },
+      {
+        "slug": "rattletrap_power_cogs",
+        "name": "Power Cogs",
+        "desc": "Forms a ring of energized cogs around Clockwerk, trapping any units that are near and knocking back enemies that touch a cog.",
+        "ultimate": false
+      },
+      {
+        "slug": "rattletrap_rocket_flare",
+        "name": "Rocket Flare",
+        "desc": "Fires a global range flare that explodes over a given area, damaging and briefly slowing enemies and providing vision.",
+        "ultimate": false
+      },
+      {
+        "slug": "rattletrap_hookshot",
+        "name": "Hookshot",
+        "desc": "Fires a grappling device rapidly at the target location, launching Clockwerk into the target and stunning everyone nearby.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "razor",
@@ -823,7 +1681,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "razor_plasma_field",
+        "name": "Plasma Field",
+        "desc": "Releases a wave of energetic plasma that grows in power as it expands, but also zaps on contraction, slowing and dealing damage to enemy units caught in its path. Damage and slow increases with distance from Razor. The Plasma Field hits each unit twice, once each direction.",
+        "ultimate": false
+      },
+      {
+        "slug": "razor_static_link",
+        "name": "Static Link",
+        "desc": "Creates a charged link between Razor and an enemy Hero, stealing damage from the target and giving it to Razor. Allows Razor to attack while moving with the link active.",
+        "ultimate": false
+      },
+      {
+        "slug": "razor_storm_surge",
+        "name": "Storm Surge",
+        "desc": "There's a chance when attacked, and always when targeted with a spell, to release a forked lightning that strikes the target and other nearby enemies, prioritizing the unit type of the attacker, dealing damage and slowing movement speed.",
+        "ultimate": false
+      },
+      {
+        "slug": "razor_eye_of_the_storm",
+        "name": "Eye of the Storm",
+        "desc": "A powerful lightning storm strikes out at the enemy unit with the lowest health, dealing damage and reducing armor.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "riki",
@@ -846,7 +1730,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "riki_smoke_screen",
+        "name": "Smoke Screen",
+        "desc": "Throws down a smoke bomb, silencing enemies and causing them to miss attacks.",
+        "ultimate": false
+      },
+      {
+        "slug": "riki_blink_strike",
+        "name": "Blink Strike",
+        "desc": "Teleports behind the target unit, momentarily slowing them and attacking them with bonus damage if it is an enemy.",
+        "ultimate": false
+      },
+      {
+        "slug": "riki_tricks_of_the_trade",
+        "name": "Tricks of the Trade",
+        "desc": "CHANNELED - Riki phases out of the world and periodically strikes random enemy units from behind in an area around him.",
+        "ultimate": false
+      },
+      {
+        "slug": "riki_backstab",
+        "name": "Cloak and Dagger",
+        "desc": "Riki fades into the shadows, becoming invisible until he attacks. Hero kills and assists grant additional experience.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "sand-king",
@@ -871,7 +1781,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "sandking_burrowstrike",
+        "name": "Burrowstrike",
+        "desc": "Sand King burrows into the ground and tunnels forward, damaging and stunning enemy units above him as he resurfaces. Adds Caustic Finale poison to heroes hit<br><br> Can be put on alt-cast to immediately cast in the desired direction, without walking towards the targeted location.",
+        "ultimate": false
+      },
+      {
+        "slug": "sandking_sand_storm",
+        "name": "Sand Storm",
+        "desc": "Sand King creates a fearsome sandstorm that damages enemy units and grants Sand King Invisibility while he is in it. The effect ends when Sand King leaves the area.",
+        "ultimate": false
+      },
+      {
+        "slug": "sandking_scorpion_strike",
+        "name": "Stinger",
+        "desc": "Sand King strikes an area, performing an attack on all enemies in the area of effect, dealing extra damage to each. Enemies within an innermost radius of %inner_radius% take %inner_radius_bonus_damage_pct%%% extra damage. Applies Caustic Finale and a slow to all enemies hit.",
+        "ultimate": false
+      },
+      {
+        "slug": "sandking_epicenter",
+        "name": "Epicenter",
+        "desc": "After a cast point of %abilitycastpoint% seconds, Sand King sends a disturbance into the earth, causing it to shudder violently. All enemies caught within range will take damage and become slowed. Each subsequent pulse increases the radius of damage dealt.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "shadow-shaman",
@@ -896,7 +1832,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "shadow_shaman_ether_shock",
+        "name": "Ether Shock",
+        "desc": "Creates a cone of ethereal energy that strikes multiple enemy units.",
+        "ultimate": false
+      },
+      {
+        "slug": "shadow_shaman_voodoo",
+        "name": "Hex",
+        "desc": "Transforms an enemy unit into a harmless creature, disabling their attacks and abilities.",
+        "ultimate": false
+      },
+      {
+        "slug": "shadow_shaman_shackles",
+        "name": "Shackles",
+        "desc": "CHANNELED - Magically binds an enemy unit so that it cannot move or attack, absorbing their life energy over time.",
+        "ultimate": false
+      },
+      {
+        "slug": "shadow_shaman_mass_serpent_ward",
+        "name": "Mass Serpent Ward",
+        "desc": "Summons Serpent Wards to attack enemy units and structures. The Wards are immune to magic.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "slardar",
@@ -922,7 +1884,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "slardar_sprint",
+        "name": "Guardian Sprint",
+        "desc": "Slardar slithers ahead, moving significantly faster and passing through units.",
+        "ultimate": false
+      },
+      {
+        "slug": "slardar_slithereen_crush",
+        "name": "Slithereen Crush",
+        "desc": "Slams the ground, leaving a puddle of water, and stunning and damaging nearby enemy units.",
+        "ultimate": false
+      },
+      {
+        "slug": "slardar_bash",
+        "name": "Bash of the Deep",
+        "desc": "After a set number of attacks, your next attack will bash the target.",
+        "ultimate": false
+      },
+      {
+        "slug": "slardar_amplify_damage",
+        "name": "Corrosive Haze",
+        "desc": "Reduces enemy armor to amplify physical damage and provides True Sight and vision of the targeted unit, revealing invisibility.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "sniper",
@@ -944,7 +1932,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "sniper_shrapnel",
+        "name": "Shrapnel",
+        "desc": "Launches a ball of shrapnel that showers the target area in explosive pellets, damaging and slowing enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "sniper_headshot",
+        "name": "Headshot",
+        "desc": "Sniper increases his accuracy, giving him a chance to deal extra damage and knock back his enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "sniper_take_aim",
+        "name": "Take Aim",
+        "desc": "Passively increases Sniper's attack range. On cast, gains increased vision, Headshot chance, and attack range.",
+        "ultimate": false
+      },
+      {
+        "slug": "sniper_assassinate",
+        "name": "Assassinate",
+        "desc": "Sniper locks onto a target enemy unit and fires a devastating shot that deals bonus damage at long range and mini-stuns the target.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "spectre",
@@ -967,7 +1981,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "spectre_spectral_dagger",
+        "name": "Spectral Dagger",
+        "desc": "Spectre flings a dagger to draw a Shadow Path, dealing damage and slowing enemies along the trail.",
+        "ultimate": false
+      },
+      {
+        "slug": "spectre_shadow_step",
+        "name": "Shadow Step",
+        "desc": "Sends an uncontrollable illusion at a target that follows and attacks it; Spectre can teleport to the illusion.",
+        "ultimate": false
+      },
+      {
+        "slug": "spectre_dispersion",
+        "name": "Dispersion",
+        "desc": "Spectre disperses part of the damage dealt to her, reflecting it to all nearby enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "spectre_haunt",
+        "name": "Haunt",
+        "desc": "Creates a spectral nemesis to haunt all enemy Heroes; Spectre can teleport to any illusion, destroying it.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "storm-spirit",
@@ -992,7 +2032,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "storm_spirit_static_remnant",
+        "name": "Static Remnant",
+        "desc": "Creates an explosively charged image of Storm Spirit that walks to the target position and lasts for %abilityduration% seconds. Will detonate and deal damage if an enemy unit comes near it.",
+        "ultimate": false
+      },
+      {
+        "slug": "storm_spirit_electric_vortex",
+        "name": "Electric Vortex",
+        "desc": "A vortex that pulls an enemy unit to Storm Spirit's location.",
+        "ultimate": false
+      },
+      {
+        "slug": "storm_spirit_overload",
+        "name": "Overload",
+        "desc": "Casting a spell creates an electrical charge, which is released in a burst on Storm's next attack, dealing damage and slowing nearby enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "storm_spirit_ball_lightning",
+        "name": "Ball Lightning",
+        "desc": "Storm Spirit becomes volatile electricity, charging across the battlefield until he depletes his mana or reaches his target. The activation mana cost is %ball_lightning_initial_mana_base%+%ball_lightning_initial_mana_percentage%%% of his total mana pool, and the cost per 100 units traveled is %ball_lightning_travel_cost_base%+%ball_lightning_travel_cost_percent%%% of his total mana pool.  Damage is expressed in damage per 100 units traveled.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "sven",
@@ -1017,7 +2083,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "sven_storm_bolt",
+        "name": "Storm Hammer",
+        "desc": "Sven unleashes his magical gauntlet that deals damage and stuns enemy units in a small area around the target.",
+        "ultimate": false
+      },
+      {
+        "slug": "sven_great_cleave",
+        "name": "Great Cleave",
+        "desc": "Sven strikes with great force, cleaving all nearby enemy units with his attack.",
+        "ultimate": false
+      },
+      {
+        "slug": "sven_warcry",
+        "name": "Warcry",
+        "desc": "Sven's Warcry heartens his allied heroes for battle, increasing their armor and movement speed. Lasts %duration% seconds.",
+        "ultimate": false
+      },
+      {
+        "slug": "sven_gods_strength",
+        "name": "God's Strength",
+        "desc": "Sven channels his rogue strength, granting bonus damage and slow resistance for %abilityduration% seconds.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "tidehunter",
@@ -1043,7 +2135,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "tidehunter_gush",
+        "name": "Gush",
+        "desc": "Summons a gush of water to damage an enemy unit, reducing their movement speed and armor.",
+        "ultimate": false
+      },
+      {
+        "slug": "tidehunter_kraken_shell",
+        "name": "Kraken Shell",
+        "desc": "Thickens Tidehunter's hide to passively block a portion of any incoming physical attack damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "tidehunter_anchor_smash",
+        "name": "Anchor Smash",
+        "desc": "Tidehunter swings his mighty anchor to attack and deal bonus damage to nearby enemies and reduce their attack damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "tidehunter_ravage",
+        "name": "Ravage",
+        "desc": "Slams the ground, causing tentacles to erupt in all directions, damaging and stunning all nearby enemy units.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "tinker",
@@ -1066,7 +2184,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "tinker_laser",
+        "name": "Laser",
+        "desc": "Fires an intense energy beam, damaging and blinding the target. Blinded targets miss all physical attacks.",
+        "ultimate": false
+      },
+      {
+        "slug": "tinker_march_of_the_machines",
+        "name": "March of the Machines",
+        "desc": "Enlists an army of robotic minions to destroy enemy units in an area around Tinker.",
+        "ultimate": false
+      },
+      {
+        "slug": "tinker_deploy_turrets",
+        "name": "Deploy Turrets",
+        "desc": "Deploys uncontrollable turrets at the target location that fire missiles at the nearest enemy hero.",
+        "ultimate": false
+      },
+      {
+        "slug": "tinker_rearm",
+        "name": "Rearm",
+        "desc": "CHANNELED - Resets the cooldown on Tinker's abilities.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "tiny",
@@ -1092,7 +2236,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "tiny_avalanche",
+        "name": "Avalanche",
+        "desc": "Bombards an area with rocks, continously doing small intervals of damage and stun to enemy units.",
+        "ultimate": false
+      },
+      {
+        "slug": "tiny_toss",
+        "name": "Toss",
+        "desc": "Grabs the nearest unit in a %grab_radius% radius around Tiny, ally or enemy, and launches it at the target unit or rune to deal damage where they land.",
+        "ultimate": false
+      },
+      {
+        "slug": "tiny_tree_grab",
+        "name": "Tree Grab",
+        "desc": "Grabs a tree and causes Tiny to have bonus range, damage, and a splashing attack for a limited number of attacks.  The tree can be thrown, to deal your attack to a unit at a distance.",
+        "ultimate": false
+      },
+      {
+        "slug": "tiny_grow",
+        "name": "Grow",
+        "desc": "Tiny gains craggy mass, increasing his attack damage, movement speed and armor, and toss power while slowing his attack speed.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "venomancer",
@@ -1118,7 +2288,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "venomancer_venomous_gale",
+        "name": "Venomous Gale",
+        "desc": "Launches a ball of venom in a line, poisoning enemy units so that they take both initial damage and damage over time.",
+        "ultimate": false
+      },
+      {
+        "slug": "venomancer_snakebite",
+        "name": "Snakebite",
+        "desc": "Venomancer summons a Spawn of Aktok to sink its fangs into a target, dealing magic damage and applying a toxin.",
+        "ultimate": false
+      },
+      {
+        "slug": "venomancer_plague_ward",
+        "name": "Plague Ward",
+        "desc": "Summons a plague ward to attack enemy units and structures. The ward is immune to magic.",
+        "ultimate": false
+      },
+      {
+        "slug": "venomancer_noxious_plague",
+        "name": "Noxious Plague",
+        "desc": "Infects an enemy with a plague that slows the target and deals damage over time based on their maximum health, then spreads to nearby targets.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "viper",
@@ -1142,7 +2338,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "viper_poison_attack",
+        "name": "Poison Attack",
+        "desc": "Intensifies Viper's venom, adding a stacking movement speed slow and damage over time to his normal attack.",
+        "ultimate": false
+      },
+      {
+        "slug": "viper_nethertoxin",
+        "name": "Nethertoxin",
+        "desc": "Viper releases a Nethertoxin at the targeted area, dealing increasing damage over time and slowing attack speed.",
+        "ultimate": false
+      },
+      {
+        "slug": "viper_corrosive_skin",
+        "name": "Corrosive Skin",
+        "desc": "Viper exudes an infectious toxin that damages and slows the attack speed of any enemy that damages him.",
+        "ultimate": false
+      },
+      {
+        "slug": "viper_viper_strike",
+        "name": "Viper Strike",
+        "desc": "Viper slows the targeted enemy unit's movement and attack speed, disables their passives, and deals poison damage over time.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "weaver",
@@ -1164,7 +2386,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "weaver_the_swarm",
+        "name": "The Swarm",
+        "desc": "Weaver launches a swarm of young Weavers that latch onto an enemy unit, attacking and reducing armor until killed.",
+        "ultimate": false
+      },
+      {
+        "slug": "weaver_shukuchi",
+        "name": "Shukuchi",
+        "desc": "Weaver shifts out of visibility, gaining max movement speed and damaging any enemies it passes through.",
+        "ultimate": false
+      },
+      {
+        "slug": "weaver_geminate_attack",
+        "name": "Geminate Attack",
+        "desc": "Allows Weaver to dispatch two attacks at once.",
+        "ultimate": false
+      },
+      {
+        "slug": "weaver_time_lapse",
+        "name": "Time Lapse",
+        "desc": "Weaver warps backward to whatever position it was in five seconds earlier, regaining the HP and mana from that time.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "windranger",
@@ -1189,7 +2437,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "windrunner_shackleshot",
+        "name": "Shackleshot",
+        "desc": "Shackles the target to an enemy unit or tree in a line directly behind it.  If no unit or tree is present, the stun duration is reduced.",
+        "ultimate": false
+      },
+      {
+        "slug": "windrunner_powershot",
+        "name": "Powershot",
+        "desc": "CHANNELED - Windranger charges her bow for a single powerful shot, which deals more damage the longer it is charged. The arrow damages and slows enemies' movement speed along its path.",
+        "ultimate": false
+      },
+      {
+        "slug": "windrunner_windrun",
+        "name": "Windrun",
+        "desc": "Increases movement speed and adds evasion from all physical attacks.",
+        "ultimate": false
+      },
+      {
+        "slug": "windrunner_focusfire",
+        "name": "Focus Fire",
+        "desc": "Windranger channels the wind to gain additional attack speed against a single enemy unit or structure, though with a reduction to her attack damage.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "witch-doctor",
@@ -1212,7 +2486,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "witch_doctor_paralyzing_cask",
+        "name": "Paralyzing Cask",
+        "desc": "Launches a cask of paralyzing powder that ricochets between enemy units, stunning and damaging those it hits.",
+        "ultimate": false
+      },
+      {
+        "slug": "witch_doctor_voodoo_restoration",
+        "name": "Voodoo Restoration",
+        "desc": "Witch Doctor focuses his magic to heal nearby allied units, costing Witch Doctor mana every second it is active.",
+        "ultimate": false
+      },
+      {
+        "slug": "witch_doctor_maledict",
+        "name": "Maledict",
+        "desc": "Curses all enemy Heroes in a small area, causing them to take a set amount of damage each second, plus bursts of damage based on health lost.",
+        "ultimate": false
+      },
+      {
+        "slug": "witch_doctor_death_ward",
+        "name": "Death Ward",
+        "desc": "CHANNELED - Summons a deadly ward to attack enemy heroes within its attack range.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "zeus",
@@ -1234,7 +2534,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "zuus_arc_lightning",
+        "name": "Arc Lightning",
+        "desc": "Hurls a bolt of lightning that leaps through nearby enemy units that deal damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "zuus_lightning_bolt",
+        "name": "Lightning Bolt",
+        "desc": "Calls down a bolt of lightning to strike an enemy unit, causing damage and a mini-stun.",
+        "ultimate": false
+      },
+      {
+        "slug": "zuus_heavenly_jump",
+        "name": "Heavenly Jump",
+        "desc": "Zeus performs a Heavenly Jump, leaping forward and shocking the closest visible nearby enemy, dealing damage as well as reducing their movement and attack speed.",
+        "ultimate": false
+      },
+      {
+        "slug": "zuus_thundergods_wrath",
+        "name": "Thundergod's Wrath",
+        "desc": "Strikes all enemy heroes with a bolt of lightning, dealing damage no matter where they may be.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "broodmother",
@@ -1258,7 +2584,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "broodmother_insatiable_hunger",
+        "name": "Insatiable Hunger",
+        "desc": "A violent lust for vital fluids increases Broodmother's attack damage and gives her and her Spiderlings a vampiric attack.",
+        "ultimate": false
+      },
+      {
+        "slug": "broodmother_spin_web",
+        "name": "Spin Web",
+        "desc": "Spins a large web that grants Broodmother a passive movement speed increase while in its vicinity.",
+        "ultimate": false
+      },
+      {
+        "slug": "broodmother_incapacitating_bite",
+        "name": "Incapacitating Bite",
+        "desc": "Broodmother's venom cripples enemy units, causing her attacks to slow and give a chance to miss.",
+        "ultimate": false
+      },
+      {
+        "slug": "broodmother_spawn_spiderlings",
+        "name": "Spawn Spiderlings",
+        "desc": "Broodmother injects her young into an enemy unit, dealing damage and slowing; spiderlings hatch if the target dies.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "wraith-king",
@@ -1283,7 +2635,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "skeleton_king_hellfire_blast",
+        "name": "Wraithfire Blast",
+        "desc": "Wraith King sears an enemy unit with spectral fire, dealing damage and stunning, then dealing damage over time and slowing the target.",
+        "ultimate": false
+      },
+      {
+        "slug": "skeleton_king_bone_guard",
+        "name": "Bone Guard",
+        "desc": "Gains a Charge for every 2 creeps killed and 2 charges per hero killed. Activate to spend all charges, summoning skeletons that respawn once when killed.",
+        "ultimate": false
+      },
+      {
+        "slug": "skeleton_king_mortal_strike",
+        "name": "Mortal Strike",
+        "desc": "Wraith King passively deals bonus damage on an attack with a cooldown.",
+        "ultimate": false
+      },
+      {
+        "slug": "skeleton_king_reincarnation",
+        "name": "Reincarnation",
+        "desc": "Wraith King's form regroups after death, allowing him to resurrect when killed in battle.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "queen-of-pain",
@@ -1306,7 +2684,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "queenofpain_shadow_strike",
+        "name": "Shadow Strike",
+        "desc": "Hurls a poisoned dagger which deals large initial damage, and then deals damage over time.",
+        "ultimate": false
+      },
+      {
+        "slug": "queenofpain_blink",
+        "name": "Blink",
+        "desc": "Short distance teleportation that allows Queen of Pain to move in and out of combat.",
+        "ultimate": false
+      },
+      {
+        "slug": "queenofpain_scream_of_pain",
+        "name": "Scream Of Pain",
+        "desc": "The Queen of Pain lets loose a piercing scream around her, damaging nearby enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "queenofpain_sonic_wave",
+        "name": "Sonic Wave",
+        "desc": "Creates a gigantic wave of sound in front of Queen of Pain, dealing heavy damage to all enemy units in its wake and pushing them back.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "huskar",
@@ -1329,7 +2733,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "huskar_inner_fire",
+        "name": "Inner Fire",
+        "desc": "In a fiery rage, knocks all nearby enemies away from you to a fixed distance, dealing damage and silencing them.",
+        "ultimate": false
+      },
+      {
+        "slug": "huskar_burning_spear",
+        "name": "Burning Spear",
+        "desc": "Huskar sets his spears aflame, dealing damage over time with his regular attack, draining some of his own health.",
+        "ultimate": false
+      },
+      {
+        "slug": "huskar_berserkers_blood",
+        "name": "Berserker's Blood",
+        "desc": "Huskar's injuries feed his power, giving increased attack speed, magic resistance and health regen based on missing health.",
+        "ultimate": false
+      },
+      {
+        "slug": "huskar_life_break",
+        "name": "Life Break",
+        "desc": "Huskar draws upon his health to leap at a target, shattering a percentage of that hero's current health and slowing them.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "jakiro",
@@ -1354,7 +2784,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "jakiro_dual_breath",
+        "name": "Dual Breath",
+        "desc": "An icy blast followed by a wave of fire launches out in a path in front of Jakiro, slowing then burning enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "jakiro_ice_path",
+        "name": "Ice Path",
+        "desc": "Creates a path of ice that stuns and damages enemies that touch it.",
+        "ultimate": false
+      },
+      {
+        "slug": "jakiro_liquid_fire",
+        "name": "Liquid Fire",
+        "desc": "Jakiro burns his enemies in an area of effect with fire added to his attack, slowing their attacks.",
+        "ultimate": false
+      },
+      {
+        "slug": "jakiro_macropyre",
+        "name": "Macropyre",
+        "desc": "Jakiro exhales a wide line of lasting flames, dealing damage per second to any enemy units caught in the fire.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "batrider",
@@ -1377,7 +2833,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "batrider_sticky_napalm",
+        "name": "Sticky Napalm",
+        "desc": "Drenches an area in sticky oil, amplifying damage from Batrider's attacks and slowing enemies caught in it.",
+        "ultimate": false
+      },
+      {
+        "slug": "batrider_flamebreak",
+        "name": "Flamebreak",
+        "desc": "Hurls an explosive cocktail that knocks back, slows and deals damage over time to enemies in the area.",
+        "ultimate": false
+      },
+      {
+        "slug": "batrider_firefly",
+        "name": "Firefly",
+        "desc": "Batrider takes to the skies, moving increasingly fast and laying down a trail of flames that damages enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "batrider_flaming_lasso",
+        "name": "Flaming Lasso",
+        "desc": "Lassoes an enemy and drags them in Batrider's wake; dragged units cannot move, attack, or use abilities.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "warlock",
@@ -1400,7 +2882,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "warlock_fatal_bonds",
+        "name": "Fatal Bonds",
+        "desc": "Binds several visible enemy units together, causing a percentage of the damage dealt to one of them to be felt by the others.",
+        "ultimate": false
+      },
+      {
+        "slug": "warlock_shadow_word",
+        "name": "Shadow Word",
+        "desc": "Warlock casts a spell on a unit that makes it deal damage to nearby enemy units and heal nearby ally units.",
+        "ultimate": false
+      },
+      {
+        "slug": "warlock_upheaval",
+        "name": "Upheaval",
+        "desc": "CHANNELED - A powerful slowing and damaging current that grows stronger as it's channeled.",
+        "ultimate": false
+      },
+      {
+        "slug": "warlock_rain_of_chaos",
+        "name": "Chaotic Offering",
+        "desc": "Summons a Golem from the depths, stunning enemies. The Golem has reduced spell damage, increased slow resistance, and Flaming Fists.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "alchemist",
@@ -1428,7 +2936,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "alchemist_acid_spray",
+        "name": "Acid Spray",
+        "desc": "Sprays high-pressure acid across a target area, dealing damage per second and reducing armor.",
+        "ultimate": false
+      },
+      {
+        "slug": "alchemist_unstable_concoction",
+        "name": "Unstable Concoction",
+        "desc": "Alchemist brews an unstable concoction to throw at an enemy hero, stunning and dealing damage; the longer it brews, the stronger it is.",
+        "ultimate": false
+      },
+      {
+        "slug": "alchemist_corrosive_weaponry",
+        "name": "Corrosive Weaponry",
+        "desc": "Alchemist coats his weapons with acid that applies a stacking slow and attack damage reduction to enemies hit.",
+        "ultimate": false
+      },
+      {
+        "slug": "alchemist_chemical_rage",
+        "name": "Chemical Rage",
+        "desc": "Alchemist enters a chemically induced rage, reducing attack cooldown and increasing movement speed and health regen.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "death-prophet",
@@ -1454,7 +2988,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "death_prophet_carrion_swarm",
+        "name": "Crypt Swarm",
+        "desc": "Sends a swarm of winged beasts to savage enemy units in front of Death Prophet.",
+        "ultimate": false
+      },
+      {
+        "slug": "death_prophet_silence",
+        "name": "Silence",
+        "desc": "Fires a projectile that prevents enemy units in a target area from casting spells.",
+        "ultimate": false
+      },
+      {
+        "slug": "death_prophet_spirit_siphon",
+        "name": "Spirit Siphon",
+        "desc": "Creates a spirit link between Death Prophet and an enemy unit, draining health from the enemy.",
+        "ultimate": false
+      },
+      {
+        "slug": "death_prophet_exorcism",
+        "name": "Exorcism",
+        "desc": "Unleashes evil spirits to drain the life of nearby enemy units and structures, healing Death Prophet in proportion to the damage dealt.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "ursa",
@@ -1477,7 +3037,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "ursa_earthshock",
+        "name": "Earthshock",
+        "desc": "Ursa leaps forward and slams the earth, causing a powerful shock to damage and slow nearby enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "ursa_overpower",
+        "name": "Overpower",
+        "desc": "Using his skill in combat, Ursa gains increased attack speed and slow resistance for a number of attacks.",
+        "ultimate": false
+      },
+      {
+        "slug": "ursa_fury_swipes",
+        "name": "Fury Swipes",
+        "desc": "Ursa's claws dig deeper wounds, causing consecutive attacks to the same enemy to deal more damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "ursa_enrage",
+        "name": "Enrage",
+        "desc": "Ursa goes into a frenzy, providing damage reduction and status resistance, and removing existing debuffs.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "bounty-hunter",
@@ -1499,7 +3085,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "bounty_hunter_shuriken_toss",
+        "name": "Shuriken Toss",
+        "desc": "Hurls a deadly shuriken at an enemy unit, dealing damage and slowing the target's movement speed.",
+        "ultimate": false
+      },
+      {
+        "slug": "bounty_hunter_jinada",
+        "name": "Jinada",
+        "desc": "Bounty Hunter plans his next hit, dealing bonus damage and stealing some unreliable gold.",
+        "ultimate": false
+      },
+      {
+        "slug": "bounty_hunter_wind_walk",
+        "name": "Shadow Walk",
+        "desc": "Bounty Hunter becomes invisible and gains bonus movement speed until he attacks or casts a spell.",
+        "ultimate": false
+      },
+      {
+        "slug": "bounty_hunter_track",
+        "name": "Track",
+        "desc": "Tracks an enemy hero, granting True Sight, increasing damage taken, and revealing their gold. Grants bonus gold on kill.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "spirit-breaker",
@@ -1524,7 +3136,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "spirit_breaker_charge_of_darkness",
+        "name": "Charge of Darkness",
+        "desc": "Spirit Breaker charges through all objects toward an enemy unit, hitting everyone passed through with a Greater Bash.",
+        "ultimate": false
+      },
+      {
+        "slug": "spirit_breaker_bulldoze",
+        "name": "Bulldoze",
+        "desc": "Spirit Breaker gains movement speed and status resistance to ram through enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "spirit_breaker_greater_bash",
+        "name": "Greater Bash",
+        "desc": "Gives a chance to stun and knockback an enemy unit on an attack.",
+        "ultimate": false
+      },
+      {
+        "slug": "spirit_breaker_nether_strike",
+        "name": "Nether Strike",
+        "desc": "Spirit Breaker slips into the nether realm, reappearing next to his target with a bonus Greater Bash.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "outworld-devourer",
@@ -1547,7 +3185,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "obsidian_destroyer_arcane_orb",
+        "name": "Arcane Orb",
+        "desc": "Adds extra pure damage to Outworld Destroyer's attacks, based on his remaining mana pool.",
+        "ultimate": false
+      },
+      {
+        "slug": "obsidian_destroyer_astral_imprisonment",
+        "name": "Astral Imprisonment",
+        "desc": "Steals a percentage of the target's max mana and places them into an astral prison, invulnerable and disabled.",
+        "ultimate": false
+      },
+      {
+        "slug": "obsidian_destroyer_objurgation",
+        "name": "Objurgation",
+        "desc": "Increases Outworld Destroyer's maximum mana; on cast, grants a barrier based on his maximum mana.",
+        "ultimate": false
+      },
+      {
+        "slug": "obsidian_destroyer_sanity_eclipse",
+        "name": "Sanity's Eclipse",
+        "desc": "Unleashes a psychic blast dealing damage based on the difference between his max mana and the target's.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "shadow-demon",
@@ -1572,7 +3236,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "shadow_demon_disruption",
+        "name": "Disruption",
+        "desc": "Banishes the targeted unit briefly; upon returning, two illusions of it are created under Shadow Demon's control.",
+        "ultimate": false
+      },
+      {
+        "slug": "shadow_demon_disseminate",
+        "name": "Disseminate",
+        "desc": "Whenever the target takes damage, nearby units also receive a portion of that damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "shadow_demon_shadow_poison",
+        "name": "Shadow Poison",
+        "desc": "Deals damage in a line and afflicts enemies with stacking poison, dealing deferred damage when released.",
+        "ultimate": false
+      },
+      {
+        "slug": "shadow_demon_demonic_purge",
+        "name": "Demonic Purge",
+        "desc": "Purges the target enemy unit, removing positive buffs and slowing them, then dealing damage.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "lycan",
@@ -1596,7 +3286,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "lycan_summon_wolves",
+        "name": "Summon Wolves",
+        "desc": "Summons wolves to aid Lycan in battle, gaining invisibility and cripple at higher levels.",
+        "ultimate": false
+      },
+      {
+        "slug": "lycan_howl",
+        "name": "Howl",
+        "desc": "Strikes fear into enemies, reducing armor and attack damage of enemies near Lycan and his wolves.",
+        "ultimate": false
+      },
+      {
+        "slug": "lycan_feral_impulse",
+        "name": "Feral Impulse",
+        "desc": "Increases the HP regeneration and damage of Lycan and all units under his control.",
+        "ultimate": false
+      },
+      {
+        "slug": "lycan_shapeshift",
+        "name": "Shapeshift",
+        "desc": "Lycan assumes his lupine form, gaining critical strikes, increased speed, and immunity to slows.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "brewmaster",
@@ -1621,7 +3337,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "brewmaster_thunder_clap",
+        "name": "Thunder Clap",
+        "desc": "Slams the ground, dealing damage and slowing the movement speed and attack rate of nearby enemy units.",
+        "ultimate": false
+      },
+      {
+        "slug": "brewmaster_cinder_brew",
+        "name": "Cinder Brew",
+        "desc": "Rolls a barrel of ale at enemies that damages and slows them along its path.",
+        "ultimate": false
+      },
+      {
+        "slug": "brewmaster_drunken_brawler",
+        "name": "Drunken Brawler",
+        "desc": "Brewmaster switches stances based on the elements he controls, each granting different bonuses.",
+        "ultimate": false
+      },
+      {
+        "slug": "brewmaster_primal_split",
+        "name": "Primal Split",
+        "desc": "Splits Brewmaster into three elemental warriors, each with their own abilities; if any survive, Brewmaster is reborn.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "treant-protector",
@@ -1647,7 +3389,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "treant_natures_grasp",
+        "name": "Nature's Grasp",
+        "desc": "Creates vines towards the target location that slow and damage enemies who walk through.",
+        "ultimate": false
+      },
+      {
+        "slug": "treant_leech_seed",
+        "name": "Leech Seed",
+        "desc": "Treant's attack plants a life-sapping seed that roots and disarms an enemy while healing nearby allies.",
+        "ultimate": false
+      },
+      {
+        "slug": "treant_living_armor",
+        "name": "Living Armor",
+        "desc": "Infuses a hero or structure with a protective coating that heals and blocks incoming damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "treant_overgrowth",
+        "name": "Overgrowth",
+        "desc": "Summons vines and branches around Treant that damage enemies and prevent them from moving or acting.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "ogre-magi",
@@ -1672,7 +3440,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "ogre_magi_fireblast",
+        "name": "Fireblast",
+        "desc": "Blasts an enemy unit with a wave of fire, dealing damage and stunning the target.",
+        "ultimate": false
+      },
+      {
+        "slug": "ogre_magi_ignite",
+        "name": "Ignite",
+        "desc": "Drenches the target and a nearby unit in volatile chemicals, dealing damage and slowing them.",
+        "ultimate": false
+      },
+      {
+        "slug": "ogre_magi_bloodlust",
+        "name": "Bloodlust",
+        "desc": "Incites a frenzy in a friendly unit, increasing its movement speed and attack speed.",
+        "ultimate": false
+      },
+      {
+        "slug": "ogre_magi_multicast",
+        "name": "Multicast",
+        "desc": "Enables Ogre Magi to cast his abilities and items multiple times with each use.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "lone-druid",
@@ -1695,7 +3489,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "lone_druid_entangle",
+        "name": "Entangle",
+        "desc": "Roots and damages enemies over time once they've accumulated enough stacks from Lone Druid's attacks.",
+        "ultimate": false
+      },
+      {
+        "slug": "lone_druid_spirit_link",
+        "name": "Spirit Link",
+        "desc": "Links Lone Druid and the Spirit Bear, sharing movement speed and lifesteal between them.",
+        "ultimate": false
+      },
+      {
+        "slug": "lone_druid_savage_roar",
+        "name": "Savage Roar",
+        "desc": "Lone Druid and the Spirit Bear roar fiercely, causing nearby enemies to flee in terror.",
+        "ultimate": false
+      },
+      {
+        "slug": "lone_druid_true_form",
+        "name": "True Form",
+        "desc": "Lone Druid morphs into a raging bear, losing his ranged advantage but gaining bonus armor, health, and damage.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "phantom-assassin",
@@ -1717,7 +3537,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "phantom_assassin_stifling_dagger",
+        "name": "Stifling Dagger",
+        "desc": "Throws a dagger slowing the enemy unit's movement speed and dealing physical damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "phantom_assassin_phantom_strike",
+        "name": "Phantom Strike",
+        "desc": "Teleports to a unit, friendly or enemy, and grants bonus attack speed while attacking if it's an enemy unit.",
+        "ultimate": false
+      },
+      {
+        "slug": "phantom_assassin_fan_of_knives",
+        "name": "Fan of Knives",
+        "desc": "Phantom Assassin releases sharp blades around her, dealing a percentage of each victim's max health on impact.",
+        "ultimate": false
+      },
+      {
+        "slug": "phantom_assassin_coup_de_grace",
+        "name": "Coup de Grace",
+        "desc": "Phantom Assassin refines her combat abilities, gaining a chance with each attack to land a guaranteed critical hit.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "gyrocopter",
@@ -1740,7 +3586,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "gyrocopter_rocket_barrage",
+        "name": "Rocket Barrage",
+        "desc": "Launches a salvo of rockets at nearby enemy units in a radius around the Gyrocopter.",
+        "ultimate": false
+      },
+      {
+        "slug": "gyrocopter_homing_missile",
+        "name": "Homing Missile",
+        "desc": "Fires a homing missile to seek the targeted enemy unit, dealing damage and stunning when it impacts.",
+        "ultimate": false
+      },
+      {
+        "slug": "gyrocopter_flak_cannon",
+        "name": "Flak Cannon",
+        "desc": "Gyrocopter's attacks hit all enemy units in an area around it for a limited number of attacks.",
+        "ultimate": false
+      },
+      {
+        "slug": "gyrocopter_call_down",
+        "name": "Call Down",
+        "desc": "Call down aerial missile strikes that slow and damage enemy units in a target area.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "rubick",
@@ -1764,7 +3636,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "rubick_telekinesis",
+        "name": "Telekinesis",
+        "desc": "Rubick lifts an enemy into the air and hurls them to the ground, stunning nearby enemies on landing.",
+        "ultimate": false
+      },
+      {
+        "slug": "rubick_fade_bolt",
+        "name": "Fade Bolt",
+        "desc": "Creates a stream of arcane energy that jumps between enemies, dealing damage and reducing their attack and spell damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "rubick_arcane_supremacy",
+        "name": "Arcane Supremacy",
+        "desc": "Rubick's mastery of the arcane grants him a larger cast range and bonus spell amplification.",
+        "ultimate": false
+      },
+      {
+        "slug": "rubick_spell_steal",
+        "name": "Spell Steal",
+        "desc": "Rubick learns the secrets of the last spell an enemy hero cast, and can use it as his own.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "luna",
@@ -1787,7 +3685,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "luna_lucent_beam",
+        "name": "Lucent Beam",
+        "desc": "Calls a beam of lunar energy down upon an enemy, damaging and briefly stunning them.",
+        "ultimate": false
+      },
+      {
+        "slug": "luna_lunar_orbit",
+        "name": "Lunar Orbit",
+        "desc": "Creates glaives that rotate around Luna. Any enemy unit that collides with a glaive takes damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "luna_moon_glaive",
+        "name": "Moon Glaives",
+        "desc": "Empowers Luna's glaives, causing her attacks to bounce between enemy units, dealing less damage with each bounce.",
+        "ultimate": false
+      },
+      {
+        "slug": "luna_eclipse",
+        "name": "Eclipse",
+        "desc": "Showers random nearby enemies with strikes from Luna's current level of Lucent Beam, and turns day into night for a short time.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "disruptor",
@@ -1811,7 +3735,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "disruptor_thunder_strike",
+        "name": "Thunder Strike",
+        "desc": "Repeatedly strikes the targeted unit with lightning, damaging nearby enemies and slowing movement and attack speed.",
+        "ultimate": false
+      },
+      {
+        "slug": "disruptor_glimpse",
+        "name": "Glimpse",
+        "desc": "Teleports the target hero back to where it was a few seconds ago, instantly killing illusions.",
+        "ultimate": false
+      },
+      {
+        "slug": "disruptor_kinetic_field",
+        "name": "Kinetic Field",
+        "desc": "After a short formation time, creates a circular barrier of kinetic energy that enemies can't pass.",
+        "ultimate": false
+      },
+      {
+        "slug": "disruptor_static_storm",
+        "name": "Static Storm",
+        "desc": "Creates a damaging static storm that also silences all enemy units in the area for the duration.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "templar-assassin",
@@ -1833,7 +3783,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "templar_assassin_refraction",
+        "name": "Refraction",
+        "desc": "Templar Assassin becomes highly elusive, gaining a small barrier and bonus to her damage for a limited number of instances.",
+        "ultimate": false
+      },
+      {
+        "slug": "templar_assassin_meld",
+        "name": "Meld",
+        "desc": "Templar Assassin conceals herself, becoming invisible as long as she remains still, dealing bonus damage when broken by an attack.",
+        "ultimate": false
+      },
+      {
+        "slug": "templar_assassin_psi_blades",
+        "name": "Psi Blades",
+        "desc": "Templar Assassin's psi blades slice through the attacked unit, splitting and damaging enemy units directly behind it.",
+        "ultimate": false
+      },
+      {
+        "slug": "templar_assassin_psionic_trap",
+        "name": "Psionic Trap",
+        "desc": "Templar Assassin places mystical traps that invisibly monitor enemy movement, exerting a slowing influence when sprung.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "naga-siren",
@@ -1859,7 +3835,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "naga_siren_mirror_image",
+        "name": "Mirror Image",
+        "desc": "Creates multiple images of Naga Siren under her control.",
+        "ultimate": false
+      },
+      {
+        "slug": "naga_siren_ensnare",
+        "name": "Ensnare",
+        "desc": "Interrupts the target and traps them in place, preventing movement or blinking.",
+        "ultimate": false
+      },
+      {
+        "slug": "naga_siren_rip_tide",
+        "name": "Rip Tide",
+        "desc": "Naga Siren and her illusions deal bonus damage to enemies and reduce their armor every few attacks.",
+        "ultimate": false
+      },
+      {
+        "slug": "naga_siren_song_of_the_siren",
+        "name": "Song of the Siren",
+        "desc": "All enemies in range are put into a magical stasis where they cannot act or be attacked.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "nyx-assassin",
@@ -1884,7 +3886,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "nyx_assassin_impale",
+        "name": "Impale",
+        "desc": "Rock spikes burst from the earth along a straight path, damaging enemies then hurling them into the air and stunning.",
+        "ultimate": false
+      },
+      {
+        "slug": "nyx_assassin_jolt",
+        "name": "Mind Flare",
+        "desc": "Deals damage equal to a percentage of the target's Max Mana and burns part of it away.",
+        "ultimate": false
+      },
+      {
+        "slug": "nyx_assassin_spiked_carapace",
+        "name": "Spiked Carapace",
+        "desc": "Reflects and negates damage dealt to Nyx Assassin, stunning the source of the damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "nyx_assassin_vendetta",
+        "name": "Vendetta",
+        "desc": "Nyx Assassin becomes invisible and gains a speed bonus; breaking invisibility with an attack deals massive bonus damage.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "keeper-of-the-light",
@@ -1907,7 +3935,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "keeper_of_the_light_illuminate",
+        "name": "Illuminate",
+        "desc": "CHANNELED - Channels light energy, then releases a wave that deals damage and gives vision in its path.",
+        "ultimate": false
+      },
+      {
+        "slug": "keeper_of_the_light_blinding_light",
+        "name": "Blinding Light",
+        "desc": "A blinding light flashes over the targeted area, knocking back units and blinding them.",
+        "ultimate": false
+      },
+      {
+        "slug": "keeper_of_the_light_chakra_magic",
+        "name": "Chakra Magic",
+        "desc": "Restores mana to the target unit and reduces cooldowns of all basic abilities currently on cooldown.",
+        "ultimate": false
+      },
+      {
+        "slug": "keeper_of_the_light_spirit_form",
+        "name": "Spirit Form",
+        "desc": "Ezalor turns luminescent, gaining cast range and letting Illuminate be channeled by a separate spirit to heal allies.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "phoenix",
@@ -1932,7 +3986,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "phoenix_icarus_dive",
+        "name": "Icarus Dive",
+        "desc": "Phoenix dives forward in an arc, damaging and slowing units it touches before orbiting back to its original position.",
+        "ultimate": false
+      },
+      {
+        "slug": "phoenix_fire_spirits",
+        "name": "Fire Spirits",
+        "desc": "Summons fire spirits that circle Phoenix and can be launched independently to damage and slow enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "phoenix_sun_ray",
+        "name": "Sun Ray",
+        "desc": "Phoenix expels a beam of light at the cost of its own health, damaging enemies and healing allies.",
+        "ultimate": false
+      },
+      {
+        "slug": "phoenix_supernova",
+        "name": "Supernova",
+        "desc": "Phoenix transforms into a burning sun that scorches enemies, then explodes to stun nearby enemies and fully restore itself.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "magnus",
@@ -1956,7 +4036,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "magnataur_shockwave",
+        "name": "Shockwave",
+        "desc": "Magnus sends out a wave of force, damaging enemy units in a line, pulling them towards him, and slowing them.",
+        "ultimate": false
+      },
+      {
+        "slug": "magnataur_empower",
+        "name": "Empower",
+        "desc": "Grants an ally bonus damage and cleave on attack; always active on Magnus himself with a larger bonus.",
+        "ultimate": false
+      },
+      {
+        "slug": "magnataur_skewer",
+        "name": "Skewer",
+        "desc": "Magnus rushes forward, goring enemy units on his tusk and dragging heroes hit to the destination.",
+        "ultimate": false
+      },
+      {
+        "slug": "magnataur_reverse_polarity",
+        "name": "Reverse Polarity",
+        "desc": "Magnus pulls all nearby enemies in front of him and stuns them with a damaging slam.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "centaur-warrunner",
@@ -1981,7 +4087,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "centaur_hoof_stomp",
+        "name": "Hoof Stomp",
+        "desc": "After a brief windup, Centaur slams the ground, stunning and damaging nearby enemy units.",
+        "ultimate": false
+      },
+      {
+        "slug": "centaur_double_edge",
+        "name": "Double Edge",
+        "desc": "Centaur strikes a mighty blow at melee range, damaging both himself and a small area around the target.",
+        "ultimate": false
+      },
+      {
+        "slug": "centaur_return",
+        "name": "Retaliate",
+        "desc": "Centaur counters all attacks, dealing damage back to the attacker.",
+        "ultimate": false
+      },
+      {
+        "slug": "centaur_stampede",
+        "name": "Stampede",
+        "desc": "Centaur leads all allies into a vicious charge, trampling and slowing any enemy units in the path.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "timbersaw",
@@ -2004,7 +4136,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "shredder_whirling_death",
+        "name": "Whirling Death",
+        "desc": "Timbersaw whirls sharp edges, damaging enemies and destroying trees around him, dealing bonus damage per tree destroyed.",
+        "ultimate": false
+      },
+      {
+        "slug": "shredder_timber_chain",
+        "name": "Timber Chain",
+        "desc": "Timbersaw fires a chain that embeds in the first tree it hits, pulling him towards it and damaging enemies in the path.",
+        "ultimate": false
+      },
+      {
+        "slug": "shredder_reactive_armor",
+        "name": "Reactive Armor",
+        "desc": "Each time Timbersaw is attacked, he gains increased health regen and armor.",
+        "ultimate": false
+      },
+      {
+        "slug": "shredder_chakram",
+        "name": "Chakram",
+        "desc": "Fires Timbersaw's main saw blade at the target location where it spins in place, dealing damage in an area around it.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "medusa",
@@ -2028,7 +4186,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "medusa_split_shot",
+        "name": "Split Shot",
+        "desc": "Medusa magically splits her shot into several arrows, each dealing a lower percent of her normal damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "medusa_mystic_snake",
+        "name": "Mystic Snake",
+        "desc": "A mystic snake jumps from target to target dealing damage, then returns to Medusa to replenish her mana.",
+        "ultimate": false
+      },
+      {
+        "slug": "medusa_gorgon_grasp",
+        "name": "Gorgon's Grasp",
+        "desc": "Medusa fires arrows in a line that root and reveal enemies struck, dealing damage over time.",
+        "ultimate": false
+      },
+      {
+        "slug": "medusa_stone_gaze",
+        "name": "Stone Gaze",
+        "desc": "Enemies looking at Medusa are slowed, and can be turned to stone and stunned if they look long enough.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "troll-warlord",
@@ -2053,7 +4237,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "troll_warlord_whirling_axes_ranged",
+        "name": "Whirling Axes (Ranged)",
+        "desc": "Troll hurls a fistful of axes in a cone shape, slowing and damaging enemy units.",
+        "ultimate": false
+      },
+      {
+        "slug": "troll_warlord_fervor",
+        "name": "Fervor",
+        "desc": "With each continuous blow on the same target, Troll gains increased attack speed.",
+        "ultimate": false
+      },
+      {
+        "slug": "troll_warlord_berserkers_rage",
+        "name": "Berserker's Rage",
+        "desc": "Troll's attacks have a chance to ensnare or maim depending on his form, slowing or immobilizing the target.",
+        "ultimate": false
+      },
+      {
+        "slug": "troll_warlord_battle_trance",
+        "name": "Battle Trance",
+        "desc": "Troll unleashes a powerful battle trance, forcing continuous attacks and granting bonus lifesteal and attack speed.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "tusk",
@@ -2077,7 +4287,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "tusk_ice_shards",
+        "name": "Ice Shards",
+        "desc": "Tusk launches a ball of frozen energy that damages enemies and creates a barrier where it lands.",
+        "ultimate": false
+      },
+      {
+        "slug": "tusk_snowball",
+        "name": "Snowball",
+        "desc": "Tusk rolls into a snowball that allies can join, stunning and damaging enemies caught in its path when launched.",
+        "ultimate": false
+      },
+      {
+        "slug": "tusk_walrus_kick",
+        "name": "Walrus Kick",
+        "desc": "Kicks the closest enemy unit in the drawn direction, stunning, damaging, and slowing them.",
+        "ultimate": false
+      },
+      {
+        "slug": "tusk_walrus_punch",
+        "name": "Walrus PUNCH!",
+        "desc": "Tusk connects with a mighty critical strike so powerful it launches its victim into the air.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "bristleback",
@@ -2101,7 +4337,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "bristleback_viscous_nasal_goo",
+        "name": "Viscous Nasal Goo",
+        "desc": "Covers a target in snot, reducing armor and movement speed; stacks and refreshes with multiple casts.",
+        "ultimate": false
+      },
+      {
+        "slug": "bristleback_quill_spray",
+        "name": "Quill Spray",
+        "desc": "Sprays enemy units with quills, dealing damage in an area around Bristleback.",
+        "ultimate": false
+      },
+      {
+        "slug": "bristleback_bristleback",
+        "name": "Bristleback",
+        "desc": "Bristleback takes less damage if hit on the sides or rear, and releases a Quill Spray if hit enough from behind.",
+        "ultimate": false
+      },
+      {
+        "slug": "bristleback_warpath",
+        "name": "Warpath",
+        "desc": "Bristleback works himself up into a fury every time he casts a spell, increasing his movement speed and damage.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "skywrath-mage",
@@ -2124,7 +4386,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "skywrath_mage_arcane_bolt",
+        "name": "Arcane Bolt",
+        "desc": "Skywrath Mage launches a slow-moving bolt of arcane magic, dealing damage based on his intelligence.",
+        "ultimate": false
+      },
+      {
+        "slug": "skywrath_mage_concussive_shot",
+        "name": "Concussive Shot",
+        "desc": "A long range shot that hits the closest hero, dealing damage and slowing in an area of effect.",
+        "ultimate": false
+      },
+      {
+        "slug": "skywrath_mage_ancient_seal",
+        "name": "Ancient Seal",
+        "desc": "Seals the targeted unit with an ancient rune, silencing it and causing it to take additional spell damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "skywrath_mage_mystic_flare",
+        "name": "Mystic Flare",
+        "desc": "Conjures a violent mystical field that deals massive damage distributed among any Heroes in the area.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "abaddon",
@@ -2147,7 +4435,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "abaddon_death_coil",
+        "name": "Mist Coil",
+        "desc": "Abaddon releases a coil of deathly mist that can damage an enemy unit or heal a friendly unit at the cost of some of Abaddon's health.",
+        "ultimate": false
+      },
+      {
+        "slug": "abaddon_aphotic_shield",
+        "name": "Aphotic Shield",
+        "desc": "Summons dark energies around an ally, creating a barrier that absorbs damage before bursting to damage nearby enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "abaddon_frostmourne",
+        "name": "Curse of Avernus",
+        "desc": "Abaddon strikes an enemy with a chilling curse, slowing them and dealing damage over time.",
+        "ultimate": false
+      },
+      {
+        "slug": "abaddon_borrowed_time",
+        "name": "Borrowed Time",
+        "desc": "When activated, all damage dealt to Abaddon heals him instead of harming him.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "earth-spirit",
@@ -2172,7 +4486,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "earth_spirit_boulder_smash",
+        "name": "Boulder Smash",
+        "desc": "Earth Spirit smashes a target or Stone Remnant, sending it flying and damaging enemies it hits.",
+        "ultimate": false
+      },
+      {
+        "slug": "earth_spirit_rolling_boulder",
+        "name": "Rolling Boulder",
+        "desc": "Earth Spirit gathers into a boulder and rolls toward the target location, damaging and stunning enemy units.",
+        "ultimate": false
+      },
+      {
+        "slug": "earth_spirit_geomagnetic_grip",
+        "name": "Geomagnetic Grip",
+        "desc": "Earth Spirit pulls a Stone Remnant or allied unit, silencing enemies struck by the gripped target.",
+        "ultimate": false
+      },
+      {
+        "slug": "earth_spirit_magnetize",
+        "name": "Magnetize",
+        "desc": "Magnetizes nearby units, dealing damage over time; magnetized heroes trigger nearby Stone Remnants to explode.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "ember-spirit",
@@ -2197,7 +4537,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "ember_spirit_searing_chains",
+        "name": "Searing Chains",
+        "desc": "Ember Spirit unleashes fiery bolas that wrap around nearby enemies, anchoring them in place and dealing damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "ember_spirit_sleight_of_fist",
+        "name": "Sleight of Fist",
+        "desc": "Ember Spirit dashes around, attacking all enemies in the targeted area before returning to his start location.",
+        "ultimate": false
+      },
+      {
+        "slug": "ember_spirit_flame_guard",
+        "name": "Flame Guard",
+        "desc": "Ember Spirit surrounds himself with a ring of fire that consumes incoming magic damage and damages nearby enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "ember_spirit_fire_remnant",
+        "name": "Fire Remnant",
+        "desc": "Sends a Fire Remnant that Ember Spirit can dash to later, destroying it and dealing damage in an area.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "legion-commander",
@@ -2222,7 +4588,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "legion_commander_overwhelming_odds",
+        "name": "Overwhelming Odds",
+        "desc": "Deals a slow and damage to all enemies in the area; damage increases with each enemy unit or hero present.",
+        "ultimate": false
+      },
+      {
+        "slug": "legion_commander_press_the_attack",
+        "name": "Press The Attack",
+        "desc": "Removes debuffs and disables from a friendly unit, granting bonus movement speed and health regen.",
+        "ultimate": false
+      },
+      {
+        "slug": "legion_commander_moment_of_courage",
+        "name": "Moment of Courage",
+        "desc": "When attacked a number of times, Legion Commander counter-attacks her target with bonus lifesteal.",
+        "ultimate": false
+      },
+      {
+        "slug": "legion_commander_duel",
+        "name": "Duel",
+        "desc": "Legion Commander and the target enemy hero are forced to attack each other; the winner gains permanent bonus damage.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "terrorblade",
@@ -2245,7 +4637,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "terrorblade_reflection",
+        "name": "Reflection",
+        "desc": "Brings forth an invulnerable dark reflection of enemy heroes in a target area, slowing and attacking them.",
+        "ultimate": false
+      },
+      {
+        "slug": "terrorblade_conjure_image",
+        "name": "Conjure Image",
+        "desc": "Creates an illusion of Terrorblade that deals damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "terrorblade_metamorphosis",
+        "name": "Metamorphosis",
+        "desc": "Terrorblade transforms into a powerful demon with a ranged attack, also transforming nearby illusions.",
+        "ultimate": false
+      },
+      {
+        "slug": "terrorblade_sunder",
+        "name": "Sunder",
+        "desc": "Severs the life from both Terrorblade and a target hero, exchanging a percentage of both units' current health.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "techies",
@@ -2267,7 +4685,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "techies_sticky_bomb",
+        "name": "Sticky Bomb",
+        "desc": "Lobs a bomb that sticks to a nearby enemy hero, slowing them before exploding to deal area damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "techies_reactive_tazer",
+        "name": "Reactive Tazer",
+        "desc": "Triggers an electric charge on an ally, damaging and disarming enemies that attack them.",
+        "ultimate": false
+      },
+      {
+        "slug": "techies_suicide",
+        "name": "Blast Off!",
+        "desc": "Techies hurtle themselves into the enemy's midst, detonating charges that deal massive area damage and stun enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "techies_land_mines",
+        "name": "Proximity Mines",
+        "desc": "Plants invisible mines that detonate when an enemy stands nearby, dealing damage and reducing magic resistance.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "oracle",
@@ -2291,7 +4735,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "oracle_fortunes_end",
+        "name": "Fortune's End",
+        "desc": "CHANNELED - Releases a bolt of energy that damages, roots, and dispels buffs from enemies in an area.",
+        "ultimate": false
+      },
+      {
+        "slug": "oracle_fates_edict",
+        "name": "Fate's Edict",
+        "desc": "Oracle enraptures a target, disarming them and granting them bonus magic damage resistance.",
+        "ultimate": false
+      },
+      {
+        "slug": "oracle_purifying_flames",
+        "name": "Purifying Flames",
+        "desc": "Deals heavy magic damage to the target before causing them to regenerate health over time.",
+        "ultimate": false
+      },
+      {
+        "slug": "oracle_false_promise",
+        "name": "False Promise",
+        "desc": "Delays any healing or damage taken by an ally until the effect ends, amplifying delayed healing.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "winter-wyvern",
@@ -2314,7 +4784,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "winter_wyvern_arctic_burn",
+        "name": "Arctic Burn",
+        "desc": "Winter Wyvern soars upon an arctic wind, her attacks traveling further and slowing enemies with a draining chill.",
+        "ultimate": false
+      },
+      {
+        "slug": "winter_wyvern_splinter_blast",
+        "name": "Splinter Blast",
+        "desc": "Launches a ball of ice that shatters on impact, hurling damaging, slowing splinters into nearby enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "winter_wyvern_cold_embrace",
+        "name": "Cold Embrace",
+        "desc": "Encases an ally in an icy cocoon, healing them over time and blocking all physical damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "winter_wyvern_winters_curse",
+        "name": "Winter's Curse",
+        "desc": "Freezes an enemy in place while cursing nearby enemies to attack them, all immune to other damage during the curse.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "arc-warden",
@@ -2337,7 +4833,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "arc_warden_flux",
+        "name": "Flux",
+        "desc": "Infuses a lone enemy unit with volatile energy, dealing damage over time and slowing the target.",
+        "ultimate": false
+      },
+      {
+        "slug": "arc_warden_magnetic_field",
+        "name": "Magnetic Field",
+        "desc": "Generates a distortion field granting bonus attack speed and evasion to allies within it.",
+        "ultimate": false
+      },
+      {
+        "slug": "arc_warden_spark_wraith",
+        "name": "Spark Wraith",
+        "desc": "Summons a wraith that patrols an area until an enemy comes near, then fuses with them to deal damage and slow.",
+        "ultimate": false
+      },
+      {
+        "slug": "arc_warden_tempest_double",
+        "name": "Tempest Double",
+        "desc": "Creates a perfect electrical duplicate of Arc Warden that can use all of his current items and spells.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "underlord",
@@ -2362,7 +4884,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "abyssal_underlord_firestorm",
+        "name": "Firestorm",
+        "desc": "Calls down waves of fire that damage enemy units in the target area, burning for additional damage over time.",
+        "ultimate": false
+      },
+      {
+        "slug": "abyssal_underlord_pit_of_malice",
+        "name": "Pit of Malice",
+        "desc": "A deadly pit is conjured at the target location; any unit that enters is damaged and rooted.",
+        "ultimate": false
+      },
+      {
+        "slug": "abyssal_underlord_atrophy_aura",
+        "name": "Atrophy Aura",
+        "desc": "Nearby enemy units are weakened, losing a portion of their base damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "abyssal_underlord_dark_portal",
+        "name": "Fiend's Gate",
+        "desc": "Opens two portals that heroes can channel to teleport between.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "grimstroke",
@@ -2386,7 +4934,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "grimstroke_dark_artistry",
+        "name": "Stroke of Fate",
+        "desc": "Paints a curved path of ink, damaging and slowing enemies; damage increases with each enemy hit.",
+        "ultimate": false
+      },
+      {
+        "slug": "grimstroke_ink_creature",
+        "name": "Phantom's Embrace",
+        "desc": "Summons a phantom that latches onto the target, damaging and silencing it, then rends it for heavy damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "grimstroke_spirit_walk",
+        "name": "Ink Swell",
+        "desc": "Shrouds an ally in ink, granting speed and damaging nearby enemies over time before stunning them.",
+        "ultimate": false
+      },
+      {
+        "slug": "grimstroke_soul_chain",
+        "name": "Soulbind",
+        "desc": "Binds an enemy hero to its nearest ally, preventing both from moving apart; shared abilities affect both.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "mars",
@@ -2410,7 +4984,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "mars_spear",
+        "name": "Spear of Mars",
+        "desc": "Throws a spear that damages enemies in a line and skewers the first hero hit, impaling them against obstacles.",
+        "ultimate": false
+      },
+      {
+        "slug": "mars_gods_rebuke",
+        "name": "God's Rebuke",
+        "desc": "Smashes enemies in front of him with his shield, knocking them back and dealing a critical hit.",
+        "ultimate": false
+      },
+      {
+        "slug": "mars_bulwark",
+        "name": "Bulwark",
+        "desc": "Blocks a portion of physical attacks from the front or sides; can toggle for phased movement.",
+        "ultimate": false
+      },
+      {
+        "slug": "mars_arena_of_blood",
+        "name": "Arena Of Blood",
+        "desc": "Summons an arena of undead warriors that block movement and attack enemies near its edge.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "undying",
@@ -2435,7 +5035,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "undying_decay",
+        "name": "Decay",
+        "desc": "Undying steals strength from all enemy heroes in an area, dealing damage as he claims it for himself.",
+        "ultimate": false
+      },
+      {
+        "slug": "undying_soul_rip",
+        "name": "Soul Rip",
+        "desc": "Undying rips health from nearby units and uses it to heal an ally or damage an enemy.",
+        "ultimate": false
+      },
+      {
+        "slug": "undying_tombstone",
+        "name": "Tombstone",
+        "desc": "Summons a tombstone that spawns zombies to attack nearby enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "undying_flesh_golem",
+        "name": "Flesh Golem",
+        "desc": "Undying transforms into a horrifying flesh golem, gaining strength, speed, and slowing/damage-amplifying attacks.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "invoker",
@@ -2460,7 +5086,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "invoker_quas",
+        "name": "Quas",
+        "desc": "Allows manipulation of ice elements, granting bonus hp regeneration and strength.",
+        "ultimate": false
+      },
+      {
+        "slug": "invoker_wex",
+        "name": "Wex",
+        "desc": "Allows manipulation of storm elements, granting bonus movement and attack speed and agility.",
+        "ultimate": false
+      },
+      {
+        "slug": "invoker_exort",
+        "name": "Exort",
+        "desc": "Allows manipulation of fire elements, granting bonus attack damage and intelligence.",
+        "ultimate": false
+      },
+      {
+        "slug": "invoker_sun_strike",
+        "name": "Sun Strike",
+        "desc": "Sends a catastrophic ray of energy from the sun at a targeted location, incinerating enemies standing beneath it.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "clinkz",
@@ -2483,7 +5135,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "clinkz_strafe",
+        "name": "Strafe",
+        "desc": "Clinkz gains attack speed and bonus attack range, sharing some of the bonus with nearby Skeleton Archers.",
+        "ultimate": false
+      },
+      {
+        "slug": "clinkz_searing_arrows",
+        "name": "Searing Arrows",
+        "desc": "Imbues Clinkz's arrows with fire for extra damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "clinkz_death_pact",
+        "name": "Death Pact",
+        "desc": "Clinkz consumes the target enemy creep or friendly Skeleton Archer, healing and gaining max health.",
+        "ultimate": false
+      },
+      {
+        "slug": "clinkz_wind_walk",
+        "name": "Skeleton Walk",
+        "desc": "Clinkz moves invisibly through units until he attacks or uses items, leaving Skeleton Archers behind.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "elder-titan",
@@ -2508,7 +5186,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "elder_titan_echo_stomp",
+        "name": "Echo Stomp",
+        "desc": "CHANNELED - Elder Titan and his Astral Spirit both stomp the ground, damaging and knocking nearby enemy units unconscious.",
+        "ultimate": false
+      },
+      {
+        "slug": "elder_titan_ancestral_spirit",
+        "name": "Astral Spirit",
+        "desc": "Elder Titan sends forth his Astral Spirit, damaging units it passes through and granting bonus damage and speed on return.",
+        "ultimate": false
+      },
+      {
+        "slug": "elder_titan_natural_order",
+        "name": "Natural Order",
+        "desc": "Reduces all elements to their basic levels, removing base armor and magic resistance from nearby enemy units.",
+        "ultimate": false
+      },
+      {
+        "slug": "elder_titan_earth_splitter",
+        "name": "Earth Splitter",
+        "desc": "Sends a jagged crack in front of Elder Titan that implodes, slowing movement and dealing damage based on max life.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "pangolier",
@@ -2534,7 +5238,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "pangolier_swashbuckle",
+        "name": "Swashbuckle",
+        "desc": "Pangolier dashes along the target line, slashing and briefly slowing all enemies in the drawn direction.",
+        "ultimate": false
+      },
+      {
+        "slug": "pangolier_shield_crash",
+        "name": "Shield Crash",
+        "desc": "Pangolier slams back to the ground, damaging nearby enemies and gaining a damage barrier if it hits a hero.",
+        "ultimate": false
+      },
+      {
+        "slug": "pangolier_lucky_shot",
+        "name": "Lucky Shot",
+        "desc": "Grants a chance to drastically slow attack speed and reduce armor on any damage Pangolier deals.",
+        "ultimate": false
+      },
+      {
+        "slug": "pangolier_gyroshell",
+        "name": "Rolling Thunder",
+        "desc": "Pangolier curls into a debuff-immune ball and rolls out at increased speed, knocking back and stunning enemies struck.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "slark",
@@ -2558,7 +5288,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "slark_dark_pact",
+        "name": "Dark Pact",
+        "desc": "Slark purges most negative debuffs and deals damage to enemy units around him and to himself.",
+        "ultimate": false
+      },
+      {
+        "slug": "slark_pounce",
+        "name": "Pounce",
+        "desc": "Slark leaps forward, leashing the first hero he connects with and applying Essence Shift stacks.",
+        "ultimate": false
+      },
+      {
+        "slug": "slark_saltwater_shiv",
+        "name": "Saltwater Shiv",
+        "desc": "Slark slices the target, stealing a portion of their movement speed and health regen.",
+        "ultimate": false
+      },
+      {
+        "slug": "slark_shadow_dance",
+        "name": "Shadow Dance",
+        "desc": "When not visible to the enemy, Slark gains bonus movement speed and health regen; can also hide in a cloud of shadows.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "dark-willow",
@@ -2582,7 +5338,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "dark_willow_bramble_maze",
+        "name": "Bramble Maze",
+        "desc": "Creates a maze of brambles that root and deal damage over time to enemies who walk into them.",
+        "ultimate": false
+      },
+      {
+        "slug": "dark_willow_shadow_realm",
+        "name": "Shadow Realm",
+        "desc": "Dark Willow recedes into the shadows, becoming untargetable; her next attack deals bonus magic damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "dark_willow_cursed_crown",
+        "name": "Cursed Crown",
+        "desc": "Casts an ancient fae curse that stuns the target and nearby enemies after a delay.",
+        "ultimate": false
+      },
+      {
+        "slug": "dark_willow_bedlam",
+        "name": "Bedlam",
+        "desc": "Sends her pet wisp to roam around herself, rapidly attacking nearby enemies.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "dark-seer",
@@ -2605,7 +5387,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "dark_seer_vacuum",
+        "name": "Vacuum",
+        "desc": "Dark Seer creates a vacuum over the target area that sucks in enemy units, disrupting them and dealing damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "dark_seer_ion_shell",
+        "name": "Ion Shell",
+        "desc": "Surrounds the target unit with a bristling shield that damages enemy units in an area around it.",
+        "ultimate": false
+      },
+      {
+        "slug": "dark_seer_surge",
+        "name": "Surge",
+        "desc": "Charges a target friendly unit with power, giving it a brief burst of phased, unslowable movement speed.",
+        "ultimate": false
+      },
+      {
+        "slug": "dark_seer_wall_of_replica",
+        "name": "Wall of Replica",
+        "desc": "Raises a wall of warping light that slows, damages, and creates replicas of any enemy hero who crosses it.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "phantom-lancer",
@@ -2629,7 +5437,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "phantom_lancer_spirit_lance",
+        "name": "Spirit Lance",
+        "desc": "Sends a magical spirit lance to a target enemy unit that damages and slows, while summoning an illusory phantom to attack the unit.",
+        "ultimate": false
+      },
+      {
+        "slug": "phantom_lancer_doppelwalk",
+        "name": "Doppelganger",
+        "desc": "Phantom Lancer briefly vanishes from the battlefield. After %delay% second, Phantom Lancer and any of his nearby illusions reappear at a random position within the targeted location, along with two additional doppelgangers. Extends duration of all illusions. The two added doppelgangers have different properties: one takes normal damage and deals none, while the other takes %illusion_2_damage_in_pct%%% bonus damage and deals %illusion_2_damage_out_pct%%% less damage.\n\nDISPEL TYPE: Basic Dispel",
+        "ultimate": false
+      },
+      {
+        "slug": "phantom_lancer_phantom_edge",
+        "name": "Phantom Rush",
+        "desc": "When targeting an enemy for an attack, Phantom Lancer quickly charges into range, gaining increased movement speed and evasion.",
+        "ultimate": false
+      },
+      {
+        "slug": "phantom_lancer_juxtapose",
+        "name": "Juxtapose",
+        "desc": "Phantom Lancer has a chance to fracture his presence on an attack, creating an illusion of himself. Illusions also have a chance to fracture further. Illusions created from Phantom Lancer last for %illusion_duration% seconds, while illusions created from other illusions last %illusion_from_illusion_duration% seconds.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "monkey-king",
@@ -2653,7 +5487,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "monkey_king_boundless_strike",
+        "name": "Boundless Strike",
+        "desc": "Monkey King slams his staff against the ground, stunning enemies in a line and dealing bonus critical damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "monkey_king_tree_dance",
+        "name": "Tree Dance",
+        "desc": "Monkey King jumps to a tree and perches atop it, gaining a channeled leap attack.",
+        "ultimate": false
+      },
+      {
+        "slug": "monkey_king_jingu_mastery",
+        "name": "Jingu Mastery",
+        "desc": "Monkey King's attacks build stacks that grant charged attacks with bonus damage and lifesteal.",
+        "ultimate": false
+      },
+      {
+        "slug": "monkey_king_wukongs_command",
+        "name": "Wukong's Command",
+        "desc": "Creates a circular formation of soldiers that attack enemy heroes; Monkey King can transform into one of them.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "void-spirit",
@@ -2677,7 +5537,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "void_spirit_aether_remnant",
+        "name": "Aether Remnant",
+        "desc": "Dispatches a remnant that pulls in and damages the first unit crossing its gaze.",
+        "ultimate": false
+      },
+      {
+        "slug": "void_spirit_dissimilate",
+        "name": "Dissimilate",
+        "desc": "Fades into the aether, creating portals to reassemble through; damages enemies on exit.",
+        "ultimate": false
+      },
+      {
+        "slug": "void_spirit_resonant_pulse",
+        "name": "Resonant Pulse",
+        "desc": "Wraps himself in a shield absorbing physical damage and emits a damaging pulse around him.",
+        "ultimate": false
+      },
+      {
+        "slug": "void_spirit_astral_step",
+        "name": "Astral Step",
+        "desc": "Tears through the astral plane to a target location, attacking enemies along the path and marking them.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "snapfire",
@@ -2702,7 +5588,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "snapfire_scatterblast",
+        "name": "Scatterblast",
+        "desc": "Unloads a wide blast that damages and slows enemies in a cone, stronger at point-blank range.",
+        "ultimate": false
+      },
+      {
+        "slug": "snapfire_firesnap_cookie",
+        "name": "Firesnap Cookie",
+        "desc": "Feeds a cookie to Mortimer or an ally, causing them to hop and stun enemies on landing.",
+        "ultimate": false
+      },
+      {
+        "slug": "snapfire_lil_shredder",
+        "name": "Lil' Shredder",
+        "desc": "Heats up her mounted turret to rapidly fire attacks that reduce enemy armor.",
+        "ultimate": false
+      },
+      {
+        "slug": "snapfire_mortimer_kisses",
+        "name": "Mortimer Kisses",
+        "desc": "Mortimer launches a barrage of firespit globs that damage and leave slowing pools of fire.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "silencer",
@@ -2728,7 +5640,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "silencer_curse_of_the_silent",
+        "name": "Arcane Curse",
+        "desc": "Curses the target area, dealing damage over time and slowing movement speed.",
+        "ultimate": false
+      },
+      {
+        "slug": "silencer_glaives_of_wisdom",
+        "name": "Glaives of Wisdom",
+        "desc": "Silencer enchants his glaives, stealing his target's Intelligence with each hit and dealing bonus damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "silencer_last_word",
+        "name": "Last Word",
+        "desc": "Enchants a target, damaging and silencing them if they cast a spell or when the enchantment expires.",
+        "ultimate": false
+      },
+      {
+        "slug": "silencer_global_silence",
+        "name": "Global Silence",
+        "desc": "Silencer stops all sound, preventing enemy heroes and units on the map from casting spells.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "visage",
@@ -2753,7 +5691,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "visage_grave_chill",
+        "name": "Grave Chill",
+        "desc": "Visage drains the movement and attack speed of the targeted unit, gaining the drained speed for itself.",
+        "ultimate": false
+      },
+      {
+        "slug": "visage_soul_assumption",
+        "name": "Soul Assumption",
+        "desc": "Visage gathers charges of soul essence as nearby heroes take damage, releasing them for a burst of damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "visage_gravekeepers_cloak",
+        "name": "Gravekeeper's Cloak",
+        "desc": "Visage generates a layered barrier that protects him and nearby Familiars from damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "visage_summon_familiars",
+        "name": "Summon Familiars",
+        "desc": "Conjures blind Familiars to fight for Visage, which can turn to stone to stun enemies and become invulnerable.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "vengeful-spirit",
@@ -2778,7 +5742,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "vengefulspirit_magic_missile",
+        "name": "Magic Missile",
+        "desc": "Fires a magic missile at an enemy unit, stunning and dealing damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "vengefulspirit_wave_of_terror",
+        "name": "Wave of Terror",
+        "desc": "Vengeful Spirit lets loose a wicked cry, weakening the total attack damage and armor of enemies, and giving vision of the path ahead.",
+        "ultimate": false
+      },
+      {
+        "slug": "vengefulspirit_command_aura",
+        "name": "Vengeance Aura",
+        "desc": "Vengeful Spirit's presence increases the damage of nearby friendly heroes. Vengeful Spirit herself receives %self_multiplier%%% extra bonus.",
+        "ultimate": false
+      },
+      {
+        "slug": "vengefulspirit_nether_swap",
+        "name": "Nether Swap",
+        "desc": "Instantaneously swaps positions with a target Hero, friend or enemy. Nether Swap interrupts channeling abilities on the target. Enemy Swapped units take damage. Vengeful Spirit and allied swapped units gain a barrier equal to the damage dealt.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "drow-ranger",
@@ -2801,7 +5791,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "drow_ranger_frost_arrows",
+        "name": "Frost Arrows",
+        "desc": "Adds a freezing effect to Drow's attacks, slowing enemy movement and dealing bonus damage.  Slow lasts %abilityduration% seconds.",
+        "ultimate": false
+      },
+      {
+        "slug": "drow_ranger_wave_of_silence",
+        "name": "Gust",
+        "desc": "Releases a wave that silences and knocks back and reveals invisible enemy units. Knockback distance is relative to how close they are to Drow.",
+        "ultimate": false
+      },
+      {
+        "slug": "drow_ranger_multishot",
+        "name": "Multishot",
+        "desc": "CHANNELED - Drow releases a flurry of arrows in continuous salvos, hitting enemies for extra damage and applying Frost Arrows with a range of Drow's Attack Range + %arrow_range_base%. Lasts up to %abilitychanneltime% seconds.<br><br>Drow can move slowly and use items while casting Multishot.",
+        "ultimate": false
+      },
+      {
+        "slug": "drow_ranger_marksmanship",
+        "name": "Marksmanship",
+        "desc": "Drow's experiences in battle grant her a chance to launch arrows with incredible accuracy and effectiveness. Pierces through the enemy's defenses, ignoring their base armor. This ability is disabled if there is an enemy hero within %disable_range% range.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "chaos-knight",
@@ -2826,7 +5842,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "chaos_knight_chaos_bolt",
+        "name": "Chaos Bolt",
+        "desc": "Throws a bolt of energy at the target unit, stunning for a random duration and dealing random damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "chaos_knight_reality_rift",
+        "name": "Reality Rift",
+        "desc": "Teleports Chaos Knight, his illusions, and the target to a point between them, reducing the target's armor.",
+        "ultimate": false
+      },
+      {
+        "slug": "chaos_knight_chaos_strike",
+        "name": "Chaos Strike",
+        "desc": "Chaos Knight and his illusions gain a chance to deal a critical strike with bonus lifesteal.",
+        "ultimate": false
+      },
+      {
+        "slug": "chaos_knight_phantasm",
+        "name": "Phantasm",
+        "desc": "Summons several phantasmal copies of Chaos Knight that deal reduced damage but also take more.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "io",
@@ -2849,7 +5891,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "wisp_tether",
+        "name": "Tether",
+        "desc": "Tethers Io to an allied unit, granting bonus movement speed to both and sharing healing.",
+        "ultimate": false
+      },
+      {
+        "slug": "wisp_spirits",
+        "name": "Spirits",
+        "desc": "Summons particle spirits that dance around Io and explode on colliding with an enemy hero.",
+        "ultimate": false
+      },
+      {
+        "slug": "wisp_overcharge",
+        "name": "Overcharge",
+        "desc": "Io gains attack speed, spell amplification, and health regeneration, sharing bonuses with a tethered ally.",
+        "ultimate": false
+      },
+      {
+        "slug": "wisp_relocate",
+        "name": "Relocate",
+        "desc": "Teleports Io and a tethered ally to any location, returning to the original location when the spell expires.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "meepo",
@@ -2875,7 +5943,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "meepo_earthbind",
+        "name": "Earthbind",
+        "desc": "Tosses a net at the target point, rooting down all enemy units in an area around it.",
+        "ultimate": false
+      },
+      {
+        "slug": "meepo_poof",
+        "name": "Poof",
+        "desc": "A Meepo teleports to another Meepo or itself after a short channel, damaging enemies at both ends.",
+        "ultimate": false
+      },
+      {
+        "slug": "meepo_ransack",
+        "name": "Ransack",
+        "desc": "Steals health from the enemy with each strike and heals all other Meepos for that amount.",
+        "ultimate": false
+      },
+      {
+        "slug": "meepo_divided_we_stand",
+        "name": "Divided We Stand",
+        "desc": "Meepo summons another Meepo that shares items and experience with the main Meepo; if any dies, they all die.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "hoodwink",
@@ -2899,7 +5993,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "hoodwink_acorn_shot",
+        "name": "Acorn Shot",
+        "desc": "Fires an acorn attack that bounces to nearby targets, slowing them and dealing bonus damage.",
+        "ultimate": false
+      },
+      {
+        "slug": "hoodwink_bushwhack",
+        "name": "Bushwhack",
+        "desc": "Tosses a net trap that stuns enemies near a tree, dealing damage over time and reducing vision.",
+        "ultimate": false
+      },
+      {
+        "slug": "hoodwink_scurry",
+        "name": "Scurry",
+        "desc": "Gains bonus movement speed, phased movement, and tree-walking for a brief time.",
+        "ultimate": false
+      },
+      {
+        "slug": "hoodwink_sharpshooter",
+        "name": "Sharpshooter",
+        "desc": "Charges up and fires a deadly bolt dealing heavy damage, break, and slow to an enemy hero.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "dawnbreaker",
@@ -2921,7 +6041,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "dawnbreaker_fire_wreath",
+        "name": "Starbreaker",
+        "desc": "Whirls her hammer 3 times, damaging enemies, then smashes it down to stun and damage those in front.",
+        "ultimate": false
+      },
+      {
+        "slug": "dawnbreaker_celestial_hammer",
+        "name": "Celestial Hammer",
+        "desc": "Hurls her weapon at a target, then it flies back leaving a slowing trail of fire; can recall it early.",
+        "ultimate": false
+      },
+      {
+        "slug": "dawnbreaker_luminosity",
+        "name": "Luminosity",
+        "desc": "After a number of attacks, charges a critical hit that heals nearby allies for a portion of damage dealt.",
+        "ultimate": false
+      },
+      {
+        "slug": "dawnbreaker_solar_guardian",
+        "name": "Solar Guardian",
+        "desc": "CHANNELED - Creates pulses near an allied hero that damage enemies and heal allies, then flies there to stun on landing.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "marci",
@@ -2946,7 +6092,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "marci_grapple",
+        "name": "Dispose",
+        "desc": "Grabs a unit and throws it behind her, damaging and slowing enemies in the landing area.",
+        "ultimate": false
+      },
+      {
+        "slug": "marci_companion_run",
+        "name": "Rebound",
+        "desc": "Bounds to an allied unit then springs away, lunging to her destination and stunning enemies on landing.",
+        "ultimate": false
+      },
+      {
+        "slug": "marci_bodyguard",
+        "name": "Bodyguard",
+        "desc": "Passively grants lifesteal and bonus attack damage; can share bonuses and a damage barrier with an ally.",
+        "ultimate": false
+      },
+      {
+        "slug": "marci_unleash",
+        "name": "Unleash",
+        "desc": "Gains charges for rapid strikes that slow the target, with the final strike creating a damaging pulse.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "primal-beast",
@@ -2970,7 +6142,33 @@
       "tank"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "primal_beast_onslaught",
+        "name": "Onslaught",
+        "desc": "Charges up then runs forward, knocking back and stunning enemies on impact.",
+        "ultimate": false
+      },
+      {
+        "slug": "primal_beast_trample",
+        "name": "Trample",
+        "desc": "Stomps as he moves, damaging nearby enemies periodically while disarmed.",
+        "ultimate": false
+      },
+      {
+        "slug": "primal_beast_uproar",
+        "name": "Uproar",
+        "desc": "Builds stacks from dealing hero damage; activating releases a roar granting slow, damage, and armor.",
+        "ultimate": false
+      },
+      {
+        "slug": "primal_beast_pulverize",
+        "name": "Pulverize",
+        "desc": "CHANNELED - Grabs an enemy and slams them into the ground repeatedly, damaging and mini-stunning nearby enemies.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "muerta",
@@ -2993,7 +6191,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "muerta_dead_shot",
+        "name": "Dead Shot",
+        "desc": "Fires a ghostly trickshot that slows and ricochets toward a direction, fearing the hero it hits.",
+        "ultimate": false
+      },
+      {
+        "slug": "muerta_the_calling",
+        "name": "The Calling",
+        "desc": "Summons revenants that circle a location, slowing and silencing enemies they pass through.",
+        "ultimate": false
+      },
+      {
+        "slug": "muerta_gunslinger",
+        "name": "Gunslinger",
+        "desc": "Toggleable passive giving attacks a chance to fire a second shot at another target.",
+        "ultimate": false
+      },
+      {
+        "slug": "muerta_pierce_the_veil",
+        "name": "Pierce the Veil",
+        "desc": "Transforms, becoming ethereal with bonus damage and phased movement; deals magical damage while ethereal.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "ring-master",
@@ -3017,7 +6241,33 @@
       "support"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "ringmaster_tame_the_beasts",
+        "name": "Tame the Beasts",
+        "desc": "CHANNELED - Twirls his whip then cracks it, damaging enemies and making them flee in fear.",
+        "ultimate": false
+      },
+      {
+        "slug": "ringmaster_the_box",
+        "name": "Escape Act",
+        "desc": "Packs himself or an ally into a mobile box, granting untargetability and bonus speed and resistance.",
+        "ultimate": false
+      },
+      {
+        "slug": "ringmaster_impalement",
+        "name": "Impalement Arts",
+        "desc": "Throws a dagger that deals impact damage, slows, and causes the target to bleed over time.",
+        "ultimate": false
+      },
+      {
+        "slug": "ringmaster_wheel",
+        "name": "Wheel of Wonder",
+        "desc": "Rolls a wheel to a location, damaging and slowing enemies in range and mesmerizing those who face it too long.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "kez",
@@ -3040,7 +6290,33 @@
       "core"
     ],
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "kez_echo_slash",
+        "name": "Echo Slash",
+        "desc": "Slashes forward with his Katana, attacking enemies in an area twice with a brief delay between.",
+        "ultimate": false
+      },
+      {
+        "slug": "kez_grappling_claw",
+        "name": "Grappling Claw",
+        "desc": "Swings on a grappling hook toward a target, slowing it and landing an attack on arrival.",
+        "ultimate": false
+      },
+      {
+        "slug": "kez_kazurai_katana",
+        "name": "Kazurai Katana",
+        "desc": "Katana attacks apply a stacking damage-over-time debuff; can be activated to impale and immobilize a target.",
+        "ultimate": false
+      },
+      {
+        "slug": "kez_raptor_dance",
+        "name": "Raptor Dance",
+        "desc": "Becomes invulnerable briefly, then unleashes radial slashes dealing damage based on max health and healing Kez.",
+        "ultimate": true
+      }
+    ]
   },
   {
     "slug": "largo",
@@ -3061,6 +6337,32 @@
     "piercesMagicImmunity": false,
     "needsReview": false,
     "coreItemSlugs": [],
-    "situationalItemSlugs": []
+    "situationalItemSlugs": [],
+    "abilities": [
+      {
+        "slug": "largo_catchy_lick",
+        "name": "Catchy Lick",
+        "desc": "Licks a target, pulling it back and dealing damage if it's an enemy; dispelling grants Largo health regen.",
+        "ultimate": false
+      },
+      {
+        "slug": "largo_frogstomp",
+        "name": "Frogstomp",
+        "desc": "Tosses froglings into an area that periodically stomp, dealing damage and slowing enemies.",
+        "ultimate": false
+      },
+      {
+        "slug": "largo_croak_of_genius",
+        "name": "Croak of Genius",
+        "desc": "Strums a tune for an ally, reducing their mana costs and reverberating a portion of their damage over time.",
+        "ultimate": false
+      },
+      {
+        "slug": "largo_amphibian_rhapsody",
+        "name": "Amphibian Rhapsody",
+        "desc": "Disarms himself and switches to 3 song abilities that buff allies with damage, speed, or healing when strummed on beat.",
+        "ultimate": true
+      }
+    ]
   }
 ]

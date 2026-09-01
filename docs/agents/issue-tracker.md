@@ -9,7 +9,7 @@ Use the Atlassian MCP tools for all operations. `cloudId` for every call is `vit
 Modeled on the sibling **VS** (Vital Stats) project's workflow, so both projects move tickets the same way. Board columns: **To Do → In Progress → In Review → Done**, plus **Blocked**.
 
 - **Every change worth tracking gets a Jira issue** — even a quick one-off ask, not just planned work.
-- **Transition an issue to In Progress before starting work on it** (planning, implementation, anything beyond filing it) — not after, not as a batch cleanup later.
+- **Transition an issue to In Progress before starting work on it** (planning, implementation, anything beyond filing it) — not after, not as a batch cleanup later. **Assign it to the reporter (Erskine Duenas) at the same time** — a ticket shouldn't sit In Progress unassigned.
 - Keep the status matched to where the work actually stands:
   - **To Do** — filed, not started.
   - **In Progress** — actively investigating/implementing, or self-tested but not yet confirmed correct. Stay here even after the fix is implemented — being confident in a fix isn't the same as it being confirmed.
@@ -54,5 +54,6 @@ Run `getJiraIssue` with the ticket's key (e.g. `DOW-42`). If only a bare number 
 
 ## Notes
 
+- Erskine Duenas's Atlassian account ID (for assigning issues): `712020:e5856eab-38bc-42c0-b4ca-a55a33158af5`.
 - Jira issue keys (`DOW-<n>`) are the canonical reference — use them in commit messages and branch names where practical (e.g. `DOW-42-add-hero-picker`) so Jira's smart commits can link work automatically.
 - No GitHub/GitLab PR-as-triage-surface convention applies here; Jira has no equivalent flag.

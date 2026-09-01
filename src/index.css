@@ -715,6 +715,11 @@ body {
   overflow: hidden;
 }
 
+.item-picker-popover[data-open-upward] {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+
 .item-picker-popover input {
   background: var(--panel-deep);
   border: none;

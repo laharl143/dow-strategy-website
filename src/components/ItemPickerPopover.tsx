@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import type { Item } from '../types';
 
 /**
@@ -17,9 +17,44 @@ export function ItemPickerPopover({
 }) {
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
+  // The hero page stacks item grids and the notes box tightly inside their
+  // own <section>, so a slot near the bottom of a grid opens a popover that
+  // runs past its section (or the viewport) and over whatever's below it.
+  // Flip to whichever side of the slot has more room, and cap the height to
+  // that room so the list scrolls internally instead of overflowing either
+  // way — a plain flip isn't enough when neither side has a full 320px.
+  const [openUpward, setOpenUpward] = useState(false);
+  const [maxHeight, setMaxHeight] = useState<number | null>(null);
 
   useEffect(() => {
     inputRef.current?.focus();
+  }, []);
+
+  useLayoutEffect(() => {
+    const el = popoverRef.current;
+    const slotEl = el?.parentElement;
+    if (!el || !slotEl) return;
+
+    const GAP = 6;
+    const MIN_HEIGHT = 160;
+    const naturalHeight = el.getBoundingClientRect().height;
+    const slotRect = slotEl.getBoundingClientRect();
+    const sectionRect = el.closest('section')?.getBoundingClientRect();
+
+    const belowLimit = Math.min(sectionRect?.bottom ?? Infinity, window.innerHeight);
+    const aboveLimit = Math.max(sectionRect?.top ?? 0, 0);
+    const spaceBelow = belowLimit - slotRect.bottom - GAP;
+    const spaceAbove = slotRect.top - aboveLimit - GAP;
+
+    if (naturalHeight <= spaceBelow) return;
+
+    if (spaceAbove > spaceBelow) {
+      setOpenUpward(true);
+      setMaxHeight(Math.max(MIN_HEIGHT, Math.min(naturalHeight, spaceAbove)));
+    } else {
+      setMaxHeight(Math.max(MIN_HEIGHT, Math.min(naturalHeight, spaceBelow)));
+    }
   }, []);
 
   useEffect(() => {
@@ -44,7 +79,13 @@ export function ItemPickerPopover({
   }, [items, query]);
 
   return (
-    <div className="item-picker-popover" onClick={(e) => e.stopPropagation()}>
+    <div
+      ref={popoverRef}
+      className="item-picker-popover"
+      data-open-upward={openUpward || undefined}
+      style={maxHeight ? { maxHeight } : undefined}
+      onClick={(e) => e.stopPropagation()}
+    >
       <input
         ref={inputRef}
         type="text"

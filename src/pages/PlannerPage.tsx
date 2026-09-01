@@ -76,6 +76,7 @@ export function PlannerPage({
   const [activeDrag, setActiveDrag] = useState<DragData | null>(null);
   const [shopOpen, setShopOpen] = useState(true);
   const [heroPanelOpen, setHeroPanelOpen] = useState(true);
+  const [twoColumns, setTwoColumns] = useState(false);
   const [neutralError, setNeutralError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -330,8 +331,18 @@ export function PlannerPage({
         </aside>
 
         <main className="board-panel">
+          <button
+            type="button"
+            className="board-columns-toggle"
+            data-active={twoColumns || undefined}
+            onClick={() => setTwoColumns((v) => !v)}
+            title={twoColumns ? 'Show roles 1-9 in a single column' : 'Split roles 6-9 into a second column'}
+          >
+            {twoColumns ? '▥ Two Columns' : '▤ One Column'}
+          </button>
           <Board
             board={board}
+            twoColumns={twoColumns}
             heroes={heroes}
             assignedHeroSlugs={assignedHeroSlugs}
             heroBySlug={heroBySlug}

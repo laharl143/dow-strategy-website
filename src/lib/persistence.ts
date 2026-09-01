@@ -20,6 +20,10 @@ const HERO_LOADOUT_KEY = 'dow-planner:hero-loadout';
 // doesn't ask again on this browser. Cleared on sign-out along with the
 // rest of the account-scoped data, so signing out returns to the gate.
 const GUEST_MODE_KEY = 'dow-planner:guest-mode';
+// Whether the item shop sidebar is open — shared across the board and the
+// hero pages so it doesn't reopen itself every time navigation remounts
+// whichever page's ItemShopDock/PlannerPage instance owns the toggle.
+const SHOP_OPEN_KEY = 'dow-planner:shop-open';
 
 export function emptyBoard(): Board {
   return {
@@ -164,6 +168,17 @@ export function setGuestMode(): void {
 /** Clears the guest choice so the login gate reappears (the "back to login page" nav button). */
 export function clearGuestMode(): void {
   localStorage.removeItem(GUEST_MODE_KEY);
+}
+
+/** Defaults to open — matches the shop panel's original always-open behavior. */
+export function loadShopOpen(): boolean {
+  const raw = localStorage.getItem(SHOP_OPEN_KEY);
+  if (raw === null) return true;
+  return raw === 'true';
+}
+
+export function saveShopOpen(open: boolean): void {
+  localStorage.setItem(SHOP_OPEN_KEY, String(open));
 }
 
 export interface HeroAghFlags {

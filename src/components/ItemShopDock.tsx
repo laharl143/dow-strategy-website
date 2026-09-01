@@ -10,6 +10,7 @@ import {
 } from '@dnd-kit/core';
 import type { NeutralItem } from '../types';
 import { regularItems, neutralItems, regularItemBySlug, neutralItemBySlug } from '../lib/gameData';
+import { loadShopOpen, saveShopOpen } from '../lib/persistence';
 import { ItemShopPanel } from './ItemShopPanel';
 
 interface DragData {
@@ -30,9 +31,13 @@ export function ItemShopDock({
   /** Called when an item drag ends over a droppable on the page — the board's own drag/drop isn't present here. */
   onDragEnd?: (event: DragEndEvent) => void;
 }) {
-  const [shopOpen, setShopOpen] = useState(true);
+  const [shopOpen, setShopOpen] = useState(loadShopOpen);
   const [activeDrag, setActiveDrag] = useState<DragData | null>(null);
   const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 4 } }));
+
+  useEffect(() => {
+    saveShopOpen(shopOpen);
+  }, [shopOpen]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {

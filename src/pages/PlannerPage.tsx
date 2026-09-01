@@ -31,6 +31,7 @@ import {
 } from '../lib/boardRules';
 import { NEUTRAL_ITEM_CAP } from '../lib/boardRules';
 import { placeHeroAt, type HeroTarget } from '../lib/heroPlacement';
+import { loadShopOpen, saveShopOpen } from '../lib/persistence';
 import { Board } from '../components/Board';
 import { HeroTray } from '../components/HeroTray';
 import { ItemShopPanel } from '../components/ItemShopPanel';
@@ -74,10 +75,14 @@ export function PlannerPage({
   onDelete: (id: string) => void;
 }) {
   const [activeDrag, setActiveDrag] = useState<DragData | null>(null);
-  const [shopOpen, setShopOpen] = useState(true);
+  const [shopOpen, setShopOpen] = useState(loadShopOpen);
   const [heroPanelOpen, setHeroPanelOpen] = useState(true);
   const [twoColumns, setTwoColumns] = useState(false);
   const [neutralError, setNeutralError] = useState<string | null>(null);
+
+  useEffect(() => {
+    saveShopOpen(shopOpen);
+  }, [shopOpen]);
 
   useEffect(() => {
     if (!neutralError) return;

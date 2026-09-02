@@ -47,6 +47,7 @@ export function ItemSlotBox({
   onToggleAutocast?: () => void;
 }) {
   const { open: pickerOpen, openPopover, closePopover } = useSingleOpenPopover(id);
+  const { open: menuOpen, openPopover: openMenu, closePopover: closeMenu } = useSingleOpenPopover(`${id}:autocast-menu`);
   const { setNodeRef, isOver } = useDroppable({ id, data });
   const slotRef = useRef<HTMLDivElement | null>(null);
   const draggable = useDraggable({
@@ -55,25 +56,27 @@ export function ItemSlotBox({
     disabled: !item,
   });
   const handleClick = useDoubleClick(onRemove);
-  const [menu, setMenu] = useState<{ x: number; y: number } | null>(null);
+  // Screen position only — visibility comes from the shared single-open-popover
+  // hook above, so right-clicking a different slot closes this one instead of
+  // stacking on top of it (a right-click isn't a 'click' event, so a plain
+  // window-click listener alone never sees it).
+  const [menuPos, setMenuPos] = useState<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
-    if (!menu) return;
-    function close() {
-      setMenu(null);
-    }
-    window.addEventListener('click', close);
-    window.addEventListener('keydown', close);
+    if (!menuOpen) return;
+    window.addEventListener('click', closeMenu);
+    window.addEventListener('keydown', closeMenu);
     return () => {
-      window.removeEventListener('click', close);
-      window.removeEventListener('keydown', close);
+      window.removeEventListener('click', closeMenu);
+      window.removeEventListener('keydown', closeMenu);
     };
-  }, [menu]);
+  }, [menuOpen, closeMenu]);
 
   function handleContextMenu(e: React.MouseEvent) {
     if (!onToggleAutocast) return;
     e.preventDefault();
-    setMenu({ x: e.clientX, y: e.clientY });
+    setMenuPos({ x: e.clientX, y: e.clientY });
+    openMenu();
   }
 
   return (
@@ -107,15 +110,16 @@ export function ItemSlotBox({
               item.name.slice(0, 2)
             )}
           </span>
-          {menu &&
+          {menuOpen &&
+            menuPos &&
             onToggleAutocast &&
             createPortal(
-              <div className="hero-context-menu" style={{ left: menu.x, top: menu.y }} onClick={(e) => e.stopPropagation()}>
+              <div className="hero-context-menu" style={{ left: menuPos.x, top: menuPos.y }} onClick={(e) => e.stopPropagation()}>
                 <button
                   type="button"
                   onClick={() => {
                     onToggleAutocast();
-                    setMenu(null);
+                    closeMenu();
                   }}
                 >
                   {autocast ? 'Disable Autocast' : 'Enable Autocast'}

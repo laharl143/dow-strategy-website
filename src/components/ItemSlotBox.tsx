@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import type { Item } from '../types';
@@ -50,6 +50,20 @@ export function ItemSlotBox({
   const { open: menuOpen, openPopover: openMenu, closePopover: closeMenu } = useSingleOpenPopover(`${id}:autocast-menu`);
   const { setNodeRef, isOver } = useDroppable({ id, data });
   const slotRef = useRef<HTMLDivElement | null>(null);
+  // A stable callback identity, not an inline arrow — an inline one gets
+  // recreated every render, so React detaches/reattaches this ref on every
+  // re-render (including the render that opens the popover below). Ref
+  // (re)attachment for a fiber runs after its children's own layout effects,
+  // so ItemPickerPopover's position-measuring layout effect would sometimes
+  // see slotRef.current still null from the detach, stranding the popover
+  // off-screen. Only reproduced in production builds, not the dev server.
+  const setSlotRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      setNodeRef(node);
+      slotRef.current = node;
+    },
+    [setNodeRef],
+  );
   const draggable = useDraggable({
     id: `${id}:occupant`,
     data: { kind: data.kind, fromSlotId: data.slotId, fromItemIndex: data.itemIndex, itemSlug: item?.slug },
@@ -81,10 +95,7 @@ export function ItemSlotBox({
 
   return (
     <div
-      ref={(node) => {
-        setNodeRef(node);
-        slotRef.current = node;
-      }}
+      ref={setSlotRef}
       className="item-slot"
       data-over={isOver || undefined}
       data-filled={!!item || undefined}

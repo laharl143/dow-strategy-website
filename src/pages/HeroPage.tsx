@@ -15,10 +15,14 @@ import {
   saveHeroBuilds,
   emptyHeroBuildState,
   newHeroBuild,
+  loadHeroCombos,
+  saveHeroCombos,
+  toggleHeroComboGiver,
   type HeroBuild,
   type HeroBuildState,
 } from '../lib/persistence';
 import { AghUpgradeToggle } from '../components/AghUpgradeToggle';
+import { ComboToggle } from '../components/ComboToggle';
 import { ItemSlotBox } from '../components/ItemSlotBox';
 import { ItemShopDock } from '../components/ItemShopDock';
 import { useAuth } from '../lib/auth';
@@ -330,10 +334,15 @@ export function HeroPage() {
   const hero = slug ? heroBySlug.get(slug) : undefined;
   const { session } = useAuth();
   const [buildsBySlug, setBuildsBySlug] = useState<Record<string, HeroBuildState>>(() => loadHeroBuilds());
+  const [combos, setCombos] = useState<Record<string, string[]>>(() => loadHeroCombos());
 
   useEffect(() => {
     saveHeroBuilds(buildsBySlug);
   }, [buildsBySlug]);
+
+  useEffect(() => {
+    saveHeroCombos(combos);
+  }, [combos]);
 
   // Push this hero's builds to Supabase after changes settle — debounced so
   // several drags in a row don't fire one network request per drop. The
@@ -496,7 +505,6 @@ export function HeroPage() {
           <div>
             <h1>{hero.name}</h1>
             <div className="hero-page-meta">
-              <span>{hero.code}</span>
               {hero.primaryAttribute && <span>{hero.primaryAttribute.toUpperCase()}</span>}
               {hero.attackType && <span>{hero.attackType}</span>}
             </div>
@@ -512,6 +520,11 @@ export function HeroPage() {
                 </span>
               )}
             </div>
+            <ComboToggle
+              hero={hero}
+              giverSlugs={combos[hero.slug] ?? []}
+              onToggleGiver={(giverSlug) => setCombos((prev) => toggleHeroComboGiver(prev, hero.slug, giverSlug))}
+            />
           </div>
         </div>
 

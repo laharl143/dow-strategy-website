@@ -17,6 +17,9 @@
   --core: #a54a4a;
   --support: #4aa578;
   --danger: #c2483e;
+  --combo: #a56fd1;
+  --combo-bright: #cf9ef0;
+  --agh-active: #5bc8f0;
 
   color-scheme: dark;
   font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
@@ -506,6 +509,7 @@ body {
 }
 
 .role-slot-hero {
+  position: relative;
   background: #2a2432;
   border: 1px solid var(--gold-dim);
   border-radius: 4px;
@@ -518,6 +522,38 @@ body {
 
 .role-slot-hero[data-dragging] {
   opacity: 0.3;
+}
+
+/* DOW-10: small icon crops anchored to the portrait's top-right corner, one
+   per flagged giver hero. row-reverse keeps the first-flagged giver pinned
+   at the corner and lays each new one down to its left, since the container
+   itself is only pinned by `right` — its left edge just grows outward as
+   DOM order (oldest-flagged first) fills in from the right. */
+.combo-dots {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 2px;
+  z-index: 1;
+}
+
+.combo-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--combo);
+  box-shadow: 0 0 4px rgba(165, 111, 209, 0.7);
+  cursor: default;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.combo-dot:hover {
+  transform: scale(2.4);
+  box-shadow: 0 0 10px rgba(165, 111, 209, 0.9);
+  z-index: 2;
 }
 
 .role-slot-hero-icon {
@@ -747,14 +783,105 @@ body {
 }
 
 .agh-toggle[data-active] {
-  border-color: var(--gold);
+  border-color: var(--agh-active);
   opacity: 1;
   filter: none;
-  box-shadow: 0 0 8px rgba(201, 168, 76, 0.55);
+  box-shadow: 0 0 8px rgba(91, 200, 240, 0.6);
 }
 
 .agh-toggle[data-active]:hover {
   opacity: 1;
+}
+
+/* Special Combo toggle (DOW-10) — same circular-icon language as .agh-toggle
+   above, purple instead of gold since it's a different kind of flag. */
+.combo-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.combo-toggle-main {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--panel-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  cursor: pointer;
+  opacity: 0.4;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.combo-toggle-main svg {
+  width: 18px;
+  height: 18px;
+}
+
+.combo-toggle-main:hover {
+  opacity: 0.7;
+}
+
+.combo-toggle-main[data-active] {
+  border-color: var(--combo);
+  opacity: 1;
+  color: var(--combo-bright);
+  box-shadow: 0 0 8px rgba(165, 111, 209, 0.55);
+}
+
+.combo-toggle-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--border-soft);
+  margin: 2px 0.15rem;
+}
+
+.combo-toggle-pip {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  padding: 2px;
+  cursor: pointer;
+  opacity: 0.4;
+  filter: grayscale(1);
+  flex-shrink: 0;
+}
+
+.combo-toggle-pip[data-checked] {
+  border-color: var(--combo);
+  opacity: 1;
+  filter: none;
+  box-shadow: 0 0 6px rgba(165, 111, 209, 0.55);
+}
+
+.combo-toggle-pip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.combo-toggle-small-pip {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--combo);
+  box-shadow: 0 0 4px rgba(165, 111, 209, 0.5);
+  flex-shrink: 0;
+  overflow: hidden;
+  display: block;
+}
+
+.combo-toggle-small-pip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .item-bay {
@@ -1072,23 +1199,23 @@ body {
   transform: none;
   offset-path: circle(50% at 50% 50%);
   offset-rotate: 0deg;
-  animation: autocast-crawl-circle 1.4s steps(24) infinite;
+  animation: autocast-crawl-circle 1.8s steps(24) infinite;
 }
 
 .item-slot[data-circular] .autocast-star:nth-child(1) {
   animation-delay: 0s;
 }
 .item-slot[data-circular] .autocast-star:nth-child(2) {
-  animation-delay: 0.0583s;
+  animation-delay: 0.075s;
 }
 .item-slot[data-circular] .autocast-star:nth-child(3) {
-  animation-delay: 0.1167s;
+  animation-delay: 0.15s;
 }
 .item-slot[data-circular] .autocast-star:nth-child(4) {
-  animation-delay: 0.175s;
+  animation-delay: 0.225s;
 }
 .item-slot[data-circular] .autocast-star:nth-child(5) {
-  animation-delay: 0.2333s;
+  animation-delay: 0.3s;
 }
 
 @keyframes autocast-crawl-circle {

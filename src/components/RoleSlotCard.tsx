@@ -8,6 +8,7 @@ import { AghUpgradeToggle } from './AghUpgradeToggle';
 import { ItemSlotBox } from './ItemSlotBox';
 import { HeroPickerPopover } from './HeroPickerPopover';
 import { BuildSwitchPill } from './BuildSwitchPill';
+import { ComboDots } from './ComboDots';
 
 export function RoleSlotCard({
   definition,
@@ -91,6 +92,7 @@ export function RoleSlotCard({
                 onContextMenu={(e) => onHeroContextMenu(e, hero.slug)}
                 title={`${hero.name} — drag to move, double-click to remove, right-click to inspect`}
               >
+                <ComboDots hero={hero} />
                 <img className="role-slot-hero-icon" src={heroIconUrl(hero.code)} alt={hero.name} draggable={false} />
               </div>
               <BuildSwitchPill

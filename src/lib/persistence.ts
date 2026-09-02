@@ -30,6 +30,12 @@ const GUEST_MODE_KEY = 'dow-planner:guest-mode';
 // hero pages so it doesn't reopen itself every time navigation remounts
 // whichever page's ItemShopDock/PlannerPage instance owns the toggle.
 const SHOP_OPEN_KEY = 'dow-planner:shop-open';
+// Which of the 7 fixed COMBO_HERO_SLUGS heroes' special abilities (each
+// unique, each usable on any hero — Lycan's bite, Snapfire's cannonball,
+// etc.) can target each hero (DOW-10) — heroSlug -> array of giver hero
+// slugs. Shown on every hero's page, one-directional (see
+// toggleHeroComboGiver below).
+const HERO_COMBO_KEY = 'dow-planner:hero-combos';
 
 function padBooleans(arr: boolean[] | undefined, count: number): boolean[] {
   const result = (arr ?? []).slice(0, count);
@@ -373,4 +379,42 @@ export function loadHeroBuilds(): Record<string, HeroBuildState> {
 
 export function saveHeroBuilds(builds: Record<string, HeroBuildState>): void {
   localStorage.setItem(HERO_BUILDS_KEY, JSON.stringify(builds));
+}
+
+export function loadHeroCombos(): Record<string, string[]> {
+  const raw = localStorage.getItem(HERO_COMBO_KEY);
+  if (!raw) return {};
+  try {
+    const parsed = JSON.parse(raw) as Record<string, string[]>;
+    const normalized: Record<string, string[]> = {};
+    for (const [slug, partners] of Object.entries(parsed)) {
+      if (Array.isArray(partners)) normalized[slug] = partners;
+    }
+    return normalized;
+  } catch {
+    return {};
+  }
+}
+
+export function saveHeroCombos(combos: Record<string, string[]>): void {
+  localStorage.setItem(HERO_COMBO_KEY, JSON.stringify(combos));
+}
+
+/**
+ * Toggles whether `giverSlug` (one of the fixed COMBO_HERO_SLUGS) can target
+ * `heroSlug` with its special ability — one-directional: giver A being able
+ * to target hero B says nothing about whether B (if also a giver) can target
+ * A back, since each of the 7 has its own distinct ability.
+ */
+export function toggleHeroComboGiver(
+  combos: Record<string, string[]>,
+  heroSlug: string,
+  giverSlug: string,
+): Record<string, string[]> {
+  const list = combos[heroSlug] ?? [];
+  const isOn = list.includes(giverSlug);
+  return {
+    ...combos,
+    [heroSlug]: isOn ? list.filter((s) => s !== giverSlug) : [...list, giverSlug],
+  };
 }

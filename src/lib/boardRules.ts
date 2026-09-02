@@ -1,4 +1,5 @@
 import type { Board, LateGameSwap, NeutralItem } from '../types';
+import type { HeroBuild } from './persistence';
 
 // Neutral items: global cap of 6 across the whole board — one guaranteed
 // drop per tier (1-5), plus one bonus drop at hero level 25 that's randomly
@@ -171,6 +172,36 @@ export function setNeutralItem(
   };
 }
 
+/**
+ * Loads one of a hero's saved hero-page builds into its board slot, replacing
+ * whatever items/agh flags are there now — the board's own "switch build"
+ * action for a hero with more than one saved build. Skips the neutral item
+ * if the board-wide cap won't allow it (setNeutralItem's own check), leaving
+ * whatever neutral item the slot already had.
+ */
+export function applyHeroBuild(
+  board: Board,
+  slotId: string,
+  build: HeroBuild,
+  neutralItemBySlug: Map<string, NeutralItem>,
+): Board {
+  const withItems: Board = {
+    ...board,
+    slots: board.slots.map((s) =>
+      s.slotId === slotId
+        ? {
+            ...s,
+            regularItemSlugs: [...build.regularItemSlugs],
+            hasScepter: build.hasScepter,
+            hasShard: build.hasShard,
+            appliedBuildId: build.id,
+          }
+        : s,
+    ),
+  };
+  return setNeutralItem(withItems, slotId, build.neutralItemSlug, neutralItemBySlug);
+}
+
 export function toggleScepter(board: Board, slotId: string): Board {
   return {
     ...board,
@@ -202,6 +233,7 @@ export function emptyLateGameSwap(): LateGameSwap {
     neutralItemSlug: null,
     hasScepter: false,
     hasShard: false,
+    appliedBuildId: null,
   };
 }
 
@@ -224,6 +256,28 @@ export function clearLateGameHero(board: Board, slotId: string): Board {
   return {
     ...board,
     slots: board.slots.map((s) => (s.slotId === slotId && s.lateGameSwap ? { ...s, lateGameSwap: emptyLateGameSwap() } : s)),
+  };
+}
+
+/** Late-game swap counterpart to {@link applyHeroBuild} — no neutral cap check, matching setLateGameNeutralItem. */
+export function applyLateGameHeroBuild(board: Board, slotId: string, build: HeroBuild): Board {
+  return {
+    ...board,
+    slots: board.slots.map((s) =>
+      s.slotId === slotId && s.lateGameSwap
+        ? {
+            ...s,
+            lateGameSwap: {
+              ...s.lateGameSwap,
+              regularItemSlugs: [...build.regularItemSlugs],
+              neutralItemSlug: build.neutralItemSlug,
+              hasScepter: build.hasScepter,
+              hasShard: build.hasShard,
+              appliedBuildId: build.id,
+            },
+          }
+        : s,
+    ),
   };
 }
 

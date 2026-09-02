@@ -1,11 +1,13 @@
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import type { BoardSlot, Hero, Item, NeutralItem, RoleSlotDefinition } from '../types';
+import type { HeroBuild } from '../lib/persistence';
 import { heroIconUrl, SCEPTER_ICON_URL, SHARD_ICON_URL } from '../lib/assets';
 import { useDoubleClick } from '../lib/useDoubleClick';
 import { useSingleOpenPopover } from '../lib/useSingleOpenPopover';
 import { AghUpgradeToggle } from './AghUpgradeToggle';
 import { ItemSlotBox } from './ItemSlotBox';
 import { HeroPickerPopover } from './HeroPickerPopover';
+import { BuildSwitchPill } from './BuildSwitchPill';
 
 export function RoleSlotCard({
   definition,
@@ -26,6 +28,7 @@ export function RoleSlotCard({
   onToggleScepter,
   onToggleShard,
   onHeroContextMenu,
+  onApplyBuild,
 }: {
   definition: RoleSlotDefinition;
   slot: BoardSlot;
@@ -45,6 +48,7 @@ export function RoleSlotCard({
   onToggleScepter: () => void;
   onToggleShard: () => void;
   onHeroContextMenu: (e: React.MouseEvent, heroSlug: string) => void;
+  onApplyBuild: (build: HeroBuild) => void;
 }) {
   const { open: pickerOpen, openPopover, closePopover } = useSingleOpenPopover(`slot:${slot.slotId}:hero-picker`);
   const { setNodeRef, isOver } = useDroppable({
@@ -72,18 +76,26 @@ export function RoleSlotCard({
       <div className="loadout-panel">
         <div ref={setNodeRef} className="hero-dropzone" data-over={isOver || undefined}>
           {hero ? (
-            <div
-              ref={heroDraggable.setNodeRef}
-              {...heroDraggable.listeners}
-              {...heroDraggable.attributes}
-              className="role-slot-hero"
-              data-dragging={heroDraggable.isDragging || undefined}
-              onClick={handleHeroClick}
-              onContextMenu={(e) => onHeroContextMenu(e, hero.slug)}
-              title={`${hero.name} — drag to move, double-click to remove, right-click to inspect`}
-            >
-              <img className="role-slot-hero-icon" src={heroIconUrl(hero.code)} alt={hero.name} draggable={false} />
-            </div>
+            <>
+              <div
+                ref={heroDraggable.setNodeRef}
+                {...heroDraggable.listeners}
+                {...heroDraggable.attributes}
+                className="role-slot-hero"
+                data-dragging={heroDraggable.isDragging || undefined}
+                onClick={handleHeroClick}
+                onContextMenu={(e) => onHeroContextMenu(e, hero.slug)}
+                title={`${hero.name} — drag to move, double-click to remove, right-click to inspect`}
+              >
+                <img className="role-slot-hero-icon" src={heroIconUrl(hero.code)} alt={hero.name} draggable={false} />
+              </div>
+              <BuildSwitchPill
+                id={`slot:${slot.slotId}:build-switch`}
+                heroSlug={hero.slug}
+                appliedBuildId={slot.appliedBuildId}
+                onApply={onApplyBuild}
+              />
+            </>
           ) : (
             <>
               <button

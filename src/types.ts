@@ -106,6 +106,11 @@ export interface LateGameSwap {
   neutralItemSlug: string | null;
   hasScepter: boolean;
   hasShard: boolean;
+  /** Which of the hero's saved hero-page builds (if any) these items last came
+   * from — lets the board show/switch which build a hero with several is
+   * using here. Null once the items no longer came from picking a build (a
+   * fresh hero with no saved build, or items edited by hand afterward). */
+  appliedBuildId: string | null;
 }
 
 export interface BoardSlot {
@@ -117,6 +122,8 @@ export interface BoardSlot {
   /** Whether this game's hero has bought the Aghanim's Scepter/Shard upgrade. */
   hasScepter: boolean;
   hasShard: boolean;
+  /** See {@link LateGameSwap.appliedBuildId} — same idea for the primary slot. */
+  appliedBuildId: string | null;
   lateGameSwap: LateGameSwap | null;
 }
 

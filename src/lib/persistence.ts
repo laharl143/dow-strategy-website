@@ -40,6 +40,7 @@ export function emptyBoard(): Board {
       neutralItemSlug: null,
       hasScepter: false,
       hasShard: false,
+      appliedBuildId: null,
       lateGameSwap: null,
     })),
     bonusNeutralTier: 5,
@@ -56,12 +57,13 @@ function normalizeLateGameSwap(swap: BoardSlot['lateGameSwap']): BoardSlot['late
     neutralItemSlug: swap.neutralItemSlug ?? null,
     hasScepter: swap.hasScepter ?? false,
     hasShard: swap.hasShard ?? false,
+    appliedBuildId: swap.appliedBuildId ?? null,
   };
 }
 
 // Pads/truncates regularItemSlugs to the current length, and backfills
-// hasScepter/hasShard/lateGameSwap/bonusNeutralTier, for boards saved
-// before those fields existed.
+// hasScepter/hasShard/appliedBuildId/lateGameSwap/bonusNeutralTier, for
+// boards saved before those fields existed.
 export function normalizeBoard(board: Board): Board {
   return {
     slots: board.slots.map((s) => {
@@ -72,6 +74,7 @@ export function normalizeBoard(board: Board): Board {
         regularItemSlugs: slugs,
         hasScepter: s.hasScepter ?? false,
         hasShard: s.hasShard ?? false,
+        appliedBuildId: s.appliedBuildId ?? null,
         lateGameSwap: normalizeLateGameSwap(s.lateGameSwap),
       };
     }),

@@ -1,4 +1,5 @@
 import type { Board as BoardType, Hero, NeutralItem, Item, RoleSlotDefinition } from '../types';
+import type { HeroBuild } from '../lib/persistence';
 import { ROLE_SLOTS } from '../data/roleSlots';
 import { RoleSlotCard } from './RoleSlotCard';
 import { LateGameSwapCard } from './LateGameSwapCard';
@@ -37,6 +38,8 @@ export function Board({
   onPickLateGameNeutralItem,
   onToggleLateGameScepter,
   onToggleLateGameShard,
+  onApplyBuild,
+  onApplyLateGameBuild,
 }: {
   board: BoardType;
   twoColumns: boolean;
@@ -65,6 +68,8 @@ export function Board({
   onPickLateGameNeutralItem: (slotId: string, itemSlug: string) => void;
   onToggleLateGameScepter: (slotId: string) => void;
   onToggleLateGameShard: (slotId: string) => void;
+  onApplyBuild: (slotId: string, build: HeroBuild) => void;
+  onApplyLateGameBuild: (slotId: string, build: HeroBuild) => void;
 }) {
   const { openMenu, menuNode } = useHeroContextMenu();
 
@@ -92,6 +97,7 @@ export function Board({
           onToggleScepter={() => onToggleScepter(definition.id)}
           onToggleShard={() => onToggleShard(definition.id)}
           onHeroContextMenu={openMenu}
+          onApplyBuild={(build) => onApplyBuild(definition.id, build)}
         />
 
         {swap && (
@@ -122,6 +128,7 @@ export function Board({
             onToggleScepter={() => onToggleLateGameScepter(definition.id)}
             onToggleShard={() => onToggleLateGameShard(definition.id)}
             onHeroContextMenu={openMenu}
+            onApplyBuild={(build) => onApplyLateGameBuild(definition.id, build)}
           />
         ) : (
           <button

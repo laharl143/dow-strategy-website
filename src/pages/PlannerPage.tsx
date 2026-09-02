@@ -27,6 +27,8 @@ import {
   setLateGameNeutralItem,
   toggleLateGameScepter,
   toggleLateGameShard,
+  applyHeroBuild,
+  applyLateGameHeroBuild,
   type NeutralAssignError,
 } from '../lib/boardRules';
 import { NEUTRAL_ITEM_CAP } from '../lib/boardRules';
@@ -382,6 +384,8 @@ export function PlannerPage({
             onPickLateGameNeutralItem={(slotId, itemSlug) => setBoard((prev) => setLateGameNeutralItem(prev, slotId, itemSlug))}
             onToggleLateGameScepter={(slotId) => setBoard((prev) => toggleLateGameScepter(prev, slotId))}
             onToggleLateGameShard={(slotId) => setBoard((prev) => toggleLateGameShard(prev, slotId))}
+            onApplyBuild={(slotId, build) => setBoard((prev) => applyHeroBuild(prev, slotId, build, neutralItemBySlug))}
+            onApplyLateGameBuild={(slotId, build) => setBoard((prev) => applyLateGameHeroBuild(prev, slotId, build))}
           />
         </main>
 

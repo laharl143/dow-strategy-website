@@ -11,6 +11,7 @@ interface HeroLoadoutState {
   neutralItemSlug: string | null;
   hasScepter: boolean;
   hasShard: boolean;
+  appliedBuildId: string | null;
 }
 
 function findHero(board: Board, heroSlug: string): HeroTarget | null {
@@ -30,12 +31,27 @@ function readLoadout(board: Board, target: HeroTarget): HeroLoadoutState {
       neutralItemSlug: slot.neutralItemSlug,
       hasScepter: slot.hasScepter,
       hasShard: slot.hasShard,
+      appliedBuildId: slot.appliedBuildId,
     };
   }
   const swap = slot.lateGameSwap;
   return swap
-    ? { heroSlug: swap.heroSlug, regularItemSlugs: swap.regularItemSlugs, neutralItemSlug: swap.neutralItemSlug, hasScepter: swap.hasScepter, hasShard: swap.hasShard }
-    : { heroSlug: null, regularItemSlugs: new Array(REGULAR_ITEM_SLOT_COUNT).fill(null), neutralItemSlug: null, hasScepter: false, hasShard: false };
+    ? {
+        heroSlug: swap.heroSlug,
+        regularItemSlugs: swap.regularItemSlugs,
+        neutralItemSlug: swap.neutralItemSlug,
+        hasScepter: swap.hasScepter,
+        hasShard: swap.hasShard,
+        appliedBuildId: swap.appliedBuildId,
+      }
+    : {
+        heroSlug: null,
+        regularItemSlugs: new Array(REGULAR_ITEM_SLOT_COUNT).fill(null),
+        neutralItemSlug: null,
+        hasScepter: false,
+        hasShard: false,
+        appliedBuildId: null,
+      };
 }
 
 function writeLoadout(board: Board, target: HeroTarget, loadout: HeroLoadoutState): Board {
@@ -86,6 +102,7 @@ export function placeHeroAt(board: Board, target: HeroTarget, heroSlug: string):
         neutralItemSlug: saved.neutralItemSlug,
         hasScepter: saved.hasScepter,
         hasShard: saved.hasShard,
+        appliedBuildId: saved.id,
       }
     : { ...readLoadout(board, target), heroSlug };
   return writeLoadout(board, target, seeded);

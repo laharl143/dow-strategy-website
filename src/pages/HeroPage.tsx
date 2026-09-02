@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import type { DragEndEvent } from '@dnd-kit/core';
 import {
+  heroes,
   heroBySlug,
   regularItems as regularItemsCatalog,
   regularItemBySlug,
@@ -25,6 +26,7 @@ import { AghUpgradeToggle } from '../components/AghUpgradeToggle';
 import { ComboToggle } from '../components/ComboToggle';
 import { ItemSlotBox } from '../components/ItemSlotBox';
 import { ItemShopDock } from '../components/ItemShopDock';
+import { HeroPageSearch } from '../components/HeroPageSearch';
 import { useAuth } from '../lib/auth';
 import { pushHeroBuilds } from '../lib/heroLoadoutSync';
 
@@ -378,9 +380,12 @@ export function HeroPage() {
     return (
       <ItemShopDock>
         <div className="hero-page">
-          <Link to="/heroes" className="hero-page-back">
-            ‹ Back to Heroes
-          </Link>
+          <div className="hero-page-top-row">
+            <Link to="/heroes" className="hero-page-back">
+              ‹ Back to Heroes
+            </Link>
+            <HeroPageSearch heroes={heroes} />
+          </div>
           <p>Hero not found.</p>
         </div>
       </ItemShopDock>
@@ -497,9 +502,12 @@ export function HeroPage() {
   return (
     <ItemShopDock onDragEnd={handleItemDragEnd}>
       <div className="hero-page">
-        <Link to="/heroes" className="hero-page-back">
-          ‹ Back to Heroes
-        </Link>
+        <div className="hero-page-top-row">
+          <Link to="/heroes" className="hero-page-back">
+            ‹ Back to Heroes
+          </Link>
+          <HeroPageSearch heroes={heroes} />
+        </div>
         <div className="hero-page-header">
           <img className="hero-page-portrait" src={heroIconUrl(hero.code)} alt={hero.name} />
           <div>

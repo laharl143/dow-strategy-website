@@ -37,6 +37,8 @@ export function LateGameSwapCard({
   onToggleShard,
   onHeroContextMenu,
   onApplyBuild,
+  onToggleRegularAutocast,
+  onToggleNeutralAutocast,
 }: {
   slotId: string;
   swap: BoardSlot['lateGameSwap'];
@@ -58,6 +60,8 @@ export function LateGameSwapCard({
   onToggleShard: () => void;
   onHeroContextMenu: (e: React.MouseEvent, heroSlug: string) => void;
   onApplyBuild: (build: HeroBuild) => void;
+  onToggleRegularAutocast: (index: number) => void;
+  onToggleNeutralAutocast: () => void;
 }) {
   const { open: pickerOpen, openPopover, closePopover } = useSingleOpenPopover(`slot:${slotId}:lategame:hero-picker`);
   const { setNodeRef, isOver } = useDroppable({
@@ -161,6 +165,8 @@ export function LateGameSwapCard({
                     onPick={(itemSlug) => onPickRegularItem(i, itemSlug)}
                     empty={i < 6 ? 'Empty item slot' : 'Empty backpack slot'}
                     backpack={i >= 6}
+                    autocast={swap.regularItemAutocast[i]}
+                    onToggleAutocast={() => onToggleRegularAutocast(i)}
                   />
                 ))}
               </div>
@@ -173,6 +179,8 @@ export function LateGameSwapCard({
                 onPick={onPickNeutralItem}
                 empty="Empty neutral slot"
                 circular
+                autocast={swap.neutralItemAutocast}
+                onToggleAutocast={onToggleNeutralAutocast}
               />
             </div>
           </>

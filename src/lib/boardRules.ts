@@ -195,11 +195,32 @@ export function applyHeroBuild(
             hasScepter: build.hasScepter,
             hasShard: build.hasShard,
             appliedBuildId: build.id,
+            regularItemAutocast: [...build.regularItemAutocast],
+            neutralItemAutocast: build.neutralItemAutocast,
           }
         : s,
     ),
   };
   return setNeutralItem(withItems, slotId, build.neutralItemSlug, neutralItemBySlug);
+}
+
+export function toggleRegularItemAutocast(board: Board, slotId: string, itemIndex: number): Board {
+  return {
+    ...board,
+    slots: board.slots.map((s) => {
+      if (s.slotId !== slotId) return s;
+      const regularItemAutocast = [...s.regularItemAutocast];
+      regularItemAutocast[itemIndex] = !regularItemAutocast[itemIndex];
+      return { ...s, regularItemAutocast };
+    }),
+  };
+}
+
+export function toggleNeutralItemAutocast(board: Board, slotId: string): Board {
+  return {
+    ...board,
+    slots: board.slots.map((s) => (s.slotId === slotId ? { ...s, neutralItemAutocast: !s.neutralItemAutocast } : s)),
+  };
 }
 
 export function toggleScepter(board: Board, slotId: string): Board {
@@ -234,6 +255,8 @@ export function emptyLateGameSwap(): LateGameSwap {
     hasScepter: false,
     hasShard: false,
     appliedBuildId: null,
+    regularItemAutocast: new Array(REGULAR_ITEM_SLOT_COUNT).fill(false),
+    neutralItemAutocast: false,
   };
 }
 
@@ -274,8 +297,33 @@ export function applyLateGameHeroBuild(board: Board, slotId: string, build: Hero
               hasScepter: build.hasScepter,
               hasShard: build.hasShard,
               appliedBuildId: build.id,
+              regularItemAutocast: [...build.regularItemAutocast],
+              neutralItemAutocast: build.neutralItemAutocast,
             },
           }
+        : s,
+    ),
+  };
+}
+
+export function toggleLateGameRegularItemAutocast(board: Board, slotId: string, itemIndex: number): Board {
+  return {
+    ...board,
+    slots: board.slots.map((s) => {
+      if (s.slotId !== slotId || !s.lateGameSwap) return s;
+      const regularItemAutocast = [...s.lateGameSwap.regularItemAutocast];
+      regularItemAutocast[itemIndex] = !regularItemAutocast[itemIndex];
+      return { ...s, lateGameSwap: { ...s.lateGameSwap, regularItemAutocast } };
+    }),
+  };
+}
+
+export function toggleLateGameNeutralItemAutocast(board: Board, slotId: string): Board {
+  return {
+    ...board,
+    slots: board.slots.map((s) =>
+      s.slotId === slotId && s.lateGameSwap
+        ? { ...s, lateGameSwap: { ...s.lateGameSwap, neutralItemAutocast: !s.lateGameSwap.neutralItemAutocast } }
         : s,
     ),
   };

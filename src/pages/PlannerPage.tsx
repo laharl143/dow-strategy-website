@@ -29,6 +29,10 @@ import {
   toggleLateGameShard,
   applyHeroBuild,
   applyLateGameHeroBuild,
+  toggleRegularItemAutocast,
+  toggleNeutralItemAutocast,
+  toggleLateGameRegularItemAutocast,
+  toggleLateGameNeutralItemAutocast,
   type NeutralAssignError,
 } from '../lib/boardRules';
 import { NEUTRAL_ITEM_CAP } from '../lib/boardRules';
@@ -386,6 +390,14 @@ export function PlannerPage({
             onToggleLateGameShard={(slotId) => setBoard((prev) => toggleLateGameShard(prev, slotId))}
             onApplyBuild={(slotId, build) => setBoard((prev) => applyHeroBuild(prev, slotId, build, neutralItemBySlug))}
             onApplyLateGameBuild={(slotId, build) => setBoard((prev) => applyLateGameHeroBuild(prev, slotId, build))}
+            onToggleRegularAutocast={(slotId, i) => setBoard((prev) => toggleRegularItemAutocast(prev, slotId, i))}
+            onToggleNeutralAutocast={(slotId) => setBoard((prev) => toggleNeutralItemAutocast(prev, slotId))}
+            onToggleLateGameRegularAutocast={(slotId, i) =>
+              setBoard((prev) => toggleLateGameRegularItemAutocast(prev, slotId, i))
+            }
+            onToggleLateGameNeutralAutocast={(slotId) =>
+              setBoard((prev) => toggleLateGameNeutralItemAutocast(prev, slotId))
+            }
           />
         </main>
 

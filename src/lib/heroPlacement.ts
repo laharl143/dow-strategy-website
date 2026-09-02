@@ -12,6 +12,8 @@ interface HeroLoadoutState {
   hasScepter: boolean;
   hasShard: boolean;
   appliedBuildId: string | null;
+  regularItemAutocast: boolean[];
+  neutralItemAutocast: boolean;
 }
 
 function findHero(board: Board, heroSlug: string): HeroTarget | null {
@@ -32,6 +34,8 @@ function readLoadout(board: Board, target: HeroTarget): HeroLoadoutState {
       hasScepter: slot.hasScepter,
       hasShard: slot.hasShard,
       appliedBuildId: slot.appliedBuildId,
+      regularItemAutocast: slot.regularItemAutocast,
+      neutralItemAutocast: slot.neutralItemAutocast,
     };
   }
   const swap = slot.lateGameSwap;
@@ -43,6 +47,8 @@ function readLoadout(board: Board, target: HeroTarget): HeroLoadoutState {
         hasScepter: swap.hasScepter,
         hasShard: swap.hasShard,
         appliedBuildId: swap.appliedBuildId,
+        regularItemAutocast: swap.regularItemAutocast,
+        neutralItemAutocast: swap.neutralItemAutocast,
       }
     : {
         heroSlug: null,
@@ -51,6 +57,8 @@ function readLoadout(board: Board, target: HeroTarget): HeroLoadoutState {
         hasScepter: false,
         hasShard: false,
         appliedBuildId: null,
+        regularItemAutocast: new Array(REGULAR_ITEM_SLOT_COUNT).fill(false),
+        neutralItemAutocast: false,
       };
 }
 
@@ -103,6 +111,8 @@ export function placeHeroAt(board: Board, target: HeroTarget, heroSlug: string):
         hasScepter: saved.hasScepter,
         hasShard: saved.hasShard,
         appliedBuildId: saved.id,
+        regularItemAutocast: [...saved.regularItemAutocast],
+        neutralItemAutocast: saved.neutralItemAutocast,
       }
     : { ...readLoadout(board, target), heroSlug };
   return writeLoadout(board, target, seeded);

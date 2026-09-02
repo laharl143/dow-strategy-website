@@ -111,6 +111,9 @@ export interface LateGameSwap {
    * using here. Null once the items no longer came from picking a build (a
    * fresh hero with no saved build, or items edited by hand afterward). */
   appliedBuildId: string | null;
+  /** Per-slot "autocast enabled" flags, index-matched to regularItemSlugs. */
+  regularItemAutocast: boolean[];
+  neutralItemAutocast: boolean;
 }
 
 export interface BoardSlot {
@@ -124,6 +127,9 @@ export interface BoardSlot {
   hasShard: boolean;
   /** See {@link LateGameSwap.appliedBuildId} — same idea for the primary slot. */
   appliedBuildId: string | null;
+  /** Per-slot "autocast enabled" flags, index-matched to regularItemSlugs. */
+  regularItemAutocast: boolean[];
+  neutralItemAutocast: boolean;
   lateGameSwap: LateGameSwap | null;
 }
 

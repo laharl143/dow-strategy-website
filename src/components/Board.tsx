@@ -40,6 +40,10 @@ export function Board({
   onToggleLateGameShard,
   onApplyBuild,
   onApplyLateGameBuild,
+  onToggleRegularAutocast,
+  onToggleNeutralAutocast,
+  onToggleLateGameRegularAutocast,
+  onToggleLateGameNeutralAutocast,
 }: {
   board: BoardType;
   twoColumns: boolean;
@@ -70,6 +74,10 @@ export function Board({
   onToggleLateGameShard: (slotId: string) => void;
   onApplyBuild: (slotId: string, build: HeroBuild) => void;
   onApplyLateGameBuild: (slotId: string, build: HeroBuild) => void;
+  onToggleRegularAutocast: (slotId: string, index: number) => void;
+  onToggleNeutralAutocast: (slotId: string) => void;
+  onToggleLateGameRegularAutocast: (slotId: string, index: number) => void;
+  onToggleLateGameNeutralAutocast: (slotId: string) => void;
 }) {
   const { openMenu, menuNode } = useHeroContextMenu();
 
@@ -98,6 +106,8 @@ export function Board({
           onToggleShard={() => onToggleShard(definition.id)}
           onHeroContextMenu={openMenu}
           onApplyBuild={(build) => onApplyBuild(definition.id, build)}
+          onToggleRegularAutocast={(i) => onToggleRegularAutocast(definition.id, i)}
+          onToggleNeutralAutocast={() => onToggleNeutralAutocast(definition.id)}
         />
 
         {swap && (
@@ -129,6 +139,8 @@ export function Board({
             onToggleShard={() => onToggleLateGameShard(definition.id)}
             onHeroContextMenu={openMenu}
             onApplyBuild={(build) => onApplyLateGameBuild(definition.id, build)}
+            onToggleRegularAutocast={(i) => onToggleLateGameRegularAutocast(definition.id, i)}
+            onToggleNeutralAutocast={() => onToggleLateGameNeutralAutocast(definition.id)}
           />
         ) : (
           <button

@@ -31,6 +31,12 @@ const GUEST_MODE_KEY = 'dow-planner:guest-mode';
 // whichever page's ItemShopDock/PlannerPage instance owns the toggle.
 const SHOP_OPEN_KEY = 'dow-planner:shop-open';
 
+function padBooleans(arr: boolean[] | undefined, count: number): boolean[] {
+  const result = (arr ?? []).slice(0, count);
+  while (result.length < count) result.push(false);
+  return result;
+}
+
 export function emptyBoard(): Board {
   return {
     slots: ROLE_SLOTS.map((slot) => ({
@@ -41,6 +47,8 @@ export function emptyBoard(): Board {
       hasScepter: false,
       hasShard: false,
       appliedBuildId: null,
+      regularItemAutocast: new Array(REGULAR_ITEM_SLOT_COUNT).fill(false),
+      neutralItemAutocast: false,
       lateGameSwap: null,
     })),
     bonusNeutralTier: 5,
@@ -58,12 +66,14 @@ function normalizeLateGameSwap(swap: BoardSlot['lateGameSwap']): BoardSlot['late
     hasScepter: swap.hasScepter ?? false,
     hasShard: swap.hasShard ?? false,
     appliedBuildId: swap.appliedBuildId ?? null,
+    regularItemAutocast: padBooleans(swap.regularItemAutocast, REGULAR_ITEM_SLOT_COUNT),
+    neutralItemAutocast: swap.neutralItemAutocast ?? false,
   };
 }
 
 // Pads/truncates regularItemSlugs to the current length, and backfills
-// hasScepter/hasShard/appliedBuildId/lateGameSwap/bonusNeutralTier, for
-// boards saved before those fields existed.
+// hasScepter/hasShard/appliedBuildId/autocast flags/lateGameSwap/
+// bonusNeutralTier, for boards saved before those fields existed.
 export function normalizeBoard(board: Board): Board {
   return {
     slots: board.slots.map((s) => {
@@ -75,6 +85,8 @@ export function normalizeBoard(board: Board): Board {
         hasScepter: s.hasScepter ?? false,
         hasShard: s.hasShard ?? false,
         appliedBuildId: s.appliedBuildId ?? null,
+        regularItemAutocast: padBooleans(s.regularItemAutocast, REGULAR_ITEM_SLOT_COUNT),
+        neutralItemAutocast: s.neutralItemAutocast ?? false,
         lateGameSwap: normalizeLateGameSwap(s.lateGameSwap),
       };
     }),
@@ -266,6 +278,10 @@ export interface HeroBuild {
   note: string;
   hasScepter: boolean;
   hasShard: boolean;
+  /** Per-slot "autocast enabled" flags for the Core Items only, index-matched
+   * to regularItemSlugs — situational items don't support autocast. */
+  regularItemAutocast: boolean[];
+  neutralItemAutocast: boolean;
 }
 
 export interface HeroBuildState {
@@ -284,6 +300,8 @@ export function newHeroBuild(name: string): HeroBuild {
     note: '',
     hasScepter: false,
     hasShard: false,
+    regularItemAutocast: new Array(REGULAR_ITEM_SLOT_COUNT).fill(false),
+    neutralItemAutocast: false,
   };
 }
 
@@ -303,6 +321,8 @@ function normalizeHeroBuild(build: Partial<HeroBuild> & { id: string }): HeroBui
     note: build.note ?? '',
     hasScepter: build.hasScepter ?? false,
     hasShard: build.hasShard ?? false,
+    regularItemAutocast: padBooleans(build.regularItemAutocast, REGULAR_ITEM_SLOT_COUNT),
+    neutralItemAutocast: build.neutralItemAutocast ?? false,
   };
 }
 

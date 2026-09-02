@@ -145,6 +145,8 @@ function CoreItemsSection({
   onPickNeutralItem,
   onToggleScepter,
   onToggleShard,
+  onToggleRegularAutocast,
+  onToggleNeutralAutocast,
 }: {
   heroSlug: string;
   build: HeroBuild;
@@ -160,6 +162,8 @@ function CoreItemsSection({
   onPickNeutralItem: (itemSlug: string) => void;
   onToggleScepter: () => void;
   onToggleShard: () => void;
+  onToggleRegularAutocast: (index: number) => void;
+  onToggleNeutralAutocast: () => void;
 }) {
   const slotId = `hero:${heroSlug}`;
   const regularItems = build.regularItemSlugs.map((slug) => (slug ? regularItemBySlug.get(slug) : undefined));
@@ -203,6 +207,8 @@ function CoreItemsSection({
               onPick={(itemSlug) => onPickRegularItem(i, itemSlug)}
               empty={i < 6 ? 'Empty item slot' : 'Empty backpack slot'}
               backpack={i >= 6}
+              autocast={build.regularItemAutocast[i]}
+              onToggleAutocast={() => onToggleRegularAutocast(i)}
             />
           ))}
         </div>
@@ -215,6 +221,8 @@ function CoreItemsSection({
           onPick={onPickNeutralItem}
           empty="Empty neutral slot"
           circular
+          autocast={build.neutralItemAutocast}
+          onToggleAutocast={onToggleNeutralAutocast}
         />
       </div>
     </section>
@@ -536,6 +544,16 @@ export function HeroPage() {
           onPickNeutralItem={(itemSlug) => setActiveBuild((prev) => ({ ...prev, neutralItemSlug: itemSlug }))}
           onToggleScepter={() => setActiveBuild((prev) => ({ ...prev, hasScepter: !prev.hasScepter }))}
           onToggleShard={() => setActiveBuild((prev) => ({ ...prev, hasShard: !prev.hasShard }))}
+          onToggleRegularAutocast={(i) =>
+            setActiveBuild((prev) => {
+              const flags = [...prev.regularItemAutocast];
+              flags[i] = !flags[i];
+              return { ...prev, regularItemAutocast: flags };
+            })
+          }
+          onToggleNeutralAutocast={() =>
+            setActiveBuild((prev) => ({ ...prev, neutralItemAutocast: !prev.neutralItemAutocast }))
+          }
         />
         <SituationalItemsSection
           heroSlug={hero.slug}

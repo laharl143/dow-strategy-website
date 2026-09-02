@@ -29,6 +29,11 @@ alter table hero_loadouts add column if not exists build_name text not null defa
 alter table hero_loadouts add column if not exists has_scepter boolean not null default false;
 alter table hero_loadouts add column if not exists has_shard boolean not null default false;
 
+-- Autocast indicator (DOW-9): a per-slot "this item is on autocast" flag,
+-- Core Items only — situational items don't support it.
+alter table hero_loadouts add column if not exists regular_item_autocast jsonb not null default '[]'::jsonb;
+alter table hero_loadouts add column if not exists neutral_item_autocast boolean not null default false;
+
 -- Backfill build_id for any pre-existing single-build rows, then make it
 -- required and fold it into the primary key. Safe to re-run: once every row
 -- has a build_id and the composite key exists, these are no-ops.

@@ -29,6 +29,8 @@ export function RoleSlotCard({
   onToggleShard,
   onHeroContextMenu,
   onApplyBuild,
+  onToggleRegularAutocast,
+  onToggleNeutralAutocast,
 }: {
   definition: RoleSlotDefinition;
   slot: BoardSlot;
@@ -49,6 +51,8 @@ export function RoleSlotCard({
   onToggleShard: () => void;
   onHeroContextMenu: (e: React.MouseEvent, heroSlug: string) => void;
   onApplyBuild: (build: HeroBuild) => void;
+  onToggleRegularAutocast: (index: number) => void;
+  onToggleNeutralAutocast: () => void;
 }) {
   const { open: pickerOpen, openPopover, closePopover } = useSingleOpenPopover(`slot:${slot.slotId}:hero-picker`);
   const { setNodeRef, isOver } = useDroppable({
@@ -153,6 +157,8 @@ export function RoleSlotCard({
                     onPick={(itemSlug) => onPickRegularItem(i, itemSlug)}
                     empty={i < 6 ? 'Empty item slot' : 'Empty backpack slot'}
                     backpack={i >= 6}
+                    autocast={slot.regularItemAutocast[i]}
+                    onToggleAutocast={() => onToggleRegularAutocast(i)}
                   />
                 ))}
               </div>
@@ -165,6 +171,8 @@ export function RoleSlotCard({
                 onPick={onPickNeutralItem}
                 empty="Empty neutral slot"
                 circular
+                autocast={slot.neutralItemAutocast}
+                onToggleAutocast={onToggleNeutralAutocast}
               />
             </div>
           </>

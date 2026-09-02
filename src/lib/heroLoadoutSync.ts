@@ -1,5 +1,6 @@
 import { supabase } from './supabase';
 import { loadHeroBuilds, saveHeroBuilds, type HeroBuild, type HeroBuildState } from './persistence';
+import { REGULAR_ITEM_SLOT_COUNT } from './boardRules';
 
 interface HeroBuildRow {
   hero_slug: string;
@@ -12,6 +13,8 @@ interface HeroBuildRow {
   note: string | null;
   has_scepter: boolean | null;
   has_shard: boolean | null;
+  regular_item_autocast: boolean[] | null;
+  neutral_item_autocast: boolean | null;
 }
 
 function toRow(userId: string, heroSlug: string, build: HeroBuild) {
@@ -27,6 +30,8 @@ function toRow(userId: string, heroSlug: string, build: HeroBuild) {
     note: build.note,
     has_scepter: build.hasScepter,
     has_shard: build.hasShard,
+    regular_item_autocast: build.regularItemAutocast,
+    neutral_item_autocast: build.neutralItemAutocast,
     updated_at: new Date().toISOString(),
   };
 }
@@ -69,7 +74,7 @@ export async function pullAndMergeHeroBuilds(userId: string): Promise<void> {
   const { data, error } = await supabase
     .from('hero_loadouts')
     .select(
-      'hero_slug, build_id, build_name, regular_item_slugs, neutral_item_slug, situational_item_slugs, situational_neutral_item_slugs, note, has_scepter, has_shard',
+      'hero_slug, build_id, build_name, regular_item_slugs, neutral_item_slug, situational_item_slugs, situational_neutral_item_slugs, note, has_scepter, has_shard, regular_item_autocast, neutral_item_autocast',
     )
     .eq('user_id', userId);
 
@@ -99,6 +104,8 @@ export async function pullAndMergeHeroBuilds(userId: string): Promise<void> {
       note: r.note ?? '',
       hasScepter: r.has_scepter ?? false,
       hasShard: r.has_shard ?? false,
+      regularItemAutocast: r.regular_item_autocast ?? new Array(REGULAR_ITEM_SLOT_COUNT).fill(false),
+      neutralItemAutocast: r.neutral_item_autocast ?? false,
     }));
     merged[heroSlug] = { builds, activeBuildId: builds[0]?.id ?? '' };
   }

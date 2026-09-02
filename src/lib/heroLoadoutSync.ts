@@ -17,7 +17,7 @@ interface HeroBuildRow {
   neutral_item_autocast: boolean | null;
 }
 
-function toRow(userId: string, heroSlug: string, build: HeroBuild) {
+function toRow(userId: string, heroSlug: string, build: HeroBuild, includeAutocast: boolean) {
   return {
     user_id: userId,
     hero_slug: heroSlug,
@@ -30,8 +30,9 @@ function toRow(userId: string, heroSlug: string, build: HeroBuild) {
     note: build.note,
     has_scepter: build.hasScepter,
     has_shard: build.hasShard,
-    regular_item_autocast: build.regularItemAutocast,
-    neutral_item_autocast: build.neutralItemAutocast,
+    ...(includeAutocast
+      ? { regular_item_autocast: build.regularItemAutocast, neutral_item_autocast: build.neutralItemAutocast }
+      : null),
     updated_at: new Date().toISOString(),
   };
 }
@@ -57,6 +58,29 @@ function isSchemaReady(): Promise<boolean> {
   return schemaReadyCheck;
 }
 
+// Whether the later DOW-9 autocast migration has actually been run — probed
+// separately (and more leniently than isSchemaReady above) so a project that
+// has the base multi-build columns but hasn't picked up the autocast ones
+// yet still gets everything else pulled/pushed, instead of the select below
+// failing outright on the missing columns and silently discarding every
+// saved build (this is exactly what was happening: the base schema was
+// migrated, the autocast columns weren't, and pulls were failing whole-hog
+// on "column regular_item_autocast does not exist" with nothing surfaced
+// beyond a console.error, so a hero's saved Core Items — including its
+// neutral item — never made it into this browser at all).
+let autocastColumnsReadyCheck: Promise<boolean> | null = null;
+
+async function probeAutocastColumnsReady(): Promise<boolean> {
+  if (!supabase) return false;
+  const { error } = await supabase.from('hero_loadouts').select('regular_item_autocast').limit(1);
+  return !error;
+}
+
+function areAutocastColumnsReady(): Promise<boolean> {
+  if (!autocastColumnsReadyCheck) autocastColumnsReadyCheck = probeAutocastColumnsReady();
+  return autocastColumnsReadyCheck;
+}
+
 /**
  * Called once when a user signs in. Pulls their synced builds down, merges
  * them with whatever's already in this browser's localStorage (remote wins
@@ -71,20 +95,25 @@ export async function pullAndMergeHeroBuilds(userId: string): Promise<void> {
     return;
   }
 
-  const { data, error } = await supabase
-    .from('hero_loadouts')
-    .select(
-      'hero_slug, build_id, build_name, regular_item_slugs, neutral_item_slug, situational_item_slugs, situational_neutral_item_slugs, note, has_scepter, has_shard, regular_item_autocast, neutral_item_autocast',
-    )
-    .eq('user_id', userId);
+  const autocastReady = await areAutocastColumnsReady();
+  const baseColumns =
+    'hero_slug, build_id, build_name, regular_item_slugs, neutral_item_slug, situational_item_slugs, situational_neutral_item_slugs, note, has_scepter, has_shard';
+  const columns: string = autocastReady ? `${baseColumns}, regular_item_autocast, neutral_item_autocast` : baseColumns;
+
+  const { data, error } = await supabase.from('hero_loadouts').select(columns).eq('user_id', userId);
 
   if (error) {
     console.error('Failed to pull synced hero builds', error);
     return;
   }
+  if (!autocastReady) {
+    console.warn(
+      'hero_loadouts is missing the autocast columns — run supabase/schema.sql. Builds synced without autocast flags.',
+    );
+  }
 
   const local = loadHeroBuilds();
-  const remoteRows = (data ?? []) as HeroBuildRow[];
+  const remoteRows = (data ?? []) as unknown as HeroBuildRow[];
   const remoteByHero = new Map<string, HeroBuildRow[]>();
   for (const row of remoteRows) {
     const list = remoteByHero.get(row.hero_slug) ?? [];
@@ -133,7 +162,8 @@ export async function pushHeroBuilds(userId: string, heroSlug: string, state: He
   }
   if (state.builds.length === 0) return;
 
-  const rows = state.builds.map((build) => toRow(userId, heroSlug, build));
+  const autocastReady = await areAutocastColumnsReady();
+  const rows = state.builds.map((build) => toRow(userId, heroSlug, build, autocastReady));
   const { error: upsertError } = await supabase
     .from('hero_loadouts')
     .upsert(rows, { onConflict: 'user_id,hero_slug,build_id' });

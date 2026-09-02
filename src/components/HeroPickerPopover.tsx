@@ -50,10 +50,19 @@ export function HeroPickerPopover({
     <div className="hero-picker-popover" onClick={(e) => e.stopPropagation()}>
       <input
         ref={inputRef}
-        type="text"
+        type="search"
         placeholder="Search heroes…"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
+        name="dow-hero-search"
+        data-lpignore="true"
+        data-1p-ignore=""
+        data-bwignore="true"
+        data-form-type="other"
       />
       <div className="hero-picker-grid" data-single={filtered.length === 1 || undefined}>
         {filtered.length === 0 && <div className="hero-picker-empty">No heroes found.</div>}

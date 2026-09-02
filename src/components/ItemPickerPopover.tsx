@@ -47,10 +47,19 @@ export function ItemPickerPopover({
     <div className="item-picker-popover" onClick={(e) => e.stopPropagation()}>
       <input
         ref={inputRef}
-        type="text"
+        type="search"
         placeholder="Search items…"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
+        name="dow-item-search"
+        data-lpignore="true"
+        data-1p-ignore=""
+        data-bwignore="true"
+        data-form-type="other"
       />
       <div className="item-picker-list">
         {filtered.length === 0 && <div className="item-picker-empty">No items found.</div>}

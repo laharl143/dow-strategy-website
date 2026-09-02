@@ -1,69 +1,30 @@
 import type { Board, LateGameSwap, NeutralItem } from '../types';
 import type { HeroBuild } from './persistence';
 
-// Neutral items: global cap of 6 across the whole board — one guaranteed
-// drop per tier (1-5), plus one bonus drop at hero level 25 that's randomly
-// a 2nd tier 4 or a 2nd tier 5 (see Board.bonusNeutralTier). So every tier
-// caps at 1 except the game's bonus tier, which caps at 2.
-export const NEUTRAL_ITEM_CAP = 6;
-
 // A hero's inventory: 6 active item slots + a 3-slot backpack, matching Dota 2's
 // own layout. Index 0-5 = active, 6-8 = backpack.
 export const ACTIVE_ITEM_SLOT_COUNT = 6;
 export const BACKPACK_ITEM_SLOT_COUNT = 3;
 export const REGULAR_ITEM_SLOT_COUNT = ACTIVE_ITEM_SLOT_COUNT + BACKPACK_ITEM_SLOT_COUNT;
 
-export function countAssignedNeutrals(board: Board): number {
-  return board.slots.filter((s) => s.neutralItemSlug !== null).length;
-}
-
-export function neutralTierCap(board: Board, tier: number): number {
-  return tier === board.bonusNeutralTier ? 2 : 1;
-}
-
-export function countAssignedByTier(board: Board, tier: number, neutralItemBySlug: Map<string, NeutralItem>): number {
-  return board.slots.filter((s) => s.neutralItemSlug && neutralItemBySlug.get(s.neutralItemSlug)?.tier === tier).length;
-}
-
-export type NeutralAssignError = 'total-cap' | 'tier-cap' | null;
-
 /**
- * Whether `itemSlug` can be placed in `slotId`'s neutral slot, and if not,
- * why — 'total-cap' for the board-wide 6 item limit, 'tier-cap' for the
- * per-tier limit (see NEUTRAL_ITEM_CAP above). Both checks exclude the
- * slot's own current occupant, so replacing a slot's existing item with
- * another of the same tier is always fine.
+ * How many primary-board slots (not late-game swaps — those are a plan, not
+ * something actually equipped at the same time) currently hold a neutral
+ * item of each tier. In reality only one item per tier (two for the game's
+ * level-25 bonus tier) can ever actually drop, so a tier with more than one
+ * assigned slot here is a "duplicate" — the board no longer blocks that
+ * (DOW-23), but callers use this to flag it visually (glow the slots sharing
+ * a tier) so the user can see who's really getting that drop.
  */
-export function checkAssignNeutral(
-  board: Board,
-  slotId: string,
-  itemSlug: string,
-  neutralItemBySlug: Map<string, NeutralItem>,
-): NeutralAssignError {
-  const slot = board.slots.find((s) => s.slotId === slotId);
-  if (!slot || slot.heroSlug === null) return 'total-cap'; // no hero to hold it
-  if (slot.neutralItemSlug === itemSlug) return null;
-
-  const item = neutralItemBySlug.get(itemSlug);
-  if (!item) return 'total-cap';
-
-  const others = board.slots.filter((s) => s.slotId !== slotId);
-  const totalOthers = others.filter((s) => s.neutralItemSlug !== null).length;
-  if (totalOthers >= NEUTRAL_ITEM_CAP) return 'total-cap';
-
-  const tierOthers = others.filter((s) => s.neutralItemSlug && neutralItemBySlug.get(s.neutralItemSlug)?.tier === item.tier).length;
-  if (tierOthers >= neutralTierCap(board, item.tier)) return 'tier-cap';
-
-  return null;
-}
-
-export function canAssignNeutral(
-  board: Board,
-  slotId: string,
-  itemSlug: string,
-  neutralItemBySlug: Map<string, NeutralItem>,
-): boolean {
-  return checkAssignNeutral(board, slotId, itemSlug, neutralItemBySlug) === null;
+export function neutralTierCounts(board: Board, neutralItemBySlug: Map<string, NeutralItem>): Map<number, number> {
+  const counts = new Map<number, number>();
+  for (const s of board.slots) {
+    if (!s.neutralItemSlug) continue;
+    const tier = neutralItemBySlug.get(s.neutralItemSlug)?.tier;
+    if (tier === undefined) continue;
+    counts.set(tier, (counts.get(tier) ?? 0) + 1);
+  }
+  return counts;
 }
 
 export function setBonusNeutralTier(board: Board, tier: 4 | 5): Board {
@@ -159,13 +120,7 @@ export function setRegularItem(
   };
 }
 
-export function setNeutralItem(
-  board: Board,
-  slotId: string,
-  itemSlug: string | null,
-  neutralItemBySlug: Map<string, NeutralItem>,
-): Board {
-  if (itemSlug !== null && !canAssignNeutral(board, slotId, itemSlug, neutralItemBySlug)) return board;
+export function setNeutralItem(board: Board, slotId: string, itemSlug: string | null): Board {
   return {
     ...board,
     slots: board.slots.map((s) => (s.slotId === slotId ? { ...s, neutralItemSlug: itemSlug } : s)),
@@ -174,17 +129,11 @@ export function setNeutralItem(
 
 /**
  * Loads one of a hero's saved hero-page builds into its board slot, replacing
- * whatever items/agh flags are there now — the board's own "switch build"
- * action for a hero with more than one saved build. Skips the neutral item
- * if the board-wide cap won't allow it (setNeutralItem's own check), leaving
- * whatever neutral item the slot already had.
+ * whatever items/agh flags (including the neutral item) are there now — the
+ * board's own "switch build" action for a hero with more than one saved
+ * build.
  */
-export function applyHeroBuild(
-  board: Board,
-  slotId: string,
-  build: HeroBuild,
-  neutralItemBySlug: Map<string, NeutralItem>,
-): Board {
+export function applyHeroBuild(board: Board, slotId: string, build: HeroBuild): Board {
   const withItems: Board = {
     ...board,
     slots: board.slots.map((s) =>
@@ -201,7 +150,7 @@ export function applyHeroBuild(
         : s,
     ),
   };
-  return setNeutralItem(withItems, slotId, build.neutralItemSlug, neutralItemBySlug);
+  return setNeutralItem(withItems, slotId, build.neutralItemSlug);
 }
 
 export function toggleRegularItemAutocast(board: Board, slotId: string, itemIndex: number): Board {

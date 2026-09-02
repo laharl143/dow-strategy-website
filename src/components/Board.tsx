@@ -20,6 +20,7 @@ export function Board({
   regularItemBySlug,
   neutralItems,
   neutralItemBySlug,
+  neutralTierCounts,
   onRemoveHero,
   onPickHero,
   onRemoveRegularItem,
@@ -54,6 +55,9 @@ export function Board({
   regularItemBySlug: Map<string, Item>;
   neutralItems: NeutralItem[];
   neutralItemBySlug: Map<string, NeutralItem>;
+  /** Tier -> how many primary-board slots hold a neutral item of that tier
+   * (DOW-23) — a tier with more than one glows on every slot sharing it. */
+  neutralTierCounts: Map<number, number>;
   onRemoveHero: (slotId: string) => void;
   onPickHero: (slotId: string, heroSlug: string) => void;
   onRemoveRegularItem: (slotId: string, index: number) => void;
@@ -84,6 +88,8 @@ export function Board({
   function renderRow(definition: RoleSlotDefinition) {
     const slot = board.slots.find((s) => s.slotId === definition.id)!;
     const swap = slot.lateGameSwap;
+    const neutralItem = slot.neutralItemSlug ? neutralItemBySlug.get(slot.neutralItemSlug) : undefined;
+    const neutralTierGlow = neutralItem && (neutralTierCounts.get(neutralItem.tier) ?? 0) > 1 ? neutralItem.tier : undefined;
     return (
       <div className="role-slot-row" key={definition.id}>
         <RoleSlotCard
@@ -92,7 +98,8 @@ export function Board({
           hero={slot.heroSlug ? heroBySlug.get(slot.heroSlug) : undefined}
           regularItems={slot.regularItemSlugs.map((s) => (s ? regularItemBySlug.get(s) : undefined))}
           regularItemsCatalog={regularItems}
-          neutralItem={slot.neutralItemSlug ? neutralItemBySlug.get(slot.neutralItemSlug) : undefined}
+          neutralItem={neutralItem}
+          neutralTierGlow={neutralTierGlow}
           neutralItemsCatalog={neutralItems}
           heroes={heroes}
           assignedHeroSlugs={assignedHeroSlugs}

@@ -12,10 +12,9 @@ import type { Board as BoardType, NeutralItem, SavedStrategy } from '../types';
 import { heroIconUrl } from '../lib/assets';
 import { heroes, regularItems, neutralItems, heroBySlug, regularItemBySlug, neutralItemBySlug } from '../lib/gameData';
 import {
-  checkAssignNeutral,
-  countAssignedNeutrals,
   setHero,
   setNeutralItem,
+  neutralTierCounts,
   setBonusNeutralTier,
   setRegularItem,
   toggleScepter,
@@ -33,23 +32,13 @@ import {
   toggleNeutralItemAutocast,
   toggleLateGameRegularItemAutocast,
   toggleLateGameNeutralItemAutocast,
-  type NeutralAssignError,
 } from '../lib/boardRules';
-import { NEUTRAL_ITEM_CAP } from '../lib/boardRules';
 import { placeHeroAt, type HeroTarget } from '../lib/heroPlacement';
 import { loadShopOpen, saveShopOpen } from '../lib/persistence';
 import { Board } from '../components/Board';
 import { HeroTray } from '../components/HeroTray';
 import { ItemShopPanel } from '../components/ItemShopPanel';
 import { StrategyList } from '../components/StrategyList';
-
-function neutralErrorMessage(error: NeutralAssignError, tier: number, bonusTier: number): string | null {
-  if (!error) return null;
-  if (error === 'total-cap') return 'Neutral item cap reached (6) — remove one first.';
-  return tier === bonusTier
-    ? `Only two Tier ${tier} items are possible this game (1 guaranteed + 1 level-25 bonus).`
-    : `Not possible to have two Tier ${tier} items — this game's level-25 bonus went to Tier ${bonusTier}.`;
-}
 
 interface DragData {
   kind: string;
@@ -84,17 +73,11 @@ export function PlannerPage({
   const [shopOpen, setShopOpen] = useState(loadShopOpen);
   const [heroPanelOpen, setHeroPanelOpen] = useState(true);
   const [twoColumns, setTwoColumns] = useState(false);
-  const [neutralError, setNeutralError] = useState<string | null>(null);
 
   useEffect(() => {
     saveShopOpen(shopOpen);
   }, [shopOpen]);
 
-  useEffect(() => {
-    if (!neutralError) return;
-    const timer = setTimeout(() => setNeutralError(null), 3500);
-    return () => clearTimeout(timer);
-  }, [neutralError]);
   // Require a small drag distance before a pointer-down counts as a drag —
   // otherwise dnd-kit treats any real click (with its inevitable sub-pixel
   // jitter) as a micro-drag and swallows the trailing click event, breaking
@@ -142,8 +125,6 @@ export function PlannerPage({
     return map;
   }, []);
 
-  const neutralsRemaining = NEUTRAL_ITEM_CAP - countAssignedNeutrals(board);
-
   function handleDragStart(event: DragStartEvent) {
     setActiveDrag((event.active.data.current as DragData | undefined) ?? null);
   }
@@ -155,11 +136,6 @@ export function PlannerPage({
     const activeData = active.data.current as DragData | undefined;
     const overData = over.data.current as DragData | undefined;
     if (!activeData || !overData) return;
-
-    // Written to (at most once) by the neutral-item branches below when a
-    // placement is rejected — read after setBoard() returns since the
-    // updater itself must stay pure (React 18 Strict Mode double-invokes it).
-    let rejection: string | null = null;
 
     setBoard((prev) => {
       // Placing/moving/swapping a hero into a primary or late-game-swap
@@ -190,12 +166,7 @@ export function PlannerPage({
       // Placing a neutral item from the tray.
       if (activeData.kind === 'neutral-item' && overData.kind === 'neutral-item-slot' && overData.slotId) {
         if (!activeData.itemSlug) return prev;
-        const error = checkAssignNeutral(prev, overData.slotId, activeData.itemSlug, neutralItemBySlug);
-        if (error) {
-          rejection = neutralErrorMessage(error, neutralItemBySlug.get(activeData.itemSlug)?.tier ?? 0, prev.bonusNeutralTier);
-          return prev;
-        }
-        return setNeutralItem(prev, overData.slotId, activeData.itemSlug, neutralItemBySlug);
+        return setNeutralItem(prev, overData.slotId, activeData.itemSlug);
       }
 
       // Moving a regular item already on the board to another regular slot —
@@ -222,13 +193,8 @@ export function PlannerPage({
         overData.slotId
       ) {
         if (!activeData.itemSlug) return prev;
-        const withoutOld = setNeutralItem(prev, activeData.fromSlotId, null, neutralItemBySlug);
-        const error = checkAssignNeutral(withoutOld, overData.slotId, activeData.itemSlug, neutralItemBySlug);
-        if (error) {
-          rejection = neutralErrorMessage(error, neutralItemBySlug.get(activeData.itemSlug)?.tier ?? 0, prev.bonusNeutralTier);
-          return prev;
-        }
-        return setNeutralItem(withoutOld, overData.slotId, activeData.itemSlug, neutralItemBySlug);
+        const withoutOld = setNeutralItem(prev, activeData.fromSlotId, null);
+        return setNeutralItem(withoutOld, overData.slotId, activeData.itemSlug);
       }
 
       // Placing a regular item from the tray into a late-game swap slot.
@@ -278,8 +244,6 @@ export function PlannerPage({
 
       return prev;
     });
-
-    if (rejection) setNeutralError(rejection);
   }
 
   function renderDragOverlay() {
@@ -327,14 +291,6 @@ export function PlannerPage({
     return null;
   }
 
-  function handlePickNeutralItem(slotId: string, itemSlug: string) {
-    const error = checkAssignNeutral(board, slotId, itemSlug, neutralItemBySlug);
-    if (error) {
-      setNeutralError(neutralErrorMessage(error, neutralItemBySlug.get(itemSlug)?.tier ?? 0, board.bonusNeutralTier));
-      return;
-    }
-    setBoard((prev) => setNeutralItem(prev, slotId, itemSlug, neutralItemBySlug));
-  }
 
   return (
     <DndContext
@@ -372,8 +328,9 @@ export function PlannerPage({
             onPickHero={(slotId, heroSlug) => setBoard((prev) => placeHeroAt(prev, { kind: 'primary', slotId }, heroSlug))}
             onRemoveRegularItem={(slotId, i) => setBoard((prev) => setRegularItem(prev, slotId, i, null))}
             onPickRegularItem={(slotId, i, itemSlug) => setBoard((prev) => setRegularItem(prev, slotId, i, itemSlug))}
-            onRemoveNeutralItem={(slotId) => setBoard((prev) => setNeutralItem(prev, slotId, null, neutralItemBySlug))}
-            onPickNeutralItem={handlePickNeutralItem}
+            onRemoveNeutralItem={(slotId) => setBoard((prev) => setNeutralItem(prev, slotId, null))}
+            onPickNeutralItem={(slotId, itemSlug) => setBoard((prev) => setNeutralItem(prev, slotId, itemSlug))}
+            neutralTierCounts={neutralTierCounts(board, neutralItemBySlug)}
             onToggleScepter={(slotId) => setBoard((prev) => toggleScepter(prev, slotId))}
             onToggleShard={(slotId) => setBoard((prev) => toggleShard(prev, slotId))}
             onAddLateGameSwap={(slotId) => setBoard((prev) => addLateGameSwap(prev, slotId))}
@@ -388,7 +345,7 @@ export function PlannerPage({
             onPickLateGameNeutralItem={(slotId, itemSlug) => setBoard((prev) => setLateGameNeutralItem(prev, slotId, itemSlug))}
             onToggleLateGameScepter={(slotId) => setBoard((prev) => toggleLateGameScepter(prev, slotId))}
             onToggleLateGameShard={(slotId) => setBoard((prev) => toggleLateGameShard(prev, slotId))}
-            onApplyBuild={(slotId, build) => setBoard((prev) => applyHeroBuild(prev, slotId, build, neutralItemBySlug))}
+            onApplyBuild={(slotId, build) => setBoard((prev) => applyHeroBuild(prev, slotId, build))}
             onApplyLateGameBuild={(slotId, build) => setBoard((prev) => applyLateGameHeroBuild(prev, slotId, build))}
             onToggleRegularAutocast={(slotId, i) => setBoard((prev) => toggleRegularItemAutocast(prev, slotId, i))}
             onToggleNeutralAutocast={(slotId) => setBoard((prev) => toggleNeutralItemAutocast(prev, slotId))}
@@ -405,7 +362,7 @@ export function PlannerPage({
           <ItemShopPanel
             regularItems={regularItems}
             neutralsByTier={neutralsByTier}
-            neutralsRemaining={neutralsRemaining}
+            neutralsRemaining={null}
             bonusNeutralTier={board.bonusNeutralTier}
             onSetBonusNeutralTier={(tier) => setBoard((prev) => setBonusNeutralTier(prev, tier))}
           />
@@ -445,8 +402,6 @@ export function PlannerPage({
         <span className="hero-panel-collapse-handle-label">Heroes</span>
         <span className="shop-toggle-hotkey">Space</span>
       </button>
-
-      {neutralError && <div className="neutral-error-toast">{neutralError}</div>}
 
       <DragOverlay dropAnimation={null}>{renderDragOverlay()}</DragOverlay>
     </DndContext>

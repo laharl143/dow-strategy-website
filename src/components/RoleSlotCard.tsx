@@ -19,6 +19,7 @@ export function RoleSlotCard({
   regularItems,
   regularItemsCatalog,
   neutralItem,
+  neutralTierGlow,
   neutralItemsCatalog,
   onRemoveHero,
   onPickHero,
@@ -41,6 +42,8 @@ export function RoleSlotCard({
   regularItems: (Item | undefined)[];
   regularItemsCatalog: Item[];
   neutralItem: NeutralItem | undefined;
+  /** Set to the item's tier when another slot on the board shares it (DOW-23) — glows the ring. */
+  neutralTierGlow?: number;
   neutralItemsCatalog: NeutralItem[];
   onRemoveHero: () => void;
   onPickHero: (heroSlug: string) => void;
@@ -173,6 +176,7 @@ export function RoleSlotCard({
                 onPick={onPickNeutralItem}
                 empty="Empty neutral slot"
                 circular
+                tierGlow={neutralTierGlow}
                 autocast={slot.neutralItemAutocast}
                 onToggleAutocast={onToggleNeutralAutocast}
               />

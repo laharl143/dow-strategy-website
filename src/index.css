@@ -21,6 +21,14 @@
   --combo-bright: #cf9ef0;
   --agh-active: #5bc8f0;
 
+  /* Neutral item tier colors (DOW-23) — flags duplicate-tier neutral items
+     across the board, since only one of a tier can really drop this game. */
+  --neutral-t1: #9a9fa8;
+  --neutral-t2: #5fbf6f;
+  --neutral-t3: #3aa8d8;
+  --neutral-t4: #d16fb4;
+  --neutral-t5: #e2793a;
+
   color-scheme: dark;
   font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
 }
@@ -1090,6 +1098,38 @@ body {
   border-color: var(--gold);
 }
 
+/* Duplicate-tier glow (DOW-23) — every slot sharing a tier with another
+   pulses in that tier's color, since only one of a tier can really drop
+   this game. */
+.item-slot[data-circular][data-tier-glow] {
+  animation: neutral-tier-pulse 2.4s ease-in-out infinite;
+}
+
+.item-slot[data-circular][data-tier-glow='1'] { --tier-glow-color: var(--neutral-t1); }
+.item-slot[data-circular][data-tier-glow='2'] { --tier-glow-color: var(--neutral-t2); }
+.item-slot[data-circular][data-tier-glow='3'] { --tier-glow-color: var(--neutral-t3); }
+.item-slot[data-circular][data-tier-glow='4'] { --tier-glow-color: var(--neutral-t4); }
+.item-slot[data-circular][data-tier-glow='5'] { --tier-glow-color: var(--neutral-t5); }
+
+/* Same specificity as [data-circular][data-filled] above (two attributes on
+   top of the base class) — wins by source order, since it's declared after. */
+.item-slot[data-circular][data-tier-glow] {
+  border-color: var(--tier-glow-color);
+  box-shadow:
+    0 0 0 2px rgba(0, 0, 0, 0.5),
+    0 0 8px 1px var(--tier-glow-color),
+    0 0 16px 2px color-mix(in srgb, var(--tier-glow-color) 55%, transparent);
+}
+
+@keyframes neutral-tier-pulse {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.25); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item-slot[data-circular][data-tier-glow] { animation: none; }
+}
+
 /* The icon's own corners must round with the slot, not just the slot's
    border — otherwise a filled neutral slot shows the item art's square
    corners poking out past the circular border. Wins by specificity over
@@ -1772,23 +1812,6 @@ body {
 .hero-context-menu button:hover {
   background: var(--panel-alt);
   color: var(--gold);
-}
-
-.neutral-error-toast {
-  position: fixed;
-  left: 50%;
-  bottom: 1.5rem;
-  transform: translateX(-50%);
-  z-index: 200;
-  background: var(--panel-raised);
-  border: 1px solid var(--danger);
-  color: var(--text);
-  font-size: 0.82rem;
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  max-width: 420px;
-  text-align: center;
 }
 
 .pick-frequency-filters {

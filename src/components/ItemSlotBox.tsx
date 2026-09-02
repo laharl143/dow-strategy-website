@@ -29,6 +29,7 @@ export function ItemSlotBox({
   empty,
   backpack,
   circular,
+  tierGlow,
   autocast,
   onToggleAutocast,
 }: {
@@ -41,6 +42,9 @@ export function ItemSlotBox({
   empty: string;
   backpack?: boolean;
   circular?: boolean;
+  /** Neutral item tier (1-5) to glow the ring in, when another board slot
+   * holds the same tier (DOW-23) — a heads-up that only one can really drop. */
+  tierGlow?: number;
   /** Current autocast state. Omit along with onToggleAutocast for slots that
    * don't support it (situational items). */
   autocast?: boolean;
@@ -102,7 +106,8 @@ export function ItemSlotBox({
       data-backpack={backpack || undefined}
       data-circular={circular || undefined}
       data-autocast={(!!item && autocast) || undefined}
-      title={item ? item.name : empty}
+      data-tier-glow={(!!item && tierGlow) || undefined}
+      title={item && tierGlow ? `${item.name} — Tier ${tierGlow}, shared with another slot` : item ? item.name : empty}
     >
       {item ? (
         <>

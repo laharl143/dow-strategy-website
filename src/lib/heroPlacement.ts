@@ -80,7 +80,13 @@ export function placeHeroAt(board: Board, target: HeroTarget, heroSlug: string):
   const saved = heroBuildState?.builds.find((b) => b.id === heroBuildState.activeBuildId);
   const hasSavedItems = saved && (saved.regularItemSlugs.some((s) => s !== null) || saved.neutralItemSlug !== null);
   const seeded: HeroLoadoutState = hasSavedItems
-    ? { heroSlug, regularItemSlugs: [...saved.regularItemSlugs], neutralItemSlug: saved.neutralItemSlug, hasScepter: false, hasShard: false }
+    ? {
+        heroSlug,
+        regularItemSlugs: [...saved.regularItemSlugs],
+        neutralItemSlug: saved.neutralItemSlug,
+        hasScepter: saved.hasScepter,
+        hasShard: saved.hasShard,
+      }
     : { ...readLoadout(board, target), heroSlug };
   return writeLoadout(board, target, seeded);
 }

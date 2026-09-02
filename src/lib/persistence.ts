@@ -15,11 +15,33 @@ const HERO_AGH_KEY = 'dow-planner:hero-agh';
 // Per-hero "my current build" item loadout shown on each hero's page — a
 // personal scratchpad separate from the board, and separate from the
 // hero's static coreItemSlugs/situationalItemSlugs reference list.
+// Superseded by HERO_BUILDS_KEY (multiple named builds per hero); kept only
+// as a one-time migration source for browsers that saved under the old shape.
 const HERO_LOADOUT_KEY = 'dow-planner:hero-loadout';
+// One or more named item builds per hero (e.g. "Aghs Carry", "Support"),
+// shown as tabs on the hero page. Replaces HERO_LOADOUT_KEY/HERO_AGH_KEY,
+// which stored exactly one loadout and one set of agh flags per hero.
+const HERO_BUILDS_KEY = 'dow-planner:hero-builds';
 // Set once someone picks "Continue as Guest" on the login gate, so it
 // doesn't ask again on this browser. Cleared on sign-out along with the
 // rest of the account-scoped data, so signing out returns to the gate.
 const GUEST_MODE_KEY = 'dow-planner:guest-mode';
+// Whether the item shop sidebar is open — shared across the board and the
+// hero pages so it doesn't reopen itself every time navigation remounts
+// whichever page's ItemShopDock/PlannerPage instance owns the toggle.
+const SHOP_OPEN_KEY = 'dow-planner:shop-open';
+// Which of the 7 fixed COMBO_HERO_SLUGS heroes' special abilities (each
+// unique, each usable on any hero — Lycan's bite, Snapfire's cannonball,
+// etc.) can target each hero (DOW-10) — heroSlug -> array of giver hero
+// slugs. Shown on every hero's page, one-directional (see
+// toggleHeroComboGiver below).
+const HERO_COMBO_KEY = 'dow-planner:hero-combos';
+
+function padBooleans(arr: boolean[] | undefined, count: number): boolean[] {
+  const result = (arr ?? []).slice(0, count);
+  while (result.length < count) result.push(false);
+  return result;
+}
 
 export function emptyBoard(): Board {
   return {
@@ -30,6 +52,9 @@ export function emptyBoard(): Board {
       neutralItemSlug: null,
       hasScepter: false,
       hasShard: false,
+      appliedBuildId: null,
+      regularItemAutocast: new Array(REGULAR_ITEM_SLOT_COUNT).fill(false),
+      neutralItemAutocast: false,
       lateGameSwap: null,
     })),
     bonusNeutralTier: 5,
@@ -46,12 +71,15 @@ function normalizeLateGameSwap(swap: BoardSlot['lateGameSwap']): BoardSlot['late
     neutralItemSlug: swap.neutralItemSlug ?? null,
     hasScepter: swap.hasScepter ?? false,
     hasShard: swap.hasShard ?? false,
+    appliedBuildId: swap.appliedBuildId ?? null,
+    regularItemAutocast: padBooleans(swap.regularItemAutocast, REGULAR_ITEM_SLOT_COUNT),
+    neutralItemAutocast: swap.neutralItemAutocast ?? false,
   };
 }
 
 // Pads/truncates regularItemSlugs to the current length, and backfills
-// hasScepter/hasShard/lateGameSwap/bonusNeutralTier, for boards saved
-// before those fields existed.
+// hasScepter/hasShard/appliedBuildId/autocast flags/lateGameSwap/
+// bonusNeutralTier, for boards saved before those fields existed.
 export function normalizeBoard(board: Board): Board {
   return {
     slots: board.slots.map((s) => {
@@ -62,6 +90,9 @@ export function normalizeBoard(board: Board): Board {
         regularItemSlugs: slugs,
         hasScepter: s.hasScepter ?? false,
         hasShard: s.hasShard ?? false,
+        appliedBuildId: s.appliedBuildId ?? null,
+        regularItemAutocast: padBooleans(s.regularItemAutocast, REGULAR_ITEM_SLOT_COUNT),
+        neutralItemAutocast: s.neutralItemAutocast ?? false,
         lateGameSwap: normalizeLateGameSwap(s.lateGameSwap),
       };
     }),
@@ -149,6 +180,7 @@ export function clearAccountScopedLocalData(): void {
   localStorage.removeItem(ACTIVE_BOARD_KEY);
   localStorage.removeItem(HERO_AGH_KEY);
   localStorage.removeItem(HERO_LOADOUT_KEY);
+  localStorage.removeItem(HERO_BUILDS_KEY);
   localStorage.removeItem(GUEST_MODE_KEY);
 }
 
@@ -166,45 +198,47 @@ export function clearGuestMode(): void {
   localStorage.removeItem(GUEST_MODE_KEY);
 }
 
-export interface HeroAghFlags {
+/** Defaults to open — matches the shop panel's original always-open behavior. */
+export function loadShopOpen(): boolean {
+  const raw = localStorage.getItem(SHOP_OPEN_KEY);
+  if (raw === null) return true;
+  return raw === 'true';
+}
+
+export function saveShopOpen(open: boolean): void {
+  localStorage.setItem(SHOP_OPEN_KEY, String(open));
+}
+
+// --- Everything below this point through loadLegacyHeroItemLoadouts is the
+// pre-multi-build shape (one loadout + one agh-flags record per hero). Kept
+// private, read-only, and unexported: migrateLegacyHeroBuilds() is the only
+// caller, folding old data into the new HeroBuild shape the first time a
+// browser's builds are loaded after this feature shipped.
+
+interface LegacyHeroAghFlags {
   coreScepter: boolean;
   coreShard: boolean;
 }
 
-export function loadHeroAghFlags(): Record<string, HeroAghFlags> {
+function loadLegacyHeroAghFlags(): Record<string, LegacyHeroAghFlags> {
   const raw = localStorage.getItem(HERO_AGH_KEY);
   if (!raw) return {};
   try {
-    return JSON.parse(raw) as Record<string, HeroAghFlags>;
+    return JSON.parse(raw) as Record<string, LegacyHeroAghFlags>;
   } catch {
     return {};
   }
 }
 
-export function saveHeroAghFlags(flags: Record<string, HeroAghFlags>): void {
-  localStorage.setItem(HERO_AGH_KEY, JSON.stringify(flags));
-}
-
 export const SITUATIONAL_ITEM_SLOT_COUNT = 6;
 export const SITUATIONAL_NEUTRAL_SLOT_COUNT = 2;
 
-export interface HeroItemLoadout {
+interface LegacyHeroItemLoadout {
   regularItemSlugs: (string | null)[];
   neutralItemSlug: string | null;
-  /** Freeform "my own situational picks" slots — separate from the hero's static reference list. */
   situationalItemSlugs: (string | null)[];
   situationalNeutralItemSlugs: (string | null)[];
   note: string;
-}
-
-export function emptyHeroItemLoadout(): HeroItemLoadout {
-  return {
-    regularItemSlugs: new Array(REGULAR_ITEM_SLOT_COUNT).fill(null),
-    neutralItemSlug: null,
-    situationalItemSlugs: new Array(SITUATIONAL_ITEM_SLOT_COUNT).fill(null),
-    situationalNeutralItemSlugs: new Array(SITUATIONAL_NEUTRAL_SLOT_COUNT).fill(null),
-    note: '',
-  };
 }
 
 function padSlots(slugs: (string | null)[] | undefined, count: number): (string | null)[] {
@@ -213,7 +247,7 @@ function padSlots(slugs: (string | null)[] | undefined, count: number): (string 
   return result;
 }
 
-function normalizeHeroItemLoadout(loadout: HeroItemLoadout): HeroItemLoadout {
+function normalizeLegacyHeroItemLoadout(loadout: LegacyHeroItemLoadout): LegacyHeroItemLoadout {
   return {
     regularItemSlugs: padSlots(loadout.regularItemSlugs, REGULAR_ITEM_SLOT_COUNT),
     neutralItemSlug: loadout.neutralItemSlug ?? null,
@@ -223,15 +257,15 @@ function normalizeHeroItemLoadout(loadout: HeroItemLoadout): HeroItemLoadout {
   };
 }
 
-export function loadHeroItemLoadouts(): Record<string, HeroItemLoadout> {
+function loadLegacyHeroItemLoadouts(): Record<string, LegacyHeroItemLoadout> {
   const raw = localStorage.getItem(HERO_LOADOUT_KEY);
   if (!raw) return {};
   try {
-    const parsed = JSON.parse(raw) as Record<string, HeroItemLoadout>;
-    const normalized: Record<string, HeroItemLoadout> = {};
+    const parsed = JSON.parse(raw) as Record<string, LegacyHeroItemLoadout>;
+    const normalized: Record<string, LegacyHeroItemLoadout> = {};
     for (const [slug, loadout] of Object.entries(parsed)) {
       if (!loadout || !Array.isArray(loadout.regularItemSlugs)) continue;
-      normalized[slug] = normalizeHeroItemLoadout(loadout);
+      normalized[slug] = normalizeLegacyHeroItemLoadout(loadout);
     }
     return normalized;
   } catch {
@@ -239,6 +273,148 @@ export function loadHeroItemLoadouts(): Record<string, HeroItemLoadout> {
   }
 }
 
-export function saveHeroItemLoadouts(loadouts: Record<string, HeroItemLoadout>): void {
-  localStorage.setItem(HERO_LOADOUT_KEY, JSON.stringify(loadouts));
+export interface HeroBuild {
+  id: string;
+  name: string;
+  regularItemSlugs: (string | null)[];
+  neutralItemSlug: string | null;
+  /** Freeform "my own situational picks" slots — separate from the hero's static reference list. */
+  situationalItemSlugs: (string | null)[];
+  situationalNeutralItemSlugs: (string | null)[];
+  note: string;
+  hasScepter: boolean;
+  hasShard: boolean;
+  /** Per-slot "autocast enabled" flags for the Core Items only, index-matched
+   * to regularItemSlugs — situational items don't support autocast. */
+  regularItemAutocast: boolean[];
+  neutralItemAutocast: boolean;
+}
+
+export interface HeroBuildState {
+  builds: HeroBuild[];
+  activeBuildId: string;
+}
+
+export function newHeroBuild(name: string): HeroBuild {
+  return {
+    id: crypto.randomUUID(),
+    name,
+    regularItemSlugs: new Array(REGULAR_ITEM_SLOT_COUNT).fill(null),
+    neutralItemSlug: null,
+    situationalItemSlugs: new Array(SITUATIONAL_ITEM_SLOT_COUNT).fill(null),
+    situationalNeutralItemSlugs: new Array(SITUATIONAL_NEUTRAL_SLOT_COUNT).fill(null),
+    note: '',
+    hasScepter: false,
+    hasShard: false,
+    regularItemAutocast: new Array(REGULAR_ITEM_SLOT_COUNT).fill(false),
+    neutralItemAutocast: false,
+  };
+}
+
+export function emptyHeroBuildState(): HeroBuildState {
+  const build = newHeroBuild('Build 1');
+  return { builds: [build], activeBuildId: build.id };
+}
+
+function normalizeHeroBuild(build: Partial<HeroBuild> & { id: string }): HeroBuild {
+  return {
+    id: build.id,
+    name: build.name || 'Build 1',
+    regularItemSlugs: padSlots(build.regularItemSlugs, REGULAR_ITEM_SLOT_COUNT),
+    neutralItemSlug: build.neutralItemSlug ?? null,
+    situationalItemSlugs: padSlots(build.situationalItemSlugs, SITUATIONAL_ITEM_SLOT_COUNT),
+    situationalNeutralItemSlugs: padSlots(build.situationalNeutralItemSlugs, SITUATIONAL_NEUTRAL_SLOT_COUNT),
+    note: build.note ?? '',
+    hasScepter: build.hasScepter ?? false,
+    hasShard: build.hasShard ?? false,
+    regularItemAutocast: padBooleans(build.regularItemAutocast, REGULAR_ITEM_SLOT_COUNT),
+    neutralItemAutocast: build.neutralItemAutocast ?? false,
+  };
+}
+
+/**
+ * One-time upgrade path: heroes saved before multi-build support only have
+ * a single loadout (HERO_LOADOUT_KEY) and separate agh flags (HERO_AGH_KEY).
+ * Folds each into a single "Build 1" so existing saved builds aren't lost.
+ */
+function migrateLegacyHeroBuilds(): Record<string, HeroBuildState> {
+  const legacyLoadouts = loadLegacyHeroItemLoadouts();
+  const legacyFlags = loadLegacyHeroAghFlags();
+  const result: Record<string, HeroBuildState> = {};
+  for (const [heroSlug, loadout] of Object.entries(legacyLoadouts)) {
+    const flags = legacyFlags[heroSlug];
+    const build = normalizeHeroBuild({
+      id: crypto.randomUUID(),
+      name: 'Build 1',
+      ...loadout,
+      hasScepter: flags?.coreScepter ?? false,
+      hasShard: flags?.coreShard ?? false,
+    });
+    result[heroSlug] = { builds: [build], activeBuildId: build.id };
+  }
+  if (Object.keys(result).length > 0) {
+    localStorage.removeItem(HERO_LOADOUT_KEY);
+    localStorage.removeItem(HERO_AGH_KEY);
+  }
+  return result;
+}
+
+export function loadHeroBuilds(): Record<string, HeroBuildState> {
+  const raw = localStorage.getItem(HERO_BUILDS_KEY);
+  if (raw === null) return migrateLegacyHeroBuilds();
+  try {
+    const parsed = JSON.parse(raw) as Record<string, HeroBuildState>;
+    const normalized: Record<string, HeroBuildState> = {};
+    for (const [slug, state] of Object.entries(parsed)) {
+      if (!state?.builds?.length) continue;
+      const builds = state.builds.map((b) => normalizeHeroBuild(b));
+      const activeBuildId = builds.some((b) => b.id === state.activeBuildId) ? state.activeBuildId : builds[0].id;
+      normalized[slug] = { builds, activeBuildId };
+    }
+    return normalized;
+  } catch {
+    return {};
+  }
+}
+
+export function saveHeroBuilds(builds: Record<string, HeroBuildState>): void {
+  localStorage.setItem(HERO_BUILDS_KEY, JSON.stringify(builds));
+}
+
+export function loadHeroCombos(): Record<string, string[]> {
+  const raw = localStorage.getItem(HERO_COMBO_KEY);
+  if (!raw) return {};
+  try {
+    const parsed = JSON.parse(raw) as Record<string, string[]>;
+    const normalized: Record<string, string[]> = {};
+    for (const [slug, partners] of Object.entries(parsed)) {
+      if (Array.isArray(partners)) normalized[slug] = partners;
+    }
+    return normalized;
+  } catch {
+    return {};
+  }
+}
+
+export function saveHeroCombos(combos: Record<string, string[]>): void {
+  localStorage.setItem(HERO_COMBO_KEY, JSON.stringify(combos));
+}
+
+/**
+ * Toggles whether `giverSlug` (one of the fixed COMBO_HERO_SLUGS) can target
+ * `heroSlug` with its special ability — one-directional: giver A being able
+ * to target hero B says nothing about whether B (if also a giver) can target
+ * A back, since each of the 7 has its own distinct ability.
+ */
+export function toggleHeroComboGiver(
+  combos: Record<string, string[]>,
+  heroSlug: string,
+  giverSlug: string,
+): Record<string, string[]> {
+  const list = combos[heroSlug] ?? [];
+  const isOn = list.includes(giverSlug);
+  return {
+    ...combos,
+    [heroSlug]: isOn ? list.filter((s) => s !== giverSlug) : [...list, giverSlug],
+  };
 }

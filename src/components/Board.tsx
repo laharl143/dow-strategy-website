@@ -1,4 +1,5 @@
 import type { Board as BoardType, Hero, NeutralItem, Item, RoleSlotDefinition } from '../types';
+import type { HeroBuild } from '../lib/persistence';
 import { ROLE_SLOTS } from '../data/roleSlots';
 import { RoleSlotCard } from './RoleSlotCard';
 import { LateGameSwapCard } from './LateGameSwapCard';
@@ -37,6 +38,12 @@ export function Board({
   onPickLateGameNeutralItem,
   onToggleLateGameScepter,
   onToggleLateGameShard,
+  onApplyBuild,
+  onApplyLateGameBuild,
+  onToggleRegularAutocast,
+  onToggleNeutralAutocast,
+  onToggleLateGameRegularAutocast,
+  onToggleLateGameNeutralAutocast,
 }: {
   board: BoardType;
   twoColumns: boolean;
@@ -65,6 +72,12 @@ export function Board({
   onPickLateGameNeutralItem: (slotId: string, itemSlug: string) => void;
   onToggleLateGameScepter: (slotId: string) => void;
   onToggleLateGameShard: (slotId: string) => void;
+  onApplyBuild: (slotId: string, build: HeroBuild) => void;
+  onApplyLateGameBuild: (slotId: string, build: HeroBuild) => void;
+  onToggleRegularAutocast: (slotId: string, index: number) => void;
+  onToggleNeutralAutocast: (slotId: string) => void;
+  onToggleLateGameRegularAutocast: (slotId: string, index: number) => void;
+  onToggleLateGameNeutralAutocast: (slotId: string) => void;
 }) {
   const { openMenu, menuNode } = useHeroContextMenu();
 
@@ -92,6 +105,9 @@ export function Board({
           onToggleScepter={() => onToggleScepter(definition.id)}
           onToggleShard={() => onToggleShard(definition.id)}
           onHeroContextMenu={openMenu}
+          onApplyBuild={(build) => onApplyBuild(definition.id, build)}
+          onToggleRegularAutocast={(i) => onToggleRegularAutocast(definition.id, i)}
+          onToggleNeutralAutocast={() => onToggleNeutralAutocast(definition.id)}
         />
 
         {swap && (
@@ -122,6 +138,9 @@ export function Board({
             onToggleScepter={() => onToggleLateGameScepter(definition.id)}
             onToggleShard={() => onToggleLateGameShard(definition.id)}
             onHeroContextMenu={openMenu}
+            onApplyBuild={(build) => onApplyLateGameBuild(definition.id, build)}
+            onToggleRegularAutocast={(i) => onToggleLateGameRegularAutocast(definition.id, i)}
+            onToggleNeutralAutocast={() => onToggleLateGameNeutralAutocast(definition.id)}
           />
         ) : (
           <button

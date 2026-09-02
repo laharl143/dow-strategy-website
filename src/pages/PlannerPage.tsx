@@ -27,10 +27,17 @@ import {
   setLateGameNeutralItem,
   toggleLateGameScepter,
   toggleLateGameShard,
+  applyHeroBuild,
+  applyLateGameHeroBuild,
+  toggleRegularItemAutocast,
+  toggleNeutralItemAutocast,
+  toggleLateGameRegularItemAutocast,
+  toggleLateGameNeutralItemAutocast,
   type NeutralAssignError,
 } from '../lib/boardRules';
 import { NEUTRAL_ITEM_CAP } from '../lib/boardRules';
 import { placeHeroAt, type HeroTarget } from '../lib/heroPlacement';
+import { loadShopOpen, saveShopOpen } from '../lib/persistence';
 import { Board } from '../components/Board';
 import { HeroTray } from '../components/HeroTray';
 import { ItemShopPanel } from '../components/ItemShopPanel';
@@ -74,10 +81,14 @@ export function PlannerPage({
   onDelete: (id: string) => void;
 }) {
   const [activeDrag, setActiveDrag] = useState<DragData | null>(null);
-  const [shopOpen, setShopOpen] = useState(true);
+  const [shopOpen, setShopOpen] = useState(loadShopOpen);
   const [heroPanelOpen, setHeroPanelOpen] = useState(true);
   const [twoColumns, setTwoColumns] = useState(false);
   const [neutralError, setNeutralError] = useState<string | null>(null);
+
+  useEffect(() => {
+    saveShopOpen(shopOpen);
+  }, [shopOpen]);
 
   useEffect(() => {
     if (!neutralError) return;
@@ -187,7 +198,8 @@ export function PlannerPage({
         return setNeutralItem(prev, overData.slotId, activeData.itemSlug, neutralItemBySlug);
       }
 
-      // Moving a regular item already on the board to another regular slot.
+      // Moving a regular item already on the board to another regular slot —
+      // swaps with whatever's already there instead of discarding it.
       if (
         activeData.kind === 'regular-item-slot' &&
         overData.kind === 'regular-item-slot' &&
@@ -196,8 +208,10 @@ export function PlannerPage({
         overData.slotId &&
         overData.itemIndex !== undefined
       ) {
-        const withoutOld = setRegularItem(prev, activeData.fromSlotId, activeData.fromItemIndex, null);
-        return setRegularItem(withoutOld, overData.slotId, overData.itemIndex, activeData.itemSlug ?? null);
+        const displaced =
+          prev.slots.find((s) => s.slotId === overData.slotId)?.regularItemSlugs[overData.itemIndex!] ?? null;
+        const withDisplaced = setRegularItem(prev, activeData.fromSlotId, activeData.fromItemIndex, displaced);
+        return setRegularItem(withDisplaced, overData.slotId, overData.itemIndex, activeData.itemSlug ?? null);
       }
 
       // Moving a neutral item already on the board to another hero's neutral slot.
@@ -234,7 +248,8 @@ export function PlannerPage({
         return setLateGameNeutralItem(prev, overData.slotId, activeData.itemSlug);
       }
 
-      // Moving a late-game regular item to another late-game regular slot.
+      // Moving a late-game regular item to another late-game regular slot —
+      // swaps with whatever's already there instead of discarding it.
       if (
         activeData.kind === 'lategame-regular-item-slot' &&
         overData.kind === 'lategame-regular-item-slot' &&
@@ -243,8 +258,11 @@ export function PlannerPage({
         overData.slotId &&
         overData.itemIndex !== undefined
       ) {
-        const withoutOld = setLateGameRegularItem(prev, activeData.fromSlotId, activeData.fromItemIndex, null);
-        return setLateGameRegularItem(withoutOld, overData.slotId, overData.itemIndex, activeData.itemSlug ?? null);
+        const displaced =
+          prev.slots.find((s) => s.slotId === overData.slotId)?.lateGameSwap?.regularItemSlugs[overData.itemIndex!] ??
+          null;
+        const withDisplaced = setLateGameRegularItem(prev, activeData.fromSlotId, activeData.fromItemIndex, displaced);
+        return setLateGameRegularItem(withDisplaced, overData.slotId, overData.itemIndex, activeData.itemSlug ?? null);
       }
 
       // Moving a late-game neutral item to another late-game neutral slot.
@@ -370,6 +388,16 @@ export function PlannerPage({
             onPickLateGameNeutralItem={(slotId, itemSlug) => setBoard((prev) => setLateGameNeutralItem(prev, slotId, itemSlug))}
             onToggleLateGameScepter={(slotId) => setBoard((prev) => toggleLateGameScepter(prev, slotId))}
             onToggleLateGameShard={(slotId) => setBoard((prev) => toggleLateGameShard(prev, slotId))}
+            onApplyBuild={(slotId, build) => setBoard((prev) => applyHeroBuild(prev, slotId, build, neutralItemBySlug))}
+            onApplyLateGameBuild={(slotId, build) => setBoard((prev) => applyLateGameHeroBuild(prev, slotId, build))}
+            onToggleRegularAutocast={(slotId, i) => setBoard((prev) => toggleRegularItemAutocast(prev, slotId, i))}
+            onToggleNeutralAutocast={(slotId) => setBoard((prev) => toggleNeutralItemAutocast(prev, slotId))}
+            onToggleLateGameRegularAutocast={(slotId, i) =>
+              setBoard((prev) => toggleLateGameRegularItemAutocast(prev, slotId, i))
+            }
+            onToggleLateGameNeutralAutocast={(slotId) =>
+              setBoard((prev) => toggleLateGameNeutralItemAutocast(prev, slotId))
+            }
           />
         </main>
 

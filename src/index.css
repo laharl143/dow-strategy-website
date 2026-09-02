@@ -17,6 +17,9 @@
   --core: #a54a4a;
   --support: #4aa578;
   --danger: #c2483e;
+  --combo: #a56fd1;
+  --combo-bright: #cf9ef0;
+  --agh-active: #5bc8f0;
 
   color-scheme: dark;
   font-family: 'Manrope', 'Segoe UI', system-ui, sans-serif;
@@ -327,8 +330,8 @@ body {
   gap: 0.6rem;
   background: var(--panel-alt);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  padding: 0.8rem 1.1rem;
 }
 
 /* The "add a late-game swap" control — a slim dashed button that sits beside
@@ -452,18 +455,27 @@ body {
 
 .role-slot-header {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.7rem;
   align-items: flex-start;
+  padding-top: 0.1rem;
   padding-bottom: 0.6rem;
   border-bottom: 1px solid var(--border-soft);
 }
 
 .role-slot-order {
   font-family: 'Cinzel', Georgia, serif;
-  font-weight: 600;
-  color: var(--gold-dim);
-  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--bg);
+  background: var(--gold);
+  font-size: 0.85rem;
   line-height: 1;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 .role-slot-label {
@@ -487,7 +499,7 @@ body {
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 0.55rem 0.85rem;
-  min-height: 68px;
+  min-height: 88px;
 }
 
 .hero-dropzone {
@@ -497,6 +509,7 @@ body {
 }
 
 .role-slot-hero {
+  position: relative;
   background: #2a2432;
   border: 1px solid var(--gold-dim);
   border-radius: 4px;
@@ -509,6 +522,38 @@ body {
 
 .role-slot-hero[data-dragging] {
   opacity: 0.3;
+}
+
+/* DOW-10: small icon crops anchored to the portrait's top-right corner, one
+   per flagged giver hero. row-reverse keeps the first-flagged giver pinned
+   at the corner and lays each new one down to its left, since the container
+   itself is only pinned by `right` — its left edge just grows outward as
+   DOM order (oldest-flagged first) fills in from the right. */
+.combo-dots {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 2px;
+  z-index: 1;
+}
+
+.combo-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--combo);
+  box-shadow: 0 0 4px rgba(165, 111, 209, 0.7);
+  cursor: default;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.combo-dot:hover {
+  transform: scale(2.4);
+  box-shadow: 0 0 10px rgba(165, 111, 209, 0.9);
+  z-index: 2;
 }
 
 .role-slot-hero-icon {
@@ -539,6 +584,83 @@ body {
 .hero-dropzone[data-over] .role-slot-hero-empty {
   border-color: var(--gold);
   color: var(--gold);
+}
+
+.build-switch {
+  position: relative;
+  margin-top: 4px;
+}
+
+.build-switch-pill {
+  width: 100%;
+  height: 18px;
+  border-radius: 4px;
+  border: 1px solid var(--gold-dim);
+  background: var(--panel-deep);
+  color: var(--gold-bright);
+  font-family: inherit;
+  font-size: 0.62rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 0 0.3rem;
+  cursor: pointer;
+}
+
+.build-switch-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.build-switch-caret {
+  color: var(--text-faint);
+  font-size: 0.55rem;
+  flex-shrink: 0;
+}
+
+.build-switch-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 25;
+  min-width: 100%;
+  background: var(--panel-deep);
+  border: 1px solid var(--gold-dim);
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.build-switch-item {
+  padding: 0.3rem 0.5rem;
+  font-size: 0.68rem;
+  font-family: inherit;
+  color: var(--text-dim);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border-soft);
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.build-switch-item:last-child {
+  border-bottom: none;
+}
+
+.build-switch-item:hover {
+  color: var(--text);
+}
+
+.build-switch-item[data-active] {
+  color: var(--gold-bright);
+  background: rgba(201, 168, 76, 0.1);
+  font-weight: 700;
 }
 
 .hero-picker-popover {
@@ -638,15 +760,20 @@ body {
 }
 
 .agh-toggle {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 2px solid var(--border);
   background: var(--panel-deep);
-  padding: 4px;
+  padding: 5px;
   cursor: pointer;
   opacity: 0.4;
   filter: grayscale(1);
+  transition: opacity 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.agh-toggle:hover {
+  opacity: 0.7;
 }
 
 .agh-toggle img {
@@ -656,10 +783,105 @@ body {
 }
 
 .agh-toggle[data-active] {
-  border-color: var(--gold);
+  border-color: var(--agh-active);
   opacity: 1;
   filter: none;
-  box-shadow: 0 0 6px rgba(201, 168, 76, 0.5);
+  box-shadow: 0 0 8px rgba(91, 200, 240, 0.6);
+}
+
+.agh-toggle[data-active]:hover {
+  opacity: 1;
+}
+
+/* Special Combo toggle (DOW-10) — same circular-icon language as .agh-toggle
+   above, purple instead of gold since it's a different kind of flag. */
+.combo-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+}
+
+.combo-toggle-main {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--panel-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  cursor: pointer;
+  opacity: 0.4;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.combo-toggle-main svg {
+  width: 18px;
+  height: 18px;
+}
+
+.combo-toggle-main:hover {
+  opacity: 0.7;
+}
+
+.combo-toggle-main[data-active] {
+  border-color: var(--combo);
+  opacity: 1;
+  color: var(--combo-bright);
+  box-shadow: 0 0 8px rgba(165, 111, 209, 0.55);
+}
+
+.combo-toggle-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--border-soft);
+  margin: 2px 0.15rem;
+}
+
+.combo-toggle-pip {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  padding: 2px;
+  cursor: pointer;
+  opacity: 0.4;
+  filter: grayscale(1);
+  flex-shrink: 0;
+}
+
+.combo-toggle-pip[data-checked] {
+  border-color: var(--combo);
+  opacity: 1;
+  filter: none;
+  box-shadow: 0 0 6px rgba(165, 111, 209, 0.55);
+}
+
+.combo-toggle-pip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.combo-toggle-small-pip {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--combo);
+  box-shadow: 0 0 4px rgba(165, 111, 209, 0.5);
+  flex-shrink: 0;
+  overflow: hidden;
+  display: block;
+}
+
+.combo-toggle-small-pip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .item-bay {
@@ -700,9 +922,7 @@ body {
 }
 
 .item-picker-popover {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
+  position: fixed;
   z-index: 30;
   width: 220px;
   max-height: 320px;
@@ -745,6 +965,53 @@ body {
   text-align: center;
 }
 
+.item-picker-accordion {
+  gap: 0;
+}
+
+.item-picker-tier + .item-picker-tier {
+  border-top: 1px solid var(--border-soft);
+}
+
+.item-picker-tier-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  border: none;
+  padding: 0.4rem;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 0.76rem;
+  font-weight: 600;
+  font-family: inherit;
+}
+
+.item-picker-tier-header:hover {
+  color: var(--gold);
+}
+
+.item-picker-tier-caret {
+  color: var(--text-faint);
+  font-size: 0.7rem;
+}
+
+.item-picker-tier-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-bottom: 0.3rem;
+}
+
+.item-picker-tier-items[data-icon-only],
+.item-picker-list[data-icon-only] {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  padding: 0.3rem;
+}
+
 .item-picker-item {
   display: flex;
   align-items: center;
@@ -760,6 +1027,10 @@ body {
   font-family: inherit;
 }
 
+.item-picker-item[data-icon-only] {
+  padding: 0.2rem;
+}
+
 .item-picker-item:hover {
   background: var(--panel-alt);
   color: var(--gold);
@@ -771,6 +1042,12 @@ body {
   object-fit: cover;
   border-radius: 3px;
   flex-shrink: 0;
+}
+
+.item-picker-item[data-icon-only] img,
+.item-picker-item[data-icon-only] .item-picker-item-fallback {
+  width: 40px;
+  height: 40px;
 }
 
 .item-picker-item-fallback {
@@ -801,6 +1078,8 @@ body {
 }
 
 .item-slot[data-circular] {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   border: 2px solid var(--gold-dim);
   background: radial-gradient(circle at 35% 30%, #2c2438, #0e0c12 75%);
@@ -809,6 +1088,15 @@ body {
 
 .item-slot[data-circular][data-filled] {
   border-color: var(--gold);
+}
+
+/* The icon's own corners must round with the slot, not just the slot's
+   border — otherwise a filled neutral slot shows the item art's square
+   corners poking out past the circular border. Wins by specificity over
+   both .item-slot-icon's base radius and the hero page's larger-slot
+   override below, regardless of source order. */
+.item-slot[data-circular] .item-slot-icon {
+  border-radius: 50%;
 }
 
 .item-slot-occupant {
@@ -828,6 +1116,155 @@ body {
   height: 100%;
   object-fit: cover;
   border-radius: 2px;
+}
+
+/* Autocast indicator (DOW-9): a fixed-length train of five sparkle glyphs
+   crawling clockwise along the slot's border in discrete steps (not a smooth
+   rotation), fading and dimming from head to tail, each also twinkling in
+   place — right-click a filled slot to toggle. */
+.autocast-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.autocast-star {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 9px;
+  line-height: 1;
+  color: var(--gold-bright);
+  text-shadow: 0 0 4px var(--gold-bright);
+  animation: autocast-crawl 3.2s steps(6) infinite;
+}
+
+.autocast-star::before {
+  content: '✦';
+  display: inline-block;
+  animation: autocast-twinkle 0.9s ease-in-out infinite;
+}
+
+.autocast-star:nth-child(1) {
+  animation-delay: 0s;
+  opacity: 1;
+}
+.autocast-star:nth-child(1)::before {
+  animation-delay: 0s;
+}
+.autocast-star:nth-child(2) {
+  animation-delay: 0.1333s;
+  opacity: 0.8;
+}
+.autocast-star:nth-child(2)::before {
+  animation-delay: 0.15s;
+}
+.autocast-star:nth-child(3) {
+  animation-delay: 0.2667s;
+  opacity: 0.6;
+  color: var(--gold);
+  text-shadow: none;
+}
+.autocast-star:nth-child(3)::before {
+  animation-delay: 0.3s;
+}
+.autocast-star:nth-child(4) {
+  animation-delay: 0.4s;
+  opacity: 0.4;
+  color: var(--gold);
+  text-shadow: none;
+}
+.autocast-star:nth-child(4)::before {
+  animation-delay: 0.45s;
+}
+.autocast-star:nth-child(5) {
+  animation-delay: 0.5333s;
+  opacity: 0.22;
+  color: var(--gold-dim);
+  text-shadow: none;
+}
+.autocast-star:nth-child(5)::before {
+  animation-delay: 0.6s;
+}
+
+/* Circular slots (neutral items) trace the actual circular border instead
+   of the rectangular corner path. The rectangular timing (steps(6) over one
+   side) doesn't carry over — a circle is a single 0%-100% run, so the same
+   steps(6) meant just 6 big jumps for the whole loop instead of 6 per side,
+   reading as sluggish. Runs its own faster, finer-grained pace instead, with
+   matching per-star delays scaled to it for the same trailing-snake look. */
+.item-slot[data-circular] .autocast-star {
+  top: auto;
+  left: auto;
+  transform: none;
+  offset-path: circle(50% at 50% 50%);
+  offset-rotate: 0deg;
+  animation: autocast-crawl-circle 1.8s steps(24) infinite;
+}
+
+.item-slot[data-circular] .autocast-star:nth-child(1) {
+  animation-delay: 0s;
+}
+.item-slot[data-circular] .autocast-star:nth-child(2) {
+  animation-delay: 0.075s;
+}
+.item-slot[data-circular] .autocast-star:nth-child(3) {
+  animation-delay: 0.15s;
+}
+.item-slot[data-circular] .autocast-star:nth-child(4) {
+  animation-delay: 0.225s;
+}
+.item-slot[data-circular] .autocast-star:nth-child(5) {
+  animation-delay: 0.3s;
+}
+
+@keyframes autocast-crawl-circle {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes autocast-crawl {
+  0% {
+    top: 0%;
+    left: 0%;
+  }
+  25% {
+    top: 0%;
+    left: 100%;
+  }
+  50% {
+    top: 100%;
+    left: 100%;
+  }
+  75% {
+    top: 100%;
+    left: 0%;
+  }
+  100% {
+    top: 0%;
+    left: 0%;
+  }
+}
+
+@keyframes autocast-twinkle {
+  0%,
+  100% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .autocast-star,
+  .autocast-star::before {
+    animation: none !important;
+  }
 }
 
 .hero-tray {
@@ -1469,6 +1906,112 @@ body {
   border-bottom: 1px solid var(--border-soft);
   padding-bottom: 0.4rem;
   margin: 0 0 0.9rem;
+}
+
+.skills-row {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.skill-slot {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: var(--panel-alt);
+}
+
+.skill-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.skill-slot.ultimate {
+  border-color: var(--gold-dim);
+  box-shadow: inset 0 0 0 2px var(--gold-dim);
+}
+
+.skill-slot .hotkey {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--gold-bright);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+  z-index: 1;
+}
+
+.build-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.build-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.7rem;
+  border-radius: 5px 5px 0 0;
+  border: 1px solid var(--border-soft);
+  border-bottom: none;
+  background: var(--panel-alt);
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.build-tab.active {
+  background: var(--panel-deep);
+  color: var(--gold-bright);
+  border-color: var(--gold-dim);
+}
+
+.build-tab-input {
+  background: var(--panel-deep);
+  border: 1px solid var(--gold-dim);
+  border-radius: 3px;
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.1rem 0.3rem;
+  width: 8ch;
+}
+
+.build-tab-remove {
+  color: var(--text-faint);
+  font-size: 0.65rem;
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 1;
+}
+
+.build-tab-remove:hover {
+  color: var(--danger);
+}
+
+.build-tab-add {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  border: 1px dashed var(--gold-dim);
+  color: var(--gold);
+  background: transparent;
+  font-size: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hero-page-core-row {

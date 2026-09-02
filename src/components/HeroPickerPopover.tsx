@@ -46,6 +46,15 @@ export function HeroPickerPopover({
     return heroes.filter((h) => h.name.toLowerCase().includes(q));
   }, [heroes, query]);
 
+  // A search narrowed to exactly one match is picked automatically — no
+  // need to also click it. Only while actively searching: with an empty
+  // query `filtered` is just the full roster, and picking whichever hero
+  // happens to be first (or the entire roster if it's length 1) would be
+  // wrong. Mirrors ItemPickerPopover's same behavior (DOW-4).
+  useEffect(() => {
+    if (query.trim() && filtered.length === 1) onPick(filtered[0].slug);
+  }, [query, filtered, onPick]);
+
   return (
     <div className="hero-picker-popover" onClick={(e) => e.stopPropagation()}>
       <input

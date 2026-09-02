@@ -1,6 +1,6 @@
 import type { Board } from '../types';
 import { REGULAR_ITEM_SLOT_COUNT } from './boardRules';
-import { loadHeroItemLoadouts } from './persistence';
+import { loadHeroBuilds } from './persistence';
 
 /** Addresses either a role slot's primary hero or its late-game swap hero. */
 export type HeroTarget = { kind: 'primary'; slotId: string } | { kind: 'lategame'; slotId: string };
@@ -11,6 +11,9 @@ interface HeroLoadoutState {
   neutralItemSlug: string | null;
   hasScepter: boolean;
   hasShard: boolean;
+  appliedBuildId: string | null;
+  regularItemAutocast: boolean[];
+  neutralItemAutocast: boolean;
 }
 
 function findHero(board: Board, heroSlug: string): HeroTarget | null {
@@ -30,12 +33,33 @@ function readLoadout(board: Board, target: HeroTarget): HeroLoadoutState {
       neutralItemSlug: slot.neutralItemSlug,
       hasScepter: slot.hasScepter,
       hasShard: slot.hasShard,
+      appliedBuildId: slot.appliedBuildId,
+      regularItemAutocast: slot.regularItemAutocast,
+      neutralItemAutocast: slot.neutralItemAutocast,
     };
   }
   const swap = slot.lateGameSwap;
   return swap
-    ? { heroSlug: swap.heroSlug, regularItemSlugs: swap.regularItemSlugs, neutralItemSlug: swap.neutralItemSlug, hasScepter: swap.hasScepter, hasShard: swap.hasShard }
-    : { heroSlug: null, regularItemSlugs: new Array(REGULAR_ITEM_SLOT_COUNT).fill(null), neutralItemSlug: null, hasScepter: false, hasShard: false };
+    ? {
+        heroSlug: swap.heroSlug,
+        regularItemSlugs: swap.regularItemSlugs,
+        neutralItemSlug: swap.neutralItemSlug,
+        hasScepter: swap.hasScepter,
+        hasShard: swap.hasShard,
+        appliedBuildId: swap.appliedBuildId,
+        regularItemAutocast: swap.regularItemAutocast,
+        neutralItemAutocast: swap.neutralItemAutocast,
+      }
+    : {
+        heroSlug: null,
+        regularItemSlugs: new Array(REGULAR_ITEM_SLOT_COUNT).fill(null),
+        neutralItemSlug: null,
+        hasScepter: false,
+        hasShard: false,
+        appliedBuildId: null,
+        regularItemAutocast: new Array(REGULAR_ITEM_SLOT_COUNT).fill(false),
+        neutralItemAutocast: false,
+      };
 }
 
 function writeLoadout(board: Board, target: HeroTarget, loadout: HeroLoadoutState): Board {
@@ -61,7 +85,8 @@ function writeLoadout(board: Board, target: HeroTarget, loadout: HeroLoadoutStat
  * swap: if it's already somewhere else, this relocates it (and everything
  * it's holding) there instead of creating a duplicate — swapping with
  * whatever was already at the target, if anything. A freshly-placed hero
- * seeds its items from its saved "Core Items" build, if it has one.
+ * seeds its items from its saved "Core Items" build (whichever build tab
+ * was last active on its hero page), if it has one.
  */
 export function placeHeroAt(board: Board, target: HeroTarget, heroSlug: string): Board {
   const existing = findHero(board, heroSlug);
@@ -75,10 +100,20 @@ export function placeHeroAt(board: Board, target: HeroTarget, heroSlug: string):
     return next;
   }
 
-  const saved = loadHeroItemLoadouts()[heroSlug];
+  const heroBuildState = loadHeroBuilds()[heroSlug];
+  const saved = heroBuildState?.builds.find((b) => b.id === heroBuildState.activeBuildId);
   const hasSavedItems = saved && (saved.regularItemSlugs.some((s) => s !== null) || saved.neutralItemSlug !== null);
   const seeded: HeroLoadoutState = hasSavedItems
-    ? { heroSlug, regularItemSlugs: [...saved.regularItemSlugs], neutralItemSlug: saved.neutralItemSlug, hasScepter: false, hasShard: false }
+    ? {
+        heroSlug,
+        regularItemSlugs: [...saved.regularItemSlugs],
+        neutralItemSlug: saved.neutralItemSlug,
+        hasScepter: saved.hasScepter,
+        hasShard: saved.hasShard,
+        appliedBuildId: saved.id,
+        regularItemAutocast: [...saved.regularItemAutocast],
+        neutralItemAutocast: saved.neutralItemAutocast,
+      }
     : { ...readLoadout(board, target), heroSlug };
   return writeLoadout(board, target, seeded);
 }

@@ -1,8 +1,23 @@
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import type { Item } from '../types';
 import { useDoubleClick } from '../lib/useDoubleClick';
 import { useSingleOpenPopover } from '../lib/useSingleOpenPopover';
 import { ItemPickerPopover } from './ItemPickerPopover';
+
+/** The rotating gold sparkle border shown on a slot with autocast enabled (DOW-9). */
+function AutocastGlow() {
+  return (
+    <div className="autocast-glow" aria-hidden="true">
+      <span className="autocast-star" />
+      <span className="autocast-star" />
+      <span className="autocast-star" />
+      <span className="autocast-star" />
+      <span className="autocast-star" />
+    </div>
+  );
+}
 
 export function ItemSlotBox({
   id,
@@ -14,6 +29,8 @@ export function ItemSlotBox({
   empty,
   backpack,
   circular,
+  autocast,
+  onToggleAutocast,
 }: {
   id: string;
   data: Record<string, unknown>;
@@ -24,40 +41,93 @@ export function ItemSlotBox({
   empty: string;
   backpack?: boolean;
   circular?: boolean;
+  /** Current autocast state. Omit along with onToggleAutocast for slots that
+   * don't support it (situational items). */
+  autocast?: boolean;
+  onToggleAutocast?: () => void;
 }) {
   const { open: pickerOpen, openPopover, closePopover } = useSingleOpenPopover(id);
+  const { open: menuOpen, openPopover: openMenu, closePopover: closeMenu } = useSingleOpenPopover(`${id}:autocast-menu`);
   const { setNodeRef, isOver } = useDroppable({ id, data });
+  const slotRef = useRef<HTMLDivElement | null>(null);
   const draggable = useDraggable({
     id: `${id}:occupant`,
     data: { kind: data.kind, fromSlotId: data.slotId, fromItemIndex: data.itemIndex, itemSlug: item?.slug },
     disabled: !item,
   });
   const handleClick = useDoubleClick(onRemove);
+  // Screen position only — visibility comes from the shared single-open-popover
+  // hook above, so right-clicking a different slot closes this one instead of
+  // stacking on top of it (a right-click isn't a 'click' event, so a plain
+  // window-click listener alone never sees it).
+  const [menuPos, setMenuPos] = useState<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    window.addEventListener('click', closeMenu);
+    window.addEventListener('keydown', closeMenu);
+    return () => {
+      window.removeEventListener('click', closeMenu);
+      window.removeEventListener('keydown', closeMenu);
+    };
+  }, [menuOpen, closeMenu]);
+
+  function handleContextMenu(e: React.MouseEvent) {
+    if (!onToggleAutocast) return;
+    e.preventDefault();
+    setMenuPos({ x: e.clientX, y: e.clientY });
+    openMenu();
+  }
 
   return (
     <div
-      ref={setNodeRef}
+      ref={(node) => {
+        setNodeRef(node);
+        slotRef.current = node;
+      }}
       className="item-slot"
       data-over={isOver || undefined}
       data-filled={!!item || undefined}
       data-backpack={backpack || undefined}
       data-circular={circular || undefined}
+      data-autocast={(!!item && autocast) || undefined}
       title={item ? item.name : empty}
     >
       {item ? (
-        <span
-          ref={draggable.setNodeRef}
-          {...draggable.listeners}
-          {...draggable.attributes}
-          className="item-slot-occupant"
-          onClick={handleClick}
-        >
-          {item.iconUrl ? (
-            <img className="item-slot-icon" src={item.iconUrl} alt={item.name} draggable={false} />
-          ) : (
-            item.name.slice(0, 2)
-          )}
-        </span>
+        <>
+          {autocast && <AutocastGlow />}
+          <span
+            ref={draggable.setNodeRef}
+            {...draggable.listeners}
+            {...draggable.attributes}
+            className="item-slot-occupant"
+            onClick={handleClick}
+            onContextMenu={handleContextMenu}
+          >
+            {item.iconUrl ? (
+              <img className="item-slot-icon" src={item.iconUrl} alt={item.name} draggable={false} />
+            ) : (
+              item.name.slice(0, 2)
+            )}
+          </span>
+          {menuOpen &&
+            menuPos &&
+            onToggleAutocast &&
+            createPortal(
+              <div className="hero-context-menu" style={{ left: menuPos.x, top: menuPos.y }} onClick={(e) => e.stopPropagation()}>
+                <button
+                  type="button"
+                  onClick={() => {
+                    onToggleAutocast();
+                    closeMenu();
+                  }}
+                >
+                  {autocast ? 'Disable Autocast' : 'Enable Autocast'}
+                </button>
+              </div>,
+              document.body,
+            )}
+        </>
       ) : (
         <>
           <button
@@ -73,6 +143,7 @@ export function ItemSlotBox({
           {pickerOpen && (
             <ItemPickerPopover
               items={items}
+              anchorRef={slotRef}
               onPick={(itemSlug) => {
                 onPick(itemSlug);
                 closePopover();

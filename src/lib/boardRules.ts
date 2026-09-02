@@ -8,23 +8,32 @@ export const BACKPACK_ITEM_SLOT_COUNT = 3;
 export const REGULAR_ITEM_SLOT_COUNT = ACTIVE_ITEM_SLOT_COUNT + BACKPACK_ITEM_SLOT_COUNT;
 
 /**
- * How many primary-board slots (not late-game swaps — those are a plan, not
- * something actually equipped at the same time) currently hold a neutral
- * item of each tier. In reality only one item per tier (two for the game's
- * level-25 bonus tier) can ever actually drop, so a tier with more than one
- * assigned slot here is a "duplicate" — the board no longer blocks that
- * (DOW-23), but callers use this to flag it visually (glow the slots sharing
- * a tier) so the user can see who's really getting that drop.
+ * Tier -> hero slugs of every primary-board slot (not late-game swaps —
+ * those are a plan, not something actually equipped at the same time) that
+ * holds a neutral item of that tier, for tiers with 2 or more such slots.
+ * In reality only one item per tier (two for the game's level-25 bonus tier)
+ * can ever actually drop, so a tier with more than one assigned slot here is
+ * a "duplicate" — the board no longer blocks that (DOW-23), but callers use
+ * this to flag it visually (glow the slots sharing a tier, list who's
+ * competing for it) so the user can see who's really getting that drop.
  */
-export function neutralTierCounts(board: Board, neutralItemBySlug: Map<string, NeutralItem>): Map<number, number> {
-  const counts = new Map<number, number>();
+export function neutralTierDuplicateGroups(
+  board: Board,
+  neutralItemBySlug: Map<string, NeutralItem>,
+): Map<number, string[]> {
+  const byTier = new Map<number, string[]>();
   for (const s of board.slots) {
-    if (!s.neutralItemSlug) continue;
+    if (!s.neutralItemSlug || !s.heroSlug) continue;
     const tier = neutralItemBySlug.get(s.neutralItemSlug)?.tier;
     if (tier === undefined) continue;
-    counts.set(tier, (counts.get(tier) ?? 0) + 1);
+    const list = byTier.get(tier) ?? [];
+    list.push(s.heroSlug);
+    byTier.set(tier, list);
   }
-  return counts;
+  for (const [tier, heroSlugs] of byTier) {
+    if (heroSlugs.length < 2) byTier.delete(tier);
+  }
+  return byTier;
 }
 
 export function setBonusNeutralTier(board: Board, tier: 4 | 5): Board {

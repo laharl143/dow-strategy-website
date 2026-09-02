@@ -14,7 +14,7 @@ import { heroes, regularItems, neutralItems, heroBySlug, regularItemBySlug, neut
 import {
   setHero,
   setNeutralItem,
-  neutralTierCounts,
+  neutralTierDuplicateGroups,
   setBonusNeutralTier,
   setRegularItem,
   toggleScepter,
@@ -36,6 +36,7 @@ import {
 import { placeHeroAt, type HeroTarget } from '../lib/heroPlacement';
 import { loadShopOpen, saveShopOpen } from '../lib/persistence';
 import { Board } from '../components/Board';
+import { DuplicateTierNotices } from '../components/DuplicateTierNotices';
 import { HeroTray } from '../components/HeroTray';
 import { ItemShopPanel } from '../components/ItemShopPanel';
 import { StrategyList } from '../components/StrategyList';
@@ -124,6 +125,11 @@ export function PlannerPage({
     }
     return map;
   }, []);
+
+  const duplicateTierGroups = useMemo(
+    () => neutralTierDuplicateGroups(board, neutralItemBySlug),
+    [board, neutralItemBySlug],
+  );
 
   function handleDragStart(event: DragStartEvent) {
     setActiveDrag((event.active.data.current as DragData | undefined) ?? null);
@@ -330,7 +336,7 @@ export function PlannerPage({
             onPickRegularItem={(slotId, i, itemSlug) => setBoard((prev) => setRegularItem(prev, slotId, i, itemSlug))}
             onRemoveNeutralItem={(slotId) => setBoard((prev) => setNeutralItem(prev, slotId, null))}
             onPickNeutralItem={(slotId, itemSlug) => setBoard((prev) => setNeutralItem(prev, slotId, itemSlug))}
-            neutralTierCounts={neutralTierCounts(board, neutralItemBySlug)}
+            neutralTierDuplicateGroups={duplicateTierGroups}
             onToggleScepter={(slotId) => setBoard((prev) => toggleScepter(prev, slotId))}
             onToggleShard={(slotId) => setBoard((prev) => toggleShard(prev, slotId))}
             onAddLateGameSwap={(slotId) => setBoard((prev) => addLateGameSwap(prev, slotId))}
@@ -402,6 +408,8 @@ export function PlannerPage({
         <span className="hero-panel-collapse-handle-label">Heroes</span>
         <span className="shop-toggle-hotkey">Space</span>
       </button>
+
+      <DuplicateTierNotices groups={duplicateTierGroups} heroBySlug={heroBySlug} />
 
       <DragOverlay dropAnimation={null}>{renderDragOverlay()}</DragOverlay>
     </DndContext>

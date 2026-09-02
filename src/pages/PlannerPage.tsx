@@ -409,7 +409,7 @@ export function PlannerPage({
         <span className="shop-toggle-hotkey">Space</span>
       </button>
 
-      <DuplicateTierNotices groups={duplicateTierGroups} heroBySlug={heroBySlug} />
+      <DuplicateTierNotices groups={duplicateTierGroups} heroBySlug={heroBySlug} shopOpen={shopOpen} />
 
       <DragOverlay dropAnimation={null}>{renderDragOverlay()}</DragOverlay>
     </DndContext>

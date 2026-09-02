@@ -11,10 +11,15 @@ import type { Hero } from '../types';
 export function DuplicateTierNotices({
   groups,
   heroBySlug,
+  shopOpen,
 }: {
   /** Tier -> hero slugs sharing it, tiers with fewer than 2 already excluded. */
   groups: Map<number, string[]>;
   heroBySlug: Map<string, Hero>;
+  /** Docks the stack flush against the shop panel's left edge while it's
+   * open (same data-shop-open pattern the shop/hero-panel collapse handles
+   * use) instead of floating on top of its search bar and item grid. */
+  shopOpen: boolean;
 }) {
   const [dismissed, setDismissed] = useState<Set<string>>(new Set());
 
@@ -32,7 +37,7 @@ export function DuplicateTierNotices({
   if (visible.length === 0) return null;
 
   return (
-    <div className="duplicate-tier-stack">
+    <div className="duplicate-tier-stack" data-shop-open={shopOpen}>
       {visible.map((card) => (
         <div key={card.key} className="duplicate-tier-card" data-tier={card.tier}>
           <span className="duplicate-tier-dot" />

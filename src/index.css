@@ -1514,6 +1514,14 @@ body {
   flex-direction: column;
   gap: 0.4rem;
   width: 240px;
+  transition: right 0.22s ease;
+}
+
+/* Docks flush against the shop panel's left edge while it's open, instead
+   of floating on top of its search bar and item grid — same pattern as the
+   shop-collapse-handle's own [data-shop-open='true'] shift. */
+.duplicate-tier-stack[data-shop-open='true'] {
+  right: 316px;
 }
 
 .duplicate-tier-card {

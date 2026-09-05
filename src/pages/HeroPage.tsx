@@ -121,7 +121,7 @@ function BuildTabs({
               title={`Remove ${build.name}`}
               onClick={(e) => {
                 e.stopPropagation();
-                onRemove(build.id);
+                if (window.confirm(`Remove "${build.name}"? This can't be undone.`)) onRemove(build.id);
               }}
             >
               ✕

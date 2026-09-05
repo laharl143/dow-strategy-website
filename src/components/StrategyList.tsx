@@ -44,7 +44,13 @@ export function StrategyList({
               >
                 ✎
               </button>
-              <button type="button" className="strategy-delete-btn" onClick={() => onDelete(s.id)}>
+              <button
+                type="button"
+                className="strategy-delete-btn"
+                onClick={() => {
+                  if (window.confirm(`Delete "${s.name}"? This can't be undone.`)) onDelete(s.id);
+                }}
+              >
                 ✕
               </button>
             </li>

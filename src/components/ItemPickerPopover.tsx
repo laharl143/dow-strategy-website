@@ -1,12 +1,12 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type RefObject } from 'react';
+import { useEffect, useMemo, useRef, useState, type RefObject } from 'react';
 import { createPortal } from 'react-dom';
 import type { Item, NeutralItem } from '../types';
+import { usePopoverPlacement } from '../lib/usePopoverPlacement';
 
 function isNeutralItem(item: Item): item is NeutralItem {
   return 'tier' in item;
 }
 
-const GAP = 6;
 const MIN_HEIGHT = 160;
 const MAX_HEIGHT = 320;
 const WIDTH = 220;
@@ -50,55 +50,18 @@ export function ItemPickerPopover({
   const width = isNeutralPicker ? NEUTRAL_WIDTH : WIDTH;
   const minHeight = isNeutralPicker ? NEUTRAL_MIN_HEIGHT : MIN_HEIGHT;
   const maxHeightCap = isNeutralPicker ? NEUTRAL_MAX_HEIGHT : MAX_HEIGHT;
-  // Positioned off-screen until the layout effect below measures the
-  // anchor and the popover's natural size, then places it for real —
-  // avoids a flash at the wrong spot before that measurement runs. `width`
-  // is set from the start (not just after measuring) so that measurement
-  // itself reflects the icon-only grid's actual final width.
-  const [style, setStyle] = useState<CSSProperties>({ top: -9999, left: -9999, width, visibility: 'hidden' });
+  // `width` is set from the start (not just after measuring) so that the
+  // placement hook's measurement reflects the icon-only grid's actual final
+  // width.
+  const style = usePopoverPlacement({ anchorRef, popoverRef, width, minHeight, maxHeightCap });
 
   // Focusing while the popover is still `visibility: hidden` (during the
   // initial off-screen measurement render) is a silent no-op per the DOM
-  // spec, so this has to wait for the layout effect below to flip it
-  // visible rather than running once on mount.
+  // spec, so this has to wait for the placement hook to flip it visible
+  // rather than running once on mount.
   useEffect(() => {
     if (style.visibility === 'visible') inputRef.current?.focus();
   }, [style.visibility]);
-
-  useLayoutEffect(() => {
-    const anchor = anchorRef.current;
-    const popover = popoverRef.current;
-    if (!anchor || !popover) return;
-
-    const anchorRect = anchor.getBoundingClientRect();
-    const naturalHeight = popover.getBoundingClientRect().height;
-    const sectionRect = anchor.closest('section')?.getBoundingClientRect();
-
-    const belowLimit = Math.min(sectionRect?.bottom ?? Infinity, window.innerHeight);
-    const aboveLimit = Math.max(sectionRect?.top ?? 0, 0);
-    const spaceBelow = belowLimit - anchorRect.bottom - GAP;
-    const spaceAbove = anchorRect.top - aboveLimit - GAP;
-
-    let top: number | undefined;
-    let bottom: number | undefined;
-    let maxHeight = maxHeightCap;
-    if (naturalHeight > spaceBelow && spaceAbove > spaceBelow) {
-      maxHeight = Math.max(minHeight, Math.min(naturalHeight, spaceAbove));
-      // Anchor by `bottom`, not `top` — max-height is just a cap, so the box
-      // often renders shorter than it (e.g. a collapsed accordion). Anchoring
-      // by `top` assuming the box fills maxHeight leaves its actual bottom
-      // edge floating short of the slot; `bottom` stays pinned regardless of
-      // how tall the box actually ends up.
-      bottom = window.innerHeight - anchorRect.top + GAP;
-    } else {
-      if (naturalHeight > spaceBelow) maxHeight = Math.max(minHeight, Math.min(naturalHeight, spaceBelow));
-      top = anchorRect.bottom + GAP;
-    }
-
-    const left = Math.min(anchorRect.left, window.innerWidth - width - GAP);
-
-    setStyle({ top, bottom, left: Math.max(GAP, left), width, maxHeight, visibility: 'visible' });
-  }, [anchorRef, width, minHeight, maxHeightCap]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {

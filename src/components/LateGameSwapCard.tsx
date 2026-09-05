@@ -1,3 +1,4 @@
+import { useCallback, useRef } from 'react';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import type { BoardSlot, Hero, Item, NeutralItem } from '../types';
 import type { HeroBuild } from '../lib/persistence';
@@ -69,6 +70,16 @@ export function LateGameSwapCard({
     id: `slot:${slotId}:lategame:hero`,
     data: { kind: 'lategame-hero-slot', slotId },
   });
+  const dropzoneRef = useRef<HTMLDivElement | null>(null);
+  // Stable callback ref — see RoleSlotCard's setDropzoneRef / ItemSlotBox's
+  // setSlotRef for why (DOW-35).
+  const setDropzoneRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      setNodeRef(node);
+      dropzoneRef.current = node;
+    },
+    [setNodeRef],
+  );
   const heroDraggable = useDraggable({
     id: `slot:${slotId}:lategame:hero:occupant`,
     data: { kind: 'lategame-hero-slot', fromSlotId: slotId, heroSlug: hero?.slug },
@@ -87,7 +98,7 @@ export function LateGameSwapCard({
       </div>
 
       <div className="loadout-panel late-game-card-loadout">
-        <div ref={setNodeRef} className="hero-dropzone late-game-hero-dropzone" data-over={isOver || undefined}>
+        <div ref={setDropzoneRef} className="hero-dropzone late-game-hero-dropzone" data-over={isOver || undefined}>
           {hero ? (
             <>
               <div
@@ -126,6 +137,7 @@ export function LateGameSwapCard({
                 <HeroPickerPopover
                   heroes={heroes}
                   assignedHeroSlugs={assignedHeroSlugs}
+                  anchorRef={dropzoneRef}
                   onPick={(heroSlug) => {
                     onPickHero(heroSlug);
                     closePopover();

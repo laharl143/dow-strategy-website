@@ -1,3 +1,4 @@
+import { useCallback, useRef } from 'react';
 import { useDraggable, useDroppable } from '@dnd-kit/core';
 import type { BoardSlot, Hero, Item, NeutralItem, RoleSlotDefinition } from '../types';
 import type { HeroBuild } from '../lib/persistence';
@@ -63,6 +64,19 @@ export function RoleSlotCard({
     id: `slot:${slot.slotId}:hero`,
     data: { kind: 'hero-slot', slotId: slot.slotId },
   });
+  const dropzoneRef = useRef<HTMLDivElement | null>(null);
+  // A stable callback identity, not an inline arrow — see ItemSlotBox's
+  // setSlotRef for why (DOW-35): an inline arrow gets recreated every
+  // render, so React detaches/reattaches this ref on every re-render
+  // (including the one that opens the popover), and HeroPickerPopover's
+  // position-measuring layout effect can see dropzoneRef.current still null.
+  const setDropzoneRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      setNodeRef(node);
+      dropzoneRef.current = node;
+    },
+    [setNodeRef],
+  );
   const heroDraggable = useDraggable({
     id: `slot:${slot.slotId}:hero:occupant`,
     data: { kind: 'hero-slot', fromSlotId: slot.slotId, heroSlug: hero?.slug },
@@ -82,7 +96,7 @@ export function RoleSlotCard({
       </div>
 
       <div className="loadout-panel">
-        <div ref={setNodeRef} className="hero-dropzone" data-over={isOver || undefined}>
+        <div ref={setDropzoneRef} className="hero-dropzone" data-over={isOver || undefined}>
           {hero ? (
             <>
               <div
@@ -121,6 +135,7 @@ export function RoleSlotCard({
                 <HeroPickerPopover
                   heroes={heroes}
                   assignedHeroSlugs={assignedHeroSlugs}
+                  anchorRef={dropzoneRef}
                   onPick={(heroSlug) => {
                     onPickHero(heroSlug);
                     closePopover();

@@ -1,29 +1,50 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type RefObject } from 'react';
+import { createPortal } from 'react-dom';
 import type { Hero } from '../types';
 import { heroIconUrl } from '../lib/assets';
+import { usePopoverPlacement } from '../lib/usePopoverPlacement';
+
+const WIDTH = 264;
+const MIN_HEIGHT = 160;
+const MAX_HEIGHT = 320;
 
 /**
  * A small search-and-pick dropdown shown when clicking an empty "Drop hero
  * here" slot — a click alternative to dragging a hero in from the tray.
  * Picking an already-assigned hero relocates it here, same as dragging it.
+ *
+ * Rendered via a portal straight to <body> with `position: fixed`, same as
+ * ItemPickerPopover (DOW-35) — a popover positioned `absolute` inside its
+ * role slot can render past the containing scroll area's clipped edge with
+ * no way to reach it, regardless of z-index. Portaling escapes that
+ * entirely, and the flip/clamp placement math is shared via
+ * usePopoverPlacement so it isn't hand-rolled per popover.
  */
 export function HeroPickerPopover({
   heroes,
   assignedHeroSlugs,
+  anchorRef,
   onPick,
   onClose,
 }: {
   heroes: Hero[];
   assignedHeroSlugs: Set<string>;
+  anchorRef: RefObject<HTMLElement | null>;
   onPick: (heroSlug: string) => void;
   onClose: () => void;
 }) {
   const [query, setQuery] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const popoverRef = useRef<HTMLDivElement>(null);
+  const style = usePopoverPlacement({ anchorRef, popoverRef, width: WIDTH, minHeight: MIN_HEIGHT, maxHeightCap: MAX_HEIGHT });
 
+  // Focusing while the popover is still `visibility: hidden` (during the
+  // initial off-screen measurement render) is a silent no-op per the DOM
+  // spec, so this has to wait for the placement hook to flip it visible
+  // rather than running once on mount.
   useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
+    if (style.visibility === 'visible') inputRef.current?.focus();
+  }, [style.visibility]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -55,8 +76,8 @@ export function HeroPickerPopover({
     if (query.trim() && filtered.length === 1) onPick(filtered[0].slug);
   }, [query, filtered, onPick]);
 
-  return (
-    <div className="hero-picker-popover" onClick={(e) => e.stopPropagation()}>
+  return createPortal(
+    <div ref={popoverRef} className="hero-picker-popover" style={style} onClick={(e) => e.stopPropagation()}>
       <input
         ref={inputRef}
         type="search"
@@ -88,6 +109,7 @@ export function HeroPickerPopover({
           </button>
         ))}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

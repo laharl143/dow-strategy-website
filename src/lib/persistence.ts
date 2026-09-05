@@ -30,6 +30,10 @@ const GUEST_MODE_KEY = 'dow-planner:guest-mode';
 // hero pages so it doesn't reopen itself every time navigation remounts
 // whichever page's ItemShopDock/PlannerPage instance owns the toggle.
 const SHOP_OPEN_KEY = 'dow-planner:shop-open';
+// Whether the main board is split into two columns (roles 6-9 in a second
+// column) — persisted so it survives navigating to the heroes section and
+// back, which remounts PlannerPage and would otherwise reset it (DOW-27).
+const TWO_COLUMNS_KEY = 'dow-planner:board-two-columns';
 // Which of the 7 fixed COMBO_HERO_SLUGS heroes' special abilities (each
 // unique, each usable on any hero — Lycan's bite, Snapfire's cannonball,
 // etc.) can target each hero (DOW-10) — heroSlug -> array of giver hero
@@ -207,6 +211,15 @@ export function loadShopOpen(): boolean {
 
 export function saveShopOpen(open: boolean): void {
   localStorage.setItem(SHOP_OPEN_KEY, String(open));
+}
+
+/** Defaults to one column — matches the board's original single-column layout. */
+export function loadTwoColumns(): boolean {
+  return localStorage.getItem(TWO_COLUMNS_KEY) === 'true';
+}
+
+export function saveTwoColumns(twoColumns: boolean): void {
+  localStorage.setItem(TWO_COLUMNS_KEY, String(twoColumns));
 }
 
 // --- Everything below this point through loadLegacyHeroItemLoadouts is the

@@ -672,9 +672,7 @@ body {
 }
 
 .hero-picker-popover {
-  position: absolute;
-  top: calc(100% + 6px);
-  left: 0;
+  position: fixed;
   z-index: 30;
   width: 264px;
   max-height: 320px;

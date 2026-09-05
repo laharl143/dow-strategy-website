@@ -34,7 +34,7 @@ import {
   toggleLateGameNeutralItemAutocast,
 } from '../lib/boardRules';
 import { placeHeroAt, type HeroTarget } from '../lib/heroPlacement';
-import { loadShopOpen, saveShopOpen } from '../lib/persistence';
+import { loadShopOpen, saveShopOpen, loadTwoColumns, saveTwoColumns } from '../lib/persistence';
 import { Board } from '../components/Board';
 import { DuplicateTierNotices } from '../components/DuplicateTierNotices';
 import { HeroTray } from '../components/HeroTray';
@@ -73,11 +73,15 @@ export function PlannerPage({
   const [activeDrag, setActiveDrag] = useState<DragData | null>(null);
   const [shopOpen, setShopOpen] = useState(loadShopOpen);
   const [heroPanelOpen, setHeroPanelOpen] = useState(true);
-  const [twoColumns, setTwoColumns] = useState(false);
+  const [twoColumns, setTwoColumns] = useState(loadTwoColumns);
 
   useEffect(() => {
     saveShopOpen(shopOpen);
   }, [shopOpen]);
+
+  useEffect(() => {
+    saveTwoColumns(twoColumns);
+  }, [twoColumns]);
 
   // Require a small drag distance before a pointer-down counts as a drag —
   // otherwise dnd-kit treats any real click (with its inevitable sub-pixel

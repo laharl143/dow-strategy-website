@@ -315,15 +315,28 @@ export function PlannerPage({
         </aside>
 
         <main className="board-panel">
-          <button
-            type="button"
-            className="board-columns-toggle"
-            data-active={twoColumns || undefined}
-            onClick={() => setTwoColumns((v) => !v)}
-            title={twoColumns ? 'Show roles 1-9 in a single column' : 'Split roles 6-9 into a second column'}
-          >
-            {twoColumns ? '▥ Two Columns' : '▤ One Column'}
-          </button>
+          <div className="board-toolbar">
+            <button
+              type="button"
+              className="board-columns-toggle"
+              data-active={twoColumns || undefined}
+              onClick={() => setTwoColumns((v) => !v)}
+              title={twoColumns ? 'Show roles 1-9 in a single column' : 'Split roles 6-9 into a second column'}
+            >
+              {twoColumns ? '▥ Two Columns' : '▤ One Column'}
+            </button>
+            <button
+              type="button"
+              className="bonus-tier-switch"
+              data-tier={board.bonusNeutralTier}
+              title={`This game's bonus: Tier ${board.bonusNeutralTier} — click to switch to Tier ${board.bonusNeutralTier === 4 ? 5 : 4}`}
+              onClick={() => setBoard((prev) => setBonusNeutralTier(prev, board.bonusNeutralTier === 4 ? 5 : 4))}
+            >
+              <span className="bonus-tier-switch-thumb" />
+              <span className="bonus-tier-switch-option">Tier 4</span>
+              <span className="bonus-tier-switch-option">Tier 5</span>
+            </button>
+          </div>
           <Board
             board={board}
             twoColumns={twoColumns}
@@ -369,13 +382,7 @@ export function PlannerPage({
         </main>
 
         <aside className="right-panel">
-          <ItemShopPanel
-            regularItems={regularItems}
-            neutralsByTier={neutralsByTier}
-            neutralsRemaining={null}
-            bonusNeutralTier={board.bonusNeutralTier}
-            onSetBonusNeutralTier={(tier) => setBoard((prev) => setBonusNeutralTier(prev, tier))}
-          />
+          <ItemShopPanel regularItems={regularItems} neutralsByTier={neutralsByTier} neutralsRemaining={null} />
           {strategies.length > 0 && (
             <StrategyList
               strategies={strategies}

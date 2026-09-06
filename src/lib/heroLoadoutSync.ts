@@ -82,11 +82,15 @@ function areAutocastColumnsReady(): Promise<boolean> {
 }
 
 /**
- * Called once when a user signs in. Pulls their synced builds down, merges
- * them with whatever's already in this browser's localStorage (remote wins
- * per-hero when both exist, since the whole point is "the most recent thing
- * I set on another machine"), writes the merged result back to localStorage,
- * and pushes any local-only hero builds (never synced before) up to Supabase.
+ * Called once when a user signs in. Pulls their synced builds down and
+ * merges them with whatever's already in this browser's localStorage
+ * per-build (remote wins per build id on conflict, local-only build ids
+ * are kept — not per-hero wholesale replacement, which used to silently
+ * drop any build tab that existed locally but hadn't made it to Supabase
+ * yet, see DOW-38), writes the merged result back to localStorage, and
+ * re-pushes every touched hero so local-only builds that survived the
+ * merge actually make it to Supabase instead of staying vulnerable until
+ * the next merge.
  */
 export async function pullAndMergeHeroBuilds(userId: string): Promise<void> {
   if (!supabase) return;
@@ -123,7 +127,7 @@ export async function pullAndMergeHeroBuilds(userId: string): Promise<void> {
 
   const merged: Record<string, HeroBuildState> = { ...local };
   for (const [heroSlug, rows] of remoteByHero) {
-    const builds: HeroBuild[] = rows.map((r) => ({
+    const remoteBuilds: HeroBuild[] = rows.map((r) => ({
       id: r.build_id,
       name: r.build_name,
       regularItemSlugs: r.regular_item_slugs,
@@ -136,12 +140,16 @@ export async function pullAndMergeHeroBuilds(userId: string): Promise<void> {
       regularItemAutocast: r.regular_item_autocast ?? new Array(REGULAR_ITEM_SLOT_COUNT).fill(false),
       neutralItemAutocast: r.neutral_item_autocast ?? false,
     }));
-    merged[heroSlug] = { builds, activeBuildId: builds[0]?.id ?? '' };
+    const remoteIds = new Set(remoteBuilds.map((b) => b.id));
+    const localOnlyBuilds = (local[heroSlug]?.builds ?? []).filter((b) => !remoteIds.has(b.id));
+    const builds = [...remoteBuilds, ...localOnlyBuilds];
+    const previousActiveId = local[heroSlug]?.activeBuildId;
+    const activeBuildId = builds.some((b) => b.id === previousActiveId) ? previousActiveId! : (builds[0]?.id ?? '');
+    merged[heroSlug] = { builds, activeBuildId };
   }
   saveHeroBuilds(merged);
 
-  const localOnly = Object.entries(local).filter(([slug]) => !remoteByHero.has(slug));
-  for (const [heroSlug, state] of localOnly) {
+  for (const [heroSlug, state] of Object.entries(merged)) {
     await pushHeroBuilds(userId, heroSlug, state);
   }
 }

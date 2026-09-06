@@ -364,6 +364,8 @@ export function HeroPage() {
           b.situationalNeutralItemSlugs,
           b.hasScepter,
           b.hasShard,
+          b.regularItemAutocast,
+          b.neutralItemAutocast,
         ]),
       )
     : null;

@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { heroes } from '../lib/gameData';
 import { heroIconUrl } from '../lib/assets';
+import { heroMatchesQuery } from '../lib/heroSearch';
 import { ItemShopDock } from '../components/ItemShopDock';
 
 export function HeroesIndexPage() {
@@ -10,7 +11,7 @@ export function HeroesIndexPage() {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return heroes;
-    return heroes.filter((h) => h.name.toLowerCase().includes(q));
+    return heroes.filter((h) => heroMatchesQuery(h, q));
   }, [query]);
 
   return (

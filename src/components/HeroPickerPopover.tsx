@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, type RefObject } from 'react';
 import { createPortal } from 'react-dom';
 import type { Hero } from '../types';
 import { heroIconUrl } from '../lib/assets';
+import { heroMatchesQuery } from '../lib/heroSearch';
 import { usePopoverPlacement } from '../lib/usePopoverPlacement';
 
 const WIDTH = 264;
@@ -64,7 +65,7 @@ export function HeroPickerPopover({
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return heroes;
-    return heroes.filter((h) => h.name.toLowerCase().includes(q));
+    return heroes.filter((h) => heroMatchesQuery(h, q));
   }, [heroes, query]);
 
   // A search narrowed to exactly one match is picked automatically — no

@@ -6329,8 +6329,10 @@
       "Disabler",
       "Support"
     ],
-    "compositionRoles": [],
-    "pickFrequency": null,
+    "compositionRoles": [
+      "support"
+    ],
+    "pickFrequency": "sometimes",
     "damageType": null,
     "powerCurve": null,
     "hasAoeStun": false,

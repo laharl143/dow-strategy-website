@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Hero } from '../types';
 import { heroIconUrl } from '../lib/assets';
+import { heroMatchesQuery } from '../lib/heroSearch';
 
 /**
  * A compact search box shown on each hero's dedicated page (DOW-20) — lets
@@ -17,7 +18,7 @@ export function HeroPageSearch({ heroes }: { heroes: Hero[] }) {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     if (!q) return [];
-    return heroes.filter((h) => h.name.toLowerCase().includes(q)).slice(0, 8);
+    return heroes.filter((h) => heroMatchesQuery(h, q)).slice(0, 8);
   }, [heroes, query]);
 
   function goTo(heroSlug: string) {

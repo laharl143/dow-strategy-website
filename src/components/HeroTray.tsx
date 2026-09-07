@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useDraggable } from '@dnd-kit/core';
 import type { CompositionRole, Hero, PickFrequency } from '../types';
 import { heroIconUrl } from '../lib/assets';
+import { heroMatchesQuery } from '../lib/heroSearch';
 import { useHeroContextMenu } from './HeroContextMenu';
 
 const ROLE_FILTERS: { value: CompositionRole | 'all'; label: string }[] = [
@@ -63,7 +64,7 @@ export function HeroTray({ heroes, assignedSlugs }: { heroes: Hero[]; assignedSl
     return heroes.filter((h) => {
       if (roleFilter !== 'all' && !h.compositionRoles.includes(roleFilter)) return false;
       if (pickFrequencyFilter !== 'all' && h.pickFrequency !== pickFrequencyFilter) return false;
-      if (q && !h.name.toLowerCase().includes(q)) return false;
+      if (q && !heroMatchesQuery(h, q)) return false;
       return true;
     });
   }, [heroes, query, roleFilter, pickFrequencyFilter]);

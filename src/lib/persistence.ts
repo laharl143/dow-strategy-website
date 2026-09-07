@@ -186,6 +186,7 @@ export function clearAccountScopedLocalData(): void {
   localStorage.removeItem(HERO_LOADOUT_KEY);
   localStorage.removeItem(HERO_BUILDS_KEY);
   localStorage.removeItem(GUEST_MODE_KEY);
+  localStorage.removeItem(HERO_COMBO_KEY);
 }
 
 /** Whether this browser already chose "Continue as Guest" on the login gate. */

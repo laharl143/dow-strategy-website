@@ -77,42 +77,6 @@ export function setHero(board: Board, slotId: string, heroSlug: string | null, s
   };
 }
 
-/** Moves a hero (and everything it's holding) between two role slots. If the
- * destination already has a hero, the two slots' heroes+items swap places. */
-export function moveHero(board: Board, fromSlotId: string, toSlotId: string): Board {
-  if (fromSlotId === toSlotId) return board;
-  const from = board.slots.find((s) => s.slotId === fromSlotId);
-  const to = board.slots.find((s) => s.slotId === toSlotId);
-  if (!from || !to) return board;
-
-  return {
-    ...board,
-    slots: board.slots.map((s) => {
-      if (s.slotId === fromSlotId) {
-        return {
-          ...s,
-          heroSlug: to.heroSlug,
-          regularItemSlugs: to.regularItemSlugs,
-          neutralItemSlug: to.neutralItemSlug,
-          hasScepter: to.hasScepter,
-          hasShard: to.hasShard,
-        };
-      }
-      if (s.slotId === toSlotId) {
-        return {
-          ...s,
-          heroSlug: from.heroSlug,
-          regularItemSlugs: from.regularItemSlugs,
-          neutralItemSlug: from.neutralItemSlug,
-          hasScepter: from.hasScepter,
-          hasShard: from.hasShard,
-        };
-      }
-      return s;
-    }),
-  };
-}
-
 /**
  * Reads the loadout at a {@link HeroTarget} — a role slot's primary hero, or
  * its late-game swap hero. Null for a late-game target whose slot has no

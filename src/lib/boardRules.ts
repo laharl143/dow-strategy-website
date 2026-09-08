@@ -32,7 +32,8 @@ export function neutralTierDuplicateGroups(
     byTier.set(tier, list);
   }
   for (const [tier, heroSlugs] of byTier) {
-    if (heroSlugs.length < 2) byTier.delete(tier);
+    const cap = tier === board.bonusNeutralTier ? 2 : 1;
+    if (heroSlugs.length <= cap) byTier.delete(tier);
   }
   return byTier;
 }

@@ -13,8 +13,7 @@ const STRATEGIES_KEY = 'dow-planner:saved-strategies';
 // the board's own toggle — lives in localStorage rather than heroes.json.
 const HERO_AGH_KEY = 'dow-planner:hero-agh';
 // Per-hero "my current build" item loadout shown on each hero's page — a
-// personal scratchpad separate from the board, and separate from the
-// hero's static coreItemSlugs/situationalItemSlugs reference list.
+// personal scratchpad separate from the board.
 // Superseded by HERO_BUILDS_KEY (multiple named builds per hero); kept only
 // as a one-time migration source for browsers that saved under the old shape.
 const HERO_LOADOUT_KEY = 'dow-planner:hero-loadout';

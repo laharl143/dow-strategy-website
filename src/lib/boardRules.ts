@@ -1,5 +1,6 @@
 import type { Board, LateGameSwap, NeutralItem } from '../types';
 import type { HeroBuild } from './persistence';
+import type { HeroTarget } from './heroPlacement';
 
 // A hero's inventory: 6 active item slots + a 3-slot backpack, matching Dota 2's
 // own layout. Index 0-5 = active, 6-8 = backpack.
@@ -112,91 +113,108 @@ export function moveHero(board: Board, fromSlotId: string, toSlotId: string): Bo
   };
 }
 
+/**
+ * Reads the loadout at a {@link HeroTarget} — a role slot's primary hero, or
+ * its late-game swap hero. Null for a late-game target whose slot has no
+ * swap card yet (see {@link addLateGameSwap}); a primary target's loadout is
+ * always present once its slot exists.
+ */
+function readTargetLoadout(board: Board, target: HeroTarget): LateGameSwap | null {
+  const slot = board.slots.find((s) => s.slotId === target.slotId);
+  if (!slot) return null;
+  if (target.kind === 'lategame') return slot.lateGameSwap;
+  const {
+    heroSlug,
+    regularItemSlugs,
+    neutralItemSlug,
+    hasScepter,
+    hasShard,
+    appliedBuildId,
+    regularItemAutocast,
+    neutralItemAutocast,
+  } = slot;
+  return { heroSlug, regularItemSlugs, neutralItemSlug, hasScepter, hasShard, appliedBuildId, regularItemAutocast, neutralItemAutocast };
+}
+
+/** Writes a loadout back to a {@link HeroTarget}. A no-op for a late-game
+ * target whose slot has no swap card (mirrors {@link readTargetLoadout}). */
+function writeTargetLoadout(board: Board, target: HeroTarget, loadout: LateGameSwap): Board {
+  return {
+    ...board,
+    slots: board.slots.map((s) => {
+      if (s.slotId !== target.slotId) return s;
+      if (target.kind === 'primary') return { ...s, ...loadout };
+      if (!s.lateGameSwap) return s;
+      return { ...s, lateGameSwap: loadout };
+    }),
+  };
+}
+
 export function setRegularItem(
   board: Board,
-  slotId: string,
+  target: HeroTarget,
   itemIndex: number,
   itemSlug: string | null,
 ): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) => {
-      if (s.slotId !== slotId) return s;
-      const regularItemSlugs = [...s.regularItemSlugs];
-      regularItemSlugs[itemIndex] = itemSlug;
-      return { ...s, regularItemSlugs };
-    }),
-  };
+  const current = readTargetLoadout(board, target);
+  if (!current) return board;
+  const regularItemSlugs = [...current.regularItemSlugs];
+  regularItemSlugs[itemIndex] = itemSlug;
+  return writeTargetLoadout(board, target, { ...current, regularItemSlugs });
 }
 
-export function setNeutralItem(board: Board, slotId: string, itemSlug: string | null): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) => (s.slotId === slotId ? { ...s, neutralItemSlug: itemSlug } : s)),
-  };
+export function setNeutralItem(board: Board, target: HeroTarget, itemSlug: string | null): Board {
+  const current = readTargetLoadout(board, target);
+  if (!current) return board;
+  return writeTargetLoadout(board, target, { ...current, neutralItemSlug: itemSlug });
 }
 
 /**
- * Loads one of a hero's saved hero-page builds into its board slot, replacing
- * whatever items/agh flags (including the neutral item) are there now — the
- * board's own "switch build" action for a hero with more than one saved
- * build.
+ * Loads one of a hero's saved hero-page builds into its board loadout,
+ * replacing whatever items/agh flags (including the neutral item) are there
+ * now — the board's own "switch build" action for a hero with more than one
+ * saved build. Works for either a role slot's primary hero or its late-game
+ * swap hero.
  */
-export function applyHeroBuild(board: Board, slotId: string, build: HeroBuild): Board {
-  const withItems: Board = {
-    ...board,
-    slots: board.slots.map((s) =>
-      s.slotId === slotId
-        ? {
-            ...s,
-            regularItemSlugs: [...build.regularItemSlugs],
-            hasScepter: build.hasScepter,
-            hasShard: build.hasShard,
-            appliedBuildId: build.id,
-            regularItemAutocast: [...build.regularItemAutocast],
-            neutralItemAutocast: build.neutralItemAutocast,
-          }
-        : s,
-    ),
-  };
-  return setNeutralItem(withItems, slotId, build.neutralItemSlug);
+export function applyHeroBuild(board: Board, target: HeroTarget, build: HeroBuild): Board {
+  const current = readTargetLoadout(board, target);
+  if (!current) return board;
+  return writeTargetLoadout(board, target, {
+    ...current,
+    regularItemSlugs: [...build.regularItemSlugs],
+    neutralItemSlug: build.neutralItemSlug,
+    hasScepter: build.hasScepter,
+    hasShard: build.hasShard,
+    appliedBuildId: build.id,
+    regularItemAutocast: [...build.regularItemAutocast],
+    neutralItemAutocast: build.neutralItemAutocast,
+  });
 }
 
-export function toggleRegularItemAutocast(board: Board, slotId: string, itemIndex: number): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) => {
-      if (s.slotId !== slotId) return s;
-      const regularItemAutocast = [...s.regularItemAutocast];
-      regularItemAutocast[itemIndex] = !regularItemAutocast[itemIndex];
-      return { ...s, regularItemAutocast };
-    }),
-  };
+export function toggleRegularItemAutocast(board: Board, target: HeroTarget, itemIndex: number): Board {
+  const current = readTargetLoadout(board, target);
+  if (!current) return board;
+  const regularItemAutocast = [...current.regularItemAutocast];
+  regularItemAutocast[itemIndex] = !regularItemAutocast[itemIndex];
+  return writeTargetLoadout(board, target, { ...current, regularItemAutocast });
 }
 
-export function toggleNeutralItemAutocast(board: Board, slotId: string): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) => (s.slotId === slotId ? { ...s, neutralItemAutocast: !s.neutralItemAutocast } : s)),
-  };
+export function toggleNeutralItemAutocast(board: Board, target: HeroTarget): Board {
+  const current = readTargetLoadout(board, target);
+  if (!current) return board;
+  return writeTargetLoadout(board, target, { ...current, neutralItemAutocast: !current.neutralItemAutocast });
 }
 
-export function toggleScepter(board: Board, slotId: string): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) =>
-      s.slotId === slotId && s.heroSlug ? { ...s, hasScepter: !s.hasScepter } : s,
-    ),
-  };
+export function toggleScepter(board: Board, target: HeroTarget): Board {
+  const current = readTargetLoadout(board, target);
+  if (!current?.heroSlug) return board;
+  return writeTargetLoadout(board, target, { ...current, hasScepter: !current.hasScepter });
 }
 
-export function toggleShard(board: Board, slotId: string): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) =>
-      s.slotId === slotId && s.heroSlug ? { ...s, hasShard: !s.hasShard } : s,
-    ),
-  };
+export function toggleShard(board: Board, target: HeroTarget): Board {
+  const current = readTargetLoadout(board, target);
+  if (!current?.heroSlug) return board;
+  return writeTargetLoadout(board, target, { ...current, hasShard: !current.hasShard });
 }
 
 // --- Late-game swap: an optional second hero+loadout tracked per role slot,
@@ -240,97 +258,6 @@ export function clearLateGameHero(board: Board, slotId: string): Board {
   };
 }
 
-/** Late-game swap counterpart to {@link applyHeroBuild} — no neutral cap check, matching setLateGameNeutralItem. */
-export function applyLateGameHeroBuild(board: Board, slotId: string, build: HeroBuild): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) =>
-      s.slotId === slotId && s.lateGameSwap
-        ? {
-            ...s,
-            lateGameSwap: {
-              ...s.lateGameSwap,
-              regularItemSlugs: [...build.regularItemSlugs],
-              neutralItemSlug: build.neutralItemSlug,
-              hasScepter: build.hasScepter,
-              hasShard: build.hasShard,
-              appliedBuildId: build.id,
-              regularItemAutocast: [...build.regularItemAutocast],
-              neutralItemAutocast: build.neutralItemAutocast,
-            },
-          }
-        : s,
-    ),
-  };
-}
-
-export function toggleLateGameRegularItemAutocast(board: Board, slotId: string, itemIndex: number): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) => {
-      if (s.slotId !== slotId || !s.lateGameSwap) return s;
-      const regularItemAutocast = [...s.lateGameSwap.regularItemAutocast];
-      regularItemAutocast[itemIndex] = !regularItemAutocast[itemIndex];
-      return { ...s, lateGameSwap: { ...s.lateGameSwap, regularItemAutocast } };
-    }),
-  };
-}
-
-export function toggleLateGameNeutralItemAutocast(board: Board, slotId: string): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) =>
-      s.slotId === slotId && s.lateGameSwap
-        ? { ...s, lateGameSwap: { ...s.lateGameSwap, neutralItemAutocast: !s.lateGameSwap.neutralItemAutocast } }
-        : s,
-    ),
-  };
-}
-
-export function setLateGameRegularItem(
-  board: Board,
-  slotId: string,
-  itemIndex: number,
-  itemSlug: string | null,
-): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) => {
-      if (s.slotId !== slotId || !s.lateGameSwap) return s;
-      const regularItemSlugs = [...s.lateGameSwap.regularItemSlugs];
-      regularItemSlugs[itemIndex] = itemSlug;
-      return { ...s, lateGameSwap: { ...s.lateGameSwap, regularItemSlugs } };
-    }),
-  };
-}
-
-export function setLateGameNeutralItem(board: Board, slotId: string, itemSlug: string | null): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) =>
-      s.slotId === slotId && s.lateGameSwap ? { ...s, lateGameSwap: { ...s.lateGameSwap, neutralItemSlug: itemSlug } } : s,
-    ),
-  };
-}
-
-export function toggleLateGameScepter(board: Board, slotId: string): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) =>
-      s.slotId === slotId && s.lateGameSwap?.heroSlug
-        ? { ...s, lateGameSwap: { ...s.lateGameSwap, hasScepter: !s.lateGameSwap.hasScepter } }
-        : s,
-    ),
-  };
-}
-
-export function toggleLateGameShard(board: Board, slotId: string): Board {
-  return {
-    ...board,
-    slots: board.slots.map((s) =>
-      s.slotId === slotId && s.lateGameSwap?.heroSlug
-        ? { ...s, lateGameSwap: { ...s.lateGameSwap, hasShard: !s.lateGameSwap.hasShard } }
-        : s,
-    ),
-  };
-}
+// setRegularItem, setNeutralItem, applyHeroBuild, toggleRegularItemAutocast,
+// toggleNeutralItemAutocast, toggleScepter and toggleShard above all take a
+// HeroTarget, so they cover a late-game swap's loadout too — see DOW-39.

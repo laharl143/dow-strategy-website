@@ -313,6 +313,18 @@ body {
   color: var(--gold-bright);
 }
 
+.aura-order-reminder {
+  display: block;
+  background: var(--panel-deep);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-dim);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+  cursor: help;
+}
+
 /* Two-column mode: same row/card styling as .board, just laid out as a pair
    of independent columns side by side instead of one long list. */
 .board-columns {

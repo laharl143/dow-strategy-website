@@ -339,6 +339,9 @@ export function PlannerPage({
               <span className="bonus-tier-switch-option">Tier 4</span>
               <span className="bonus-tier-switch-option">Tier 5</span>
             </button>
+            <span className="aura-order-reminder" title="Reminder: aura items should be placed in ascending order.">
+              ℹ Aura items: keep in ascending order
+            </span>
           </div>
           <Board
             board={board}

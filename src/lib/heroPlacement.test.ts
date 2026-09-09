@@ -152,6 +152,78 @@ describe('placeHeroAt', () => {
     expect(next.slots[1].lateGameSwap?.regularItemSlugs[0]).toBeNull();
   });
 
+  it('displaces the occupant (with its full loadout) to the first open slot when placing an unplaced hero onto an occupied primary slot', () => {
+    const b = board([
+      emptySlot('a', {
+        heroSlug: 'sven',
+        regularItemSlugs: ['blink', ...new Array(REGULAR_ITEM_SLOT_COUNT - 1).fill(null)],
+        neutralItemSlug: 'tier1-item',
+        hasScepter: true,
+      }),
+      emptySlot('b'),
+    ]);
+    const next = placeHeroAt(b, { kind: 'primary', slotId: 'a' }, 'axe');
+    expect(next.slots[0]).toMatchObject({ heroSlug: 'axe', regularItemSlugs: [null, null, null, null, null, null, null, null, null] });
+    expect(next.slots[1]).toMatchObject({
+      heroSlug: 'sven',
+      regularItemSlugs: expect.arrayContaining(['blink']),
+      neutralItemSlug: 'tier1-item',
+      hasScepter: true,
+    });
+  });
+
+  it('does not mislabel the displaced occupant\'s items as the incoming hero\'s when the incoming hero has no saved build', () => {
+    const b = board([
+      emptySlot('a', { heroSlug: 'sven', regularItemSlugs: ['blink', ...new Array(REGULAR_ITEM_SLOT_COUNT - 1).fill(null)] }),
+      emptySlot('b'),
+    ]);
+    const next = placeHeroAt(b, { kind: 'primary', slotId: 'a' }, 'axe');
+    // axe (freshly placed, no saved build) must not inherit sven's leftover items.
+    expect(next.slots[0].regularItemSlugs.every((s) => s === null)).toBe(true);
+    // sven keeps them, relocated to the open slot.
+    expect(next.slots[1].regularItemSlugs[0]).toBe('blink');
+  });
+
+  it('seeds the incoming hero from its saved build when displacing an occupant', () => {
+    const heroBuildState: HeroBuildState = {
+      activeBuildId: 'build-1',
+      builds: [
+        {
+          id: 'build-1',
+          name: 'Build 1',
+          regularItemSlugs: ['boots', ...new Array(REGULAR_ITEM_SLOT_COUNT - 1).fill(null)],
+          neutralItemSlug: null,
+          situationalItemSlugs: [],
+          situationalNeutralItemSlugs: [],
+          note: '',
+          hasScepter: false,
+          hasShard: false,
+          regularItemAutocast: new Array(REGULAR_ITEM_SLOT_COUNT).fill(false),
+          neutralItemAutocast: false,
+        },
+      ],
+    };
+    loadHeroBuildsMock.mockReturnValue({ axe: heroBuildState });
+
+    const b = board([
+      emptySlot('a', { heroSlug: 'sven', regularItemSlugs: ['blink', ...new Array(REGULAR_ITEM_SLOT_COUNT - 1).fill(null)] }),
+      emptySlot('b'),
+    ]);
+    const next = placeHeroAt(b, { kind: 'primary', slotId: 'a' }, 'axe');
+    expect(next.slots[0]).toMatchObject({ heroSlug: 'axe', regularItemSlugs: expect.arrayContaining(['boots']) });
+    expect(next.slots[1]).toMatchObject({ heroSlug: 'sven', regularItemSlugs: expect.arrayContaining(['blink']) });
+  });
+
+  it('falls back to overwriting the occupant in place when the entire board is full (no open slot to displace it to)', () => {
+    const b = board([
+      emptySlot('a', { heroSlug: 'sven', regularItemSlugs: ['blink', ...new Array(REGULAR_ITEM_SLOT_COUNT - 1).fill(null)] }),
+      emptySlot('b', { heroSlug: 'pudge' }),
+    ]);
+    const next = placeHeroAt(b, { kind: 'primary', slotId: 'a' }, 'axe');
+    expect(next.slots[0].heroSlug).toBe('axe');
+    expect(next.slots[1].heroSlug).toBe('pudge');
+  });
+
   it('placeHeroInSlot and placeHeroInLateGameSlot address the right target kind', () => {
     const b = board([emptySlot('a')]);
     expect(placeHeroInSlot(b, 'a', 'axe').slots[0].heroSlug).toBe('axe');

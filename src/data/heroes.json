@@ -19,8 +19,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "ancient_apparition_cold_feet",
@@ -68,8 +66,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "antimage_mana_break",
@@ -118,8 +114,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "axe_berserkers_call",
@@ -168,8 +162,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "bane_enfeeble",
@@ -218,8 +210,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "beastmaster_wild_axes",
@@ -268,8 +258,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "bloodseeker_bloodrage",
@@ -316,8 +304,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "chen_penitence",
@@ -365,8 +351,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "crystal_maiden_crystal_nova",
@@ -414,8 +398,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "dazzle_poison_touch",
@@ -466,8 +448,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "dragon_knight_breathe_fire",
@@ -518,8 +498,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "doom_bringer_devour",
@@ -569,8 +547,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "earthshaker_fissure",
@@ -620,8 +596,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "enchantress_impetus",
@@ -669,8 +643,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "enigma_malefice",
@@ -720,8 +692,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "faceless_void_time_walk",
@@ -770,8 +740,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "furion_sprout",
@@ -819,8 +787,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "juggernaut_blade_fury",
@@ -872,8 +838,6 @@
       "tank",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "kunkka_torrent",
@@ -923,8 +887,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "leshrac_split_earth",
@@ -971,8 +933,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "lich_frost_nova",
@@ -1022,8 +982,6 @@
       "support",
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "life_stealer_rage",
@@ -1073,8 +1031,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "lina_dragon_slave",
@@ -1124,8 +1080,6 @@
       "support",
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "lion_impale",
@@ -1176,8 +1130,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "mirana_starfall",
@@ -1227,8 +1179,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "morphling_waveform",
@@ -1278,8 +1228,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "necrolyte_death_pulse",
@@ -1326,8 +1274,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "nevermore_shadowraze1",
@@ -1377,8 +1323,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "night_stalker_void",
@@ -1428,8 +1372,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "omniknight_purification",
@@ -1478,8 +1420,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "puck_illusory_orb",
@@ -1530,8 +1470,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "pudge_meat_hook",
@@ -1579,8 +1517,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "pugna_nether_blast",
@@ -1630,8 +1566,6 @@
       "tank",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "rattletrap_battery_assault",
@@ -1680,8 +1614,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "razor_plasma_field",
@@ -1729,8 +1661,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "riki_smoke_screen",
@@ -1780,8 +1710,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "sandking_burrowstrike",
@@ -1831,8 +1759,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "shadow_shaman_ether_shock",
@@ -1883,8 +1809,6 @@
       "support",
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "slardar_sprint",
@@ -1931,8 +1855,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "sniper_shrapnel",
@@ -1980,8 +1902,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "spectre_spectral_dagger",
@@ -2031,8 +1951,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "storm_spirit_static_remnant",
@@ -2082,8 +2000,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "sven_storm_bolt",
@@ -2134,8 +2050,6 @@
       "core",
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "tidehunter_gush",
@@ -2183,8 +2097,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "tinker_laser",
@@ -2235,8 +2147,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "tiny_avalanche",
@@ -2287,8 +2197,6 @@
       "support",
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "venomancer_venomous_gale",
@@ -2337,8 +2245,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "viper_poison_attack",
@@ -2385,8 +2291,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "weaver_the_swarm",
@@ -2436,8 +2340,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "windrunner_shackleshot",
@@ -2485,8 +2387,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "witch_doctor_paralyzing_cask",
@@ -2533,8 +2433,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "zuus_arc_lightning",
@@ -2583,8 +2481,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "broodmother_insatiable_hunger",
@@ -2634,8 +2530,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "skeleton_king_hellfire_blast",
@@ -2683,8 +2577,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "queenofpain_shadow_strike",
@@ -2732,8 +2624,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "huskar_inner_fire",
@@ -2783,8 +2673,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "jakiro_dual_breath",
@@ -2832,8 +2720,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "batrider_sticky_napalm",
@@ -2881,8 +2767,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "warlock_fatal_bonds",
@@ -2935,8 +2819,6 @@
       "tank",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "alchemist_acid_spray",
@@ -2987,8 +2869,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "death_prophet_carrion_swarm",
@@ -3036,8 +2916,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "ursa_earthshock",
@@ -3084,8 +2962,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "bounty_hunter_shuriken_toss",
@@ -3135,8 +3011,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "spirit_breaker_charge_of_darkness",
@@ -3184,8 +3058,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "obsidian_destroyer_arcane_orb",
@@ -3235,8 +3107,6 @@
       "support",
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "shadow_demon_disruption",
@@ -3285,8 +3155,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "lycan_summon_wolves",
@@ -3336,8 +3204,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "brewmaster_thunder_clap",
@@ -3388,8 +3254,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "treant_natures_grasp",
@@ -3439,8 +3303,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "ogre_magi_fireblast",
@@ -3488,8 +3350,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "lone_druid_entangle",
@@ -3536,8 +3396,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "phantom_assassin_stifling_dagger",
@@ -3585,8 +3443,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "gyrocopter_rocket_barrage",
@@ -3635,8 +3491,6 @@
       "support",
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "rubick_telekinesis",
@@ -3684,8 +3538,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "luna_lucent_beam",
@@ -3734,8 +3586,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "disruptor_thunder_strike",
@@ -3782,8 +3632,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "templar_assassin_refraction",
@@ -3834,8 +3682,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "naga_siren_mirror_image",
@@ -3885,8 +3731,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "nyx_assassin_impale",
@@ -3934,8 +3778,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "keeper_of_the_light_illuminate",
@@ -3985,8 +3827,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "phoenix_icarus_dive",
@@ -4035,8 +3875,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "magnataur_shockwave",
@@ -4086,8 +3924,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "centaur_hoof_stomp",
@@ -4135,8 +3971,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "shredder_whirling_death",
@@ -4185,8 +4019,6 @@
       "tank",
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "medusa_split_shot",
@@ -4236,8 +4068,6 @@
       "tank",
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "troll_warlord_whirling_axes_ranged",
@@ -4286,8 +4116,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "tusk_ice_shards",
@@ -4336,8 +4164,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "bristleback_viscous_nasal_goo",
@@ -4385,8 +4211,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "skywrath_mage_arcane_bolt",
@@ -4434,8 +4258,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "abaddon_death_coil",
@@ -4485,8 +4307,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "earth_spirit_boulder_smash",
@@ -4536,8 +4356,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "ember_spirit_searing_chains",
@@ -4587,8 +4405,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "legion_commander_overwhelming_odds",
@@ -4636,8 +4452,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "terrorblade_reflection",
@@ -4684,8 +4498,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "techies_sticky_bomb",
@@ -4734,8 +4546,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "oracle_fortunes_end",
@@ -4783,8 +4593,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "winter_wyvern_arctic_burn",
@@ -4832,8 +4640,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "arc_warden_flux",
@@ -4883,8 +4689,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "abyssal_underlord_firestorm",
@@ -4933,8 +4737,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "grimstroke_dark_artistry",
@@ -4983,8 +4785,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "mars_spear",
@@ -5034,8 +4834,6 @@
       "tank",
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "undying_decay",
@@ -5085,8 +4883,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "invoker_quas",
@@ -5134,8 +4930,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "clinkz_strafe",
@@ -5185,8 +4979,6 @@
       "support",
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "elder_titan_echo_stomp",
@@ -5237,8 +5029,6 @@
     "compositionRoles": [
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "pangolier_swashbuckle",
@@ -5287,8 +5077,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "slark_dark_pact",
@@ -5337,8 +5125,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "dark_willow_bramble_maze",
@@ -5386,8 +5172,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "dark_seer_vacuum",
@@ -5436,8 +5220,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "phantom_lancer_spirit_lance",
@@ -5486,8 +5268,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "monkey_king_boundless_strike",
@@ -5536,8 +5316,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "void_spirit_aether_remnant",
@@ -5587,8 +5365,6 @@
       "support",
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "snapfire_scatterblast",
@@ -5639,8 +5415,6 @@
       "core",
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "silencer_curse_of_the_silent",
@@ -5690,8 +5464,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "visage_grave_chill",
@@ -5741,8 +5513,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "vengefulspirit_magic_missile",
@@ -5790,8 +5560,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "drow_ranger_frost_arrows",
@@ -5841,8 +5609,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "chaos_knight_chaos_bolt",
@@ -5890,8 +5656,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "wisp_tether",
@@ -5942,8 +5706,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "meepo_earthbind",
@@ -5992,8 +5754,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "hoodwink_acorn_shot",
@@ -6040,8 +5800,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "dawnbreaker_fire_wreath",
@@ -6091,8 +5849,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "marci_grapple",
@@ -6141,8 +5897,6 @@
       "core",
       "tank"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "primal_beast_onslaught",
@@ -6190,8 +5944,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "muerta_dead_shot",
@@ -6240,8 +5992,6 @@
     "compositionRoles": [
       "support"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "ringmaster_tame_the_beasts",
@@ -6289,8 +6039,6 @@
     "compositionRoles": [
       "core"
     ],
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "kez_echo_slash",
@@ -6338,8 +6086,6 @@
     "hasAoeStun": false,
     "piercesMagicImmunity": false,
     "needsReview": false,
-    "coreItemSlugs": [],
-    "situationalItemSlugs": [],
     "abilities": [
       {
         "slug": "largo_catchy_lick",

@@ -33,9 +33,6 @@ export interface Hero {
   piercesMagicImmunity: boolean;
   /** True when this record wasn't found in the reference data source and needs a manual check. */
   needsReview: boolean;
-  /** Recommended-build item slugs for this hero, shown on its dedicated page. */
-  coreItemSlugs: string[];
-  situationalItemSlugs: string[];
   /** Skillable Q/W/E/R abilities (innate and item abilities excluded), shown on the hero page. */
   abilities: Ability[];
 }

@@ -118,6 +118,18 @@ describe('setHero', () => {
     expect(slot.hasShard).toBe(false);
   });
 
+  it('clearing a hero clears a stale appliedBuildId (DOW-51)', () => {
+    const b = board([emptySlot('a', { heroSlug: 'axe', appliedBuildId: 'build-1' })]);
+    const next = setHero(b, 'a', null);
+    expect(next.slots[0].appliedBuildId).toBeNull();
+  });
+
+  it('placing a new hero into a slot with a stale appliedBuildId clears it, even unseeded (DOW-51)', () => {
+    const b = board([emptySlot('a', { appliedBuildId: 'build-1' })]);
+    const next = setHero(b, 'a', 'sven');
+    expect(next.slots[0].appliedBuildId).toBeNull();
+  });
+
   it('placing a hero without a seed leaves existing items untouched', () => {
     const b = board([
       emptySlot('a', {
@@ -217,6 +229,57 @@ describe('primary/late-game shared mutators (HeroTarget)', () => {
     const lategameNext = applyHeroBuild(swapBoard, { kind: 'lategame', slotId: 'b' }, build);
     expect(lategameNext.slots[0].lateGameSwap?.regularItemSlugs[0]).toBe('blink');
     expect(lategameNext.slots[0].lateGameSwap?.appliedBuildId).toBe('build-1');
+  });
+
+  describe('hand edits clear a previously-applied build id (DOW-51)', () => {
+    const build: HeroBuild = {
+      id: 'build-1',
+      name: 'Build 1',
+      regularItemSlugs: ['blink', ...new Array(REGULAR_ITEM_SLOT_COUNT - 1).fill(null)],
+      neutralItemSlug: 'tier1-item',
+      situationalItemSlugs: [],
+      situationalNeutralItemSlugs: [],
+      note: '',
+      hasScepter: false,
+      hasShard: false,
+      regularItemAutocast: new Array(REGULAR_ITEM_SLOT_COUNT).fill(false),
+      neutralItemAutocast: false,
+    };
+    const target = { kind: 'primary' as const, slotId: 'a' };
+
+    function boardWithAppliedBuild() {
+      return applyHeroBuild(board([emptySlot('a', { heroSlug: 'axe' })]), target, build);
+    }
+
+    it('setRegularItem clears it', () => {
+      const applied = boardWithAppliedBuild();
+      expect(setRegularItem(applied, target, 1, 'boots').slots[0].appliedBuildId).toBeNull();
+    });
+
+    it('setNeutralItem clears it', () => {
+      const applied = boardWithAppliedBuild();
+      expect(setNeutralItem(applied, target, 'tier5-item').slots[0].appliedBuildId).toBeNull();
+    });
+
+    it('toggleRegularItemAutocast clears it', () => {
+      const applied = boardWithAppliedBuild();
+      expect(toggleRegularItemAutocast(applied, target, 0).slots[0].appliedBuildId).toBeNull();
+    });
+
+    it('toggleNeutralItemAutocast clears it', () => {
+      const applied = boardWithAppliedBuild();
+      expect(toggleNeutralItemAutocast(applied, target).slots[0].appliedBuildId).toBeNull();
+    });
+
+    it('toggleScepter clears it', () => {
+      const applied = boardWithAppliedBuild();
+      expect(toggleScepter(applied, target).slots[0].appliedBuildId).toBeNull();
+    });
+
+    it('toggleShard clears it', () => {
+      const applied = boardWithAppliedBuild();
+      expect(toggleShard(applied, target).slots[0].appliedBuildId).toBeNull();
+    });
   });
 });
 

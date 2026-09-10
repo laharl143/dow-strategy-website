@@ -193,7 +193,8 @@ export function PlannerPage({
         return setRegularItem(withDisplaced, { kind: 'primary', slotId: overData.slotId }, overData.itemIndex, activeData.itemSlug ?? null);
       }
 
-      // Moving a neutral item already on the board to another hero's neutral slot.
+      // Moving a neutral item already on the board to another hero's neutral slot —
+      // swaps with whatever's already there instead of discarding it.
       if (
         activeData.kind === 'neutral-item-slot' &&
         overData.kind === 'neutral-item-slot' &&
@@ -201,8 +202,9 @@ export function PlannerPage({
         overData.slotId
       ) {
         if (!activeData.itemSlug) return prev;
-        const withoutOld = setNeutralItem(prev, { kind: 'primary', slotId: activeData.fromSlotId }, null);
-        return setNeutralItem(withoutOld, { kind: 'primary', slotId: overData.slotId }, activeData.itemSlug);
+        const displaced = prev.slots.find((s) => s.slotId === overData.slotId)?.neutralItemSlug ?? null;
+        const withDisplaced = setNeutralItem(prev, { kind: 'primary', slotId: activeData.fromSlotId }, displaced);
+        return setNeutralItem(withDisplaced, { kind: 'primary', slotId: overData.slotId }, activeData.itemSlug);
       }
 
       // Placing a regular item from the tray into a late-game swap slot.
@@ -244,15 +246,18 @@ export function PlannerPage({
         return setRegularItem(withDisplaced, { kind: 'lategame', slotId: overData.slotId }, overData.itemIndex, activeData.itemSlug ?? null);
       }
 
-      // Moving a late-game neutral item to another late-game neutral slot.
+      // Moving a late-game neutral item to another late-game neutral slot —
+      // swaps with whatever's already there instead of discarding it.
       if (
         activeData.kind === 'lategame-neutral-item-slot' &&
         overData.kind === 'lategame-neutral-item-slot' &&
         activeData.fromSlotId &&
         overData.slotId
       ) {
-        const withoutOld = setNeutralItem(prev, { kind: 'lategame', slotId: activeData.fromSlotId }, null);
-        return setNeutralItem(withoutOld, { kind: 'lategame', slotId: overData.slotId }, activeData.itemSlug ?? null);
+        const displaced =
+          prev.slots.find((s) => s.slotId === overData.slotId)?.lateGameSwap?.neutralItemSlug ?? null;
+        const withDisplaced = setNeutralItem(prev, { kind: 'lategame', slotId: activeData.fromSlotId }, displaced);
+        return setNeutralItem(withDisplaced, { kind: 'lategame', slotId: overData.slotId }, activeData.itemSlug ?? null);
       }
 
       return prev;

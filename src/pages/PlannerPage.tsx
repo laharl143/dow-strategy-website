@@ -128,6 +128,13 @@ export function PlannerPage({
     [board, neutralItemBySlug],
   );
 
+  // Primary board slots only — a late-game swap is a plan, not something
+  // actually equipped at the same time (matches neutralTierDuplicateGroups).
+  const neutralsRemaining = useMemo(() => {
+    const used = board.slots.filter((s) => s.neutralItemSlug !== null).length;
+    return Math.max(0, 6 - used);
+  }, [board]);
+
   function handleDragStart(event: DragStartEvent) {
     setActiveDrag((event.active.data.current as DragData | undefined) ?? null);
   }
@@ -400,7 +407,7 @@ export function PlannerPage({
         </main>
 
         <aside className="right-panel">
-          <ItemShopPanel regularItems={regularItems} neutralsByTier={neutralsByTier} neutralsRemaining={null} />
+          <ItemShopPanel regularItems={regularItems} neutralsByTier={neutralsByTier} neutralsRemaining={neutralsRemaining} />
           {strategies.length > 0 && (
             <StrategyList
               strategies={strategies}

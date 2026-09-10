@@ -24,6 +24,38 @@ function findHero(board: Board, heroSlug: string): HeroTarget | null {
   return null;
 }
 
+/**
+ * Finds the first target (primary slots in board order, then late-game swap
+ * slots in board order) that has no hero, other than `exclude` itself — a
+ * displacement spot for a hero that's about to be bumped off `exclude`.
+ */
+function findFirstEmptySlot(board: Board, exclude: HeroTarget): HeroTarget | null {
+  for (const s of board.slots) {
+    if (s.heroSlug === null && !(exclude.kind === 'primary' && exclude.slotId === s.slotId)) {
+      return { kind: 'primary', slotId: s.slotId };
+    }
+  }
+  for (const s of board.slots) {
+    if (s.lateGameSwap && s.lateGameSwap.heroSlug === null && !(exclude.kind === 'lategame' && exclude.slotId === s.slotId)) {
+      return { kind: 'lategame', slotId: s.slotId };
+    }
+  }
+  return null;
+}
+
+function emptyLoadout(heroSlug: string): HeroLoadoutState {
+  return {
+    heroSlug,
+    regularItemSlugs: new Array(REGULAR_ITEM_SLOT_COUNT).fill(null),
+    neutralItemSlug: null,
+    hasScepter: false,
+    hasShard: false,
+    appliedBuildId: null,
+    regularItemAutocast: new Array(REGULAR_ITEM_SLOT_COUNT).fill(false),
+    neutralItemAutocast: false,
+  };
+}
+
 function readLoadout(board: Board, target: HeroTarget): HeroLoadoutState {
   const slot = board.slots.find((s) => s.slotId === target.slotId)!;
   if (target.kind === 'primary') {
@@ -87,6 +119,12 @@ function writeLoadout(board: Board, target: HeroTarget, loadout: HeroLoadoutStat
  * whatever was already at the target, if anything. A freshly-placed hero
  * seeds its items from its saved "Core Items" build (whichever build tab
  * was last active on its hero page), if it has one.
+ *
+ * If the incoming hero isn't on the board at all (e.g. dragged from the
+ * Hero Tray) and the target is already occupied by a *different* hero, that
+ * occupant is displaced (with its full loadout intact) to the first open
+ * slot elsewhere on the board, rather than being silently overwritten —
+ * only if the board is entirely full does it fall back to being replaced.
  */
 export function placeHeroAt(board: Board, target: HeroTarget, heroSlug: string): Board {
   const existing = findHero(board, heroSlug);
@@ -103,6 +141,9 @@ export function placeHeroAt(board: Board, target: HeroTarget, heroSlug: string):
   const heroBuildState = loadHeroBuilds()[heroSlug];
   const saved = heroBuildState?.builds.find((b) => b.id === heroBuildState.activeBuildId);
   const hasSavedItems = saved && (saved.regularItemSlugs.some((s) => s !== null) || saved.neutralItemSlug !== null);
+  const targetLoadout = readLoadout(board, target);
+  const targetOccupied = targetLoadout.heroSlug !== null;
+
   const seeded: HeroLoadoutState = hasSavedItems
     ? {
         heroSlug,
@@ -114,7 +155,17 @@ export function placeHeroAt(board: Board, target: HeroTarget, heroSlug: string):
         regularItemAutocast: [...saved.regularItemAutocast],
         neutralItemAutocast: saved.neutralItemAutocast,
       }
-    : { ...readLoadout(board, target), heroSlug };
+    : targetOccupied
+      ? emptyLoadout(heroSlug) // target's items belong to its current occupant, not the incoming hero
+      : { ...targetLoadout, heroSlug };
+
+  if (targetOccupied) {
+    const displaced = findFirstEmptySlot(board, target);
+    if (displaced) {
+      const next = writeLoadout(board, displaced, targetLoadout);
+      return writeLoadout(next, target, seeded);
+    }
+  }
   return writeLoadout(board, target, seeded);
 }
 

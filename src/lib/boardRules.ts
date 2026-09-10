@@ -72,6 +72,10 @@ export function setHero(board: Board, slotId: string, heroSlug: string | null, s
             neutralItemSlug: heroSlug ? (seed ? seed.neutralItemSlug : s.neutralItemSlug) : null,
             hasScepter: heroSlug ? s.hasScepter : false,
             hasShard: heroSlug ? s.hasShard : false,
+            // Neither clearing a hero nor seeding one from a HeroLoadoutSeed
+            // (which carries no build id) corresponds to a still-active saved
+            // build — see the appliedBuildId invariant on LateGameSwap/BoardSlot.
+            appliedBuildId: null,
           }
         : s,
     ),
@@ -115,6 +119,17 @@ function writeTargetLoadout(board: Board, target: HeroTarget, loadout: LateGameS
   };
 }
 
+/**
+ * Writes a loadout back to a {@link HeroTarget} as a hand edit — i.e.
+ * anything other than picking a build via {@link applyHeroBuild} — which
+ * always clears appliedBuildId per the invariant on {@link LateGameSwap}
+ * and {@link BoardSlot}: once items are edited by hand, they no longer
+ * represent the previously-applied saved build.
+ */
+function writeHandEditedLoadout(board: Board, target: HeroTarget, loadout: LateGameSwap): Board {
+  return writeTargetLoadout(board, target, { ...loadout, appliedBuildId: null });
+}
+
 export function setRegularItem(
   board: Board,
   target: HeroTarget,
@@ -125,13 +140,13 @@ export function setRegularItem(
   if (!current) return board;
   const regularItemSlugs = [...current.regularItemSlugs];
   regularItemSlugs[itemIndex] = itemSlug;
-  return writeTargetLoadout(board, target, { ...current, regularItemSlugs });
+  return writeHandEditedLoadout(board, target, { ...current, regularItemSlugs });
 }
 
 export function setNeutralItem(board: Board, target: HeroTarget, itemSlug: string | null): Board {
   const current = readTargetLoadout(board, target);
   if (!current) return board;
-  return writeTargetLoadout(board, target, { ...current, neutralItemSlug: itemSlug });
+  return writeHandEditedLoadout(board, target, { ...current, neutralItemSlug: itemSlug });
 }
 
 /**
@@ -161,25 +176,25 @@ export function toggleRegularItemAutocast(board: Board, target: HeroTarget, item
   if (!current) return board;
   const regularItemAutocast = [...current.regularItemAutocast];
   regularItemAutocast[itemIndex] = !regularItemAutocast[itemIndex];
-  return writeTargetLoadout(board, target, { ...current, regularItemAutocast });
+  return writeHandEditedLoadout(board, target, { ...current, regularItemAutocast });
 }
 
 export function toggleNeutralItemAutocast(board: Board, target: HeroTarget): Board {
   const current = readTargetLoadout(board, target);
   if (!current) return board;
-  return writeTargetLoadout(board, target, { ...current, neutralItemAutocast: !current.neutralItemAutocast });
+  return writeHandEditedLoadout(board, target, { ...current, neutralItemAutocast: !current.neutralItemAutocast });
 }
 
 export function toggleScepter(board: Board, target: HeroTarget): Board {
   const current = readTargetLoadout(board, target);
   if (!current?.heroSlug) return board;
-  return writeTargetLoadout(board, target, { ...current, hasScepter: !current.hasScepter });
+  return writeHandEditedLoadout(board, target, { ...current, hasScepter: !current.hasScepter });
 }
 
 export function toggleShard(board: Board, target: HeroTarget): Board {
   const current = readTargetLoadout(board, target);
   if (!current?.heroSlug) return board;
-  return writeTargetLoadout(board, target, { ...current, hasShard: !current.hasShard });
+  return writeHandEditedLoadout(board, target, { ...current, hasShard: !current.hasShard });
 }
 
 // --- Late-game swap: an optional second hero+loadout tracked per role slot,

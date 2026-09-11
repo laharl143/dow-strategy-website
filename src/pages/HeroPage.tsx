@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import type { DragEndEvent } from '@dnd-kit/core';
 import {
@@ -369,14 +369,29 @@ export function HeroPage() {
         ]),
       )
     : null;
+  // Tracks the most recently scheduled (but not yet fired) push, so the
+  // unmount-only effect below can fire it immediately instead of losing it
+  // — clearTimeout alone would silently drop an edit made just before
+  // navigating away from this page (DOW-50).
+  const pendingPushRef = useRef<(() => void) | null>(null);
+
   useEffect(() => {
     if (!session || !hero || !heroBuildState) return;
-    const timer = setTimeout(() => {
+    const flush = () => {
+      pendingPushRef.current = null;
       void pushHeroBuilds(session.user.id, hero.slug, heroBuildState);
-    }, 600);
+    };
+    pendingPushRef.current = flush;
+    const timer = setTimeout(flush, 600);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session, hero, buildSyncSignature]);
+
+  useEffect(() => {
+    return () => {
+      pendingPushRef.current?.();
+    };
+  }, []);
 
   if (!hero) {
     return (

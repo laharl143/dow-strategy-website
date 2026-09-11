@@ -15,6 +15,7 @@ import {
   removeLateGameSwap,
   clearLateGameHero,
   emptyLateGameSwap,
+  mergeLateGameSwap,
 } from './boardRules';
 import type { HeroBuild } from './persistence';
 
@@ -246,5 +247,59 @@ describe('late-game swap lifecycle', () => {
   it('clearLateGameHero is a no-op when there is no swap card', () => {
     const b = board([emptySlot('a')]);
     expect(clearLateGameHero(b, 'a')).toEqual(b);
+  });
+});
+
+describe('mergeLateGameSwap', () => {
+  function slotWithSwap(): BoardSlot {
+    return emptySlot('a', {
+      heroSlug: 'axe',
+      regularItemSlugs: ['blink', ...new Array(REGULAR_ITEM_SLOT_COUNT - 1).fill(null)],
+      neutralItemSlug: 'tier1-item',
+      hasScepter: true,
+      hasShard: false,
+      appliedBuildId: 'axe-build-1',
+      lateGameSwap: {
+        heroSlug: 'sven',
+        regularItemSlugs: ['bkb', ...new Array(REGULAR_ITEM_SLOT_COUNT - 1).fill(null)],
+        neutralItemSlug: 'tier5-item',
+        hasScepter: false,
+        hasShard: true,
+        appliedBuildId: 'sven-build-1',
+        regularItemAutocast: [true, ...new Array(REGULAR_ITEM_SLOT_COUNT - 1).fill(false)],
+        neutralItemAutocast: true,
+      },
+    });
+  }
+
+  it('replaces the primary hero and its whole loadout with the swap hero and removes the swap card', () => {
+    const b = board([slotWithSwap()]);
+    const next = mergeLateGameSwap(b, 'a');
+    const slot = next.slots[0];
+    expect(slot.heroSlug).toBe('sven');
+    expect(slot.regularItemSlugs[0]).toBe('bkb');
+    expect(slot.neutralItemSlug).toBe('tier5-item');
+    expect(slot.hasScepter).toBe(false);
+    expect(slot.hasShard).toBe(true);
+    expect(slot.appliedBuildId).toBe('sven-build-1');
+    expect(slot.regularItemAutocast[0]).toBe(true);
+    expect(slot.neutralItemAutocast).toBe(true);
+    expect(slot.lateGameSwap).toBeNull();
+  });
+
+  it('is a no-op when the slot has no swap card', () => {
+    const b = board([emptySlot('a', { heroSlug: 'axe' })]);
+    expect(mergeLateGameSwap(b, 'a')).toEqual(b);
+  });
+
+  it('is a no-op when the swap card has no hero yet', () => {
+    const b = addLateGameSwap(board([emptySlot('a', { heroSlug: 'axe' })]), 'a');
+    expect(mergeLateGameSwap(b, 'a')).toEqual(b);
+  });
+
+  it('leaves other slots untouched', () => {
+    const b = board([slotWithSwap(), emptySlot('b', { heroSlug: 'lina' })]);
+    const next = mergeLateGameSwap(b, 'a');
+    expect(next.slots[1]).toEqual(b.slots[1]);
   });
 });

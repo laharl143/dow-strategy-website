@@ -223,6 +223,24 @@ export function clearLateGameHero(board: Board, slotId: string): Board {
   };
 }
 
+/**
+ * Merges a role slot's late-game swap into its primary hero (the "Swap"
+ * pill between the two cards): the primary hero and its whole loadout are
+ * replaced by the swap card's, and the swap card is removed. A no-op if the
+ * slot has no swap card, or the swap card has no hero yet — there's nothing
+ * to bring across.
+ */
+export function mergeLateGameSwap(board: Board, slotId: string): Board {
+  return {
+    ...board,
+    slots: board.slots.map((s) => {
+      if (s.slotId !== slotId || !s.lateGameSwap?.heroSlug) return s;
+      const { lateGameSwap, ...primary } = s;
+      return { ...primary, ...lateGameSwap, lateGameSwap: null };
+    }),
+  };
+}
+
 // setRegularItem, setNeutralItem, applyHeroBuild, toggleRegularItemAutocast,
 // toggleNeutralItemAutocast, toggleScepter and toggleShard above all take a
 // HeroTarget, so they cover a late-game swap's loadout too — see DOW-39.

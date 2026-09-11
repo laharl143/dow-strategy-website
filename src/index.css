@@ -401,17 +401,29 @@ body {
 
 .role-slot-connector-pill {
   position: relative;
+  font-family: inherit;
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #12100a;
   background: var(--gold);
+  border: none;
   padding: 0.2rem 0.55rem;
   border-radius: 999px;
   white-space: nowrap;
   opacity: 0;
+  cursor: pointer;
   animation: role-slot-connector-fade 0.3s ease 0.3s forwards;
+}
+
+.role-slot-connector-pill:hover:not(:disabled) {
+  background: var(--gold-bright);
+}
+
+.role-slot-connector-pill:disabled {
+  cursor: default;
+  background: var(--gold-dim);
 }
 
 @keyframes role-slot-connector-fade {

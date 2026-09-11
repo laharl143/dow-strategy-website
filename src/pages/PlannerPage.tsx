@@ -22,6 +22,7 @@ import {
   addLateGameSwap,
   removeLateGameSwap,
   clearLateGameHero,
+  mergeLateGameSwap,
   applyHeroBuild,
   toggleRegularItemAutocast,
   toggleNeutralItemAutocast,
@@ -368,6 +369,7 @@ export function PlannerPage({
             onToggleShard={(slotId) => setBoard((prev) => toggleShard(prev, { kind: 'primary', slotId }))}
             onAddLateGameSwap={(slotId) => setBoard((prev) => addLateGameSwap(prev, slotId))}
             onRemoveLateGameSwap={(slotId) => setBoard((prev) => removeLateGameSwap(prev, slotId))}
+            onMergeLateGameSwap={(slotId) => setBoard((prev) => mergeLateGameSwap(prev, slotId))}
             onRemoveLateGameHero={(slotId) => setBoard((prev) => clearLateGameHero(prev, slotId))}
             onPickLateGameHero={(slotId, heroSlug) => setBoard((prev) => placeHeroAt(prev, { kind: 'lategame', slotId }, heroSlug))}
             onRemoveLateGameRegularItem={(slotId, i) =>

@@ -313,6 +313,25 @@ body {
   color: var(--gold-bright);
 }
 
+.undo-merge-button {
+  display: block;
+  margin: 0;
+  background: rgba(201, 168, 76, 0.12);
+  border: 1px solid var(--gold-dim);
+  border-radius: 999px;
+  color: var(--gold-bright);
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+}
+
+.undo-merge-button:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
 /* Two-column mode: same row/card styling as .board, just laid out as a pair
    of independent columns side by side instead of one long list. */
 .board-columns {

@@ -17,6 +17,8 @@ import {
   neutralTierDuplicateGroups,
   setBonusNeutralTier,
   setRegularItem,
+  moveRegularItem,
+  moveNeutralItem,
   toggleScepter,
   toggleShard,
   addLateGameSwap,
@@ -187,15 +189,14 @@ export function PlannerPage({
         overData.slotId &&
         overData.itemIndex !== undefined
       ) {
-        const displaced =
-          prev.slots.find((s) => s.slotId === overData.slotId)?.regularItemSlugs[overData.itemIndex!] ?? null;
-        const withDisplaced = setRegularItem(
+        return moveRegularItem(
           prev,
           { kind: 'primary', slotId: activeData.fromSlotId },
           activeData.fromItemIndex,
-          displaced,
+          { kind: 'primary', slotId: overData.slotId },
+          overData.itemIndex,
+          activeData.itemSlug ?? null,
         );
-        return setRegularItem(withDisplaced, { kind: 'primary', slotId: overData.slotId }, overData.itemIndex, activeData.itemSlug ?? null);
       }
 
       // Moving a neutral item already on the board to another hero's neutral slot —
@@ -207,9 +208,12 @@ export function PlannerPage({
         overData.slotId
       ) {
         if (!activeData.itemSlug) return prev;
-        const displaced = prev.slots.find((s) => s.slotId === overData.slotId)?.neutralItemSlug ?? null;
-        const withDisplaced = setNeutralItem(prev, { kind: 'primary', slotId: activeData.fromSlotId }, displaced);
-        return setNeutralItem(withDisplaced, { kind: 'primary', slotId: overData.slotId }, activeData.itemSlug);
+        return moveNeutralItem(
+          prev,
+          { kind: 'primary', slotId: activeData.fromSlotId },
+          { kind: 'primary', slotId: overData.slotId },
+          activeData.itemSlug,
+        );
       }
 
       // Placing a regular item from the tray into a late-game swap slot.
@@ -239,16 +243,14 @@ export function PlannerPage({
         overData.slotId &&
         overData.itemIndex !== undefined
       ) {
-        const displaced =
-          prev.slots.find((s) => s.slotId === overData.slotId)?.lateGameSwap?.regularItemSlugs[overData.itemIndex!] ??
-          null;
-        const withDisplaced = setRegularItem(
+        return moveRegularItem(
           prev,
           { kind: 'lategame', slotId: activeData.fromSlotId },
           activeData.fromItemIndex,
-          displaced,
+          { kind: 'lategame', slotId: overData.slotId },
+          overData.itemIndex,
+          activeData.itemSlug ?? null,
         );
-        return setRegularItem(withDisplaced, { kind: 'lategame', slotId: overData.slotId }, overData.itemIndex, activeData.itemSlug ?? null);
       }
 
       // Moving a late-game neutral item to another late-game neutral slot —
@@ -259,10 +261,13 @@ export function PlannerPage({
         activeData.fromSlotId &&
         overData.slotId
       ) {
-        const displaced =
-          prev.slots.find((s) => s.slotId === overData.slotId)?.lateGameSwap?.neutralItemSlug ?? null;
-        const withDisplaced = setNeutralItem(prev, { kind: 'lategame', slotId: activeData.fromSlotId }, displaced);
-        return setNeutralItem(withDisplaced, { kind: 'lategame', slotId: overData.slotId }, activeData.itemSlug ?? null);
+        if (!activeData.itemSlug) return prev;
+        return moveNeutralItem(
+          prev,
+          { kind: 'lategame', slotId: activeData.fromSlotId },
+          { kind: 'lategame', slotId: overData.slotId },
+          activeData.itemSlug,
+        );
       }
 
       return prev;

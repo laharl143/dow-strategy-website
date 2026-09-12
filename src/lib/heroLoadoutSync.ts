@@ -1,5 +1,5 @@
 import { supabase } from './supabase';
-import { loadHeroBuilds, saveHeroBuilds, type HeroBuild, type HeroBuildState } from './persistence';
+import { loadHeroBuilds, saveHeroBuilds, loadHeroCombos, saveHeroCombos, type HeroBuild, type HeroBuildState } from './persistence';
 import { REGULAR_ITEM_SLOT_COUNT } from './boardRules';
 
 interface HeroBuildRow {
@@ -188,4 +188,90 @@ export async function pushHeroBuilds(userId: string, heroSlug: string, state: He
     .eq('hero_slug', heroSlug)
     .not('build_id', 'in', `(${keepIds})`);
   if (deleteError) console.error('Failed to prune removed hero builds', heroSlug, deleteError);
+}
+
+// --- Hero Combo (special-ability) giver assignments (DOW-57) — synced the
+// same way hero builds are above, just keyed on hero_slug alone (a combo
+// record has no separate id of its own, unlike a build).
+
+interface HeroComboRow {
+  hero_slug: string;
+  giver_slugs: string[] | null;
+}
+
+let comboSchemaReadyCheck: Promise<boolean> | null = null;
+
+async function probeComboSchemaReady(): Promise<boolean> {
+  if (!supabase) return false;
+  const { error } = await supabase.from('hero_combos').select('hero_slug').limit(1);
+  return !error;
+}
+
+function isComboSchemaReady(): Promise<boolean> {
+  if (!comboSchemaReadyCheck) comboSchemaReadyCheck = probeComboSchemaReady();
+  return comboSchemaReadyCheck;
+}
+
+/**
+ * Called once when a user signs in, alongside {@link pullAndMergeHeroBuilds}.
+ * Pulls their synced combos down and merges with whatever's already in this
+ * browser's localStorage per hero slug (remote wins per hero, local-only
+ * heroes are kept — mirrors the build merge above), writes the merged result
+ * back to localStorage, then re-pushes every touched hero so local-only
+ * combos that survived the merge actually make it to Supabase.
+ */
+export async function pullAndMergeHeroCombos(userId: string): Promise<void> {
+  if (!supabase) return;
+  if (!(await isComboSchemaReady())) {
+    console.warn('hero_combos table is missing — run supabase/schema.sql. Combo sync skipped.');
+    return;
+  }
+
+  const { data, error } = await supabase.from('hero_combos').select('hero_slug, giver_slugs').eq('user_id', userId);
+  if (error) {
+    console.error('Failed to pull synced hero combos', error);
+    return;
+  }
+
+  const local = loadHeroCombos();
+  const merged: Record<string, string[]> = { ...local };
+  for (const row of (data ?? []) as unknown as HeroComboRow[]) {
+    merged[row.hero_slug] = row.giver_slugs ?? [];
+  }
+  saveHeroCombos(merged);
+
+  for (const [heroSlug, giverSlugs] of Object.entries(merged)) {
+    await pushHeroCombos(userId, heroSlug, giverSlugs);
+  }
+}
+
+/**
+ * Syncs one hero's combo giver list to Supabase: upserts it when non-empty,
+ * or deletes the row once the hero has no givers left (removing the last
+ * giver via {@link toggleHeroComboGiver} doesn't delete the localStorage
+ * entry, just empties its array — that emptiness still needs to reach
+ * Supabase, or a stale giver list would come back on the next pull). No-ops
+ * entirely until the hero_combos table migration has been run (see
+ * isComboSchemaReady above).
+ */
+export async function pushHeroCombos(userId: string, heroSlug: string, giverSlugs: string[]): Promise<void> {
+  if (!supabase) return;
+  if (!(await isComboSchemaReady())) {
+    console.warn('hero_combos table is missing — run supabase/schema.sql. Combo sync skipped.');
+    return;
+  }
+
+  if (giverSlugs.length === 0) {
+    const { error } = await supabase.from('hero_combos').delete().eq('user_id', userId).eq('hero_slug', heroSlug);
+    if (error) console.error('Failed to clear synced hero combo', heroSlug, error);
+    return;
+  }
+
+  const { error } = await supabase
+    .from('hero_combos')
+    .upsert(
+      { user_id: userId, hero_slug: heroSlug, giver_slugs: giverSlugs, updated_at: new Date().toISOString() },
+      { onConflict: 'user_id,hero_slug' },
+    );
+  if (error) console.error('Failed to sync hero combo', heroSlug, error);
 }

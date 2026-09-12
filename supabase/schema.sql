@@ -65,3 +65,39 @@ drop policy if exists "delete own hero loadouts" on hero_loadouts;
 create policy "delete own hero loadouts"
   on hero_loadouts for delete
   using (auth.uid() = user_id);
+
+-- Hero Combo (special-ability) giver assignments (DOW-57), synced per
+-- signed-in user across machines the same way hero_loadouts above is —
+-- without this, clearAccountScopedLocalData()'s sign-out cleanup (added by
+-- DOW-41 to stop combo tags leaking to the next account on a shared
+-- browser) has nothing to restore them from, permanently destroying them.
+create table if not exists hero_combos (
+  user_id uuid not null references auth.users (id) on delete cascade,
+  hero_slug text not null,
+  giver_slugs jsonb not null default '[]'::jsonb,
+  updated_at timestamptz not null default now(),
+  primary key (user_id, hero_slug)
+);
+
+alter table hero_combos enable row level security;
+
+drop policy if exists "select own hero combos" on hero_combos;
+create policy "select own hero combos"
+  on hero_combos for select
+  using (auth.uid() = user_id);
+
+drop policy if exists "insert own hero combos" on hero_combos;
+create policy "insert own hero combos"
+  on hero_combos for insert
+  with check (auth.uid() = user_id);
+
+drop policy if exists "update own hero combos" on hero_combos;
+create policy "update own hero combos"
+  on hero_combos for update
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
+
+drop policy if exists "delete own hero combos" on hero_combos;
+create policy "delete own hero combos"
+  on hero_combos for delete
+  using (auth.uid() = user_id);

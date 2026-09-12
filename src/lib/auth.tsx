@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import { supabase } from './supabase';
-import { pullAndMergeHeroBuilds } from './heroLoadoutSync';
+import { pullAndMergeHeroBuilds, pullAndMergeHeroCombos } from './heroLoadoutSync';
 import { clearAccountScopedLocalData } from './persistence';
 
 interface AuthContextValue {
@@ -39,6 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (userId && syncedUserIdRef.current !== userId) {
       syncedUserIdRef.current = userId;
       pullAndMergeHeroBuilds(userId);
+      pullAndMergeHeroCombos(userId);
     }
     if (!userId) {
       syncedUserIdRef.current = null;

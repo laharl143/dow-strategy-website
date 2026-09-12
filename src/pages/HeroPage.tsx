@@ -28,7 +28,7 @@ import { ItemSlotBox } from '../components/ItemSlotBox';
 import { ItemShopDock } from '../components/ItemShopDock';
 import { HeroPageSearch } from '../components/HeroPageSearch';
 import { useAuth } from '../lib/auth';
-import { pushHeroBuilds } from '../lib/heroLoadoutSync';
+import { pushHeroBuilds, pushHeroCombos } from '../lib/heroLoadoutSync';
 
 interface DragData {
   kind: string;
@@ -377,6 +377,21 @@ export function HeroPage() {
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session, hero, buildSyncSignature]);
+
+  // Push this hero's Combo giver list to Supabase after changes settle, the
+  // same way its builds are above — see DOW-57. Skipped for a hero with no
+  // combos entry at all (never toggled), but still fires once it's an empty
+  // array (every giver removed), so that clearing reaches Supabase too.
+  const heroCombo = hero ? combos[hero.slug] : undefined;
+  const comboSyncSignature = heroCombo ? JSON.stringify(heroCombo) : null;
+  useEffect(() => {
+    if (!session || !hero || !heroCombo) return;
+    const timer = setTimeout(() => {
+      void pushHeroCombos(session.user.id, hero.slug, heroCombo);
+    }, 600);
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session, hero, comboSyncSignature]);
 
   if (!hero) {
     return (

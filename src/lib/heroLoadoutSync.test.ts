@@ -65,14 +65,76 @@ function createSupabaseMock(opts: SupabaseMockOptions) {
 
 async function loadModule(
   supabaseMock: ReturnType<typeof createSupabaseMock> | null,
-  persistenceMocks: { loadHeroBuilds?: () => Record<string, HeroBuildState>; saveHeroBuilds?: (v: unknown) => void },
+  persistenceMocks: {
+    loadHeroBuilds?: () => Record<string, HeroBuildState>;
+    saveHeroBuilds?: (v: unknown) => void;
+    loadHeroCombos?: () => Record<string, string[]>;
+    saveHeroCombos?: (v: unknown) => void;
+  },
 ) {
   vi.doMock('./supabase', () => ({ supabase: supabaseMock }));
   vi.doMock('./persistence', () => ({
     loadHeroBuilds: persistenceMocks.loadHeroBuilds ?? vi.fn(() => ({})),
     saveHeroBuilds: persistenceMocks.saveHeroBuilds ?? vi.fn(),
+    loadHeroCombos: persistenceMocks.loadHeroCombos ?? vi.fn(() => ({})),
+    saveHeroCombos: persistenceMocks.saveHeroCombos ?? vi.fn(),
   }));
   return import('./heroLoadoutSync');
+}
+
+type ComboPendingOp = 'probeSchema' | 'pull' | 'upsert' | 'delete' | null;
+
+interface ComboSupabaseMockOptions {
+  schemaError?: unknown;
+  pullData?: unknown[];
+  pullError?: unknown;
+  upsertError?: unknown;
+  deleteError?: unknown;
+}
+
+/**
+ * A minimal fake of the chained supabase-js query builder, covering exactly
+ * the call shapes heroLoadoutSync.ts's Combo sync makes: .select('hero_slug')
+ * /.limit(1) for the schema probe, .select('hero_slug, giver_slugs').eq(...)
+ * for the pull, and .upsert(...) / .delete().eq().eq() for the push.
+ */
+function createComboSupabaseMock(opts: ComboSupabaseMockOptions) {
+  let pendingOp: ComboPendingOp = null;
+  const resultFor = (op: ComboPendingOp) => {
+    switch (op) {
+      case 'probeSchema':
+        return { error: opts.schemaError ?? null };
+      case 'pull':
+        return { data: opts.pullData ?? [], error: opts.pullError ?? null };
+      case 'upsert':
+        return { error: opts.upsertError ?? null };
+      case 'delete':
+        return { error: opts.deleteError ?? null };
+      default:
+        return { error: null };
+    }
+  };
+  const chain = {
+    from: vi.fn(() => chain),
+    select: vi.fn((cols: string) => {
+      pendingOp = cols === 'hero_slug' ? 'probeSchema' : 'pull';
+      return chain;
+    }),
+    limit: vi.fn(() => chain),
+    eq: vi.fn(() => chain),
+    upsert: vi.fn(() => {
+      pendingOp = 'upsert';
+      return chain;
+    }),
+    delete: vi.fn(() => {
+      pendingOp = 'delete';
+      return chain;
+    }),
+    then(onFulfilled: (v: unknown) => unknown, onRejected?: (e: unknown) => unknown) {
+      return Promise.resolve(resultFor(pendingOp)).then(onFulfilled, onRejected);
+    },
+  };
+  return chain;
 }
 
 beforeEach(() => {
@@ -224,6 +286,130 @@ describe('pushHeroBuilds', () => {
 
     await pushHeroBuilds('user-1', 'axe', { activeBuildId: '', builds: [] });
 
+    expect(supabaseMock.upsert).not.toHaveBeenCalled();
+  });
+});
+
+// DOW-57: before this fix, Hero Combo giver assignments had no sync path at
+// all — pullAndMergeHeroCombos/pushHeroCombos didn't exist, so
+// clearAccountScopedLocalData()'s sign-out cleanup had nothing to restore
+// them from. These tests demonstrate the sync now round-trips combos the
+// same way hero builds already do.
+describe('pullAndMergeHeroCombos', () => {
+  it('merges remote and local combos per hero: remote wins on shared heroes, local-only heroes survive', async () => {
+    const local: Record<string, string[]> = {
+      axe: ['lycan'], // shared with remote below — remote's value should win
+      pudge: ['io'], // local-only — never made it to Supabase, must survive the merge
+    };
+    const remoteRows = [{ hero_slug: 'axe', giver_slugs: ['lycan', 'snapfire'] }];
+
+    const supabaseMock = createComboSupabaseMock({ pullData: remoteRows });
+    const saveHeroCombos = vi.fn();
+    vi.doMock('./supabase', () => ({ supabase: supabaseMock }));
+    vi.doMock('./persistence', () => ({
+      loadHeroBuilds: vi.fn(() => ({})),
+      saveHeroBuilds: vi.fn(),
+      loadHeroCombos: () => local,
+      saveHeroCombos,
+    }));
+    const { pullAndMergeHeroCombos } = await import('./heroLoadoutSync');
+
+    await pullAndMergeHeroCombos('user-1');
+
+    expect(saveHeroCombos).toHaveBeenCalledTimes(1);
+    const merged = saveHeroCombos.mock.calls[0][0] as Record<string, string[]>;
+    expect(merged.axe).toEqual(['lycan', 'snapfire']);
+    expect(merged.pudge).toEqual(['io']);
+
+    // Every touched hero gets re-pushed so the surviving local-only combo reaches Supabase.
+    expect(supabaseMock.upsert).toHaveBeenCalled();
+  });
+
+  it('no-ops without touching local data when the schema probe fails on an unmigrated table', async () => {
+    const supabaseMock = createComboSupabaseMock({ schemaError: { message: 'relation "hero_combos" does not exist' } });
+    vi.doMock('./supabase', () => ({ supabase: supabaseMock }));
+    const saveHeroCombos = vi.fn();
+    vi.doMock('./persistence', () => ({
+      loadHeroBuilds: vi.fn(() => ({})),
+      saveHeroBuilds: vi.fn(),
+      loadHeroCombos: vi.fn(() => ({})),
+      saveHeroCombos,
+    }));
+    const { pullAndMergeHeroCombos } = await import('./heroLoadoutSync');
+
+    await pullAndMergeHeroCombos('user-1');
+
+    expect(saveHeroCombos).not.toHaveBeenCalled();
+    expect(supabaseMock.upsert).not.toHaveBeenCalled();
+  });
+
+  it('is a no-op when supabase is not configured', async () => {
+    vi.doMock('./supabase', () => ({ supabase: null }));
+    const saveHeroCombos = vi.fn();
+    vi.doMock('./persistence', () => ({
+      loadHeroBuilds: vi.fn(() => ({})),
+      saveHeroBuilds: vi.fn(),
+      loadHeroCombos: vi.fn(() => ({})),
+      saveHeroCombos,
+    }));
+    const { pullAndMergeHeroCombos } = await import('./heroLoadoutSync');
+
+    await expect(pullAndMergeHeroCombos('user-1')).resolves.toBeUndefined();
+    expect(saveHeroCombos).not.toHaveBeenCalled();
+  });
+});
+
+describe('pushHeroCombos', () => {
+  it('no-ops (never calls upsert) when the schema probe fails on an unmigrated table', async () => {
+    const supabaseMock = createComboSupabaseMock({ schemaError: { message: 'relation missing' } });
+    vi.doMock('./supabase', () => ({ supabase: supabaseMock }));
+    vi.doMock('./persistence', () => ({
+      loadHeroBuilds: vi.fn(() => ({})),
+      saveHeroBuilds: vi.fn(),
+      loadHeroCombos: vi.fn(() => ({})),
+      saveHeroCombos: vi.fn(),
+    }));
+    const { pushHeroCombos } = await import('./heroLoadoutSync');
+
+    await pushHeroCombos('user-1', 'axe', ['lycan']);
+
+    expect(supabaseMock.upsert).not.toHaveBeenCalled();
+  });
+
+  it('upserts a non-empty giver list', async () => {
+    const supabaseMock = createComboSupabaseMock({});
+    vi.doMock('./supabase', () => ({ supabase: supabaseMock }));
+    vi.doMock('./persistence', () => ({
+      loadHeroBuilds: vi.fn(() => ({})),
+      saveHeroBuilds: vi.fn(),
+      loadHeroCombos: vi.fn(() => ({})),
+      saveHeroCombos: vi.fn(),
+    }));
+    const { pushHeroCombos } = await import('./heroLoadoutSync');
+
+    await pushHeroCombos('user-1', 'axe', ['lycan']);
+
+    expect(supabaseMock.upsert).toHaveBeenCalledWith(
+      expect.objectContaining({ user_id: 'user-1', hero_slug: 'axe', giver_slugs: ['lycan'] }),
+      { onConflict: 'user_id,hero_slug' },
+    );
+    expect(supabaseMock.delete).not.toHaveBeenCalled();
+  });
+
+  it('deletes the row instead of upserting once the giver list is emptied', async () => {
+    const supabaseMock = createComboSupabaseMock({});
+    vi.doMock('./supabase', () => ({ supabase: supabaseMock }));
+    vi.doMock('./persistence', () => ({
+      loadHeroBuilds: vi.fn(() => ({})),
+      saveHeroBuilds: vi.fn(),
+      loadHeroCombos: vi.fn(() => ({})),
+      saveHeroCombos: vi.fn(),
+    }));
+    const { pushHeroCombos } = await import('./heroLoadoutSync');
+
+    await pushHeroCombos('user-1', 'axe', []);
+
+    expect(supabaseMock.delete).toHaveBeenCalled();
     expect(supabaseMock.upsert).not.toHaveBeenCalled();
   });
 });

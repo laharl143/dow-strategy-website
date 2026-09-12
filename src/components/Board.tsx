@@ -31,6 +31,7 @@ export function Board({
   onToggleShard,
   onAddLateGameSwap,
   onRemoveLateGameSwap,
+  onMergeLateGameSwap,
   onRemoveLateGameHero,
   onPickLateGameHero,
   onRemoveLateGameRegularItem,
@@ -68,6 +69,7 @@ export function Board({
   onToggleShard: (slotId: string) => void;
   onAddLateGameSwap: (slotId: string) => void;
   onRemoveLateGameSwap: (slotId: string) => void;
+  onMergeLateGameSwap: (slotId: string) => void;
   onRemoveLateGameHero: (slotId: string) => void;
   onPickLateGameHero: (slotId: string, heroSlug: string) => void;
   onRemoveLateGameRegularItem: (slotId: string, index: number) => void;
@@ -120,7 +122,19 @@ export function Board({
         {swap && (
           <div className="role-slot-connector" title="This card is a late-game swap for the role on the left">
             <span className="role-slot-connector-line" />
-            <span className="role-slot-connector-pill">Swap</span>
+            <button
+              type="button"
+              className="role-slot-connector-pill"
+              disabled={!swap.heroSlug}
+              title={
+                swap.heroSlug
+                  ? 'Merge: replace the primary hero with this swap hero and its items, then remove the swap card'
+                  : 'Pick a swap hero first'
+              }
+              onClick={() => onMergeLateGameSwap(definition.id)}
+            >
+              Swap
+            </button>
           </div>
         )}
 

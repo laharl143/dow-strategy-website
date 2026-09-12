@@ -48,7 +48,7 @@ interface DragData {
 
 export function PlannerPage({
   board,
-  setBoard,
+  setBoard: setBoardRaw,
   strategies,
   activeStrategyId,
   onSaveActive,
@@ -69,6 +69,21 @@ export function PlannerPage({
   const [shopOpen, setShopOpen] = useState(loadShopOpen);
   const [heroPanelOpen, setHeroPanelOpen] = useState(true);
   const [twoColumns, setTwoColumns] = useState(loadTwoColumns);
+  // The board snapshot from just before the most recent "Swap" merge
+  // (DOW-34), kept only long enough to offer a one-step undo. Cleared once
+  // undone, or silently replaced if another merge happens first — this only
+  // ever tracks the single most recent merge, matching "undo the current
+  // merge".
+  const [preMergeBoard, setPreMergeBoard] = useState<BoardType | null>(null);
+
+  // Any board update other than the merge/undo actions below invalidates the
+  // pending undo snapshot — otherwise "Undo Merge" could silently discard
+  // edits made since the merge, the kind of surprise this board's own
+  // swap/drag handling goes out of its way to avoid elsewhere (DOW-47/48).
+  function setBoard(updater: (prev: BoardType) => BoardType) {
+    setPreMergeBoard(null);
+    setBoardRaw(updater);
+  }
 
   useEffect(() => {
     saveShopOpen(shopOpen);
@@ -338,6 +353,19 @@ export function PlannerPage({
             >
               {twoColumns ? '▥ Two Columns' : '▤ One Column'}
             </button>
+            {preMergeBoard && (
+              <button
+                type="button"
+                className="undo-merge-button"
+                title="Undo the last late-game swap merge"
+                onClick={() => {
+                  setBoardRaw(() => preMergeBoard);
+                  setPreMergeBoard(null);
+                }}
+              >
+                ↺ Undo Merge
+              </button>
+            )}
             <button
               type="button"
               className="bonus-tier-switch"
@@ -373,7 +401,12 @@ export function PlannerPage({
             onToggleShard={(slotId) => setBoard((prev) => toggleShard(prev, { kind: 'primary', slotId }))}
             onAddLateGameSwap={(slotId) => setBoard((prev) => addLateGameSwap(prev, slotId))}
             onRemoveLateGameSwap={(slotId) => setBoard((prev) => removeLateGameSwap(prev, slotId))}
-            onMergeLateGameSwap={(slotId) => setBoard((prev) => mergeLateGameSwap(prev, slotId))}
+            onMergeLateGameSwap={(slotId) =>
+              setBoardRaw((prev) => {
+                setPreMergeBoard(prev);
+                return mergeLateGameSwap(prev, slotId);
+              })
+            }
             onRemoveLateGameHero={(slotId) => setBoard((prev) => clearLateGameHero(prev, slotId))}
             onPickLateGameHero={(slotId, heroSlug) => setBoard((prev) => placeHeroAt(prev, { kind: 'lategame', slotId }, heroSlug))}
             onRemoveLateGameRegularItem={(slotId, i) =>

@@ -27,6 +27,7 @@ import {
   toggleNeutralItemAutocast,
 } from '../lib/boardRules';
 import { placeHeroAt, type HeroTarget } from '../lib/heroPlacement';
+import { MULTI_INSTANCE_HERO_SLUGS } from '../data/multiInstanceHeroes';
 import { loadShopOpen, saveShopOpen, loadTwoColumns, saveTwoColumns } from '../lib/persistence';
 import { Board } from '../components/Board';
 import { DuplicateTierNotices } from '../components/DuplicateTierNotices';
@@ -110,6 +111,9 @@ export function PlannerPage({
       if (s.heroSlug) slugs.add(s.heroSlug);
       if (s.lateGameSwap?.heroSlug) slugs.add(s.lateGameSwap.heroSlug);
     }
+    // Multi-instance heroes (Arc Warden) can always be placed again, so the
+    // tray/picker should never flag them as "already on the board".
+    for (const slug of MULTI_INSTANCE_HERO_SLUGS) slugs.delete(slug);
     return slugs;
   }, [board]);
 

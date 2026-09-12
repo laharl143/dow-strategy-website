@@ -1,6 +1,7 @@
 import type { Board } from '../types';
 import { REGULAR_ITEM_SLOT_COUNT } from './boardRules';
 import { loadHeroBuilds } from './persistence';
+import { MULTI_INSTANCE_HERO_SLUGS } from '../data/multiInstanceHeroes';
 
 /** Addresses either a role slot's primary hero or its late-game swap hero. */
 export type HeroTarget = { kind: 'primary'; slotId: string } | { kind: 'lategame'; slotId: string };
@@ -125,9 +126,13 @@ function writeLoadout(board: Board, target: HeroTarget, loadout: HeroLoadoutStat
  * occupant is displaced (with its full loadout intact) to the first open
  * slot elsewhere on the board, rather than being silently overwritten —
  * only if the board is entirely full does it fall back to being replaced.
+ *
+ * Exception: heroes in {@link MULTI_INSTANCE_HERO_SLUGS} (Arc Warden) are
+ * never relocated this way — each placement is treated as a fresh one, so
+ * the hero can occupy more than one slot on the board at the same time.
  */
 export function placeHeroAt(board: Board, target: HeroTarget, heroSlug: string): Board {
-  const existing = findHero(board, heroSlug);
+  const existing = MULTI_INSTANCE_HERO_SLUGS.includes(heroSlug) ? null : findHero(board, heroSlug);
 
   if (existing) {
     if (existing.kind === target.kind && existing.slotId === target.slotId) return board;

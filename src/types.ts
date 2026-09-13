@@ -1,7 +1,5 @@
 export type CompositionRole = 'tank' | 'core' | 'support';
 export type PickFrequency = 'always' | 'sometimes' | 'never';
-export type DamageType = 'physical' | 'magic';
-export type PowerCurve = 'early' | 'mid' | 'late' | 'flex';
 export type AttackType = 'melee' | 'ranged';
 export type ItemCategory = 'artifact' | 'enchantment';
 
@@ -27,10 +25,6 @@ export interface Hero {
   compositionRoles: CompositionRole[];
   /** How often this hero is worth picking in the user's strategy. Null until tagged. */
   pickFrequency: PickFrequency | null;
-  damageType: DamageType | null;
-  powerCurve: PowerCurve | null;
-  hasAoeStun: boolean;
-  piercesMagicImmunity: boolean;
   /** True when this record wasn't found in the reference data source and needs a manual check. */
   needsReview: boolean;
   /** Skillable Q/W/E/R abilities (innate and item abilities excluded), shown on the hero page. */

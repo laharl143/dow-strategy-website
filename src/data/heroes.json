@@ -10,10 +10,6 @@
       "Disabler",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -57,10 +53,6 @@
       "Escape",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -105,10 +97,6 @@
       "Disabler",
       "Carry"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -153,10 +141,6 @@
       "Nuker",
       "Durable"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -201,10 +185,6 @@
       "Durable",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -249,10 +229,6 @@
       "Nuker",
       "Initiator"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -295,10 +271,6 @@
       "Support",
       "Pusher"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -342,10 +314,6 @@
       "Disabler",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -389,10 +357,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -439,10 +403,6 @@
       "Initiator",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -488,10 +448,6 @@
       "Durable",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -537,10 +493,6 @@
       "Disabler",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -586,10 +538,6 @@
       "Durable",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -634,10 +582,6 @@
       "Initiator",
       "Pusher"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -683,10 +627,6 @@
       "Escape",
       "Durable"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -731,10 +671,6 @@
       "Escape",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -778,10 +714,6 @@
       "Pusher",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -828,10 +760,6 @@
       "Durable",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -878,10 +806,6 @@
       "Pusher",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -924,10 +848,6 @@
       "Support",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -972,10 +892,6 @@
       "Escape",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1021,10 +937,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1070,10 +982,6 @@
       "Nuker",
       "Initiator"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1120,10 +1028,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1170,10 +1074,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1218,10 +1118,6 @@
       "Durable",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1265,10 +1161,6 @@
       "Carry",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1314,10 +1206,6 @@
       "Disabler",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -1361,10 +1249,6 @@
       "Durable",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1411,10 +1295,6 @@
       "Escape",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -1459,10 +1339,6 @@
       "Durable",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -1507,10 +1383,6 @@
       "Nuker",
       "Pusher"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -1556,10 +1428,6 @@
       "Durable",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1605,10 +1473,6 @@
       "Nuker",
       "Pusher"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1652,10 +1516,6 @@
       "Escape",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -1701,10 +1561,6 @@
       "Nuker",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1750,10 +1606,6 @@
       "Nuker",
       "Initiator"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1799,10 +1651,6 @@
       "Disabler",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -1846,10 +1694,6 @@
       "Carry",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -1893,10 +1737,6 @@
       "Durable",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -1942,10 +1782,6 @@
       "Initiator",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -1991,10 +1827,6 @@
       "Durable",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -2040,10 +1872,6 @@
       "Nuker",
       "Carry"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -2088,10 +1916,6 @@
       "Nuker",
       "Pusher"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -2138,10 +1962,6 @@
       "Durable",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -2187,10 +2007,6 @@
       "Pusher",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -2236,10 +2052,6 @@
       "Initiator",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -2282,10 +2094,6 @@
       "Carry",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -2331,10 +2139,6 @@
       "Escape",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -2378,10 +2182,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -2424,10 +2224,6 @@
       "Nuker",
       "Carry"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -2472,10 +2268,6 @@
       "Escape",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -2521,10 +2313,6 @@
       "Disabler",
       "Initiator"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -2568,10 +2356,6 @@
       "Nuker",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -2615,10 +2399,6 @@
       "Durable",
       "Initiator"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -2663,10 +2443,6 @@
       "Pusher",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -2711,10 +2487,6 @@
       "Disabler",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -2758,10 +2530,6 @@
       "Initiator",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -2808,10 +2576,6 @@
       "Initiator",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -2858,10 +2622,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -2907,10 +2667,6 @@
       "Durable",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -2953,10 +2709,6 @@
       "Escape",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -3002,10 +2754,6 @@
       "Durable",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -3049,10 +2797,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -3097,10 +2841,6 @@
       "Initiator",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -3146,10 +2886,6 @@
       "Durable",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -3195,10 +2931,6 @@
       "Disabler",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -3244,10 +2976,6 @@
       "Disabler",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -3294,10 +3022,6 @@
       "Durable",
       "Initiator"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -3341,10 +3065,6 @@
       "Pusher",
       "Durable"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -3387,10 +3107,6 @@
       "Carry",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -3434,10 +3150,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -3481,10 +3193,6 @@
       "Disabler",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -3529,10 +3237,6 @@
       "Nuker",
       "Pusher"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -3577,10 +3281,6 @@
       "Nuker",
       "Initiator"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -3623,10 +3323,6 @@
       "Carry",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -3673,10 +3369,6 @@
       "Initiator",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -3721,10 +3413,6 @@
       "Initiator",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -3769,10 +3457,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -3818,10 +3502,6 @@
       "Escape",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -3866,10 +3546,6 @@
       "Nuker",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -3915,10 +3591,6 @@
       "Nuker",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -3962,10 +3634,6 @@
       "Durable",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -4009,10 +3677,6 @@
       "Disabler",
       "Durable"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -4058,10 +3722,6 @@
       "Disabler",
       "Durable"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -4106,10 +3766,6 @@
       "Disabler",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -4155,10 +3811,6 @@
       "Initiator",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -4202,10 +3854,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -4249,10 +3897,6 @@
       "Carry",
       "Durable"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -4298,10 +3942,6 @@
       "Initiator",
       "Durable"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -4347,10 +3987,6 @@
       "Disabler",
       "Initiator"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -4396,10 +4032,6 @@
       "Durable",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -4443,10 +4075,6 @@
       "Pusher",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -4489,10 +4117,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -4537,10 +4161,6 @@
       "Disabler",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -4584,10 +4204,6 @@
       "Disabler",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -4631,10 +4247,6 @@
       "Escape",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -4680,10 +4292,6 @@
       "Durable",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -4728,10 +4336,6 @@
       "Disabler",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -4776,10 +4380,6 @@
       "Disabler",
       "Durable"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -4824,10 +4424,6 @@
       "Disabler",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -4874,10 +4470,6 @@
       "Escape",
       "Pusher"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -4921,10 +4513,6 @@
       "Escape",
       "Pusher"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -4969,10 +4557,6 @@
       "Nuker",
       "Durable"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -5020,10 +4604,6 @@
       "Escape",
       "Initiator"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -5068,10 +4648,6 @@
       "Disabler",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -5116,10 +4692,6 @@
       "Disabler",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -5163,10 +4735,6 @@
       "Escape",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -5211,10 +4779,6 @@
       "Pusher",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -5259,10 +4823,6 @@
       "Disabler",
       "Initiator"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -5307,10 +4867,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -5355,10 +4911,6 @@
       "Disabler",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -5405,10 +4957,6 @@
       "Initiator",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -5455,10 +5003,6 @@
       "Disabler",
       "Pusher"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -5504,10 +5048,6 @@
       "Nuker",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -5551,10 +5091,6 @@
       "Disabler",
       "Pusher"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -5600,10 +5136,6 @@
       "Pusher",
       "Initiator"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -5647,10 +5179,6 @@
       "Escape",
       "Nuker"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -5697,10 +5225,6 @@
       "Initiator",
       "Pusher"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -5745,10 +5269,6 @@
       "Escape",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -5791,10 +5311,6 @@
       "Carry",
       "Durable"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -5840,10 +5356,6 @@
       "Disabler",
       "Escape"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "never",
     "compositionRoles": [
@@ -5887,10 +5399,6 @@
       "Durable",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -5935,10 +5443,6 @@
       "Nuker",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -5983,10 +5487,6 @@
       "Escape",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "always",
     "compositionRoles": [
@@ -6030,10 +5530,6 @@
       "Escape",
       "Disabler"
     ],
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "pickFrequency": "sometimes",
     "compositionRoles": [
@@ -6081,10 +5577,6 @@
       "support"
     ],
     "pickFrequency": "sometimes",
-    "damageType": null,
-    "powerCurve": null,
-    "hasAoeStun": false,
-    "piercesMagicImmunity": false,
     "needsReview": false,
     "abilities": [
       {

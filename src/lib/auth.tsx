@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useRef, useState, type ReactNode 
 import type { Session } from '@supabase/supabase-js';
 import { supabase } from './supabase';
 import { pullAndMergeHeroBuilds } from './heroLoadoutSync';
-import { clearAccountScopedLocalData } from './persistence';
+import { clearAccountScopedLocalData, isBoardEmpty, loadActiveBoard } from './persistence';
 
 interface AuthContextValue {
   session: Session | null;
@@ -55,6 +55,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function signOut() {
     if (!supabase) return;
+    // The active board is never synced to Supabase (DOW-58), so clearing it
+    // below is permanent — confirm first when there's anything on it to lose.
+    if (
+      !isBoardEmpty(loadActiveBoard()) &&
+      !window.confirm(
+        "Your current board isn't saved to your account — signing out will erase it permanently. Use \"Save As\" first if you want to keep it. Sign out anyway?",
+      )
+    ) {
+      return;
+    }
     await supabase.auth.signOut();
     // Clear this account's board/hero builds from the browser so they don't
     // linger for whoever uses this machine next, then reload so every

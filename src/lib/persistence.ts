@@ -117,6 +117,23 @@ export function saveActiveBoard(board: Board): void {
   localStorage.setItem(ACTIVE_BOARD_KEY, JSON.stringify(board));
 }
 
+/**
+ * Whether the active board has no user-entered state worth warning about
+ * losing (DOW-58) — the board is never synced to Supabase, so sign-out's
+ * clearAccountScopedLocalData() below is a one-way trip for anything here.
+ */
+export function isBoardEmpty(board: Board): boolean {
+  return board.slots.every(
+    (s) =>
+      s.heroSlug === null &&
+      s.neutralItemSlug === null &&
+      !s.hasScepter &&
+      !s.hasShard &&
+      s.lateGameSwap === null &&
+      s.regularItemSlugs.every((slug) => slug === null),
+  );
+}
+
 export function newGame(): Board {
   const board = emptyBoard();
   saveActiveBoard(board);

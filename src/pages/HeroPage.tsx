@@ -22,6 +22,7 @@ import {
   type HeroBuild,
   type HeroBuildState,
 } from '../lib/persistence';
+import { swapArrayValue } from '../lib/boardRules';
 import { AghUpgradeToggle } from '../components/AghUpgradeToggle';
 import { ComboToggle } from '../components/ComboToggle';
 import { ItemSlotBox } from '../components/ItemSlotBox';
@@ -448,18 +449,14 @@ export function HeroPage() {
     if (!activeData || !overData) return;
 
     function moveInto(field: 'regularItemSlugs' | 'situationalItemSlugs' | 'situationalNeutralItemSlugs') {
-      setActiveBuild((prev) => {
-        const slugs = [...prev[field]];
-        const fromIndex = activeData!.fromItemIndex;
-        const toIndex = overData!.itemIndex!;
+      setActiveBuild((prev) => ({
+        ...prev,
         // Dropping onto an occupied slot swaps the two, instead of silently
         // discarding whatever was already there. A drag from outside this
         // array (e.g. straight from the shop tray) has no fromIndex, so
         // there's nothing to swap back — it just places into the target.
-        if (fromIndex !== undefined) slugs[fromIndex] = slugs[toIndex];
-        slugs[toIndex] = activeData!.itemSlug ?? null;
-        return { ...prev, [field]: slugs };
-      });
+        [field]: swapArrayValue(prev[field], overData!.itemIndex!, activeData!.itemSlug ?? null, activeData!.fromItemIndex),
+      }));
     }
 
     if (

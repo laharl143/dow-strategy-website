@@ -135,6 +135,46 @@ export function setNeutralItem(board: Board, target: HeroTarget, itemSlug: strin
 }
 
 /**
+ * Swaps `value` into `arr[toIndex]`, returning a new array with whatever was
+ * there moved back to `arr[fromIndex]` (when given) instead of being
+ * discarded. Shared "move within an indexed array" primitive: used below for
+ * a regular item slot's array, and by HeroPage's own per-build item arrays
+ * (`moveInto`), which have the same shape but aren't board slots.
+ */
+export function swapArrayValue<T>(arr: T[], toIndex: number, value: T, fromIndex?: number): T[] {
+  const next = [...arr];
+  if (fromIndex !== undefined) next[fromIndex] = next[toIndex];
+  next[toIndex] = value;
+  return next;
+}
+
+/**
+ * Moves a regular item from one {@link HeroTarget}'s slot index to another's
+ * (or within the same target), swapping with whatever the destination
+ * already holds instead of discarding it — the shared implementation behind
+ * every regular-item board-to-board move (see DOW-48, DOW-49).
+ */
+export function moveRegularItem(
+  board: Board,
+  from: HeroTarget,
+  fromIndex: number,
+  to: HeroTarget,
+  toIndex: number,
+  itemSlug: string | null,
+): Board {
+  const displaced = readTargetLoadout(board, to)?.regularItemSlugs[toIndex] ?? null;
+  const withDisplaced = setRegularItem(board, from, fromIndex, displaced);
+  return setRegularItem(withDisplaced, to, toIndex, itemSlug);
+}
+
+/** Neutral-item counterpart of {@link moveRegularItem}. */
+export function moveNeutralItem(board: Board, from: HeroTarget, to: HeroTarget, itemSlug: string | null): Board {
+  const displaced = readTargetLoadout(board, to)?.neutralItemSlug ?? null;
+  const withDisplaced = setNeutralItem(board, from, displaced);
+  return setNeutralItem(withDisplaced, to, itemSlug);
+}
+
+/**
  * Loads one of a hero's saved hero-page builds into its board loadout,
  * replacing whatever items/agh flags (including the neutral item) are there
  * now — the board's own "switch build" action for a hero with more than one
